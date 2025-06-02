@@ -2394,16 +2394,20 @@
             
             // Simulate login process
             setTimeout(() => {
-                currentUser = {
-                    name: email.split('@')[0],
-                    email: email,
-                    points: Math.floor(Math.random() * 1000) + 100,
-                    avatar: email.charAt(0).toUpperCase()
-                };
-                
-                updateUserInterface();
-                closeAuthModal();
-                showWelcomeMessage();
+                try {
+                    currentUser = {
+                        name: email.split('@')[0],
+                        email: email,
+                        points: Math.floor(Math.random() * 1000) + 100,
+                        avatar: email.charAt(0).toUpperCase()
+                    };
+                    
+                    updateUserInterface();
+                    closeAuthModal();
+                    showWelcomeMessage();
+                } catch (e) {
+                    console.error("Error during login post-processing:", e);
+                }
             }, 1000);
         }
 
