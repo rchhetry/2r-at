@@ -128,7 +128,7 @@
 
         .nav-links {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem; /* Adjusted for new menu */
             list-style: none;
             align-items: center;
         }
@@ -138,7 +138,8 @@
             text-decoration: none;
             position: relative;
             transition: color 0.3s ease;
-            padding: 0.5rem 0.75rem;
+            padding: 0.5rem 0.6rem; /* Adjusted for new menu */
+            font-size: 0.85rem; /* Adjusted for new menu */
             border-radius: 4px;
         }
 
@@ -1695,22 +1696,77 @@
             }
 
             .nav-links {
-                display: none;
+                display: none; /* Hidden by default on mobile, shown when active */
                 position: absolute;
-                top: 100%;
+                top: 100%; /* Position below navbar */
                 left: 0;
                 width: 100%;
                 flex-direction: column;
                 background: rgba(5, 7, 20, 0.98);
-                padding: 2rem;
-                gap: 1rem;
+                padding: 1rem; /* Adjusted padding for mobile */
+                gap: 0.5rem; /* Adjusted gap for mobile */
                 border-top: 1px solid rgba(0, 212, 255, 0.2);
             }
 
             .nav-links.active {
-                display: flex;
+                display: flex; /* Show when active */
             }
 
+            /* CSS for previous dropdowns - commented out as menu is now flat */
+            /*
+            .nav-item-dropdown {
+                position: relative;
+            }
+
+            .dropdown-toggle::after {
+                content: ' ▼';
+                font-size: 0.7em;
+                margin-left: 0.3rem;
+            }
+
+            .dropdown-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: rgba(5, 7, 20, 0.98);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(0, 212, 255, 0.2);
+                border-radius: 0 0 8px 8px;
+                padding: 0.5rem 0;
+                min-width: 220px;
+                z-index: 1005;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            }
+
+            .nav-item-dropdown:hover .dropdown-menu,
+            .nav-item-dropdown.active .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-item {
+                display: block;
+                padding: 0.75rem 1.5rem;
+                color: var(--light);
+                text-decoration: none;
+                white-space: nowrap;
+            }
+
+            .dropdown-item:hover {
+                background-color: rgba(0, 212, 255, 0.1);
+                color: var(--primary);
+            }
+            .dropdown-menu .nav-links a, .dropdown-menu a {
+                 padding: 0.75rem 1.5rem;
+                 display: block;
+                 width: 100%;
+            }
+            .dropdown-menu .nav-links a::after, .dropdown-menu a::after {
+                display: none;
+            }
+            */
+
+            /* Ensure mobile menu toggle is visible on mobile */
             .mobile-menu-toggle {
                 display: flex;
             }
@@ -1873,15 +1929,15 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#professional-services">Professional Services</a></li>
-                <li><a href="#training">Training</a></li>
-                <li><a href="#ctf-challenges" onclick="auth.checkAuth('ctf-challenges')">CTF Challenges</a></li>
-                <li><a href="#dashboard" onclick="auth.checkAuth('dashboard')">Dashboard</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#case-studies">Success Stories</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#managed-security-services">Managed Security Services</a></li>
+                <li><a href="#ai-powered-solutions">AI-Powered Solutions</a></li>
+                <li><a href="#security-assessment">Security Assessment</a></li>
+                <li><a href="#cloud-infrastructure">Cloud & Infrastructure</a></li>
+                <li><a href="#identity-access">Identity & Access</a></li>
+                <li><a href="#compliance-governance">Compliance & Governance</a></li>
+                <li><a href="#training-education">Training & Education</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <!-- Team and Pricing might be moved later or accessed via other sections/footer -->
             </ul>
             <!-- Authentication Buttons / User Menu -->
             <div class="auth-buttons" id="auth-nav">
@@ -1928,6 +1984,83 @@
             <div class="cta-container">
                 <a href="#contact" class="btn btn-primary">Start Securing Now</a>
                 <a href="#professional-services" class="btn btn-secondary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Security Dashboard Demo -->
+    <section class="dashboard-section" id="home-dashboard">
+        <div class="container">
+            <h2 class="section-title">Real-Time Security Dashboard</h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">
+                Experience our advanced threat monitoring in action
+            </p>
+            <div class="dashboard-container" id="dashboard-container"> <!-- This is the container for protected content -->
+                <div class="dashboard-header">
+                    <h3>Global Threat Monitor</h3>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span>System Active</span>
+                    </div>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="threats-blocked">0</div>
+                        <div class="metric-label">Threats Blocked Today</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="active-monitors">0</div>
+                        <div class="metric-label">Active Monitors</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="data-analyzed">0 GB</div>
+                        <div class="metric-label">Data Analyzed</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="uptime">100%</div>
+                        <div class="metric-label">System Uptime</div>
+                    </div>
+                </div>
+                <div class="threat-map">
+                    <div class="world-map">
+                        <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                            <!-- World Map SVG content... -->
+                        </svg>
+                    </div>
+                    <div class="map-grid"></div>
+                    <h4 style="position: absolute; top: 20px; left: 20px; z-index: 10; color: var(--light);">Global Threat Intelligence Network</h4>
+                    <div style="position: absolute; top: 20px; right: 20px; z-index: 10; color: var(--gray); font-size: 0.9rem;">
+                        <div style="margin-bottom: 0.5rem;">🔴 Active Threats: <span id="active-threats" style="color: var(--danger); font-weight: bold;">0</span></div>
+                        <div style="margin-bottom: 0.5rem;">🟡 Blocked Attacks: <span id="blocked-attacks" style="color: var(--warning); font-weight: bold;">0</span></div>
+                        <div>🟢 Protected Regions: <span id="secured-regions" style="color: var(--success); font-weight: bold;">6</span></div>
+                    </div>
+                    <div id="threat-container"></div>
+                </div>
+                 <!-- User Stats (only visible when authenticated) -->
+                 <div id="user-dashboard-stats" style="display: none; margin-top: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Your Security Stats</h4>
+                    <div class="user-stats" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                        <div class="stat-card" style="padding: 1rem;">
+                            <span class="stat-value" id="user-threats-blocked">0</span>
+                            <span class="stat-label">Threats You've Blocked</span>
+                        </div>
+                        <div class="stat-card" style="padding: 1rem;">
+                            <span class="stat-value" id="user-ctf-points">0</span>
+                            <span class="stat-label">CTF Points</span>
+                        </div>
+                        <div class="stat-card" style="padding: 1rem;">
+                            <span class="stat-value" id="user-challenges-completed">0</span>
+                            <span class="stat-label">Challenges Done</span>
+                        </div>
+                        <div class="stat-card" style="padding: 1rem;">
+                            <span class="stat-value" id="user-rank">Unranked</span>
+                            <span class="stat-label">Global Rank</span>
+                        </div>
+                    </div>
+                    <div class="achievement-badges" id="user-achievements" style="justify-content: center; margin-top:1.5rem;">
+                        <!-- Achievements will be dynamically inserted -->
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1980,11 +2113,11 @@
         </div>
     </section>
 
-    <!-- Training Section -->
-    <section class="training-section" id="training">
+    <!-- Training & Education Section -->
+    <section class="training-section" id="training-education">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Cybersecurity Training Programs</h2>
+                <h2 class="section-title">Training & Education</h2>
                 <p class="section-subtitle">Empower your team with cutting-edge security knowledge and skills</p>
             </div>
             <div class="training-grid">
@@ -2415,83 +2548,6 @@
         </div>
     </section>
 
-    <!-- Live Security Dashboard Demo -->
-    <section class="dashboard-section" id="dashboard">
-        <div class="container">
-            <h2 class="section-title">Real-Time Security Dashboard</h2>
-            <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">
-                Experience our advanced threat monitoring in action
-            </p>
-            <div class="dashboard-container" id="dashboard-container"> <!-- This is the container for protected content -->
-                <div class="dashboard-header">
-                    <h3>Global Threat Monitor</h3>
-                    <div class="status-indicator">
-                        <span class="status-dot"></span>
-                        <span>System Active</span>
-                    </div>
-                </div>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value" id="threats-blocked">0</div>
-                        <div class="metric-label">Threats Blocked Today</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" id="active-monitors">0</div>
-                        <div class="metric-label">Active Monitors</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" id="data-analyzed">0 GB</div>
-                        <div class="metric-label">Data Analyzed</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" id="uptime">100%</div>
-                        <div class="metric-label">System Uptime</div>
-                    </div>
-                </div>
-                <div class="threat-map">
-                    <div class="world-map">
-                        <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-                            <!-- World Map SVG content... -->
-                        </svg>
-                    </div>
-                    <div class="map-grid"></div>
-                    <h4 style="position: absolute; top: 20px; left: 20px; z-index: 10; color: var(--light);">Global Threat Intelligence Network</h4>
-                    <div style="position: absolute; top: 20px; right: 20px; z-index: 10; color: var(--gray); font-size: 0.9rem;">
-                        <div style="margin-bottom: 0.5rem;">🔴 Active Threats: <span id="active-threats" style="color: var(--danger); font-weight: bold;">0</span></div>
-                        <div style="margin-bottom: 0.5rem;">🟡 Blocked Attacks: <span id="blocked-attacks" style="color: var(--warning); font-weight: bold;">0</span></div>
-                        <div>🟢 Protected Regions: <span id="secured-regions" style="color: var(--success); font-weight: bold;">6</span></div>
-                    </div>
-                    <div id="threat-container"></div>
-                </div>
-                 <!-- User Stats (only visible when authenticated) -->
-                 <div id="user-dashboard-stats" style="display: none; margin-top: 2rem;">
-                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Your Security Stats</h4>
-                    <div class="user-stats" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
-                        <div class="stat-card" style="padding: 1rem;">
-                            <span class="stat-value" id="user-threats-blocked">0</span>
-                            <span class="stat-label">Threats You've Blocked</span>
-                        </div>
-                        <div class="stat-card" style="padding: 1rem;">
-                            <span class="stat-value" id="user-ctf-points">0</span>
-                            <span class="stat-label">CTF Points</span>
-                        </div>
-                        <div class="stat-card" style="padding: 1rem;">
-                            <span class="stat-value" id="user-challenges-completed">0</span>
-                            <span class="stat-label">Challenges Done</span>
-                        </div>
-                        <div class="stat-card" style="padding: 1rem;">
-                            <span class="stat-value" id="user-rank">Unranked</span>
-                            <span class="stat-label">Global Rank</span>
-                        </div>
-                    </div>
-                    <div class="achievement-badges" id="user-achievements" style="justify-content: center; margin-top:1.5rem;">
-                        <!-- Achievements will be dynamically inserted -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Interactive Security Scanner -->
     <section class="container" style="padding: 50px 0;">
         <div class="scanner-demo">
@@ -2818,6 +2874,84 @@
         </div>
     </section>
 
+    <!-- Managed Security Services Section -->
+    <section id="managed-security-services" style="padding: 100px 0; background: var(--dark);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Managed Security Services</h2>
+                <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">24/7 MDR, SOC, vCISO, Incident Response</p>
+            </div>
+            <div style="text-align:center; color: var(--gray);">
+                <p>Further details and content for this section will be populated soon.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI-Powered Solutions Section -->
+    <section id="ai-powered-solutions" style="padding: 100px 0; background: var(--dark);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">AI-Powered Solutions</h2>
+                <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">AI Threat Detection, Automated Response, SOAR</p>
+            </div>
+            <div style="text-align:center; color: var(--gray);">
+                <p>Further details and content for this section will be populated soon.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Assessment Section -->
+    <section id="security-assessment" style="padding: 100px 0; background: var(--dark);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Security Assessment</h2>
+                <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">Penetration Testing, Vulnerability Assessment, XDR</p>
+            </div>
+            <div style="text-align:center; color: var(--gray);">
+                <p>Further details and content for this section will be populated soon.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cloud & Infrastructure Section -->
+    <section id="cloud-infrastructure" style="padding: 100px 0; background: var(--dark);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cloud & Infrastructure</h2>
+                <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">Cloud Security, CSPM, Zero Trust Architecture</p>
+            </div>
+            <div style="text-align:center; color: var(--gray);">
+                <p>Further details and content for this section will be populated soon.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Identity & Access Section -->
+    <section id="identity-access" style="padding: 100px 0; background: var(--dark);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Identity & Access</h2>
+                <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">IAM, ITDR, PAM, MFA Solutions</p>
+            </div>
+            <div style="text-align:center; color: var(--gray);">
+                <p>Further details and content for this section will be populated soon.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compliance & Governance Section -->
+    <section id="compliance-governance" style="padding: 100px 0; background: var(--dark);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Compliance & Governance</h2>
+                <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">GRC, Compliance Automation, Risk Management</p>
+            </div>
+            <div style="text-align:center; color: var(--gray);">
+                <p>Further details and content for this section will be populated soon.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Article Modal -->
     <div id="article-modal" class="article-modal" style="display: none;">
         <div class="article-content">
@@ -3071,8 +3205,8 @@ class AuthSystem {
         this.users = JSON.parse(localStorage.getItem('users')) || [];
 
         this.protectedContentMap = {
-            'dashboard': 'dashboard-container',
-            'ctf-challenges': 'ctf-section' // Changed to overall section for overlay
+            'home-dashboard': 'dashboard-container',
+            'ctf-challenges': 'ctf-challenges-grid'
         };
         // Call initializeUI via DOMContentLoaded to ensure elements are present
     }
