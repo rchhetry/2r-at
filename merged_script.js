@@ -165,12 +165,12 @@ const trainingDetails = {
         ]
     }
 };
-const caseStudyDetails = { 
+const caseStudyDetails = {
     'financial-institution': { title: "Global Financial Institution", icon: "🏦", problem: "Needed to secure a sprawling network of branches and digital services against sophisticated fraud attempts and ensure compliance with international financial regulations.", solution: "Implemented a Zero Trust architecture across all 50+ branches and online platforms. Deployed AI-driven threat detection and automated response systems. Conducted continuous penetration testing and vulnerability assessments.", results: [{value:"$10M+", label:"Potential Fraud Prevented Annually"}, {value:"99.99%", label:"Uptime of Critical Systems"}, {value:"<50ms", label:"Average Threat Response Time"}, {value:"100%", label:"Compliance with PCI-DSS & Swift CSP"}], testimonial: "2R-AT's expertise transformed our security posture, allowing us to innovate confidently while protecting our customers' assets.", image: "img/case-study-finance.jpg" },
     'healthcare-network': { title: "Major Healthcare Network", icon: "🏥", problem: "Faced challenges in securing over 2 million patient records (EHR) while maintaining HIPAA compliance and enabling seamless data access for authorized medical personnel.", solution: "Developed a multi-layered security strategy including endpoint detection and response (EDR), network segmentation, and advanced encryption for data at rest and in transit. Provided comprehensive HIPAA compliance training for all staff.", results: [{value:"2M+", label:"Patient Records Secured"}, {value:"100%", label:"HIPAA & HITECH Compliance"}, {value:"0", label:"Data Breaches Since Implementation"}, {value:"70%", label:"Reduction in Phishing Incidents"}], testimonial: "The 2R-AT team provided an exceptional solution that not only secured our data but also streamlined our compliance processes.", image: "img/case-study-healthcare.jpg" },
     'tech-startup': { title: "Rapid-Growth Tech Startup", icon: "🚀", problem: "Required a scalable, secure-by-design infrastructure to support 10x user growth and protect valuable intellectual property without hindering rapid development cycles.", solution: "Embedded security into the DevOps lifecycle (DevSecOps), implemented robust cloud security posture management (CSPM), and provided on-demand security consultation for new product features. Automated security testing throughout the CI/CD pipeline.", results: [{value:"10x", label:"User Growth Supported Securely"}, {value:"<1hr", label:"Security Review for New Features"}, {value:"0", label:"Major Security Incidents During Growth"}, {value:"$2M", label:"Estimated Savings from Breach Avoidance"}], testimonial: "2R-AT was instrumental in our ability to scale rapidly and securely. Their DevSecOps approach is a game-changer for startups.", image: "img/case-study-startup.jpg" }
 };
-const featureDetails = { 
+const featureDetails = {
     'ai-detection': { icon: '🤖', title: 'AI-Powered Threat Detection', subtitle: 'Intelligent defense against evolving cyber threats.', description: 'Our AI engine analyzes billions of data points in real-time to identify and predict malicious activities, including zero-day exploits and advanced persistent threats. It continuously learns and adapts to new attack vectors, providing proactive and intelligent security.', keyPoints: ['Behavioral Analysis', 'Anomaly Detection', 'Predictive Threat Modeling', 'Automated Threat Prioritization'], techStack: ['Python', 'TensorFlow', 'Keras', 'Spark MLlib', 'Elasticsearch'], stats: [{value: '99.9%', label: 'Detection Rate for Known Threats'}, {value: '75%', label: 'Reduction in False Positives'}, {value: '<1 sec', label: 'Average Detection Time'}]},
     'real-time-response': { icon: '⚡', title: 'Real-Time Automated Response', subtitle: 'Neutralize threats before they escalate.', description: 'Instantly react to security incidents with our automated response system. Pre-defined playbooks and customizable workflows ensure rapid containment and neutralization of threats, minimizing impact and freeing up your security team.', keyPoints: ['SOAR Integration', 'Customizable Playbooks', 'Automated Containment', 'Incident Forensics Trail'], techStack: ['Ansible', 'Python', 'Kafka', 'Serverless Functions', 'GraphQL'], stats: [{value: '<60 sec', label: 'Average Response Time'}, {value: '90%', label: 'Incidents Handled Autonomously'}, {value: '24/7', label: 'Continuous Operation'}]},
     'zero-trust': { icon: '🔐', title: 'Zero Trust Architecture', subtitle: 'Never trust, always verify, at every layer.', description: 'Implement a comprehensive Zero Trust model that secures your data, applications, and infrastructure. We enforce strict access controls, microsegmentation, and continuous verification for every user and device, regardless of location.', keyPoints: ['Microsegmentation', 'Identity & Access Management (IAM)', 'Multi-Factor Authentication (MFA)', 'Least Privilege Access'], techStack: ['Istio', 'SPIFFE/SPIRE', 'OAuth 2.0/OIDC', 'BeyondCorp Principles', 'Attribute-Based Access Control (ABAC)'], stats: [{value: '80%', label: 'Reduction in Lateral Movement'}, {value: '100%', label: 'MFA Enforcement'}, {value: 'Granular', label: 'Access Control Policies'}]},
@@ -178,7 +178,7 @@ const featureDetails = {
     'predictive-analytics': { icon: '📈', title: 'Predictive Security Analytics', subtitle: 'Anticipate and prevent attacks before they happen.', description: 'Utilize advanced data modeling and machine learning to forecast potential security breaches and vulnerabilities. Our predictive analytics help you prioritize resources and implement proactive defenses against future attacks.', keyPoints: ['Risk Scoring', 'Vulnerability Prediction', 'Attack Surface Forecasting', 'Security Trend Analysis'], techStack: ['R', 'SciKit-Learn', 'Prophet', 'Jupyter Notebooks', 'Data Warehousing (BigQuery/Snowflake)'], stats: [{value: '30%', label: 'More Accurate Risk Prediction'}, {value: 'Proactive', label: 'Defense Strategies'}, {value: 'Data-driven', label: 'Security Investments'}]},
     'certifications': { icon: '🏆', title: 'Industry Certified & Compliant', subtitle: 'Security practices you can trust.', description: 'Our solutions are built upon industry-leading standards and best practices. We help your organization achieve and maintain compliance with major regulations like ISO 27001, SOC 2, NIST, GDPR, HIPAA, and PCI-DSS.', keyPoints: ['ISO 27001 Certified', 'SOC 2 Type II Compliant', 'NIST Cybersecurity Framework Alignment', 'GDPR & HIPAA Ready'], techStack: ['Compliance Automation Tools', 'Audit Logging Systems', 'Policy Management Platforms', 'GRC Tools'], stats: [{value: '100%', label: 'Audit Pass Rate for Clients'}, {value: 'Continuous', label: 'Compliance Monitoring'}, {value: 'Expert-led', label: 'Guidance & Support'}]}
 };
-const serviceDetails = { 
+const serviceDetails = {
     'cloud-security': { icon: '☁️', title: 'Cloud Security', subtitle: 'Comprehensive protection for your cloud infrastructure.', description: 'Secure your AWS, Azure, GCP, and hybrid cloud environments with our advanced cloud security solutions. We provide real-time monitoring, automated threat response, configuration management, and compliance assurance tailored to your specific cloud setup.', keyFeatures: ['Cloud Security Posture Management (CSPM)', 'Cloud Workload Protection Platform (CWPP)', 'Serverless Security', 'Container Security (Kubernetes, Docker)', 'Infrastructure as Code (IaC) Security', 'Cloud Native SIEM/SOAR Integration'], pricing: 'Custom Quote based on Cloud Footprint', relatedCaseStudy: 'tech-startup' },
     'penetration-testing': { icon: '🔓', title: 'Penetration Testing', subtitle: 'Identify vulnerabilities before attackers do.', description: 'Our elite ethical hackers simulate real-world attacks on your applications, networks, and systems. We provide detailed reports with actionable recommendations to remediate identified weaknesses and strengthen your defenses.', keyFeatures: ['Network (Internal/External) Pentesting', 'Web Application Pentesting (OWASP Top 10)', 'Mobile Application Pentesting (iOS/Android)', 'API Security Testing', 'Social Engineering Campaigns', 'Red Team / Blue Team Exercises'], pricing: 'Starting at $5,000 per Assessment', relatedCaseStudy: 'financial-institution' },
     'vulnerability-analysis': { icon: '🛡️', title: 'Vulnerability Analysis', subtitle: 'Proactive identification of security weaknesses.', description: 'Comprehensive security assessments using cutting-edge tools and expert methodologies to identify, classify, and prioritize vulnerabilities in your systems and applications. We help you understand your risk exposure and focus remediation efforts effectively.', keyFeatures: ['Automated Scanning & Manual Verification', 'Risk-Based Prioritization', 'False Positive Reduction', 'Continuous Vulnerability Monitoring', 'Remediation Guidance & Tracking', 'Compliance Reporting (PCI, HIPAA, etc.)'], pricing: 'Starting at $2,500 per Scan Cycle', relatedCaseStudy: 'healthcare-network' },
@@ -186,7 +186,7 @@ const serviceDetails = {
     'grc-services': { icon: '📊', title: 'GRC Services', subtitle: 'Align security with your business objectives.', description: 'Achieve and maintain compliance with industry regulations and standards (e.g., ISO 27001, SOC 2, GDPR, HIPAA, PCI-DSS). We offer comprehensive Governance, Risk, and Compliance solutions, including gap analysis, policy development, risk assessments, and audit support.', keyFeatures: ['Compliance Gap Analysis', 'Security Policy Development', 'Risk Assessment & Management', 'Audit Preparation & Support', 'Vendor Risk Management', 'Security Awareness Training Integration'], pricing: 'Custom Quote based on Scope', relatedCaseStudy: 'financial-institution' },
     'security-auditing': { icon: '🔍', title: 'Security Auditing', subtitle: 'Independent verification of your security posture.', description: 'Thorough and independent security audits to assess the effectiveness of your controls and ensure compliance with internal policies and external regulations. Our certified auditors provide objective insights and recommendations for improvement.', keyFeatures: ['Internal & External Audits', 'Compliance Audits (ISO, SOC, etc.)', 'Security Control Assessments', 'Configuration Audits', 'Process & Policy Audits', 'Detailed Audit Reporting'], pricing: 'Starting at $7,000 per Audit', relatedCaseStudy: 'healthcare-network' }
 };
-const articleContent = { 
+const articleContent = {
     'zero-trust-2025': { title: "Zero Trust in 2025: Beyond the Buzzwords", date: "July 15, 2024", author: "Dr. Eve Archer", category: "Strategy", image: "img/blog-zero-trust.jpg", content: "<p>Zero Trust is no longer a futuristic concept but a foundational security strategy for modern enterprises...</p><h3>Key Principles Revisited</h3><ul><li>Verify Explicitly</li><li>Use Least Privilege Access</li><li>Assume Breach</li></ul><pre class='code-block'><code>function verifyAccess(user, resource) {\n  // Complex verification logic\n  return true;\n}</code></pre>" },
     'ransomware-tactics': { title: "Evolving Ransomware Tactics & Defenses", date: "June 28, 2024", author: "Marcus 'Glitch' Chen", category: "Threats", image: "img/blog-ransomware.jpg", content: "<p>Ransomware groups continue to innovate, employing double and triple extortion techniques...</p>" },
     'gdpr-ai': { title: "Navigating GDPR in the Age of AI", date: "May 10, 2024", author: "Lena Petrova, CIPP/E", category: "Compliance", image: "img/blog-gdpr-ai.jpg", content: "<p>Artificial Intelligence presents unique challenges for GDPR compliance, particularly concerning data subject rights and automated decision-making...</p>" }
@@ -197,9 +197,9 @@ class AuthSystem {
     constructor() {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.users = JSON.parse(localStorage.getItem('users')) || [];
-        
+
         this.protectedContentMap = {
-            'dashboard': 'dashboard-container', 
+            'dashboard': 'dashboard-container',
             'ctf-challenges': 'ctf-section' // Changed to overall section for overlay
         };
         // Call initializeUI via DOMContentLoaded to ensure elements are present
@@ -207,7 +207,7 @@ class AuthSystem {
 
     initializeUI() {
         this.updateUserInterface();
-        this.addProtectedOverlays(); 
+        this.addProtectedOverlays();
         document.querySelectorAll('a[href="#dashboard"], a[href="#ctf-challenges"]').forEach(link => {
             link.addEventListener('click', (e) => {
                 // The main smooth scroll handler will now call auth.handleProtectedLinkClick
@@ -216,7 +216,7 @@ class AuthSystem {
             });
         });
     }
-    
+
     showLogin() {
         const authModal = document.getElementById('authModal');
         const loginForm = document.getElementById('loginForm');
@@ -258,11 +258,11 @@ class AuthSystem {
         event.preventDefault();
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
-        
+
         const foundUser = this.users.find(user => user.email === email && user.password === password);
 
         if (foundUser) {
-            this.currentUser = { ...foundUser }; 
+            this.currentUser = { ...foundUser };
             localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
             this.updateUserInterface();
             this.removeProtectedOverlays();
@@ -287,17 +287,17 @@ class AuthSystem {
 
         const newUser = {
             name, email, password, company,
-            points: 50, 
+            points: 50,
             avatar: name.charAt(0).toUpperCase(),
-            stats: { ctfPoints: 0, challengesCompleted: 0 }, 
-            achievements: [] 
+            stats: { ctfPoints: 0, challengesCompleted: 0 },
+            achievements: []
         };
         this.users.push(newUser);
         localStorage.setItem('users', JSON.stringify(this.users));
-        
+
         this.currentUser = { ...newUser };
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-        
+
         this.updateUserInterface();
         this.removeProtectedOverlays();
         this.closeAuthModal();
@@ -315,7 +315,7 @@ class AuthSystem {
 
         if (this.currentUser) {
             authNav.style.display = 'none';
-            userNav.style.display = 'block'; 
+            userNav.style.display = 'block';
             userAvatarText.textContent = this.currentUser.avatar || 'U';
             navUserName.textContent = this.currentUser.name || 'User';
             navUserPoints.textContent = (this.currentUser.points || 0) + ' pts';
@@ -324,16 +324,16 @@ class AuthSystem {
             userNav.style.display = 'none';
         }
     }
-    
-    updateUserStats(statsUpdate) { 
+
+    updateUserStats(statsUpdate) {
         if (!this.currentUser) return;
         this.currentUser.stats = { ...this.currentUser.stats, ...statsUpdate };
-        
+
         // If ctfPoints are part of the general points system
         if (statsUpdate.ctfPoints) {
             this.currentUser.points = (this.currentUser.points || 0) + statsUpdate.ctfPoints;
         }
-        
+
         const userIndex = this.users.findIndex(u => u.email === this.currentUser.email);
         if (userIndex !== -1) {
             this.users[userIndex].stats = this.currentUser.stats;
@@ -344,7 +344,7 @@ class AuthSystem {
         this.updateUserInterface();
     }
 
-    addAchievement(achievementTitle) { 
+    addAchievement(achievementTitle) {
         if (!this.currentUser) return;
         if (!this.currentUser.achievements) this.currentUser.achievements = [];
         if (!this.currentUser.achievements.includes(achievementTitle)) {
@@ -367,8 +367,8 @@ class AuthSystem {
 
     showUserDashboard() { this.toggleUserMenu(); alert('User Dashboard: Coming Soon!'); }
     showUserProfile() { this.toggleUserMenu(); alert('User Profile: Coming Soon!'); }
-    showUserAchievements() { 
-        this.toggleUserMenu(); 
+    showUserAchievements() {
+        this.toggleUserMenu();
         if(this.currentUser && this.currentUser.achievements && this.currentUser.achievements.length > 0) {
             alert('Your Achievements:\n- ' + this.currentUser.achievements.join('\n- '));
         } else {
@@ -383,7 +383,7 @@ class AuthSystem {
         this.updateUserInterface();
         const userDropdown = document.getElementById('user-dropdown');
         if (userDropdown) userDropdown.classList.remove('show');
-        this.addProtectedOverlays(); 
+        this.addProtectedOverlays();
         this.showLogoutMessage();
     }
 
@@ -399,10 +399,10 @@ class AuthSystem {
     showNotificationMessage(message, type) {
         const notificationDiv = document.createElement('div');
         // Ensure this class is styled in CSS
-        notificationDiv.className = `auth-toast ${type}`; 
+        notificationDiv.className = `auth-toast ${type}`;
         notificationDiv.innerHTML = message;
         document.body.appendChild(notificationDiv);
-        
+
         if (!document.getElementById('auth-toast-styles')) {
             const toastStyle = document.createElement('style');
             toastStyle.id = 'auth-toast-styles';
@@ -417,10 +417,10 @@ class AuthSystem {
             `;
             document.head.appendChild(toastStyle);
         }
-        
+
         setTimeout(() => notificationDiv.remove(), 3000);
     }
-    
+
     isAuthenticated() {
         return this.currentUser !== null;
     }
@@ -437,19 +437,19 @@ class AuthSystem {
     }
 
     addProtectedOverlays() {
-        if (this.isAuthenticated()) return; 
+        if (this.isAuthenticated()) return;
 
         for (const sectionKey in this.protectedContentMap) {
             const contentId = this.protectedContentMap[sectionKey];
             const contentElement = document.getElementById(contentId);
             const overlayId = `overlay-${contentId}`;
-            
+
             if (contentElement && !document.getElementById(overlayId)) {
                 const overlay = document.createElement('div');
                 overlay.id = overlayId;
                 overlay.className = 'protected-overlay';
                 overlay.innerHTML = `<p>🔒 This content is protected. <a href="#" onclick="event.preventDefault(); auth.showLogin();">Login</a> to access.</p>`;
-                
+
                 if(!document.getElementById('protected-overlay-styles')) {
                     const overlayStyle = document.createElement('style');
                     overlayStyle.id = 'protected-overlay-styles';
@@ -460,7 +460,7 @@ class AuthSystem {
                     `;
                     document.head.appendChild(overlayStyle);
                 }
-                
+
                 if (getComputedStyle(contentElement).position === 'static') {
                     contentElement.style.position = 'relative';
                 }
@@ -470,7 +470,7 @@ class AuthSystem {
     }
 
     removeProtectedOverlays() {
-        if (!this.isAuthenticated()) return; 
+        if (!this.isAuthenticated()) return;
 
         for (const sectionKey in this.protectedContentMap) {
             const contentId = this.protectedContentMap[sectionKey];
@@ -478,7 +478,7 @@ class AuthSystem {
             if (overlay) overlay.remove();
         }
     }
-    
+
     handleProtectedLinkClick(sectionId) {
         if (this.checkAuth(sectionId)) {
             const targetElement = document.getElementById(sectionId);
@@ -518,7 +518,7 @@ const ctfPrizesData = {
     600: { rank: "🥉 INTERMEDIATE LEVEL", bonus: "You've earned a $200 Amazon gift card + free certification voucher!"},
     400: { rank: "🎯 BEGINNER LEVEL", bonus: "You've earned a $100 Amazon gift card + training course access!"}
 };
-let usedHints = {}; 
+let usedHints = {};
 
 function showHint(challengeId, hintNumber) {
     if (!auth.checkAuth('CTF Challenge Hint')) return;
@@ -527,11 +527,11 @@ function showHint(challengeId, hintNumber) {
     const hint = challenge.hints[hintNumber - 1];
     if (!usedHints[challengeId]) usedHints[challengeId] = [];
     if (usedHints[challengeId].includes(hintNumber)) { auth.showNotificationMessage("You've already used this hint!", "error"); return; }
-    
+
     const useHintConfirmed = confirm(`This hint will cost ${hint.cost} points. Continue?\n\nHint: ${hint.text}`);
     if (useHintConfirmed) {
         usedHints[challengeId].push(hintNumber);
-        auth.updateUserStats({ ctfPoints: -hint.cost }); 
+        auth.updateUserStats({ ctfPoints: -hint.cost });
         auth.showNotificationMessage(`Hint revealed! You lost ${hint.cost} points.`, "logout"); // 'logout' style is green like success
     }
 }
@@ -553,35 +553,35 @@ function submitFlag(challengeId) {
     if (submittedFlag === challenge.correctFlag) {
         auth.updateUserStats({ ctfPoints: finalPoints, challengesCompleted: (auth.currentUser.stats.challengesCompleted || 0) + 1 });
         auth.addAchievement(`Completed: ${challenge.title}`);
-        showCtfSuccessResponse(challengeId, finalPoints, challenge.title); 
+        showCtfSuccessResponse(challengeId, finalPoints, challenge.title);
         inputElement.value = ''; inputElement.disabled = true;
         const submitButton = inputElement.nextElementSibling; // Assuming button is next sibling
         if(submitButton) submitButton.disabled = true;
         createCelebrationEffect();
     } else {
-        showCtfFailureResponse(submittedFlag, challengeId); 
+        showCtfFailureResponse(submittedFlag, challengeId);
     }
 }
 
-function showCtfSuccessResponse(challengeId, points, challengeTitle) { 
-    let prizeInfo = ctfPrizesData[400]; 
+function showCtfSuccessResponse(challengeId, points, challengeTitle) {
+    let prizeInfo = ctfPrizesData[400];
     if (points >= 1000) prizeInfo = ctfPrizesData[1000];
     else if (points >= 800) prizeInfo = ctfPrizesData[800];
     else if (points >= 600) prizeInfo = ctfPrizesData[600];
-    
+
     const successMessage = `🎊 FLAG CAPTURED! 🎊\n\nChallenge: ${challengeTitle}\nPoints Earned: +${points}\nTotal User Points: ${auth.currentUser.points}\nLevel: ${prizeInfo.rank}\n\n🎁 ${prizeInfo.bonus}\n\n📧 Prize details will be sent to your email.`;
     auth.showNotificationMessage(successMessage.replace(/\n/g, '<br>'), 'success'); // Use notification for consistency
 }
 
-function showCtfFailureResponse(submittedFlag, challengeId) { 
+function showCtfFailureResponse(submittedFlag, challengeId) {
     const responses = [ "🚫 Incorrect flag!", "❌ Not quite right. Try again.", "🔍 Close, but no cigar."];
     const randomResponse = responses[Math.floor(Math.random() * responses.length)];
     auth.showNotificationMessage(randomResponse, 'error');
     // const useHint = confirm(`${randomResponse}\n\nUse a hint? (-cost points)`); // Alert/confirm can be annoying
-    // if (useHint) showCtfHintOptions(challengeId); 
+    // if (useHint) showCtfHintOptions(challengeId);
 }
 
-function showCtfHintOptions(challengeId) { 
+function showCtfHintOptions(challengeId) {
     if (!auth.checkAuth('CTF Hint Options')) return;
     const challenge = ctfChallengesData[challengeId];
     if (!challenge) return;
@@ -699,7 +699,7 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => { if (entry.isIntersecting) { animateDashboard(); if(document.getElementById('threat-container')) setInterval(createThreatPoint, 1500); observer.unobserve(entry.target); } });
         }, { threshold: 0.5 }).observe(dashSec);
     }
-    
+
     const termContentTyping = document.querySelector('.terminal-content .typing');
     if (termContentTyping) {
         new IntersectionObserver((entries, observer) => {
@@ -745,7 +745,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href').substring(1);
-        
+
         if (targetId === 'dashboard' || targetId === 'ctf-challenges') {
             auth.handleProtectedLinkClick(targetId);
         } else {
@@ -817,14 +817,14 @@ function animateStats() {
 
         if (isNaN(numToAnimate)) return;
 
-        let count = 0; 
+        let count = 0;
         const increment = numToAnimate / 50; // Animate in 50 steps
         const timer = setInterval(() => {
             count += increment;
-            if (count >= numToAnimate) { 
-                stat.textContent = finalDisplay; 
-                clearInterval(timer); 
-            } else { 
+            if (count >= numToAnimate) {
+                stat.textContent = finalDisplay;
+                clearInterval(timer);
+            } else {
                 let currentDisplay = Math.floor(count);
                 if (targetText.includes('%')) currentDisplay += '%';
                 if (targetText.includes('+')) currentDisplay += '+';
@@ -849,21 +849,21 @@ function createThreatPoint() {
     point.style.left = Math.random() * 90 + 5 + '%';
     point.style.top = Math.random() * 80 + 10 + '%';
     container.appendChild(point);
-    setTimeout(() => point.remove(), 2000); 
+    setTimeout(() => point.remove(), 2000);
 }
 
 document.addEventListener('click', function(event) {
     const userSection = document.querySelector('.user-section');
     const dropdown = document.getElementById('user-dropdown');
     if (userSection && dropdown && !userSection.contains(event.target) && dropdown.classList.contains('show')) {
-        auth.toggleUserMenu(); 
+        auth.toggleUserMenu();
     }
 });
 const authModalElement = document.getElementById('authModal');
 if (authModalElement) {
     authModalElement.addEventListener('click', function(event) {
         if (event.target === this) {
-            auth.closeAuthModal(); 
+            auth.closeAuthModal();
         }
     });
 }
