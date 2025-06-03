@@ -1,0 +1,3826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2R-AT | Elite Cybersecurity Solutions</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='sg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231a237e'/%3E%3Cstop offset='100%25' style='stop-color:%230d47a1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 10 L70 20 L70 50 Q70 65 50 75 Q30 65 30 50 L30 20 Z' fill='url(%23sg)' stroke='%2300e676' stroke-width='2'/%3E%3Ccircle cx='50' cy='35' r='3' fill='%2300e676'/%3E%3Cline x1='50' y1='35' x2='40' y2='35' stroke='%2300e676' stroke-width='1.5'/%3E%3Cline x1='50' y1='35' x2='60' y2='35' stroke='%2300e676' stroke-width='1.5'/%3E%3Crect x='45' y='42' width='10' height='8' fill='none' stroke='%2300e676' stroke-width='1.5' rx='1'/%3E%3C/svg%3E">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00D4FF;
+            --secondary: #FF006E;
+            --dark: #0A0E27;
+            --darker: #050714;
+            --light: #F8F9FA;
+            --gray: #94A3B8;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(45deg, #0A0E27 0%, #050714 50%, #0A0E27 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        /* Cyber Grid Effect */
+        .cyber-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 7, 20, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            filter: blur(20px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .logo-icon {
+            width: 150px;
+            height: 75px;
+            position: relative;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem; 
+            list-style: none;
+            align-items: center; 
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0.75rem; 
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background-color: rgba(0, 212, 255, 0.1);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 0.5rem; 
+            align-items: center;
+        }
+        .btn-small { 
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+        }
+        .user-menu {
+            position: relative;
+            display: flex; 
+            align-items: center;
+            margin-left: 1rem; 
+        }
+        #nav-notification-area {
+            margin-left: 0.5rem; 
+        }
+
+        .auth-section { 
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .auth-btn { 
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-section { 
+            position: relative;
+        }
+
+        .user-profile-nav { 
+            position: relative;
+        }
+
+        .user-avatar { 
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--dark); 
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .user-avatar:hover { 
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .user-dropdown { 
+            position: absolute;
+            top: 50px; 
+            right: 0;
+            background: rgba(5, 7, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            min-width: 220px; 
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1001; 
+        }
+
+        .user-dropdown.show { 
+            display: block;
+        }
+
+        .user-info { 
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        .user-info h4 { 
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+        .user-info p { 
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 0.25rem;
+        }
+
+
+        .user-name { 
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .user-points { 
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .user-dropdown a { 
+            display: block;
+            padding: 0.6rem 0; 
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem; 
+        }
+
+        .user-dropdown a:hover { 
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        #notification { 
+            color: white; 
+            padding: 0.5rem 1rem; 
+            cursor: pointer;
+            display: flex; 
+            align-items: center;
+        }
+        #notification-count {
+            background: var(--danger); 
+            border-radius: 50%; 
+            padding: 2px 6px; 
+            font-size: 0.8rem; 
+            margin-left: 5px; 
+            display:none; 
+        }
+
+        .auth-modal { 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8); 
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .auth-modal.show { 
+            display: flex;
+        }
+
+        .auth-form { 
+            background: rgba(10, 14, 39, 0.95);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        .auth-form h2 { 
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .close-modal { 
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover { 
+            color: var(--primary);
+        }
+
+        .auth-switch { 
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--gray);
+        }
+
+        .auth-switch a { 
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .auth-switch a:hover { 
+            color: var(--secondary);
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 1000px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glitch {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            color: var(--light);
+            letter-spacing: 3px;
+            animation: glitch 2s linear infinite;
+        }
+
+        @keyframes glitch {
+            2%, 64% {
+                transform: translate(2px, 0) skew(0deg);
+            }
+            4%, 60% {
+                transform: translate(-2px, 0) skew(0deg);
+            }
+            62% {
+                transform: translate(0, 0) skew(5deg);
+            }
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: var(--primary);
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: var(--secondary);
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% {
+                clip: rect(0, 900px, 0, 0);
+            }
+            25% {
+                clip: rect(20px, 900px, 40px, 0);
+            }
+            50% {
+                clip: rect(60px, 900px, 80px, 0);
+            }
+            75% {
+                clip: rect(100px, 900px, 120px, 0);
+            }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% {
+                clip: rect(0, 900px, 0, 0);
+            }
+            25% {
+                clip: rect(30px, 900px, 50px, 0);
+            }
+            50% {
+                clip: rect(70px, 900px, 90px, 0);
+            }
+            75% {
+                clip: rect(110px, 900px, 130px, 0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin: 2rem 0;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.7s;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.7);
+        }
+
+        .btn-secondary { 
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover { 
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-subtitle { 
+            font-size: 1.2rem; 
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+
+        /* Professional Services Section - From comprehensive_css */
+        .professional-services {
+            padding: 100px 0;
+            background: var(--dark);
+            position: relative;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(10, 14, 39, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: transparent;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            background: var(--dark);
+            border-radius: 14px;
+            z-index: -1;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .service-description {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Training Section - From comprehensive_css */
+        .training-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            position: relative;
+        }
+
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .training-card {
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .training-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+            border-color: var(--secondary);
+        }
+
+        .training-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .training-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .training-card:hover .training-icon {
+            background: var(--primary);
+            transform: scale(1.1) rotate(360deg);
+        }
+
+        .training-title {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .training-description {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .training-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .training-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gray);
+        }
+
+        .training-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .training-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .training-duration {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .training-level {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .training-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .training-link:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+        
+        /* CTF Challenges Section - Prioritizing login_css_content for cards, comprehensive for overall structure */
+        .ctf-section { 
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            position: relative;
+        }
+
+        .ctf-leaderboard { 
+            background: rgba(10, 14, 39, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .leaderboard-grid { 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .leaderboard-item { 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .leaderboard-item:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
+        }
+        .leaderboard-item.gold { background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 223, 0, 0.05)); border-color: #FFD700; }
+        .leaderboard-item.silver { background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(192, 192, 192, 0.05)); border-color: #C0C0C0; }
+        .leaderboard-item.bronze { background: linear-gradient(135deg, rgba(205, 127, 50, 0.1), rgba(205, 127, 50, 0.05)); border-color: #CD7F32; }
+
+        .leaderboard-item .rank { font-size: 1.2rem; font-weight: bold; min-width: 30px; }
+        .leaderboard-item .name { flex: 1; margin: 0 1rem; font-weight: 600; }
+        .leaderboard-item .score { color: var(--primary); font-weight: bold; }
+
+        .prize-pool { 
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(0, 212, 255, 0.1));
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+        }
+        .prizes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .prize-item { text-align: center; padding: 2rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,0,110,0.2); border-radius: 15px; transition: all 0.3s ease; }
+        .prize-item:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255,0,110,0.3); }
+        .prize-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .prize-amount { font-size: 2rem; font-weight: bold; color: var(--secondary); margin: 1rem 0; }
+        .prize-desc { color: var(--gray); font-size: 0.9rem; }
+
+        .ctf-challenges-grid { 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .ctf-card { 
+            background: rgba(10, 14, 39, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .ctf-card:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .ctf-header { 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .ctf-difficulty { 
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .ctf-difficulty.critical { background: rgba(239, 68, 68, 0.2); border: 1px solid var(--danger); color: var(--danger); }
+        .ctf-difficulty.high { background: rgba(245, 158, 11, 0.2); border: 1px solid var(--warning); color: var(--warning); }
+        .ctf-difficulty.medium { background: rgba(16, 185, 129, 0.2); border: 1px solid var(--success); color: var(--success); }
+
+        .ctf-points { 
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .ctf-icon { 
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .ctf-title { 
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+            text-align: center;
+        }
+
+        .ctf-description { 
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .ctf-scenario { 
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ctf-scenario h4 { 
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .ctf-details, .ctf-resources, .ctf-evidence {
+            margin-bottom: 1.5rem;
+        }
+        .ctf-details h4, .ctf-resources h4, .ctf-evidence h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .ctf-details ul { list-style: none; padding-left: 0; }
+        .ctf-details li { padding: 0.5rem 0; position: relative; padding-left: 1.5rem; color: var(--gray); }
+        .ctf-details li::before { content: '🔸'; position: absolute; left: 0; }
+
+        .ctf-encrypted-message { 
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .encrypted-text { 
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 5px;
+            color: var(--primary);
+            word-break: break-all;
+            overflow-x: auto;
+        }
+        .evidence-files { display: grid; gap: 1rem; margin-top: 1rem; } 
+        .evidence-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(0,212,255,0.1); border-radius: 8px; }
+        .file-icon { font-size: 1.5rem; }
+        .file-name { flex: 1; font-family: 'Courier New', monospace; color: var(--light); }
+        .file-size { color: var(--gray); font-size: 0.9rem; }
+        .download-btn, .resource-link { background: rgba(0,212,255,0.1); border: 1px solid var(--primary); color: var(--primary); padding: 0.5rem 1rem; border-radius: 5px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; cursor: pointer; }
+        .download-btn:hover, .resource-link:hover { background: var(--primary); color: var(--dark); }
+
+
+        .ctf-hints { 
+            margin: 1.5rem 0;
+        }
+
+        .ctf-hints h4 { 
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .hint-btn { 
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--warning);
+            color: var(--warning);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .hint-btn:hover { 
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .ctf-submission { 
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .flag-input { 
+            flex: 1;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            color: var(--light);
+            font-family: 'Courier New', monospace;
+        }
+
+        .flag-input:focus { 
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-flag-btn { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: var(--light);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-flag-btn:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .ctf-results-section {
+            background: rgba(10, 14, 39, 0.6);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 4rem;
+        }
+        .recent-submissions { display: grid; gap: 1rem; max-width: 800px; margin: 0 auto; }
+        .submission-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(0,212,255,0.1); border-radius: 10px; transition: all 0.3s ease; }
+        .submission-item:hover { background: rgba(0,212,255,0.05); }
+        .submission-item .submitter { font-weight: bold; color: var(--primary); min-width: 150px; }
+        .submission-item .challenge { flex: 1; margin: 0 1rem; color: var(--light); }
+        .submission-item .points { color: var(--success); font-weight: bold; min-width: 80px; }
+        .submission-item .time { color: var(--gray); font-size: 0.9rem; min-width: 100px; text-align: right; }
+
+        .your-results-section { background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(0,212,255,0.1)); border: 2px solid var(--success); border-radius: 20px; padding: 3rem; margin-top: 4rem; animation: celebration 2s ease; }
+        @keyframes celebration { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+        .result-card { text-align: center; }
+        .result-card h4 { font-size: 2rem; color: var(--success); margin-bottom: 1rem; }
+        .result-card .result-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .result-detail { background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 10px; }
+        .result-detail .label { color: var(--gray); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .result-detail .value { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+
+
+        /* Terminal Demo - From comprehensive_css */
+        .terminal {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 3rem 0; 
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal::before {
+            content: '● ● ●';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            color: var(--primary);
+            font-size: 12px;
+            letter-spacing: 5px;
+        }
+
+        .terminal-content {
+            margin-top: 1.5rem;
+            color: var(--primary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end);
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Stats Section - From comprehensive_css */
+        .stats {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            top: -150px;
+            right: -150px;
+            opacity: 0.1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            position: relative;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Dashboard Section - From comprehensive_css */
+        .dashboard-section {
+            padding: 100px 0;
+            background: var(--dark);
+            position: relative;
+        }
+
+        .dashboard-container {
+            background: rgba(10, 14, 39, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot { 
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite; 
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .metric-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .threat-map { 
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            padding: 2rem;
+            height: 500px; 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .world-map {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+        }
+        .world-map svg { width: 100%; height: 100%; }
+        .world-map svg path { transition: all 0.3s ease; fill: #334155; /* Default country color */ stroke: var(--darker); stroke-width: 0.5px; }
+        .world-map svg path:hover { fill: rgba(0,212,255,0.3); stroke: rgba(0,212,255,0.6); }
+        .world-map svg circle { transition: all 0.3s ease; fill: var(--primary); }
+        .world-map svg circle:hover { r: 4; fill: var(--secondary); }
+        .world-map svg line { stroke: var(--danger); stroke-width: 1px; opacity: 0.6; animation: data-flow 3s ease-in-out infinite alternate; }
+        
+        @keyframes data-flow { 
+            0% { stroke-dasharray: 0, 200; opacity: 0; } 
+            50% { stroke-dasharray: 100, 100; opacity: 0.8; }
+            100% { stroke-dasharray: 200, 0; opacity: 0;}
+        }
+        
+
+        .map-grid { 
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(0, 212, 255, 0.05) 0px, transparent 1px, transparent 20px, rgba(0, 212, 255, 0.05) 21px),
+                repeating-linear-gradient(90deg, rgba(0, 212, 255, 0.05) 0px, transparent 1px, transparent 20px, rgba(0, 212, 255, 0.05) 21px);
+        }
+
+        .threat-point { 
+            position: absolute;
+            width: 12px; 
+            height: 12px; 
+            background: var(--danger);
+            border-radius: 50%;
+            animation: threat-pulse 2s infinite;
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            border: 2px solid rgba(255,255,255,0.3); 
+            z-index: 5; 
+        }
+        .threat-point:hover { 
+            transform: scale(1.3);
+            z-index: 10;
+        }
+
+        @keyframes threat-pulse { 
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5); 
+                opacity: 0.7; 
+            }
+            100% {
+                transform: scale(2); 
+                opacity: 0;
+            }
+        }
+        
+        /* Article Modal Styles - From comprehensive_css */
+        .article-modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); }
+        .article-content { position: relative; background: var(--dark); margin: 2% auto; padding: 3rem; width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; border-radius: 15px; border: 1px solid rgba(0,212,255,0.2); }
+        .article-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; color: var(--primary); cursor: pointer; z-index: 10001; }
+        .article-close:hover { color: var(--secondary); }
+        .article-header { margin-bottom: 2rem; }
+        .article-title { font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .article-meta { display: flex; gap: 2rem; margin-bottom: 2rem; color: var(--gray); }
+        .article-body { color: var(--light); line-height: 1.8; font-size: 1.1rem; }
+        .article-body h3 { color: var(--primary); margin: 2rem 0 1rem 0; font-size: 1.5rem; }
+        .article-body p { margin-bottom: 1.5rem; }
+        .article-body ul { margin-bottom: 1.5rem; padding-left: 2rem; }
+        .article-body li { margin-bottom: 0.5rem; }
+        .code-block { background: rgba(0,0,0,0.5); border: 1px solid rgba(0,212,255,0.2); border-radius: 8px; padding: 1rem; margin: 1.5rem 0; font-family: 'Courier New', monospace; color: var(--primary); overflow-x: auto; }
+
+        /* Security Scanner - From comprehensive_css */
+        .scanner-demo { background: rgba(0,0,0,0.5); border-radius: 15px; padding: 2rem; margin-top: 3rem; }
+        .scanner-input { display: flex; gap: 1rem; margin-bottom: 2rem; }
+        .scanner-input input { flex: 1; padding: 1rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(0,212,255,0.2); border-radius: 8px; color: var(--light); }
+        .scan-button { padding: 1rem 2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; border-radius: 8px; color: var(--light); font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+        .scan-button:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,212,255,0.5); }
+        .scan-results { background: rgba(0,0,0,0.3); border-radius: 10px; padding: 1.5rem; display: none; } /* Initially hidden */
+        .scan-progress { height: 4px; background: rgba(0,212,255,0.1); border-radius: 2px; overflow: hidden; margin-bottom: 1rem; }
+        .scan-progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); width: 0; transition: width 0.3s ease; }
+
+
+        /* Features Section - From comprehensive_css */
+        .features {
+            padding: 100px 0;
+            background: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover .feature-link {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            background: var(--primary);
+            transform: scale(1.1) rotate(360deg);
+        }
+        
+        /* Feature Detail Section - From comprehensive_css */
+        .feature-detail-section { padding: 100px 0; background: var(--dark); min-height: 100vh; position: relative; }
+        .feature-detail-header { text-align: center; margin-bottom: 3rem; }
+        .feature-detail-icon { font-size: 5rem; margin-bottom: 1rem; display: inline-block; animation: pulse 2s ease infinite; } 
+        .feature-detail-title { font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .feature-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0; text-align: center; }
+        .feature-stat { background: rgba(0,212,255,0.1); border: 1px solid var(--primary); border-radius: 15px; padding: 2rem; }
+        .feature-stat-number { font-size: 2.5rem; font-weight: bold; color: var(--primary); display: block; margin-bottom: 0.5rem; }
+        .feature-tech-stack { background: rgba(10,14,39,0.6); border-radius: 15px; padding: 2rem; margin-top: 2rem; }
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .tech-item { background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); border-radius: 8px; padding: 0.75rem; text-align: center; transition: all 0.3s ease; }
+        .tech-item:hover { background: rgba(0,212,255,0.2); transform: scale(1.05); }
+
+
+        /* Case Studies - From comprehensive_css */
+        .case-studies {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .case-card {
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .case-header { 
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1));
+            padding: 2rem;
+            position: relative;
+        }
+
+        .case-icon { 
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .case-content { 
+            padding: 2rem;
+        }
+
+        .case-stats { 
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .case-stat { 
+            text-align: center;
+        }
+
+        .case-stat-value { 
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .case-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .case-card:hover .case-link {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        /* Case Study Detail Section - From comprehensive_css */
+        .case-detail-section { padding: 100px 0; background: var(--dark); min-height: 100vh; position: relative; }
+        .case-detail-hero { text-align: center; margin-bottom: 4rem; }
+        .case-detail-icon { font-size: 5rem; margin-bottom: 1rem; } 
+        .case-detail-title { font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .case-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0; text-align: center; }
+        .case-metric { background: rgba(0,212,255,0.1); border: 1px solid var(--primary); border-radius: 15px; padding: 2rem; transition: all 0.3s ease; }
+        .case-metric:hover { transform: scale(1.05); background: rgba(0,212,255,0.15); }
+        .case-metric-value { font-size: 2.5rem; font-weight: bold; color: var(--primary); display: block; margin-bottom: 0.5rem; }
+        .case-timeline { position: relative; padding: 2rem 0; margin: 3rem 0; }
+        .timeline-item { display: flex; align-items: center; margin-bottom: 2rem; position: relative; }
+        .timeline-icon { width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-right: 2rem; z-index: 2; }
+        .timeline-content { background: rgba(10,14,39,0.6); border: 1px solid rgba(0,212,255,0.2); border-radius: 10px; padding: 1.5rem; flex: 1; }
+        .case-testimonial { background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(255,0,110,0.1)); border-radius: 15px; padding: 3rem; margin: 3rem 0; text-align: center; }
+        .testimonial-quote { font-size: 1.5rem; font-style: italic; color: var(--light); margin-bottom: 1.5rem; position: relative; }
+        .testimonial-quote::before { content: '"'; font-size: 4rem; position: absolute; top: -20px; left: -30px; opacity: 0.3; color: var(--primary); }
+        .testimonial-author { font-weight: bold; color: var(--primary); }
+        .case-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+
+
+        /* Team Section - From comprehensive_css */
+        .team-section { padding: 100px 0; background: var(--dark); }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .team-member { text-align: center; position: relative; padding: 2rem; }
+        .member-avatar { width: 150px; height: 150px; margin: 0 auto 1.5rem; position: relative; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 3px; }
+        .avatar-inner { width: 100%; height: 100%; border-radius: 50%; background: var(--dark); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .member-name { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .member-role { color: var(--primary); font-size: 0.9rem; margin-bottom: 1rem; }
+        .member-certs { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+        .cert-badge { background: rgba(0,212,255,0.1); border: 1px solid var(--primary); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; }
+
+        /* Pricing Section - From comprehensive_css */
+        .pricing-section { padding: 100px 0; background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%); }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .pricing-card { background: rgba(10,14,39,0.8); border: 2px solid rgba(0,212,255,0.2); border-radius: 20px; padding: 3rem 2rem; text-align: center; position: relative; transition: all 0.3s ease; }
+        .pricing-card.featured { border-color: var(--primary); transform: scale(1.05); }
+        .pricing-card.featured::before { content: 'RECOMMENDED'; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); color: var(--dark); padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .pricing-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
+        .pricing-card.featured:hover { transform: scale(1.05) translateY(-10px); }
+        .plan-name { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
+        .plan-price { font-size: 3rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .plan-price sup { font-size: 1.5rem; }
+        .plan-period { color: var(--gray); margin-bottom: 2rem; }
+        .plan-features { list-style: none; margin-bottom: 2rem; padding-left:0; }
+        .plan-features li { padding: 0.75rem 0; border-bottom: 1px solid rgba(0,212,255,0.1); display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .plan-features li:last-child { border-bottom: none; }
+        .check-icon { color: var(--success); }
+
+
+        /* Resources Section - From comprehensive_css */
+        .resources-section { padding: 100px 0; background: var(--dark); }
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .resource-card { background: rgba(10,14,39,0.6); border: 1px solid rgba(0,212,255,0.2); border-radius: 15px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; }
+        .resource-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,212,255,0.2); }
+        .resource-image { height: 200px; background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(255,0,110,0.2)); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .resource-content { padding: 2rem; }
+        .resource-tag { display: inline-block; background: rgba(0,212,255,0.1); color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1rem; }
+        .resource-title { font-size: 1.3rem; margin-bottom: 1rem; color: var(--light); }
+        .resource-excerpt { color: var(--gray); margin-bottom: 1.5rem; }
+        .resource-meta { display: flex; justify-content: space-between; align-items: center; color: var(--gray); font-size: 0.9rem; }
+        
+
+        /* Contact Section - From comprehensive_css */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            position: relative;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: rgba(10, 14, 39, 0.5);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .form-group { 
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label { 
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+
+        .form-group input,
+        .form-group textarea { 
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            color: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus { 
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Service Detail Section - From comprehensive_css */
+        .service-detail-section { padding: 100px 0; background: var(--dark); min-height: 100vh; position: relative; }
+        .close-detail { background: rgba(0,212,255,0.1); border: 1px solid var(--primary); color: var(--primary); padding: 0.75rem 1.5rem; border-radius: 50px; cursor: pointer; margin-bottom: 2rem; transition: all 0.3s ease; }
+        .close-detail:hover { background: var(--primary); color: var(--dark); }
+        .service-detail-header { text-align: center; margin-bottom: 3rem; }
+        .service-detail-icon { font-size: 5rem; margin-bottom: 1rem; } 
+        .service-detail-title { font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .service-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .detail-card { background: rgba(10,14,39,0.6); border: 1px solid rgba(0,212,255,0.2); border-radius: 15px; padding: 2rem; transition: all 0.3s ease; }
+        .detail-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,212,255,0.2); }
+        .detail-features { list-style: none; margin: 2rem 0; padding-left:0; }
+        .detail-features li { padding: 1rem 0; padding-left: 2rem; position: relative; color: var(--gray); }
+        .detail-features li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: bold; font-size: 1.2rem; }
+        .service-pricing { background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(255,0,110,0.1)); border-radius: 15px; padding: 2rem; margin-top: 3rem; text-align: center; }
+        .price-tag { font-size: 2.5rem; font-weight: bold; color: var(--primary); margin: 1rem 0; }
+
+
+        /* Footer - From comprehensive_css */
+        footer {
+            background: var(--darker);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Particles - From comprehensive_css */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh) translateX(0);
+            }
+            to {
+                transform: translateY(-100px) translateX(100px);
+            }
+        }
+
+        /* Loading Animation - From comprehensive_css */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-circle {
+            width: 50px;
+            height: 50px;
+            border: 3px solid transparent;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Custom Scrollbar - From comprehensive_css */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+
+        /* Mobile Responsive - Start with comprehensive_css (Rule 5) and integrate login_css_content specifics */
+        @media (max-width: 768px) {
+            .logo-icon { 
+                width: 120px;
+                height: 60px;
+            }
+            
+            .nav-links { 
+                display: none; 
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(5, 7, 20, 0.98); 
+                padding: 2rem; 
+                gap: 1rem; 
+                border-top: 1px solid rgba(0, 212, 255, 0.2);
+            }
+
+            .nav-links.active { 
+                display: flex;
+            }
+            
+            .mobile-menu-toggle { 
+                display: flex;
+            }
+
+            .mobile-menu-toggle span { 
+                width: 25px;
+                height: 2px;
+                background: var(--primary);
+                transition: all 0.3s ease;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(1) { 
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(2) { 
+                opacity: 0;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(3) { 
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+            
+            .hero-content { 
+                padding: 0 1rem; 
+            }
+            
+            .glitch { 
+                font-size: 3rem; 
+            }
+            
+            .cta-container { 
+                flex-direction: column;
+                width: 100%;
+                padding: 0 1rem; 
+            }
+            
+            .btn { 
+                width: 100%;
+                text-align: center;
+            }
+            
+            .contact-container { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .services-grid,
+            .training-grid,
+            .case-grid,
+            .team-grid, 
+            .pricing-grid, 
+            .resource-grid { 
+                grid-template-columns: 1fr; 
+            }
+
+            .dashboard-header { 
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .metrics-grid { 
+                grid-template-columns: 1fr; 
+            }
+
+            .pricing-card.featured { 
+                transform: scale(1); 
+            }
+
+            .leaderboard-grid, 
+            .prizes-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .auth-section { /* From login.html, for when it was part of nav-links */
+                flex-direction: column; 
+                gap: 0.5rem;
+                width: 100%; /* Ensure it takes full width in mobile nav */
+            }
+            .auth-buttons { /* For new structure */
+                flex-direction: column;
+                width: 100%;
+                gap: 0.75rem; /* Space between stacked buttons */
+            }
+            .auth-buttons .btn {
+                width: 100%; /* Make buttons full width */
+            }
+            .user-menu {
+                 margin-left: auto; /* Push to the right if nav-links are hidden */
+            }
+
+
+            .user-dropdown { 
+                right: 0; /* Adjust for mobile, might need to be left:0 depending on final layout */
+                left: auto; 
+                min-width: 180px; /* Can be smaller */
+            }
+
+            .ctf-submission { 
+                flex-direction: column;
+            }
+ 
+            .result-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .submission-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            
+            .submission-item .submitter,
+            .submission-item .challenge,
+            .submission-item .points,
+            .submission-item .time {
+                min-width: auto;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-circle"></div>
+    </div>
+
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="cyber-grid"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <svg class="logo-icon" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a237e;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0d47a1;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#00e676;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00bfa5;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M200 30 L250 50 L250 100 Q250 130 200 150 Q150 130 150 100 L150 50 Z" 
+                          fill="url(#shieldGradient)" stroke="#00e676" stroke-width="2" opacity="0.9"/>
+                    <circle cx="200" cy="70" r="5" fill="#00e676" opacity="0.8"/>
+                    <line x1="200" y1="70" x2="180" y2="70" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+                    <line x1="200" y1="70" x2="220" y2="70" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+                    <line x1="200" y1="70" x2="200" y2="90" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+                    <line x1="200" y1="70" x2="200" y2="50" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+                    <rect x="190" y="80" width="20" height="15" fill="none" stroke="#00e676" stroke-width="2" rx="2"/>
+                    <path d="M195 80 L195 75 Q200 70 205 75 L205 80" fill="none" stroke="#00e676" stroke-width="2"/>
+                    <text x="200" y="110" font-family="Arial, sans-serif" font-size="36" font-weight="bold" 
+                          text-anchor="middle" fill="url(#textGradient)">2R-AT</text>
+                </svg>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#professional-services">Professional Services</a></li>
+                <li><a href="#training">Training</a></li>
+                <li><a href="#ctf-challenges" onclick="auth.checkAuth('ctf-challenges')">CTF Challenges</a></li>
+                <li><a href="#dashboard" onclick="auth.checkAuth('dashboard')">Dashboard</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#case-studies">Success Stories</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <!-- Authentication Buttons / User Menu -->
+            <div class="auth-buttons" id="auth-nav">
+                <button class="btn btn-secondary btn-small" onclick="auth.showLogin()">Login</button>
+                <button class="btn btn-primary btn-small" onclick="auth.showRegister()">Get Started</button>
+            </div>
+            <div class="user-menu" id="user-nav" style="display: none;">
+                <div class="user-avatar" onclick="auth.toggleUserMenu()" id="user-avatar-text">
+                    <!-- User initials will be populated by JS -->
+                </div>
+                <div class="user-dropdown" id="user-dropdown">
+                    <div class="user-info">
+                        <h4 id="nav-user-name">User</h4>
+                        <p id="nav-user-email">user@example.com</p>
+                        <p id="nav-user-points">0 pts</p>
+                    </div>
+                    <hr style="border-color: rgba(0, 212, 255, 0.1); margin: 0.5rem 0;">
+                    <a href="#" onclick="auth.showUserDashboard()">👤 Dashboard</a>
+                    <a href="#" onclick="auth.showUserProfile()">🏆 Profile</a>
+                    <a href="#" onclick="auth.showUserAchievements()">⚙️ Achievements</a>
+                     <hr style="border-color: rgba(0, 212, 255, 0.1); margin: 0.5rem 0;">
+                    <a href="#" onclick="auth.logout()">🚪 Logout</a>
+                </div>
+            </div>
+            <div id="nav-notification-area">
+                 <div id="notification" style="color: white; padding: 0 1rem; cursor: pointer; display:flex; align-items:center;" onclick="window.showNotifications()">
+                     🔔<span id="notification-count" style="background: var(--danger); border-radius: 50%; padding: 2px 6px; font-size: 0.8rem; margin-left: 5px; display:none;"></span>
+                 </div>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1 class="glitch" data-text="2R-AT SECURITY">2R-AT SECURITY</h1>
+            <p class="hero-subtitle">Next-Generation Cybersecurity Solutions for the Digital Age</p>
+            <div class="cta-container">
+                <a href="#contact" class="btn btn-primary">Start Securing Now</a>
+                <a href="#professional-services" class="btn btn-secondary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Services Section -->
+    <section class="professional-services" id="professional-services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Professional Services</h2>
+                <p class="section-subtitle">Comprehensive protection for your digital infrastructure</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" onclick="showServiceDetail('cloud-security')">
+                    <div class="service-icon">☁️</div>
+                    <h3 class="service-title">Cloud Security</h3>
+                    <p class="service-description">Advanced cloud infrastructure protection with real-time monitoring, automated threat response, and compliance management for AWS, Azure, and GCP environments.</p>
+                    <a href="#service-detail" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('penetration-testing')">
+                    <div class="service-icon">🔓</div>
+                    <h3 class="service-title">Penetration Testing</h3>
+                    <p class="service-description">Elite ethical hacking services simulating real-world attacks to identify vulnerabilities before malicious actors can exploit them.</p>
+                    <a href="#service-detail" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('vulnerability-analysis')">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Vulnerability Analysis</h3>
+                    <p class="service-description">Comprehensive security assessments using cutting-edge tools and methodologies to identify and prioritize system weaknesses.</p>
+                    <a href="#service-detail" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('threat-hunting')">
+                    <div class="service-icon">🎯</div>
+                    <h3 class="service-title">Threat Hunting</h3>
+                    <p class="service-description">Proactive threat detection and response services to identify advanced persistent threats and zero-day exploits in your environment.</p>
+                    <a href="#service-detail" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('grc-services')">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">GRC Services</h3>
+                    <p class="service-description">Complete governance, risk, and compliance solutions ensuring your organization meets all regulatory requirements.</p>
+                    <a href="#service-detail" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('security-auditing')">
+                    <div class="service-icon">🔍</div>
+                    <h3 class="service-title">Security Auditing</h3>
+                    <p class="service-description">Thorough security audits and assessments to ensure your systems meet industry standards and best practices.</p>
+                    <a href="#service-detail" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Section -->
+    <section class="training-section" id="training">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cybersecurity Training Programs</h2>
+                <p class="section-subtitle">Empower your team with cutting-edge security knowledge and skills</p>
+            </div>
+            <div class="training-grid">
+                <div class="training-card" onclick="showTrainingDetail('security-awareness')">
+                    <div class="training-icon">🧠</div>
+                    <h3 class="training-title">Security Awareness Training</h3>
+                    <p class="training-description">Comprehensive security awareness program designed to transform your employees into the first line of defense against cyber threats.</p>
+                    <ul class="training-features">
+                        <li>Interactive phishing simulations</li>
+                        <li>Real-world threat scenarios</li>
+                        <li>Customizable content by role</li>
+                        <li>Progress tracking and reporting</li>
+                        <li>Quarterly security updates</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">4-8 weeks</span>
+                        <span class="training-level">All Levels</span>
+                    </div>
+                    <a href="#training-detail" class="training-link">Enroll Now →</a>
+                </div>
+                <div class="training-card" onclick="showTrainingDetail('risk-management')">
+                    <div class="training-icon">⚖️</div>
+                    <h3 class="training-title">Risk Management Certification</h3>
+                    <p class="training-description">Master the art of identifying, assessing, and mitigating cybersecurity risks across your organization with industry-leading frameworks.</p>
+                    <ul class="training-features">
+                        <li>NIST and ISO 27001 frameworks</li>
+                        <li>Risk assessment methodologies</li>
+                        <li>Business impact analysis</li>
+                        <li>Incident response planning</li>
+                        <li>Regulatory compliance strategies</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">12 weeks</span>
+                        <span class="training-level">Intermediate to Advanced</span>
+                    </div>
+                    <a href="#training-detail" class="training-link">Learn More →</a>
+                </div>
+                <div class="training-card" onclick="showTrainingDetail('ethical-hacking')">
+                    <div class="training-icon">🎭</div>
+                    <h3 class="training-title">Ethical Hacking Bootcamp</h3>
+                    <p class="training-description">Intensive hands-on training program covering advanced penetration testing techniques and vulnerability assessment methodologies.</p>
+                    <ul class="training-features">
+                        <li>Network penetration testing</li>
+                        <li>Web application security</li>
+                        <li>Mobile app penetration testing</li>
+                        <li>Social engineering techniques</li>
+                        <li>Real-world lab environments</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">16 weeks</span>
+                        <span class="training-level">Advanced</span>
+                    </div>
+                    <a href="#training-detail" class="training-link">Apply Now →</a>
+                </div>
+                <div class="training-card" onclick="showTrainingDetail('digital-forensics')">
+                    <div class="training-icon">🔬</div>
+                    <h3 class="training-title">Digital Forensics Bootcamp</h3>
+                    <p class="training-description">Comprehensive training in digital evidence collection, analysis, and presentation for cybersecurity incident response and legal proceedings.</p>
+                    <ul class="training-features">
+                        <li>Digital evidence acquisition</li>
+                        <li>Memory and disk analysis</li>
+                        <li>Network forensics techniques</li>
+                        <li>Mobile device investigations</li>
+                        <li>Court testimony preparation</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">20 weeks</span>
+                        <span class="training-level">Advanced</span>
+                    </div>
+                    <a href="#training-detail" class="training-link">Reserve Spot →</a>
+                </div>
+            </div>
+            <div class="stats" style="padding: 60px 0; margin-top: 60px;">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">5,000+</span>
+                        <span class="stat-label">Professionals Trained</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Certification Pass Rate</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Corporate Programs</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.9/5</span>
+                        <span class="stat-label">Student Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTF Challenges Section -->
+    <section class="ctf-section" id="ctf-challenges">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Capture The Flag Challenges</h2>
+                <p class="section-subtitle">Test your skills with real-world cybersecurity scenarios</p>
+            </div>
+            <div id="ctf-challenges-grid"> <!-- This is the container for protected content -->
+                <div class="ctf-leaderboard">
+                    <h3 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">🏆 Current Leaderboard</h3>
+                    <div class="leaderboard-grid">
+                        <div class="leaderboard-item gold">
+                            <span class="rank">🥇</span>
+                            <span class="name">CyberNinja_2025</span>
+                            <span class="score">3,850 pts</span>
+                        </div>
+                        <div class="leaderboard-item silver">
+                            <span class="rank">🥈</span>
+                            <span class="name">SecMaster_Pro</span>
+                            <span class="score">3,720 pts</span>
+                        </div>
+                        <div class="leaderboard-item bronze">
+                            <span class="rank">🥉</span>
+                            <span class="name">HackTheBox_Elite</span>
+                            <span class="score">3,650 pts</span>
+                        </div>
+                        <div class="leaderboard-item">
+                            <span class="rank">4</span>
+                            <span class="name">PentestGuru</span>
+                            <span class="score">3,420 pts</span>
+                        </div>
+                        <div class="leaderboard-item">
+                            <span class="rank">5</span>
+                            <span class="name">ForensicsExpert</span>
+                            <span class="score">3,280 pts</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="prize-pool">
+                    <h3 style="text-align: center; color: var(--secondary); margin-bottom: 2rem;">💰 Monthly Prize Pool: $25,000</h3>
+                    <div class="prizes-grid">
+                        <div class="prize-item">
+                            <div class="prize-icon">🏆</div>
+                            <h4>1st Place</h4>
+                            <p class="prize-amount">$10,000</p>
+                            <p class="prize-desc">+ Job Interview Guarantee + CISSP Certification Voucher</p>
+                        </div>
+                        <div class="prize-item">
+                            <div class="prize-icon">🥈</div>
+                            <h4>2nd Place</h4>
+                            <p class="prize-amount">$5,000</p>
+                            <p class="prize-desc">+ Advanced Training Course + CEH Certification Voucher</p>
+                        </div>
+                        <div class="prize-item">
+                            <div class="prize-icon">🥉</div>
+                            <h4>3rd Place</h4>
+                            <p class="prize-amount">$3,000</p>
+                            <p class="prize-desc">+ Penetration Testing Toolkit + GCIH Certification Voucher</p>
+                        </div>
+                        <div class="prize-item">
+                            <div class="prize-icon">🎯</div>
+                            <h4>Top 10</h4>
+                            <p class="prize-amount">$500 each</p>
+                            <p class="prize-desc">+ Training Course Access + Swag Package</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ctf-challenges-grid"> <!-- Note: This class name is duplicated, might need unique ID for inner grid -->
+                    <div class="ctf-card">
+                        <div class="ctf-header">
+                            <div class="ctf-difficulty critical">CRITICAL</div>
+                            <div class="ctf-points">1000 pts</div>
+                        </div>
+                        <div class="ctf-icon">🌐</div>
+                        <h3 class="ctf-title">Corporate Data Breach Investigation</h3>
+                        <p class="ctf-description">A Fortune 500 company's web application has been compromised. Analyze the application to find how attackers gained access to sensitive customer data.</p>
+                        <div class="ctf-scenario">
+                            <h4>🎯 Scenario:</h4>
+                            <p>TechCorp Inc. discovered unauthorized access to their customer database. The attack happened through their web portal at <code>challenge1.2r-at.com</code>. Your mission: identify the vulnerability and extract the hidden flag.</p>
+                        </div>
+                        <div class="ctf-details">
+                            <h4>🔍 Investigation Points:</h4>
+                            <ul>
+                                <li>Analyze the login mechanism for SQL injection vulnerabilities</li>
+                                <li>Check for Cross-Site Scripting (XSS) in user input fields</li>
+                                <li>Investigate session management and authentication bypass</li>
+                                <li>Look for insecure direct object references</li>
+                                <li>Examine file upload functionality for malicious content</li>
+                            </ul>
+                        </div>
+                        <div class="ctf-hints">
+                            <h4>💡 Hints Available:</h4>
+                            <button class="hint-btn" onclick="showHint('web-app', 1)">Hint 1 (-50 pts)</button>
+                            <button class="hint-btn" onclick="showHint('web-app', 2)">Hint 2 (-100 pts)</button>
+                            <button class="hint-btn" onclick="showHint('web-app', 3)">Hint 3 (-150 pts)</button>
+                        </div>
+                        <div class="ctf-submission">
+                            <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-web-app" class="flag-input">
+                            <button class="submit-flag-btn" onclick="submitFlag('web-app')">Submit Flag</button>
+                        </div>
+                    </div>
+                    <div class="ctf-card">
+                        <div class="ctf-header">
+                            <div class="ctf-difficulty high">HIGH</div>
+                            <div class="ctf-points">800 pts</div>
+                        </div>
+                        <div class="ctf-icon">📡</div>
+                        <h3 class="ctf-title">APT Network Infiltration Analysis</h3>
+                        <p class="ctf-description">An Advanced Persistent Threat (APT) group has infiltrated a government network. Analyze the captured network traffic to uncover their methods and objectives.</p>
+                        <div class="ctf-scenario">
+                            <h4>🎯 Scenario:</h4>
+                            <p>Security analysts detected suspicious network activity in a classified government network. You have a packet capture file containing 48 hours of network traffic. Find evidence of the APT group's activities and discover their command & control server.</p>
+                        </div>
+                        <div class="ctf-details">
+                            <h4>🔍 Analysis Required:</h4>
+                            <ul>
+                                <li>Identify suspicious DNS queries and domain generation algorithms</li>
+                                <li>Analyze encrypted C2 communications patterns</li>
+                                <li>Discover data exfiltration methods and timing</li>
+                                <li>Find evidence of lateral movement within the network</li>
+                                <li>Identify compromised user accounts and privilege escalation</li>
+                            </ul>
+                        </div>
+                        <div class="ctf-resources">
+                            <h4>📁 Resources:</h4>
+                            <a href="#" class="resource-link" onclick="downloadResource('network-pcap')">Download PCAP File (250 MB)</a>
+                            <a href="#" class="resource-link" onclick="downloadResource('network-tools')">Recommended Analysis Tools</a>
+                        </div>
+                        <div class="ctf-hints">
+                            <h4>💡 Hints Available:</h4>
+                            <button class="hint-btn" onclick="showHint('network-forensics', 1)">Hint 1 (-40 pts)</button>
+                            <button class="hint-btn" onclick="showHint('network-forensics', 2)">Hint 2 (-80 pts)</button>
+                            <button class="hint-btn" onclick="showHint('network-forensics', 3)">Hint 3 (-120 pts)</button>
+                        </div>
+                        <div class="ctf-submission">
+                            <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-network" class="flag-input">
+                            <button class="submit-flag-btn" onclick="submitFlag('network-forensics')">Submit Flag</button>
+                        </div>
+                    </div>
+                    <div class="ctf-card">
+                        <div class="ctf-header">
+                            <div class="ctf-difficulty medium">MEDIUM</div>
+                            <div class="ctf-points">600 pts</div>
+                        </div>
+                        <div class="ctf-icon">🔐</div>
+                        <h3 class="ctf-title">State-Sponsored Crypto Espionage</h3>
+                        <p class="ctf-description">Intelligence agencies intercepted encrypted communications between state-sponsored hackers. Break the encryption to reveal their next target and operation timeline.</p>
+                        <div class="ctf-scenario">
+                            <h4>🎯 Scenario:</h4>
+                            <p>The NSA intercepted encrypted messages between members of a state-sponsored hacking group. The messages contain plans for their next major cyberattack. Your cryptanalysis skills are needed to decrypt these communications and prevent a potential disaster.</p>
+                        </div>
+                        <div class="ctf-details">
+                            <h4>🔍 Cryptographic Challenges:</h4>
+                            <ul>
+                                <li>Analyze weak RSA implementation with small key size</li>
+                                <li>Exploit reused nonces in AES-GCM encryption</li>
+                                <li>Perform frequency analysis on custom cipher</li>
+                                <li>Break modified Vigenère cipher with known plaintext</li>
+                                <li>Decrypt steganographically hidden messages</li>
+                            </ul>
+                        </div>
+                        <div class="ctf-encrypted-message">
+                            <h4>📜 Intercepted Message:</h4>
+                            <div class="encrypted-text">
+                                <code>
+                                    -----BEGIN ENCRYPTED MESSAGE-----<br>
+                                    V2UgYXJlIGdvaW5nIHRvIGF0dGFjayB0aGUgcG93ZXIgZ3JpZCBvZiBOZXcgWW9yayBDaXR5IG9uIDIwMjUtMDItMTUgYXQgMDM6MDA6MDBVVEM=<br>
+                                    Gur pbqr jbeq vf: FVYIRE_FGBEZ_2025<br>
+                                    -----END ENCRYPTED MESSAGE-----
+                                </code>
+                            </div>
+                        </div>
+                        <div class="ctf-hints">
+                            <h4>💡 Hints Available:</h4>
+                            <button class="hint-btn" onclick="showHint('cryptography', 1)">Hint 1 (-30 pts)</button>
+                            <button class="hint-btn" onclick="showHint('cryptography', 2)">Hint 2 (-60 pts)</button>
+                            <button class="hint-btn" onclick="showHint('cryptography', 3)">Hint 3 (-90 pts)</button>
+                        </div>
+                        <div class="ctf-submission">
+                            <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-crypto" class="flag-input">
+                            <button class="submit-flag-btn" onclick="submitFlag('cryptography')">Submit Flag</button>
+                        </div>
+                    </div>
+                    <div class="ctf-card">
+                        <div class="ctf-header">
+                            <div class="ctf-difficulty critical">CRITICAL</div>
+                            <div class="ctf-points">1200 pts</div>
+                        </div>
+                        <div class="ctf-icon">🔬</div>
+                        <h3 class="ctf-title">Insider Threat Investigation</h3>
+                        <p class="ctf-description">A trusted employee with high-level access has been stealing intellectual property. Conduct a digital forensics investigation to build a case for prosecution.</p>
+                        <div class="ctf-scenario">
+                            <h4>🎯 Scenario:</h4>
+                            <p>MegaCorp's $2 billion intellectual property has been leaked to competitors. All evidence points to an insider threat. You have been given forensic images of the suspect's laptop, mobile device, and network logs. Build an airtight case with digital evidence.</p>
+                        </div>
+                        <div class="ctf-details">
+                            <h4>🔍 Forensic Analysis Required:</h4>
+                            <ul>
+                                <li>Timeline analysis of file access and modification</li>
+                                <li>Recovery of deleted files and browser history</li>
+                                <li>Analysis of encrypted USB drives and hidden partitions</li>
+                                <li>Email forensics and communication patterns</li>
+                                <li>Memory dump analysis for encryption keys</li>
+                                <li>Mobile device extraction and analysis</li>
+                            </ul>
+                        </div>
+                        <div class="ctf-evidence">
+                            <h4>🗂️ Digital Evidence:</h4>
+                            <div class="evidence-files">
+                                <div class="evidence-item">
+                                    <span class="file-icon">💻</span>
+                                    <span class="file-name">laptop_image.dd</span>
+                                    <span class="file-size">120 GB</span>
+                                    <button class="download-btn" onclick="downloadEvidence('laptop')">Download</button>
+                                </div>
+                                <div class="evidence-item">
+                                    <span class="file-icon">📱</span>
+                                    <span class="file-name">mobile_extract.tar</span>
+                                    <span class="file-size">45 GB</span>
+                                    <button class="download-btn" onclick="downloadEvidence('mobile')">Download</button>
+                                </div>
+                                <div class="evidence-item">
+                                    <span class="file-icon">📊</span>
+                                    <span class="file-name">network_logs.json</span>
+                                    <span class="file-size">2.1 GB</span>
+                                    <button class="download-btn" onclick="downloadEvidence('network')">Download</button>
+                                </div>
+                                <div class="evidence-item">
+                                    <span class="file-icon">🧠</span>
+                                    <span class="file-name">memory_dump.mem</span>
+                                    <span class="file-size">32 GB</span>
+                                    <button class="download-btn" onclick="downloadEvidence('memory')">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ctf-hints">
+                            <h4>💡 Hints Available:</h4>
+                            <button class="hint-btn" onclick="showHint('digital-forensics', 1)">Hint 1 (-60 pts)</button>
+                            <button class="hint-btn" onclick="showHint('digital-forensics', 2)">Hint 2 (-120 pts)</button>
+                            <button class="hint-btn" onclick="showHint('digital-forensics', 3)">Hint 3 (-180 pts)</button>
+                        </div>
+                        <div class="ctf-submission">
+                            <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-forensics" class="flag-input">
+                            <button class="submit-flag-btn" onclick="submitFlag('digital-forensics')">Submit Flag</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ctf-results-section">
+                    <h3 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">🎉 Recent Successful Submissions</h3>
+                    <div class="recent-submissions" id="recent-submissions">
+                        <div class="submission-item">
+                            <span class="submitter">🥷 CyberNinja_2025</span>
+                            <span class="challenge">Corporate Data Breach</span>
+                            <span class="points">+1000 pts</span>
+                            <span class="time">2 hours ago</span>
+                        </div>
+                        <div class="submission-item">
+                            <span class="submitter">🔒 SecMaster_Pro</span>
+                            <span class="challenge">State-Sponsored Crypto</span>
+                            <span class="points">+570 pts</span>
+                            <span class="time">4 hours ago</span>
+                        </div>
+                        <div class="submission-item">
+                            <span class="submitter">📡 HackTheBox_Elite</span>
+                            <span class="challenge">APT Network Analysis</span>
+                            <span class="points">+720 pts</span>
+                            <span class="time">6 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="your-results-section" id="your-results" style="display: none;">
+                    <h3 style="color: var(--success); text-align: center; margin-bottom: 2rem;">🎊 Congratulations!</h3>
+                    <div class="result-card" id="result-content">
+                        <!-- Dynamic content will be added here -->
+                    </div>
+                </div>
+            </div> <!-- End of #ctf-challenges-grid -->
+        </div>
+    </section>
+
+    <!-- Service Detail Modal/Section -->
+    <section id="service-detail" class="service-detail-section" style="display: none;">
+        <div class="container">
+            <button class="close-detail" onclick="closeServiceDetail()">← Back to Professional Services</button>
+            <div id="service-detail-content"></div>
+        </div>
+    </section>
+
+    <!-- Training Detail Modal/Section -->
+    <section id="training-detail" class="service-detail-section" style="display: none;">
+        <div class="container">
+            <button class="close-detail" onclick="closeTrainingDetail()">← Back to Training Programs</button>
+            <div id="training-detail-content"></div>
+        </div>
+    </section>
+
+    <!-- Terminal Demo -->
+    <section class="container">
+        <div class="terminal">
+            <div class="terminal-content">
+                <div class="typing">
+                    $ 2R-AT --scan --target your-infrastructure<br>
+                    [+] Initializing security scan...<br>
+                    [+] Analyzing 1,247 endpoints...<br>
+                    [+] Vulnerabilities detected: 0<br>
+                    [+] Security status: PROTECTED ✓
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Threat Detection Rate</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Security Monitoring</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Protected Systems</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">&lt;1min</span>
+                    <span class="stat-label">Response Time</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Security Dashboard Demo -->
+    <section class="dashboard-section" id="dashboard">
+        <div class="container">
+            <h2 class="section-title">Real-Time Security Dashboard</h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">
+                Experience our advanced threat monitoring in action
+            </p>
+            <div class="dashboard-container" id="dashboard-container"> <!-- This is the container for protected content -->
+                <div class="dashboard-header">
+                    <h3>Global Threat Monitor</h3>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span>System Active</span>
+                    </div>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="threats-blocked">0</div>
+                        <div class="metric-label">Threats Blocked Today</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="active-monitors">0</div>
+                        <div class="metric-label">Active Monitors</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="data-analyzed">0 GB</div>
+                        <div class="metric-label">Data Analyzed</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="uptime">100%</div>
+                        <div class="metric-label">System Uptime</div>
+                    </div>
+                </div>
+                <div class="threat-map">
+                    <div class="world-map">
+                        <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                            <!-- World Map SVG content... -->
+                        </svg>
+                    </div>
+                    <div class="map-grid"></div>
+                    <h4 style="position: absolute; top: 20px; left: 20px; z-index: 10; color: var(--light);">Global Threat Intelligence Network</h4>
+                    <div style="position: absolute; top: 20px; right: 20px; z-index: 10; color: var(--gray); font-size: 0.9rem;">
+                        <div style="margin-bottom: 0.5rem;">🔴 Active Threats: <span id="active-threats" style="color: var(--danger); font-weight: bold;">0</span></div>
+                        <div style="margin-bottom: 0.5rem;">🟡 Blocked Attacks: <span id="blocked-attacks" style="color: var(--warning); font-weight: bold;">0</span></div>
+                        <div>🟢 Protected Regions: <span id="secured-regions" style="color: var(--success); font-weight: bold;">6</span></div>
+                    </div>
+                    <div id="threat-container"></div>
+                </div>
+                 <!-- User Stats (only visible when authenticated) -->
+                 <div id="user-dashboard-stats" style="display: none; margin-top: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Your Security Stats</h4>
+                    <div class="user-stats" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                        <div class="stat-card" style="padding: 1rem;">
+                            <span class="stat-value" id="user-threats-blocked">0</span>
+                            <span class="stat-label">Threats You've Blocked</span>
+                        </div>
+                        <div class="stat-card" style="padding: 1rem;">
+                            <span class="stat-value" id="user-ctf-points">0</span>
+                            <span class="stat-label">CTF Points</span>
+                        </div>
+                        <div class="stat-card" style="padding: 1rem;">
+                            <span class="stat-value" id="user-challenges-completed">0</span>
+                            <span class="stat-label">Challenges Done</span>
+                        </div>
+                        <div class="stat-card" style="padding: 1rem;">
+                            <span class="stat-value" id="user-rank">Unranked</span>
+                            <span class="stat-label">Global Rank</span>
+                        </div>
+                    </div>
+                    <div class="achievement-badges" id="user-achievements" style="justify-content: center; margin-top:1.5rem;">
+                        <!-- Achievements will be dynamically inserted -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Security Scanner -->
+    <section class="container" style="padding: 50px 0;">
+        <div class="scanner-demo">
+            <h3 style="font-size: 2rem; margin-bottom: 1.5rem;">Quick Security Check</h3>
+            <div class="scanner-input">
+                <input type="text" placeholder="Enter domain to scan (e.g., example.com)" id="scan-input">
+                <button class="scan-button" onclick="startScan()">Start Scan</button>
+            </div>
+            <div class="scan-results" id="scan-results">
+                <div class="scan-progress">
+                    <div class="scan-progress-bar" id="progress-bar"></div>
+                </div>
+                <div id="scan-output"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose 2R-AT</h2>
+                <p class="section-subtitle">Advanced capabilities that set us apart</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item" onclick="showFeatureDetail('ai-detection')">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered Detection</h3>
+                    <p>Machine learning algorithms that evolve with emerging threats</p>
+                    <span class="feature-link">Explore →</span>
+                </div>
+                <div class="feature-item" onclick="showFeatureDetail('real-time-response')">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-Time Response</h3>
+                    <p>Instant threat neutralization with automated countermeasures</p>
+                    <span class="feature-link">Explore →</span>
+                </div>
+                <div class="feature-item" onclick="showFeatureDetail('zero-trust')">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Zero Trust Architecture</h3>
+                    <p>Never trust, always verify - comprehensive security at every layer</p>
+                    <span class="feature-link">Explore →</span>
+                </div>
+                <div class="feature-item" onclick="showFeatureDetail('threat-intelligence')">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Global Threat Intelligence</h3>
+                    <p>Access to worldwide threat databases and security networks</p>
+                    <span class="feature-link">Explore →</span>
+                </div>
+                <div class="feature-item" onclick="showFeatureDetail('predictive-analytics')">
+                    <div class="feature-icon">📈</div>
+                    <h3>Predictive Analytics</h3>
+                    <p>Anticipate attacks before they happen with advanced modeling</p>
+                    <span class="feature-link">Explore →</span>
+                </div>
+                <div class="feature-item" onclick="showFeatureDetail('certifications')">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Industry Certified</h3>
+                    <p>ISO 27001, SOC 2, and NIST compliant security practices</p>
+                    <span class="feature-link">Explore →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Detail Modal/Section -->
+    <section id="feature-detail" class="feature-detail-section" style="display: none;">
+        <div class="container">
+            <button class="close-detail" onclick="closeFeatureDetail()">← Back to Features</button>
+            <div id="feature-detail-content"></div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="case-studies" id="case-studies">
+        <div class="container">
+            <h2 class="section-title">Success Stories</h2>
+            <p style="text-align: center; color: var(--gray);">Real results from real clients</p>
+            <div class="case-grid">
+                <div class="case-card" onclick="showCaseDetail('financial-institution')">
+                    <div class="case-header">
+                        <div class="case-icon">🏦</div>
+                        <h3>Global Financial Institution</h3>
+                    </div>
+                    <div class="case-content">
+                        <p>Implemented zero-trust architecture across 50+ branches, preventing $10M in potential fraud.</p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <div class="case-stat-value">99.9%</div>
+                                <div style="font-size: 0.9rem; color: var(--gray);">Threat Prevention</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-stat-value">50ms</div>
+                                <div style="font-size: 0.9rem; color: var(--gray);">Response Time</div>
+                            </div>
+                        </div>
+                        <span class="case-link">Read Full Story →</span>
+                    </div>
+                </div>
+                <div class="case-card" onclick="showCaseDetail('healthcare-network')">
+                    <div class="case-header">
+                        <div class="case-icon">🏥</div>
+                        <h3>Healthcare Network</h3>
+                    </div>
+                    <div class="case-content">
+                        <p>Secured patient data for 2M+ records while maintaining HIPAA compliance and improving access speed.</p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <div class="case-stat-value">100%</div>
+                                <div style="font-size: 0.9rem; color: var(--gray);">HIPAA Compliant</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-stat-value">2M+</div>
+                                <div style="font-size: 0.9rem; color: var(--gray);">Records Secured</div>
+                            </div>
+                        </div>
+                        <span class="case-link">Read Full Story →</span>
+                    </div>
+                </div>
+                <div class="case-card" onclick="showCaseDetail('tech-startup')">
+                    <div class="case-header">
+                        <div class="case-icon">🚀</div>
+                        <h3>Hypergrowth Tech Startup</h3>
+                    </div>
+                    <div class="case-content">
+                        <p>Built secure-by-design infrastructure enabling 10x growth while maintaining enterprise-grade security.</p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <div class="case-stat-value">10x</div>
+                                <div style="font-size: 0.9rem; color: var(--gray);">Growth Enabled</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-stat-value">0</div>
+                                <div style="font-size: 0.9rem; color: var(--gray);">Security Incidents</div>
+                            </div>
+                        </div>
+                        <span class="case-link">Read Full Story →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Detail Modal/Section -->
+    <section id="case-detail" class="case-detail-section" style="display: none;">
+        <div class="container">
+            <button class="close-detail" onclick="closeCaseDetail()">← Back to Success Stories</button>
+            <div id="case-detail-content"></div>
+        </div>
+    </section>
+
+    <!-- Elite Team -->
+    <section class="team-section" id="team">
+        <div class="container">
+            <h2 class="section-title">Our Elite Team</h2>
+            <p style="text-align: center; color: var(--gray);">World-class security experts at your service</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar"><div class="avatar-inner">👤</div></div>
+                    <h3 class="member-name">Alex Chen</h3>
+                    <p class="member-role">Chief Security Officer</p>
+                    <div class="member-certs"><span class="cert-badge">CISSP</span><span class="cert-badge">OSCP</span><span class="cert-badge">AWS Security</span></div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar"><div class="avatar-inner">👤</div></div>
+                    <h3 class="member-name">Sarah Johnson</h3>
+                    <p class="member-role">Lead Penetration Tester</p>
+                    <div class="member-certs"><span class="cert-badge">GPEN</span><span class="cert-badge">GWAPT</span><span class="cert-badge">GMOB</span></div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar"><div class="avatar-inner">👤</div></div>
+                    <h3 class="member-name">Marcus Rivera</h3>
+                    <p class="member-role">Cloud Security Architect</p>
+                    <div class="member-certs"><span class="cert-badge">Azure Security</span><span class="cert-badge">GCP Security</span><span class="cert-badge">CKS</span></div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar"><div class="avatar-inner">👤</div></div>
+                    <h3 class="member-name">Dr. Emma Wilson</h3>
+                    <p class="member-role">Threat Intelligence Lead</p>
+                    <div class="member-certs"><span class="cert-badge">GCTI</span><span class="cert-badge">GREM</span><span class="cert-badge">PhD Cybersecurity</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Security Plans</h2>
+            <p style="text-align: center; color: var(--gray);">Choose the protection level that fits your needs</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="plan-name">Essential</h3>
+                    <div class="plan-price"><sup>$</sup>2,999</div>
+                    <div class="plan-period">per month</div>
+                    <ul class="plan-features">
+                        <li><span class="check-icon">✓</span> Basic Vulnerability Scanning</li>
+                        <li><span class="check-icon">✓</span> Monthly Security Reports</li>
+                        <li><span class="check-icon">✓</span> Email Support</li>
+                        <li><span class="check-icon">✓</span> Up to 10 Assets</li>
+                    </ul>
+                    <button class="btn btn-secondary" style="width: 100%;">Get Started</button>
+                </div>
+                <div class="pricing-card featured">
+                    <h3 class="plan-name">Professional</h3>
+                    <div class="plan-price"><sup>$</sup>7,999</div>
+                    <div class="plan-period">per month</div>
+                    <ul class="plan-features">
+                        <li><span class="check-icon">✓</span> Advanced Threat Detection</li>
+                        <li><span class="check-icon">✓</span> 24/7 Monitoring</li>
+                        <li><span class="check-icon">✓</span> Incident Response Team</li>
+                        <li><span class="check-icon">✓</span> Up to 100 Assets</li>
+                        <li><span class="check-icon">✓</span> Compliance Management</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;">Get Started</button>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="plan-name">Enterprise</h3>
+                    <div class="plan-price">Custom</div>
+                    <div class="plan-period">tailored to your needs</div>
+                    <ul class="plan-features">
+                        <li><span class="check-icon">✓</span> Full Security Suite</li>
+                        <li><span class="check-icon">✓</span> Dedicated Security Team</li>
+                        <li><span class="check-icon">✓</span> Custom Integrations</li>
+                        <li><span class="check-icon">✓</span> Unlimited Assets</li>
+                        <li><span class="check-icon">✓</span> SLA Guarantee</li>
+                    </ul>
+                    <button class="btn btn-secondary" style="width: 100%;">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources & Blog -->
+    <section class="resources-section">
+        <div class="container">
+            <h2 class="section-title">Security Resources</h2>
+            <p style="text-align: center; color: var(--gray);">Stay ahead of threats with our latest insights</p>
+            <div class="resource-grid">
+                <article class="resource-card" onclick="showArticle('zero-trust-2025')">
+                    <div class="resource-image">🔐</div>
+                    <div class="resource-content">
+                        <span class="resource-tag">Cloud Security</span>
+                        <h3 class="resource-title">Zero Trust Architecture in 2025</h3>
+                        <p class="resource-excerpt">Implementing zero trust principles in modern cloud environments...</p>
+                        <div class="resource-meta">
+                            <span>5 min read</span>
+                            <span>Jan 15, 2025</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="resource-card" onclick="showArticle('ransomware-tactics')">
+                    <div class="resource-image">🚨</div>
+                    <div class="resource-content">
+                        <span class="resource-tag">Threat Intelligence</span>
+                        <h3 class="resource-title">Emerging Ransomware Tactics</h3>
+                        <p class="resource-excerpt">Analysis of the latest ransomware trends and defense strategies...</p>
+                        <div class="resource-meta">
+                            <span>8 min read</span>
+                            <span>Jan 10, 2025</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="resource-card" onclick="showArticle('gdpr-ai')">
+                    <div class="resource-image">📊</div>
+                    <div class="resource-content">
+                        <span class="resource-tag">Compliance</span>
+                        <h3 class="resource-title">GDPR & AI: What You Need to Know</h3>
+                        <p class="resource-excerpt">Navigating data protection regulations in the age of artificial intelligence...</p>
+                        <div class="resource-meta">
+                            <span>6 min read</span>
+                            <span>Jan 5, 2025</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Secure Your Future</h2>
+                <p class="section-subtitle">Get in touch with our security experts</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Ready to Fortify Your Defenses?</h3>
+                    <p>Our team of elite security professionals is standing by to assess your needs and design a custom security solution.</p>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div><strong>Email</strong><br>security@2r-at.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div><strong>24/7 Hotline</strong><br>+1 (800) 2R-SECURE</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🚨</div>
+                        <div><strong>Emergency Response</strong><br>Immediate incident response team</div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Security Needs</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Request Security Assessment</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Modal -->
+    <div id="article-modal" class="article-modal" style="display: none;">
+        <div class="article-content">
+            <span class="article-close" onclick="closeArticle()">&times;</span>
+            <div id="article-modal-content"></div>
+        </div>
+    </div>
+    
+    <div id="authModal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <button class="close-modal" onclick="auth.closeAuthModal()">&times;</button>
+            <div id="loginForm" style="display: block;">
+                <h2>Secure Login</h2>
+                <form onsubmit="auth.handleLogin(event)">
+                    <div class="form-group"><label for="loginEmail">Email</label><input type="email" id="loginEmail" name="email" required></div>
+                    <div class="form-group"><label for="loginPassword">Password</label><input type="password" id="loginPassword" name="password" required></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                </form>
+                <div class="auth-switch">Don't have an account? <a href="#" onclick="event.preventDefault(); auth.switchToRegister();">Sign up</a></div>
+            </div>
+            <div id="registerForm" style="display: none;">
+                <h2>Create Account</h2>
+                <form onsubmit="auth.handleRegister(event)">
+                    <div class="form-group"><label for="registerName">Full Name</label><input type="text" id="registerName" name="name" required></div>
+                    <div class="form-group"><label for="registerEmail">Email</label><input type="email" id="registerEmail" name="email" required></div>
+                    <div class="form-group"><label for="registerPassword">Password</label><input type="password" id="registerPassword" name="password" required></div>
+                    <div class="form-group"><label for="registerCompany">Company</label><input type="text" id="registerCompany" name="company"></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+                </form>
+                <div class="auth-switch">Already have an account? <a href="#" onclick="event.preventDefault(); auth.switchToLogin();">Login</a></div>
+            </div>
+        </div>
+    </div>
+    <!-- Notification container placeholder removed as toasts are appended to body by JS -->
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Security Disclosure</a>
+                <a href="#">Certifications</a>
+            </div>
+            <p style="color: var(--gray);">© 2025 2R-AT Cybersecurity. All systems protected.</p>
+            <p style="color: var(--gray); font-size: 0.8rem; margin-top: 1rem;">SOC 2 Type II | ISO 27001 | NIST Compliant</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Start of Merged JavaScript ---
+
+// Data objects from comprehensive_js_content
+const trainingDetails = {
+    'security-awareness': {
+        icon: '🧠',
+        title: 'Security Awareness Training',
+        subtitle: 'Transform your employees into human firewalls',
+        description: 'Our comprehensive security awareness program is designed to educate and empower your workforce to recognize, avoid, and report cyber threats. Through interactive learning modules, real-world simulations, and continuous reinforcement, we create a culture of security within your organization.',
+        duration: '4-8 weeks',
+        level: 'All Levels',
+        format: 'Hybrid (Online + In-Person)',
+        certificationOffered: 'Security Awareness Certificate',
+        features: [
+            'Interactive phishing simulation campaigns',
+            'Role-based security training modules',
+            'Real-world social engineering scenarios',
+            'Mobile security best practices',
+            'Password security and MFA training',
+            'Data protection and privacy awareness',
+            'Incident reporting procedures',
+            'Quarterly security updates and refreshers'
+        ],
+        curriculum: [
+            { module: 'Introduction to Cybersecurity', duration: '2 hours', desc: 'Understanding the threat landscape and basic security principles' },
+            { module: 'Email Security & Phishing', duration: '3 hours', desc: 'Identifying and avoiding phishing attacks and malicious emails' },
+            { module: 'Password Security & Authentication', duration: '2 hours', desc: 'Creating strong passwords and using multi-factor authentication' },
+            { module: 'Social Engineering Awareness', duration: '2 hours', desc: 'Recognizing and defending against social engineering tactics' },
+            { module: 'Data Protection & Privacy', duration: '2 hours', desc: 'Handling sensitive data and understanding privacy regulations' },
+            { module: 'Mobile & Remote Work Security', duration: '2 hours', desc: 'Securing mobile devices and working safely from home' },
+            { module: 'Incident Response & Reporting', duration: '1 hour', desc: 'What to do when a security incident occurs' }
+        ],
+        pricing: 'Starting at $99 per employee',
+        benefits: [
+            { title: 'Reduce Human Error', desc: 'Decrease security incidents caused by employee mistakes by up to 85%' },
+            { title: 'Compliance Ready', desc: 'Meet regulatory training requirements for GDPR, HIPAA, and other frameworks' },
+            { title: 'Measurable Results', desc: 'Track progress with detailed analytics and reporting dashboards' },
+            { title: 'Continuous Learning', desc: 'Keep your team updated with the latest threats and best practices' }
+        ]
+    },
+    'risk-management': {
+        icon: '⚖️',
+        title: 'Risk Management Certification',
+        subtitle: 'Master enterprise risk assessment and mitigation',
+        description: 'Develop expertise in identifying, assessing, and mitigating cybersecurity risks using industry-leading frameworks. This comprehensive program prepares professionals to build robust risk management programs that align with business objectives.',
+        duration: '12 weeks',
+        level: 'Intermediate to Advanced',
+        format: 'Live Virtual + Self-Paced',
+        certificationOffered: 'Certified Risk Management Professional (CRMP)',
+        features: [
+            'NIST Risk Management Framework (RMF)',
+            'ISO 27001/27005 risk assessment methodologies',
+            'Business impact analysis and continuity planning',
+            'Quantitative and qualitative risk analysis',
+            'Risk treatment and mitigation strategies',
+            'Regulatory compliance frameworks',
+            'Risk communication and reporting',
+            'Continuous monitoring and assessment'
+        ],
+        curriculum: [
+            { module: 'Risk Management Fundamentals', duration: '8 hours', desc: 'Core concepts, terminology, and risk management lifecycle' },
+            { module: 'Risk Assessment Methodologies', duration: '12 hours', desc: 'NIST, ISO 27005, FAIR, and other leading frameworks' },
+            { module: 'Asset Identification & Valuation', duration: '6 hours', desc: 'Cataloging and valuing organizational assets' },
+            { module: 'Threat & Vulnerability Analysis', duration: '10 hours', desc: 'Identifying and analyzing potential threats and vulnerabilities' },
+            { module: 'Risk Analysis & Calculation', duration: '8 hours', desc: 'Quantitative and qualitative risk analysis techniques' },
+            { module: 'Risk Treatment & Controls', duration: '10 hours', desc: 'Selecting and implementing appropriate risk treatments' },
+            { module: 'Business Continuity & Disaster Recovery', duration: '8 hours', desc: 'Ensuring business resilience through proper planning' },
+            { module: 'Compliance & Regulatory Requirements', duration: '6 hours', desc: 'Meeting industry-specific compliance obligations' },
+            { module: 'Risk Monitoring & Review', duration: '4 hours', desc: 'Continuous monitoring and improvement processes' },
+            { module: 'Capstone Project', duration: '16 hours', desc: 'Real-world risk assessment project' }
+        ],
+        pricing: 'Starting at $2,999 per participant',
+        benefits: [
+            { title: 'Industry Recognition', desc: 'Earn credentials recognized by leading organizations worldwide' },
+            { title: 'Career Advancement', desc: 'Qualify for senior risk management and CISO positions' },
+            { title: 'Practical Skills', desc: 'Apply learning immediately with hands-on projects and case studies' },
+            { title: 'Expert Network', desc: 'Join our exclusive community of certified risk professionals' }
+        ]
+    },
+    'ethical-hacking': {
+        icon: '🎭',
+        title: 'Ethical Hacking Bootcamp',
+        subtitle: 'Master the art of penetration testing',
+        description: 'Intensive hands-on training in ethical hacking and penetration testing. Learn to think like an attacker to better defend your organization. This immersive program covers the latest tools, techniques, and methodologies used by security professionals worldwide.',
+        duration: '16 weeks',
+        level: 'Advanced',
+        format: 'Immersive Lab Environment',
+        certificationOffered: 'Certified Ethical Hacker Professional (CEHP)',
+        features: [
+            'Comprehensive network penetration testing',
+            'Advanced web application security testing',
+            'Mobile application penetration testing',
+            'Wireless network security assessment',
+            'Social engineering and physical security',
+            'Cloud infrastructure penetration testing',
+            'Active Directory and domain attacks',
+            'Real-world capture-the-flag challenges'
+        ],
+        curriculum: [
+            { module: 'Introduction to Ethical Hacking', duration: '8 hours', desc: 'Legal and ethical considerations, methodology overview' },
+            { module: 'Reconnaissance & Information Gathering', duration: '12 hours', desc: 'OSINT, footprinting, and target reconnaissance' },
+            { module: 'Scanning & Enumeration', duration: '16 hours', desc: 'Network discovery, port scanning, and service enumeration' },
+            { module: 'System Hacking & Exploitation', duration: '20 hours', desc: 'Vulnerability exploitation and system compromise' },
+            { module: 'Malware & Trojans', duration: '8 hours', desc: 'Understanding and detecting malicious software' },
+            { module: 'Sniffing & Session Hijacking', duration: '12 hours', desc: 'Network traffic analysis and session attacks' },
+            { module: 'Social Engineering', duration: '8 hours', desc: 'Human-based attack vectors and defenses' },
+            { module: 'Denial of Service Attacks', duration: '8 hours', desc: 'DoS/DDoS attack methods and mitigation' },
+            { module: 'Web Application Hacking', duration: '24 hours', desc: 'OWASP Top 10 and advanced web security testing' },
+            { module: 'Wireless Network Hacking', duration: '12 hours', desc: 'WiFi security assessment and attacks' },
+            { module: 'Mobile Platform Attacks', duration: '16 hours', desc: 'iOS and Android security testing' },
+            { module: 'IoT & Cloud Security', duration: '12 hours', desc: 'Emerging platform security assessment' },
+            { module: 'Cryptography & PKI', duration: '8 hours', desc: 'Cryptographic attacks and implementations' },
+            { module: 'Final Capstone Project', duration: '32 hours', desc: 'Comprehensive penetration test of simulated environment' }
+        ],
+        pricing: 'Starting at $8,999 per participant',
+        benefits: [
+            { title: 'Hands-On Experience', desc: 'Real-world lab environments with vulnerable systems and applications' },
+            { title: 'Industry Tools', desc: 'Training on professional-grade penetration testing tools and frameworks' },
+            { title: 'Expert Instruction', desc: 'Learn from active penetration testers and security researchers' },
+            { title: 'Career Placement', desc: 'Job placement assistance and direct connections to hiring partners' }
+        ]
+    },
+    'digital-forensics': {
+        icon: '🔬',
+        title: 'Digital Forensics Bootcamp',
+        subtitle: 'Investigate cyber crimes and security incidents',
+        description: 'Comprehensive training in digital forensics and incident response. Learn to collect, analyze, and present digital evidence in legal proceedings. This program combines technical skills with legal knowledge to prepare forensic investigators for real-world challenges.',
+        duration: '20 weeks',
+        level: 'Advanced',
+        format: 'Lab-Intensive + Legal Training',
+        certificationOffered: 'Certified Digital Forensics Examiner (CDFE)',
+        features: [
+            'Digital evidence acquisition and preservation',
+            'File system and memory analysis',
+            'Network forensics and packet analysis',
+            'Mobile device forensics (iOS/Android)',
+            'Cloud forensics and investigations',
+            'Malware analysis and reverse engineering',
+            'Legal procedures and court testimony',
+            'Incident response and threat hunting'
+        ],
+        curriculum: [
+            { module: 'Introduction to Digital Forensics', duration: '8 hours', desc: 'Fundamentals, legal framework, and best practices' },
+            { module: 'Digital Evidence Handling', duration: '12 hours', desc: 'Chain of custody, acquisition, and preservation' },
+            { module: 'File System Forensics', duration: '16 hours', desc: 'NTFS, FAT, ext4, and other file system analysis' },
+            { module: 'Windows Forensics', duration: '20 hours', desc: 'Registry analysis, artifacts, and timeline reconstruction' },
+            { module: 'Linux/Unix Forensics', duration: '16 hours', desc: 'Log analysis, shell artifacts, and system examination' },
+            { module: 'Memory Forensics', duration: '16 hours', desc: 'RAM analysis, process investigation, and malware detection' },
+            { module: 'Network Forensics', duration: '16 hours', desc: 'Packet analysis, protocol investigation, and traffic reconstruction' },
+            { module: 'Mobile Device Forensics', duration: '20 hours', desc: 'iOS and Android acquisition and analysis' },
+            { module: 'Cloud Forensics', duration: '12 hours', desc: 'Cloud service provider investigations and challenges' },
+            { module: 'Malware Analysis', duration: '16 hours', desc: 'Static and dynamic malware analysis techniques' },
+            { module: 'Database Forensics', duration: '8 hours', desc: 'Database investigation and recovery techniques' },
+            { module: 'Email Forensics', duration: '8 hours', desc: 'Email header analysis and message recovery' },
+            { module: 'Legal Aspects & Testimony', duration: '12 hours', desc: 'Legal procedures, report writing, and expert testimony' },
+            { module: 'Incident Response Integration', duration: '8 hours', desc: 'Coordinating forensics with incident response' },
+            { module: 'Final Capstone Investigation', duration: '40 hours', desc: 'Complete forensic investigation with legal documentation' }
+        ],
+        pricing: 'Starting at $12,999 per participant',
+        benefits: [
+            { title: 'Legal Training', desc: 'Understand legal requirements and court procedures for digital evidence' },
+            { title: 'Real Cases', desc: 'Work on sanitized real-world cases and scenarios' },
+            { title: 'Tool Mastery', desc: 'Hands-on experience with industry-standard forensic tools' },
+            { title: 'Expert Network', desc: 'Access to practicing forensic examiners and legal professionals' }
+        ]
+    }
+};
+const caseStudyDetails = { 
+    'financial-institution': { title: "Global Financial Institution", icon: "🏦", problem: "Needed to secure a sprawling network of branches and digital services against sophisticated fraud attempts and ensure compliance with international financial regulations.", solution: "Implemented a Zero Trust architecture across all 50+ branches and online platforms. Deployed AI-driven threat detection and automated response systems. Conducted continuous penetration testing and vulnerability assessments.", results: [{value:"$10M+", label:"Potential Fraud Prevented Annually"}, {value:"99.99%", label:"Uptime of Critical Systems"}, {value:"<50ms", label:"Average Threat Response Time"}, {value:"100%", label:"Compliance with PCI-DSS & Swift CSP"}], testimonial: "2R-AT's expertise transformed our security posture, allowing us to innovate confidently while protecting our customers' assets.", image: "img/case-study-finance.jpg" },
+    'healthcare-network': { title: "Major Healthcare Network", icon: "🏥", problem: "Faced challenges in securing over 2 million patient records (EHR) while maintaining HIPAA compliance and enabling seamless data access for authorized medical personnel.", solution: "Developed a multi-layered security strategy including endpoint detection and response (EDR), network segmentation, and advanced encryption for data at rest and in transit. Provided comprehensive HIPAA compliance training for all staff.", results: [{value:"2M+", label:"Patient Records Secured"}, {value:"100%", label:"HIPAA & HITECH Compliance"}, {value:"0", label:"Data Breaches Since Implementation"}, {value:"70%", label:"Reduction in Phishing Incidents"}], testimonial: "The 2R-AT team provided an exceptional solution that not only secured our data but also streamlined our compliance processes.", image: "img/case-study-healthcare.jpg" },
+    'tech-startup': { title: "Rapid-Growth Tech Startup", icon: "🚀", problem: "Required a scalable, secure-by-design infrastructure to support 10x user growth and protect valuable intellectual property without hindering rapid development cycles.", solution: "Embedded security into the DevOps lifecycle (DevSecOps), implemented robust cloud security posture management (CSPM), and provided on-demand security consultation for new product features. Automated security testing throughout the CI/CD pipeline.", results: [{value:"10x", label:"User Growth Supported Securely"}, {value:"<1hr", label:"Security Review for New Features"}, {value:"0", label:"Major Security Incidents During Growth"}, {value:"$2M", label:"Estimated Savings from Breach Avoidance"}], testimonial: "2R-AT was instrumental in our ability to scale rapidly and securely. Their DevSecOps approach is a game-changer for startups.", image: "img/case-study-startup.jpg" }
+};
+const featureDetails = { 
+    'ai-detection': { icon: '🤖', title: 'AI-Powered Threat Detection', subtitle: 'Intelligent defense against evolving cyber threats.', description: 'Our AI engine analyzes billions of data points in real-time to identify and predict malicious activities, including zero-day exploits and advanced persistent threats. It continuously learns and adapts to new attack vectors, providing proactive and intelligent security.', keyPoints: ['Behavioral Analysis', 'Anomaly Detection', 'Predictive Threat Modeling', 'Automated Threat Prioritization'], techStack: ['Python', 'TensorFlow', 'Keras', 'Spark MLlib', 'Elasticsearch'], stats: [{value: '99.9%', label: 'Detection Rate for Known Threats'}, {value: '75%', label: 'Reduction in False Positives'}, {value: '<1 sec', label: 'Average Detection Time'}]},
+    'real-time-response': { icon: '⚡', title: 'Real-Time Automated Response', subtitle: 'Neutralize threats before they escalate.', description: 'Instantly react to security incidents with our automated response system. Pre-defined playbooks and customizable workflows ensure rapid containment and neutralization of threats, minimizing impact and freeing up your security team.', keyPoints: ['SOAR Integration', 'Customizable Playbooks', 'Automated Containment', 'Incident Forensics Trail'], techStack: ['Ansible', 'Python', 'Kafka', 'Serverless Functions', 'GraphQL'], stats: [{value: '<60 sec', label: 'Average Response Time'}, {value: '90%', label: 'Incidents Handled Autonomously'}, {value: '24/7', label: 'Continuous Operation'}]},
+    'zero-trust': { icon: '🔐', title: 'Zero Trust Architecture', subtitle: 'Never trust, always verify, at every layer.', description: 'Implement a comprehensive Zero Trust model that secures your data, applications, and infrastructure. We enforce strict access controls, microsegmentation, and continuous verification for every user and device, regardless of location.', keyPoints: ['Microsegmentation', 'Identity & Access Management (IAM)', 'Multi-Factor Authentication (MFA)', 'Least Privilege Access'], techStack: ['Istio', 'SPIFFE/SPIRE', 'OAuth 2.0/OIDC', 'BeyondCorp Principles', 'Attribute-Based Access Control (ABAC)'], stats: [{value: '80%', label: 'Reduction in Lateral Movement'}, {value: '100%', label: 'MFA Enforcement'}, {value: 'Granular', label: 'Access Control Policies'}]},
+    'threat-intelligence': { icon: '🌐', title: 'Global Threat Intelligence', subtitle: 'Stay ahead with proactive threat insights.', description: 'Leverage our vast network of global threat intelligence sources, including proprietary research, dark web monitoring, and industry partnerships. Receive actionable intelligence tailored to your organization\'s risk profile.', keyPoints: ['Actionable IoCs', 'Dark Web Monitoring', 'Threat Actor Profiling', 'Industry-Specific Alerts'], techStack: ['MISP', 'OpenCTI', 'YARA', 'SIEM Integration', 'Threat Intelligence Platforms (TIPs)'], stats: [{value: '1M+', label: 'New IoCs Daily'}, {value: '50+', label: 'Intelligence Feeds'}, {value: 'Real-time', label: 'Alerting System'}]},
+    'predictive-analytics': { icon: '📈', title: 'Predictive Security Analytics', subtitle: 'Anticipate and prevent attacks before they happen.', description: 'Utilize advanced data modeling and machine learning to forecast potential security breaches and vulnerabilities. Our predictive analytics help you prioritize resources and implement proactive defenses against future attacks.', keyPoints: ['Risk Scoring', 'Vulnerability Prediction', 'Attack Surface Forecasting', 'Security Trend Analysis'], techStack: ['R', 'SciKit-Learn', 'Prophet', 'Jupyter Notebooks', 'Data Warehousing (BigQuery/Snowflake)'], stats: [{value: '30%', label: 'More Accurate Risk Prediction'}, {value: 'Proactive', label: 'Defense Strategies'}, {value: 'Data-driven', label: 'Security Investments'}]},
+    'certifications': { icon: '🏆', title: 'Industry Certified & Compliant', subtitle: 'Security practices you can trust.', description: 'Our solutions are built upon industry-leading standards and best practices. We help your organization achieve and maintain compliance with major regulations like ISO 27001, SOC 2, NIST, GDPR, HIPAA, and PCI-DSS.', keyPoints: ['ISO 27001 Certified', 'SOC 2 Type II Compliant', 'NIST Cybersecurity Framework Alignment', 'GDPR & HIPAA Ready'], techStack: ['Compliance Automation Tools', 'Audit Logging Systems', 'Policy Management Platforms', 'GRC Tools'], stats: [{value: '100%', label: 'Audit Pass Rate for Clients'}, {value: 'Continuous', label: 'Compliance Monitoring'}, {value: 'Expert-led', label: 'Guidance & Support'}]}
+};
+const serviceDetails = { 
+    'cloud-security': { icon: '☁️', title: 'Cloud Security', subtitle: 'Comprehensive protection for your cloud infrastructure.', description: 'Secure your AWS, Azure, GCP, and hybrid cloud environments with our advanced cloud security solutions. We provide real-time monitoring, automated threat response, configuration management, and compliance assurance tailored to your specific cloud setup.', keyFeatures: ['Cloud Security Posture Management (CSPM)', 'Cloud Workload Protection Platform (CWPP)', 'Serverless Security', 'Container Security (Kubernetes, Docker)', 'Infrastructure as Code (IaC) Security', 'Cloud Native SIEM/SOAR Integration'], pricing: 'Custom Quote based on Cloud Footprint', relatedCaseStudy: 'tech-startup' },
+    'penetration-testing': { icon: '🔓', title: 'Penetration Testing', subtitle: 'Identify vulnerabilities before attackers do.', description: 'Our elite ethical hackers simulate real-world attacks on your applications, networks, and systems. We provide detailed reports with actionable recommendations to remediate identified weaknesses and strengthen your defenses.', keyFeatures: ['Network (Internal/External) Pentesting', 'Web Application Pentesting (OWASP Top 10)', 'Mobile Application Pentesting (iOS/Android)', 'API Security Testing', 'Social Engineering Campaigns', 'Red Team / Blue Team Exercises'], pricing: 'Starting at $5,000 per Assessment', relatedCaseStudy: 'financial-institution' },
+    'vulnerability-analysis': { icon: '🛡️', title: 'Vulnerability Analysis', subtitle: 'Proactive identification of security weaknesses.', description: 'Comprehensive security assessments using cutting-edge tools and expert methodologies to identify, classify, and prioritize vulnerabilities in your systems and applications. We help you understand your risk exposure and focus remediation efforts effectively.', keyFeatures: ['Automated Scanning & Manual Verification', 'Risk-Based Prioritization', 'False Positive Reduction', 'Continuous Vulnerability Monitoring', 'Remediation Guidance & Tracking', 'Compliance Reporting (PCI, HIPAA, etc.)'], pricing: 'Starting at $2,500 per Scan Cycle', relatedCaseStudy: 'healthcare-network' },
+    'threat-hunting': { icon: '🎯', title: 'Threat Hunting', subtitle: 'Proactively uncover hidden threats in your environment.', description: 'Our expert threat hunters actively search for indicators of compromise (IoCs) and malicious activities that may have bypassed traditional security defenses. We use advanced analytics, threat intelligence, and hypothesis-driven investigations to find and neutralize APTs and zero-day exploits.', keyFeatures: ['Hypothesis-Driven Investigations', 'Endpoint Detection & Response (EDR) Analysis', 'Network Traffic Analysis (NTA)', 'Log Analysis & SIEM Correlation', 'Threat Intelligence Integration', 'Proactive IoC Sweeps'], pricing: 'Subscription-based or Retainer', relatedCaseStudy: 'tech-startup' },
+    'grc-services': { icon: '📊', title: 'GRC Services', subtitle: 'Align security with your business objectives.', description: 'Achieve and maintain compliance with industry regulations and standards (e.g., ISO 27001, SOC 2, GDPR, HIPAA, PCI-DSS). We offer comprehensive Governance, Risk, and Compliance solutions, including gap analysis, policy development, risk assessments, and audit support.', keyFeatures: ['Compliance Gap Analysis', 'Security Policy Development', 'Risk Assessment & Management', 'Audit Preparation & Support', 'Vendor Risk Management', 'Security Awareness Training Integration'], pricing: 'Custom Quote based on Scope', relatedCaseStudy: 'financial-institution' },
+    'security-auditing': { icon: '🔍', title: 'Security Auditing', subtitle: 'Independent verification of your security posture.', description: 'Thorough and independent security audits to assess the effectiveness of your controls and ensure compliance with internal policies and external regulations. Our certified auditors provide objective insights and recommendations for improvement.', keyFeatures: ['Internal & External Audits', 'Compliance Audits (ISO, SOC, etc.)', 'Security Control Assessments', 'Configuration Audits', 'Process & Policy Audits', 'Detailed Audit Reporting'], pricing: 'Starting at $7,000 per Audit', relatedCaseStudy: 'healthcare-network' }
+};
+const articleContent = { 
+    'zero-trust-2025': { title: "Zero Trust in 2025: Beyond the Buzzwords", date: "July 15, 2024", author: "Dr. Eve Archer", category: "Strategy", image: "img/blog-zero-trust.jpg", content: "<p>Zero Trust is no longer a futuristic concept but a foundational security strategy for modern enterprises...</p><h3>Key Principles Revisited</h3><ul><li>Verify Explicitly</li><li>Use Least Privilege Access</li><li>Assume Breach</li></ul><pre class='code-block'><code>function verifyAccess(user, resource) {\n  // Complex verification logic\n  return true;\n}</code></pre>" },
+    'ransomware-tactics': { title: "Evolving Ransomware Tactics & Defenses", date: "June 28, 2024", author: "Marcus 'Glitch' Chen", category: "Threats", image: "img/blog-ransomware.jpg", content: "<p>Ransomware groups continue to innovate, employing double and triple extortion techniques...</p>" },
+    'gdpr-ai': { title: "Navigating GDPR in the Age of AI", date: "May 10, 2024", author: "Lena Petrova, CIPP/E", category: "Compliance", image: "img/blog-gdpr-ai.jpg", content: "<p>Artificial Intelligence presents unique challenges for GDPR compliance, particularly concerning data subject rights and automated decision-making...</p>" }
+};
+
+// --- Core Authentication System (from login_js_content, enhanced) ---
+class AuthSystem {
+    constructor() {
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.users = JSON.parse(localStorage.getItem('users')) || [];
+        
+        this.protectedContentMap = {
+            'dashboard': 'dashboard-container', 
+            'ctf-challenges': 'ctf-section' // Changed to overall section for overlay
+        };
+        // Call initializeUI via DOMContentLoaded to ensure elements are present
+    }
+
+    initializeUI() {
+        this.updateUserInterface();
+        this.addProtectedOverlays(); 
+        document.querySelectorAll('a[href="#dashboard"], a[href="#ctf-challenges"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // The main smooth scroll handler will now call auth.handleProtectedLinkClick
+                // This specific listener might be redundant if the main one handles it.
+                // For safety, keeping a direct call path if possible or relying on the global one.
+            });
+        });
+    }
+    
+    showLogin() {
+        const authModal = document.getElementById('authModal');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        if(authModal) authModal.classList.add('show');
+        if(loginForm) loginForm.style.display = 'block';
+        if(registerForm) registerForm.style.display = 'none';
+    }
+
+    showRegister() {
+        const authModal = document.getElementById('authModal');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        if(authModal) authModal.classList.add('show');
+        if(loginForm) loginForm.style.display = 'none';
+        if(registerForm) registerForm.style.display = 'block';
+    }
+
+    closeAuthModal() {
+        const authModal = document.getElementById('authModal');
+        if(authModal) authModal.classList.remove('show');
+    }
+
+    switchToLogin() {
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        if(loginForm) loginForm.style.display = 'block';
+        if(registerForm) registerForm.style.display = 'none';
+    }
+
+    switchToRegister() {
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        if(loginForm) loginForm.style.display = 'none';
+        if(registerForm) registerForm.style.display = 'block';
+    }
+
+    handleLogin(event) {
+        event.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        const foundUser = this.users.find(user => user.email === email && user.password === password);
+
+        if (foundUser) {
+            this.currentUser = { ...foundUser }; 
+            localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+            this.updateUserInterface();
+            this.removeProtectedOverlays();
+            this.closeAuthModal();
+            this.showWelcomeMessage();
+        } else {
+            alert('Invalid email or password.');
+        }
+    }
+
+    handleRegister(event) {
+        event.preventDefault();
+        const name = document.getElementById('registerName').value;
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        const company = document.getElementById('registerCompany').value;
+
+        if (this.users.find(user => user.email === email)) {
+            alert('User with this email already exists.');
+            return;
+        }
+
+        const newUser = {
+            name, email, password, company,
+            points: 50, 
+            avatar: name.charAt(0).toUpperCase(),
+            stats: { ctfPoints: 0, challengesCompleted: 0 }, 
+            achievements: [] 
+        };
+        this.users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(this.users));
+        
+        this.currentUser = { ...newUser };
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        
+        this.updateUserInterface();
+        this.removeProtectedOverlays();
+        this.closeAuthModal();
+        this.showWelcomeMessage("Registration successful! Welcome aboard!");
+    }
+
+    updateUserInterface() {
+        const authNav = document.getElementById('auth-nav');
+        const userNav = document.getElementById('user-nav');
+        const userAvatarText = document.getElementById('user-avatar-text');
+        const navUserName = document.getElementById('nav-user-name');
+        const navUserPoints = document.getElementById('nav-user-points');
+
+        if (!authNav || !userNav || !userAvatarText || !navUserName || !navUserPoints) return;
+
+        if (this.currentUser) {
+            authNav.style.display = 'none';
+            userNav.style.display = 'block'; 
+            userAvatarText.textContent = this.currentUser.avatar || 'U';
+            navUserName.textContent = this.currentUser.name || 'User';
+            navUserPoints.textContent = (this.currentUser.points || 0) + ' pts';
+        } else {
+            authNav.style.display = 'flex';
+            userNav.style.display = 'none';
+        }
+    }
+    
+    updateUserStats(statsUpdate) { 
+        if (!this.currentUser) return;
+        this.currentUser.stats = { ...this.currentUser.stats, ...statsUpdate };
+        
+        // If ctfPoints are part of the general points system
+        if (statsUpdate.ctfPoints) {
+            this.currentUser.points = (this.currentUser.points || 0) + statsUpdate.ctfPoints;
+        }
+        
+        const userIndex = this.users.findIndex(u => u.email === this.currentUser.email);
+        if (userIndex !== -1) {
+            this.users[userIndex].stats = this.currentUser.stats;
+            this.users[userIndex].points = this.currentUser.points; // Ensure total points are saved too
+            localStorage.setItem('users', JSON.stringify(this.users));
+        }
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        this.updateUserInterface();
+    }
+
+    addAchievement(achievementTitle) { 
+        if (!this.currentUser) return;
+        if (!this.currentUser.achievements) this.currentUser.achievements = [];
+        if (!this.currentUser.achievements.includes(achievementTitle)) {
+            this.currentUser.achievements.push(achievementTitle);
+
+            const userIndex = this.users.findIndex(u => u.email === this.currentUser.email);
+            if (userIndex !== -1) {
+                this.users[userIndex].achievements = this.currentUser.achievements;
+                localStorage.setItem('users', JSON.stringify(this.users));
+            }
+            localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+            this.showNotificationMessage(`🏆 Achievement Unlocked: ${achievementTitle}`, 'success');
+        }
+    }
+
+    toggleUserMenu() {
+        const dropdown = document.getElementById('user-dropdown');
+        if (dropdown) dropdown.classList.toggle('show');
+    }
+
+    showUserDashboard() { this.toggleUserMenu(); alert('User Dashboard: Coming Soon!'); }
+    showUserProfile() { this.toggleUserMenu(); alert('User Profile: Coming Soon!'); }
+    showUserAchievements() { 
+        this.toggleUserMenu(); 
+        if(this.currentUser && this.currentUser.achievements && this.currentUser.achievements.length > 0) {
+            alert('Your Achievements:\n- ' + this.currentUser.achievements.join('\n- '));
+        } else {
+            alert('No achievements yet. Keep exploring!');
+        }
+    }
+    showUserSettings() { this.toggleUserMenu(); alert('User Settings: Coming Soon!'); }
+
+    logout() {
+        this.currentUser = null;
+        localStorage.removeItem('currentUser');
+        this.updateUserInterface();
+        const userDropdown = document.getElementById('user-dropdown');
+        if (userDropdown) userDropdown.classList.remove('show');
+        this.addProtectedOverlays(); 
+        this.showLogoutMessage();
+    }
+
+    showWelcomeMessage(customMessage = '') {
+        const message = customMessage || `Welcome back, ${this.currentUser.name}! 🔒`;
+        this.showNotificationMessage(message, 'welcome');
+    }
+
+    showLogoutMessage() {
+        this.showNotificationMessage('Logged out successfully! 👋', 'logout');
+    }
+
+    showNotificationMessage(message, type) {
+        const notificationDiv = document.createElement('div');
+        // Ensure this class is styled in CSS
+        notificationDiv.className = `auth-toast ${type}`; 
+        notificationDiv.innerHTML = message;
+        document.body.appendChild(notificationDiv);
+        
+        if (!document.getElementById('auth-toast-styles')) {
+            const toastStyle = document.createElement('style');
+            toastStyle.id = 'auth-toast-styles';
+            toastStyle.textContent = `
+                .auth-toast { position: fixed; top: 80px; right: 20px; padding: 1rem 2rem; border-radius: 10px; z-index: 10001; animation: slideInRightToast 0.5s ease, fadeOutToast 0.5s ease 2.5s forwards; color: var(--light); font-size: 0.9rem; }
+                .auth-toast.welcome { background: linear-gradient(135deg, var(--primary), var(--secondary)); }
+                .auth-toast.logout { background: rgba(16, 185, 129, 0.9); }
+                .auth-toast.error { background: var(--danger); }
+                .auth-toast.success { background: var(--success); } /* For achievements */
+                @keyframes slideInRightToast { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+                @keyframes fadeOutToast { from { opacity: 1; } to { opacity: 0; transform: translateX(100%); } }
+            `;
+            document.head.appendChild(toastStyle);
+        }
+        
+        setTimeout(() => notificationDiv.remove(), 3000);
+    }
+    
+    isAuthenticated() {
+        return this.currentUser !== null;
+    }
+
+    checkAuth(sectionId = null) {
+        if (!this.isAuthenticated()) {
+            this.showLogin();
+            if (sectionId) {
+                 this.showNotificationMessage(`Please log in to access the ${sectionId.replace('-', ' ')} section.`, 'error');
+            }
+            return false;
+        }
+        return true;
+    }
+
+    addProtectedOverlays() {
+        if (this.isAuthenticated()) return; 
+
+        for (const sectionKey in this.protectedContentMap) {
+            const contentId = this.protectedContentMap[sectionKey];
+            const contentElement = document.getElementById(contentId);
+            const overlayId = `overlay-${contentId}`;
+            
+            if (contentElement && !document.getElementById(overlayId)) {
+                const overlay = document.createElement('div');
+                overlay.id = overlayId;
+                overlay.className = 'protected-overlay';
+                overlay.innerHTML = `<p>🔒 This content is protected. <a href="#" onclick="event.preventDefault(); auth.showLogin();">Login</a> to access.</p>`;
+                
+                if(!document.getElementById('protected-overlay-styles')) {
+                    const overlayStyle = document.createElement('style');
+                    overlayStyle.id = 'protected-overlay-styles';
+                    overlayStyle.textContent = `
+                        .protected-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 14, 39, 0.85); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; text-align: center; color: var(--light); z-index: 10; border-radius: inherit; }
+                        .protected-overlay p { font-size: 1.2rem; padding: 20px; }
+                        .protected-overlay a { color: var(--primary); text-decoration: underline; }
+                    `;
+                    document.head.appendChild(overlayStyle);
+                }
+                
+                if (getComputedStyle(contentElement).position === 'static') {
+                    contentElement.style.position = 'relative';
+                }
+                contentElement.appendChild(overlay);
+            }
+        }
+    }
+
+    removeProtectedOverlays() {
+        if (!this.isAuthenticated()) return; 
+
+        for (const sectionKey in this.protectedContentMap) {
+            const contentId = this.protectedContentMap[sectionKey];
+            const overlay = document.getElementById(`overlay-${contentId}`);
+            if (overlay) overlay.remove();
+        }
+    }
+    
+    handleProtectedLinkClick(sectionId) {
+        if (this.checkAuth(sectionId)) {
+            const targetElement = document.getElementById(sectionId);
+            if (targetElement) {
+                // Hide all main sections first
+                document.querySelectorAll('main > section, .main-content-section').forEach(sec => {
+                    if(sec.id !== 'home' && !sec.classList.contains('always-visible')) { // Keep home section as is or handle its display logic elsewhere
+                         // sec.style.display = 'none'; // Decide if hiding all other sections is desired
+                    }
+                });
+                // Show the target section
+                targetElement.style.display = 'block'; // Or 'flex', etc.
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                if (sectionId === 'ctf-challenges') {
+                    console.log("Accessing CTF Challenges page. Ensure challenges are interactive.");
+                } else if (sectionId === 'dashboard') {
+                    console.log("Accessing Dashboard. Ensure data is fresh.");
+                     // Potentially call animateDashboard() again if it should refresh on each view
+                }
+            }
+        }
+    }
+}
+const auth = new AuthSystem();
+
+// CTF Challenge System (from login_js_content, adapted)
+const ctfChallengesData = {
+    'web-app': { title: 'Corporate Data Breach Investigation', correctFlag: '2R-AT{SQL_1nj3ct10n_4nd_XSS_c0mb0_4tt4ck}', points: 1000, hints: [ { text: "Look for SQL injection in the login form - try using single quotes", cost: 50 }, { text: "The admin panel might have XSS vulnerabilities in the search function", cost: 100 }, { text: "Check the source code for hidden admin credentials in JavaScript comments", cost: 150 } ] },
+    'network-forensics': { title: 'APT Network Infiltration Analysis', correctFlag: '2R-AT{C2_53rv3r_192.168.100.42_p0rt_8080_DN5_tunneling}', points: 800, hints: [ { text: "Focus on DNS queries that look like base64 encoded data", cost: 40 }, { text: "The C2 server uses port 8080 and disguises traffic as HTTP requests", cost: 80 }, { text: "Look for packets with unusual user-agent strings containing 'APT-Agent-v2.1'", cost: 120 } ] },
+    'cryptography': { title: 'State-Sponsored Crypto Espionage', correctFlag: '2R-AT{SILVER_STORM_2025_power_grid_attack_feb_15}', points: 600, hints: [ { text: "The first part is Base64 encoded, the second part uses ROT13 cipher", cost: 30 }, { text: "Look for the operation codename in the decrypted message", cost: 60 }, { text: "Combine the decrypted attack details with the operation codename", cost: 90 } ] },
+    'digital-forensics': { title: 'Insider Threat Investigation', correctFlag: '2R-AT{john_smith_usb_exfiltration_2025-01-20_encrypted_7zip}', points: 1200, hints: [ { text: "Check the Windows Event Logs for USB device insertion events", cost: 60 }, { text: "Look for large 7zip files in the user's temp directory and recycle bin", cost: 120 }, { text: "The suspect's name is in the laptop's user profile, combine with exfiltration method", cost: 180 } ] }
+};
+const ctfPrizesData = {
+    1000: { rank: "🏆 EXPERT LEVEL", bonus: "You've earned a $500 Amazon gift card + priority consideration for our red team!"},
+    800: { rank: "🥈 ADVANCED LEVEL", bonus: "You've earned a $300 Amazon gift card + access to our advanced training!"},
+    600: { rank: "🥉 INTERMEDIATE LEVEL", bonus: "You've earned a $200 Amazon gift card + free certification voucher!"},
+    400: { rank: "🎯 BEGINNER LEVEL", bonus: "You've earned a $100 Amazon gift card + training course access!"}
+};
+let usedHints = {}; 
+
+function showHint(challengeId, hintNumber) {
+    if (!auth.checkAuth('CTF Challenge Hint')) return;
+    const challenge = ctfChallengesData[challengeId];
+    if (!challenge || !challenge.hints || !challenge.hints[hintNumber-1]) return;
+    const hint = challenge.hints[hintNumber - 1];
+    if (!usedHints[challengeId]) usedHints[challengeId] = [];
+    if (usedHints[challengeId].includes(hintNumber)) { auth.showNotificationMessage("You've already used this hint!", "error"); return; }
+    
+    const useHintConfirmed = confirm(`This hint will cost ${hint.cost} points. Continue?\n\nHint: ${hint.text}`);
+    if (useHintConfirmed) {
+        usedHints[challengeId].push(hintNumber);
+        auth.updateUserStats({ ctfPoints: -hint.cost }); 
+        auth.showNotificationMessage(`Hint revealed! You lost ${hint.cost} points.`, "logout"); // 'logout' style is green like success
+    }
+}
+
+function submitFlag(challengeId) {
+    if (!auth.checkAuth('CTF Challenge Submission')) return;
+    const inputElement = document.getElementById(`flag-${challengeId}`);
+    if(!inputElement) return;
+    const submittedFlag = inputElement.value.trim();
+    const challenge = ctfChallengesData[challengeId];
+    if (!challenge) return;
+    if (!submittedFlag) { auth.showNotificationMessage("Please enter a flag!", "error"); return; }
+
+    let finalPoints = challenge.points;
+    if (usedHints[challengeId]) {
+        usedHints[challengeId].forEach(hintNum => { finalPoints -= challenge.hints[hintNum - 1].cost; });
+    }
+
+    if (submittedFlag === challenge.correctFlag) {
+        auth.updateUserStats({ ctfPoints: finalPoints, challengesCompleted: (auth.currentUser.stats.challengesCompleted || 0) + 1 });
+        auth.addAchievement(`Completed: ${challenge.title}`);
+        showCtfSuccessResponse(challengeId, finalPoints, challenge.title); 
+        inputElement.value = ''; inputElement.disabled = true;
+        const submitButton = inputElement.nextElementSibling; // Assuming button is next sibling
+        if(submitButton) submitButton.disabled = true;
+        createCelebrationEffect();
+    } else {
+        showCtfFailureResponse(submittedFlag, challengeId); 
+    }
+}
+
+function showCtfSuccessResponse(challengeId, points, challengeTitle) { 
+    let prizeInfo = ctfPrizesData[400]; 
+    if (points >= 1000) prizeInfo = ctfPrizesData[1000];
+    else if (points >= 800) prizeInfo = ctfPrizesData[800];
+    else if (points >= 600) prizeInfo = ctfPrizesData[600];
+    
+    const successMessage = `🎊 FLAG CAPTURED! 🎊\n\nChallenge: ${challengeTitle}\nPoints Earned: +${points}\nTotal User Points: ${auth.currentUser.points}\nLevel: ${prizeInfo.rank}\n\n🎁 ${prizeInfo.bonus}\n\n📧 Prize details will be sent to your email.`;
+    auth.showNotificationMessage(successMessage.replace(/\n/g, '<br>'), 'success'); // Use notification for consistency
+}
+
+function showCtfFailureResponse(submittedFlag, challengeId) { 
+    const responses = [ "🚫 Incorrect flag!", "❌ Not quite right. Try again.", "🔍 Close, but no cigar."];
+    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+    auth.showNotificationMessage(randomResponse, 'error');
+    // const useHint = confirm(`${randomResponse}\n\nUse a hint? (-cost points)`); // Alert/confirm can be annoying
+    // if (useHint) showCtfHintOptions(challengeId); 
+}
+
+function showCtfHintOptions(challengeId) { 
+    if (!auth.checkAuth('CTF Hint Options')) return;
+    const challenge = ctfChallengesData[challengeId];
+    if (!challenge) return;
+    let hintOptionsText = "Available hints:\n\n";
+    challenge.hints.forEach((hint, index) => {
+        const hintNum = index + 1;
+        const alreadyUsed = usedHints[challengeId] && usedHints[challengeId].includes(hintNum);
+        hintOptionsText += `${hintNum}. ${hint.text}${alreadyUsed ? " (Used)" : ` (-${hint.cost} pts)`}\n\n`;
+    });
+    const hintChoice = prompt(hintOptionsText + "Enter hint number (1-3) or 0 to cancel:");
+    if (hintChoice && hintChoice !== "0" && !isNaN(parseInt(hintChoice))) {
+        showHint(challengeId, parseInt(hintChoice));
+    }
+}
+
+// --- UI Interaction functions for Detail Views (from comprehensive_js_content) ---
+function showTrainingDetail(trainingId) {
+    const detail = trainingDetails[trainingId];
+    if (!detail) return;
+    const contentElement = document.getElementById('training-detail-content'); // Assuming these IDs exist in HTML
+    const detailSection = document.getElementById('training-detail');
+    const mainSection = document.getElementById('training');
+    if(!contentElement || !detailSection || !mainSection) { console.error("Training detail elements missing"); return; }
+
+    contentElement.innerHTML = `
+        <button onclick="closeTrainingDetail()" class="close-detail btn btn-secondary" style="margin-bottom:2rem;">← Back to Trainings</button>
+        <div class="service-detail-header"> <div class="service-detail-icon">${detail.icon}</div> <h2 class="service-detail-title">${detail.title}</h2> <p style="font-size: 1.3rem; color: var(--gray);">${detail.subtitle}</p> </div>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; margin-bottom: 3rem;"> <p style="font-size: 1.1rem; line-height: 1.8;">${detail.description}</p> </div>
+        <div class="feature-stats"> <div class="feature-stat"> <span class="feature-stat-number">${detail.duration}</span> <span style="color: var(--gray);">Duration</span> </div> <div class="feature-stat"> <span class="feature-stat-number">${detail.level}</span> <span style="color: var(--gray);">Level</span> </div> <div class="feature-stat"> <span class="feature-stat-number">${detail.format}</span> <span style="color: var(--gray);">Format</span> </div> <div class="feature-stat"> <span class="feature-stat-number">✓</span> <span style="color: var(--gray);">Certification</span> </div> </div>
+        <div class="service-detail-grid"> <div class="detail-card"> <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Key Features</h3> <ul class="detail-features"> ${detail.features.map(f => `<li>${f}</li>`).join('')} </ul> </div> <div class="detail-card"> <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Benefits</h3> ${detail.benefits.map(b => `<div style="margin-bottom: 1.5rem;"><h4 style="color: var(--light); margin-bottom: 0.5rem;">${b.title}</h4><p style="color: var(--gray);">${b.desc}</p></div>`).join('')} </div> </div>
+        <div style="margin-top: 3rem;"> <h3 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">Curriculum</h3> <div class="case-timeline"> ${detail.curriculum.map((m, i) => `<div class="timeline-item"><div class="timeline-icon">${i+1}</div><div class="timeline-content"><h4 style="color: var(--light); margin-bottom: 0.5rem;">${m.module} - ${m.duration}</h4><p style="color: var(--gray);">${m.desc}</p></div></div>`).join('')} </div> </div>
+        <div class="service-pricing"> <h3 style="font-size: 2rem; margin-bottom: 1rem;">Investment</h3> <div class="price-tag">${detail.pricing}</div> <p style="color: var(--gray); margin-bottom: 1rem;">Certification: ${detail.certificationOffered}</p> <p style="color: var(--gray); margin-bottom: 2rem;">Group discounts available.</p> <button class="btn btn-primary" onclick="scrollToContactAndCloseDetails()">Enroll Now</button> <button class="btn btn-secondary" style="margin-left: 1rem;" onclick="downloadBrochure('${trainingId}')">Download Brochure</button> </div>`;
+    mainSection.style.display = 'none'; detailSection.style.display = 'block';
+    detailSection.scrollIntoView({ behavior: 'smooth' });
+}
+function closeTrainingDetail() {
+    const detailSection = document.getElementById('training-detail');
+    const mainSection = document.getElementById('training');
+    if(detailSection) detailSection.style.display = 'none';
+    if(mainSection) { mainSection.style.display = 'block'; mainSection.scrollIntoView({ behavior: 'smooth' }); }
+}
+function downloadBrochure(trainingId) { const t = trainingDetails[trainingId]; if(t) auth.showNotificationMessage(`Brochure for "${t.title}" will be sent.`, 'success'); }
+
+function showServiceDetail(serviceId) { const detail = serviceDetails[serviceId]; if (!detail) return; console.log("Show service:", serviceId); auth.showNotificationMessage("Service Detail view for: " + (detail.title || serviceId) + " (Full view coming soon!)", "success"); }
+function closeServiceDetail() { console.log("Close service detail"); /* Logic to hide detail and show main services */ }
+function showCaseDetail(caseId) { const detail = caseStudyDetails[caseId]; if (!detail) return; console.log("Show case study:", caseId); auth.showNotificationMessage("Case Study Detail view for: " + (detail.title || caseId) + " (Full view coming soon!)", "success"); }
+function closeCaseDetail() { console.log("Close case study detail"); /* Logic to hide detail */ }
+function showFeatureDetail(featureId) { const detail = featureDetails[featureId]; if (!detail) return; console.log("Show feature:", featureId); auth.showNotificationMessage("Feature Detail view for: " + (detail.title || featureId) + " (Full view coming soon!)", "success"); }
+function closeFeatureDetail() { console.log("Close feature detail"); /* Logic to hide detail */ }
+function showArticle(articleId) { const detail = articleContent[articleId]; if (!detail) return; console.log("Show article:", articleId); auth.showNotificationMessage("Article view for: " + (detail.title || articleId) + " (Full view coming soon!)", "success"); }
+function closeArticle() { console.log("Close article"); /* Logic to hide modal */ }
+
+
+function scrollToContactAndCloseDetails() {
+    ['service-detail', 'training-detail', 'feature-detail', 'case-detail'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.style.display === 'block') el.style.display = 'none';
+    });
+    const articleModal = document.getElementById('article-modal');
+    if (articleModal && articleModal.style.display !== 'none') articleModal.style.display = 'none';
+
+    // Show main sections again
+    document.querySelectorAll('#professional-services, #training, #features, #case-studies').forEach(sec => {
+        if(sec) sec.style.display = 'block'; // Or 'grid' etc. as per their default
+    });
+
+    setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+}
+
+
+// --- General UI Enhancements ---
+function createCelebrationEffect() { for (let i = 0; i < 50; i++) createConfetti(); }
+function createConfetti() {
+    const confetti = document.createElement('div');
+    confetti.style.cssText = `position: fixed; left: ${Math.random()*window.innerWidth}px; top: -10px; width: ${Math.random()*8+6}px; height: ${Math.random()*8+6}px; background-color: ${['#FFD700','#FF6B6B','#4ECDC4','#45B7D1','#96CEB4'][Math.floor(Math.random()*5)]}; border-radius: 50%; pointer-events: none; z-index: 10000; transition: transform 3s linear, opacity 3s linear;`;
+    document.body.appendChild(confetti);
+    requestAnimationFrame(() => { confetti.style.transform = `translateY(${window.innerHeight+20}px) rotate(${Math.random()*360}deg)`; confetti.style.opacity = '0'; });
+    setTimeout(() => confetti.remove(), 3000);
+}
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const loaderEl = document.getElementById('loader');
+        if (loaderEl) { loaderEl.style.opacity = '0'; setTimeout(() => loaderEl.style.display = 'none', 500); }
+    }, 1000);
+    // DOMContentLoaded is better for JS that doesn't rely on images/css fully loaded
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    auth.initializeUI(); // Initialize AuthSystem UI elements, event listeners, and overlays
+
+    ['service-detail', 'training-detail', 'feature-detail', 'case-detail'].forEach(id => {
+        const section = document.getElementById(id);
+        if (section) section.style.display = 'none';
+    });
+    const articleModal = document.getElementById('article-modal');
+    if(articleModal) articleModal.style.display = 'none';
+
+    // Other initializations from login.js if they are not covered by auth.initializeUI()
+    if (document.getElementById('particles')) setInterval(createParticle, 300);
+
+    const statsSec = document.querySelector('.stats');
+    if (statsSec) {
+        new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { animateStats(); observer.unobserve(entry.target); } });
+        }, { threshold: 0.5 }).observe(statsSec);
+    }
+
+    const dashSec = document.querySelector('.dashboard-section');
+    if (dashSec) {
+        new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { animateDashboard(); if(document.getElementById('threat-container')) setInterval(createThreatPoint, 1500); observer.unobserve(entry.target); } });
+        }, { threshold: 0.5 }).observe(dashSec);
+    }
+    
+    const termContentTyping = document.querySelector('.terminal-content .typing');
+    if (termContentTyping) {
+        new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width='0'; entry.target.style.animation='none';
+                    void entry.target.offsetWidth; entry.target.style.animation='';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 }).observe(termContentTyping);
+    }
+
+    const animElements = document.querySelectorAll('.service-card, .training-card, .feature-item, .case-card');
+    if (animElements.length > 0) {
+        const elObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animElements.forEach(el => { el.style.cssText = 'opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease'; elObserver.observe(el); });
+    }
+});
+
+
+function createParticle() {
+    const particlesContainer = document.getElementById('particles');
+    if (!particlesContainer) return;
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * window.innerWidth + 'px';
+    particle.style.animationDelay = Math.random() * 15 + 's';
+    particle.style.opacity = Math.random() * 0.5 + 0.1;
+    particlesContainer.appendChild(particle);
+    setTimeout(() => particle.remove(), 15000);
+}
+
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        
+        if (targetId === 'dashboard' || targetId === 'ctf-challenges') {
+            auth.handleProtectedLinkClick(targetId);
+        } else {
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                 // Hide other detail views if open
+                ['service-detail', 'training-detail', 'feature-detail', 'case-detail'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && el.id !== targetId + '-detail' && el.style.display !== 'none') el.style.display = 'none';
+                });
+                // Show relevant main section if a detail view is closed or another main link is clicked
+                if (!targetId.includes('-detail')) { // e.g. if not "training-detail"
+                    document.querySelectorAll('main > section, .main-content-section').forEach(s => {
+                       if(s.id === targetId) s.style.display = 'block'; // or appropriate display type
+                       // else if (s.id !== 'home') s.style.display = 'none'; // careful with this
+                    });
+                }
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        const navLinksEl = document.querySelector('.nav-links.active');
+        const mobileToggleEl = document.querySelector('.mobile-menu-toggle.active');
+        if (navLinksEl && mobileToggleEl) { navLinksEl.classList.remove('active'); mobileToggleEl.classList.remove('active'); }
+    });
+});
+
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+        navbar.style.background = window.scrollY > 50 ? 'rgba(5, 7, 20, 0.95)' : 'rgba(5, 7, 20, 0.9)';
+        navbar.style.boxShadow = window.scrollY > 50 ? '0 5px 20px rgba(0, 0, 0, 0.5)' : 'none';
+    }
+});
+
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+if (mobileMenuToggle && navLinks) {
+    mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+    });
+}
+
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const button = e.target.querySelector('button[type="submit"]');
+        const originalText = button.textContent;
+        button.textContent = 'Securing...'; button.disabled = true;
+        setTimeout(() => {
+            button.textContent = 'Sent ✓'; button.style.background = 'var(--success)';
+            setTimeout(() => { button.textContent = originalText; button.disabled = false; button.style.background = ''; e.target.reset(); }, 3000);
+        }, 2000);
+    });
+}
+
+function animateStats() {
+    document.querySelectorAll('.stat-number').forEach(stat => {
+        const targetText = stat.textContent;
+        const targetNumber = parseFloat(targetText.replace(/[^0-9.-]/g, '')); // Keep minus for <1min like cases
+        if (isNaN(targetNumber) && !targetText.includes('<')) return; // Skip if not a number and not a special case like <1
+
+        let finalDisplay = targetText;
+        let numToAnimate = targetNumber;
+        if(targetText.includes('<')) {
+            numToAnimate = parseFloat(targetText.substring(1)); // Number after '<'
+        }
+
+        if (isNaN(numToAnimate)) return;
+
+        let count = 0; 
+        const increment = numToAnimate / 50; // Animate in 50 steps
+        const timer = setInterval(() => {
+            count += increment;
+            if (count >= numToAnimate) { 
+                stat.textContent = finalDisplay; 
+                clearInterval(timer); 
+            } else { 
+                let currentDisplay = Math.floor(count);
+                if (targetText.includes('%')) currentDisplay += '%';
+                if (targetText.includes('+')) currentDisplay += '+';
+                // For '<X', we just let it reach X then set to '<X'
+                stat.textContent = currentDisplay;
+            }
+        }, 30);
+    });
+}
+
+function animateDashboard() {
+    let threats = 0; const tb = document.getElementById('threats-blocked'); if(tb) setInterval(()=>tb.textContent=(threats+=Math.floor(Math.random()*10)+1).toLocaleString(),2e3);
+    const am = document.getElementById('active-monitors'); if(am) setInterval(()=>am.textContent=Math.floor(Math.random()*50)+200,3e3);
+    let data = 0; const da = document.getElementById('data-analyzed'); if(da) setInterval(()=>{data+=Math.random()*.5;da.textContent=data.toFixed(1)+' TB'},1500);
+}
+
+function createThreatPoint() {
+    const container = document.getElementById('threat-container');
+    if (!container) return;
+    const point = document.createElement('div');
+    point.className = 'threat-point';
+    point.style.left = Math.random() * 90 + 5 + '%';
+    point.style.top = Math.random() * 80 + 10 + '%';
+    container.appendChild(point);
+    setTimeout(() => point.remove(), 2000); 
+}
+
+document.addEventListener('click', function(event) {
+    const userSection = document.querySelector('.user-section');
+    const dropdown = document.getElementById('user-dropdown');
+    if (userSection && dropdown && !userSection.contains(event.target) && dropdown.classList.contains('show')) {
+        auth.toggleUserMenu(); 
+    }
+});
+const authModalElement = document.getElementById('authModal');
+if (authModalElement) {
+    authModalElement.addEventListener('click', function(event) {
+        if (event.target === this) {
+            auth.closeAuthModal(); 
+        }
+    });
+}
+
+// Expose functions to global scope for HTML onclicks
+window.showLogin = () => auth.showLogin();
+window.showRegister = () => auth.showRegister();
+window.closeAuthModal = () => auth.closeAuthModal();
+window.switchToLogin = () => auth.switchToLogin();
+window.switchToRegister = () => auth.switchToRegister();
+window.handleLogin = (event) => auth.handleLogin(event);
+window.handleRegister = (event) => auth.handleRegister(event);
+window.toggleUserMenu = () => auth.toggleUserMenu();
+window.showUserDashboard = () => auth.showUserDashboard();
+window.showUserProfile = () => auth.showUserProfile();
+window.showUserAchievements = () => auth.showUserAchievements();
+window.showUserSettings = () => auth.showUserSettings();
+window.logout = () => auth.logout();
+window.showNotifications = () => { if(auth.checkAuth('Notifications')) auth.showNotificationMessage('Notification panel coming soon!', 'success');};
+
+window.showHint = showHint;
+window.submitFlag = submitFlag;
+
+window.showTrainingDetail = showTrainingDetail;
+window.closeTrainingDetail = closeTrainingDetail;
+window.downloadBrochure = downloadBrochure;
+window.showServiceDetail = showServiceDetail;
+window.closeServiceDetail = closeServiceDetail;
+window.showCaseDetail = showCaseDetail;
+window.closeCaseDetail = closeCaseDetail;
+window.showFeatureDetail = showFeatureDetail;
+window.closeFeatureDetail = closeFeatureDetail;
+window.showArticle = showArticle;
+window.closeArticle = closeArticle;
+window.scrollToContactAndCloseDetails = scrollToContactAndCloseDetails;
+// Function for scanner, if not already in merged_script.js
+window.startScan = function() {
+    if(!auth.checkAuth('Security Scan')) return;
+    const input = document.getElementById('scan-input');
+    const resultsDiv = document.getElementById('scan-results');
+    const progressBar = document.getElementById('progress-bar');
+    const scanOutput = document.getElementById('scan-output');
+    if (!input || !resultsDiv || !progressBar || !scanOutput) return;
+
+    const target = input.value;
+    if (!target) {
+        scanOutput.innerHTML = '<p style="color: var(--warning);">Please enter a domain to scan.</p>';
+        resultsDiv.style.display = 'block';
+        return;
+    }
+
+    resultsDiv.style.display = 'block';
+    scanOutput.innerHTML = `<p>Scanning ${target}...</p>`;
+    progressBar.style.width = '0%';
+    
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = progress + '%';
+        if (progress >= 100) {
+            clearInterval(interval);
+            scanOutput.innerHTML = `
+                <h4 style="color:var(--success); margin-bottom:1rem;">Scan Complete for ${target}</h4>
+                <p><strong>Status:</strong> <span style="color:var(--success);">Secure</span></p>
+                <ul>
+                    <li>SSL/TLS: Strong Configuration (A+)</li>
+                    <li>DNSSEC: Enabled</li>
+                    <li>Open Ports: None commonly exploited</li>
+                    <li>Known Vulnerabilities: 0 Found</li>
+                </ul>
+                <p style="font-size:0.8rem; color:var(--gray); margin-top:1rem;">Note: This is a simulated scan for demonstration purposes.</p>
+            `;
+        }
+    }, 200);
+};
+// Function for downloading resources (placeholder)
+window.downloadResource = function(resourceType) {
+    if(!auth.checkAuth('Download Resource')) return;
+    auth.showNotificationMessage(`Preparing download for ${resourceType}... (Demo only)`, 'success');
+};
+window.downloadEvidence = function(evidenceType) { // Alias for CTF
+    if(!auth.checkAuth('Download Evidence')) return;
+    auth.showNotificationMessage(`Preparing evidence download: ${evidenceType}... (Demo only)`, 'success');
+};
+
+
+// --- End of Merged JavaScript ---
+    </script>
+>>>>>>> REPLACE
