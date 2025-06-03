@@ -367,12 +367,12 @@
         }
 
         .hero {
-            min-height: 100vh;
+            min-height: 70vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 0 2rem;
+            padding: 5rem 2rem 3rem 2rem; /* Adjusted padding */
         }
 
         .hero-content {
@@ -1936,37 +1936,40 @@
                 <li><a href="#identity-access">Identity & Access</a></li>
                 <li><a href="#compliance-governance">Compliance & Governance</a></li>
                 <li><a href="#training-education">Training & Education</a></li>
+                <li><a href="#pricing">Plans</a></li>
+                <li><a href="#case-studies">Success Stories</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <!-- Team and Pricing might be moved later or accessed via other sections/footer -->
-            </ul>
-            <!-- Authentication Buttons / User Menu -->
-            <div class="auth-buttons" id="auth-nav">
-                <button class="btn btn-secondary btn-small" onclick="auth.showLogin()">Login</button>
-                <button class="btn btn-primary btn-small" onclick="auth.showRegister()">Get Started</button>
-            </div>
-            <div class="user-menu" id="user-nav" style="display: none;">
-                <div class="user-avatar" onclick="auth.toggleUserMenu()" id="user-avatar-text">
-                    <!-- User initials will be populated by JS -->
-                </div>
-                <div class="user-dropdown" id="user-dropdown">
-                    <div class="user-info">
-                        <h4 id="nav-user-name">User</h4>
-                        <p id="nav-user-email">user@example.com</p>
-                        <p id="nav-user-points">0 pts</p>
+                <li class="auth-section" id="auth-nav">
+                    <button class="btn btn-secondary auth-btn" onclick="showLogin()">Login</button>
+                    <button class="btn btn-primary auth-btn" onclick="showRegister()">Sign Up</button>
+                </li>
+                <li class="user-section" id="user-nav" style="display: none;">
+                    <div class="user-profile-nav">
+                        <div class="user-avatar" onclick="toggleUserMenu()">
+                            <span id="user-avatar-text">U</span>
+                        </div>
+                        <div class="user-dropdown" id="user-dropdown">
+                            <div class="user-info">
+                                <div class="user-name" id="nav-user-name">User</div>
+                                <div class="user-points" id="nav-user-points">0 pts</div>
+                            </div>
+                            <hr style="border-color: rgba(0, 212, 255, 0.2); margin: 0.5rem 0;">
+                            <a href="#user-dashboard" onclick="showUserDashboard()">🏠 Dashboard</a>
+                            <a href="#user-profile" onclick="showUserProfile()">👤 Profile</a>
+                            <a href="#user-achievements" onclick="showUserAchievements()">🏆 Achievements</a>
+                            <a href="#user-settings" onclick="showUserSettings()">⚙️ Settings</a>
+                            <hr style="border-color: rgba(0, 212, 255, 0.2); margin: 0.5rem 0;">
+                            <a href="#logout" onclick="logout()">🚪 Logout</a>
+                        </div>
                     </div>
-                    <hr style="border-color: rgba(0, 212, 255, 0.1); margin: 0.5rem 0;">
-                    <a href="#" onclick="auth.showUserDashboard()">👤 Dashboard</a>
-                    <a href="#" onclick="auth.showUserProfile()">🏆 Profile</a>
-                    <a href="#" onclick="auth.showUserAchievements()">⚙️ Achievements</a>
-                     <hr style="border-color: rgba(0, 212, 255, 0.1); margin: 0.5rem 0;">
-                    <a href="#" onclick="auth.logout()">🚪 Logout</a>
-                </div>
-            </div>
-            <div id="nav-notification-area">
-                 <div id="notification" style="color: white; padding: 0 1rem; cursor: pointer; display:flex; align-items:center;" onclick="window.showNotifications()">
-                     🔔<span id="notification-count" style="background: var(--danger); border-radius: 50%; padding: 2px 6px; font-size: 0.8rem; margin-left: 5px; display:none;"></span>
-                 </div>
-            </div>
+                </li>
+                <li class="nav-notification-area"> <!-- Added a wrapper list item for consistency -->
+                    <div id="notification" style="color: white; padding: 0.5rem 1rem; cursor: pointer;" onclick="showNotifications()">
+                        🔔<span id="notification-count" style="background: var(--danger); border-radius: 50%; padding: 2px 6px; font-size: 0.8rem; margin-left: 5px; display:none;"></span>
+                    </div>
+                </li>
+            </ul>
             <div class="mobile-menu-toggle">
                 <span></span>
                 <span></span>
@@ -2881,8 +2884,31 @@
                 <h2 class="section-title">Managed Security Services</h2>
                 <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">24/7 MDR, SOC, vCISO, Incident Response</p>
             </div>
-            <div style="text-align:center; color: var(--gray);">
-                <p>Further details and content for this section will be populated soon.</p>
+            <div class="services-grid">
+                <div class="service-card" onclick="showServiceDetail('threat-hunting')">
+                    <div class="service-icon">🎯</div>
+                    <h3 class="service-title">Advanced Threat Hunting</h3>
+                    <p class="service-description">Proactive threat detection and response services to identify advanced persistent threats and zero-day exploits in your environment.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('threat-hunting');">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('grc-services')">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Comprehensive GRC Services</h3>
+                    <p class="service-description">Complete governance, risk, and compliance solutions ensuring your organization meets all regulatory requirements.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('grc-services');">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('security-auditing')">
+                    <div class="service-icon">🔍</div>
+                    <h3 class="service-title">Continuous Security Auditing</h3>
+                    <p class="service-description">Thorough security audits and assessments to ensure your systems meet industry standards and best practices, offered as a managed service.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('security-auditing');">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('soc-mdr')">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">24/7 SOC & Managed Detection and Response</h3>
+                    <p class="service-description">Our Security Operations Center provides round-the-clock monitoring, threat detection, and rapid incident response to protect your assets.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('soc-mdr');">Learn More →</a>
+                </div>
             </div>
         </div>
     </section>
@@ -2894,8 +2920,31 @@
                 <h2 class="section-title">AI-Powered Solutions</h2>
                 <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">AI Threat Detection, Automated Response, SOAR</p>
             </div>
-            <div style="text-align:center; color: var(--gray);">
-                <p>Further details and content for this section will be populated soon.</p>
+            <div class="features-grid">
+                <div class="feature-item" onclick="showFeatureDetail('ai-detection')">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered Threat Detection</h3>
+                    <p>Machine learning algorithms that evolve with emerging threats, identifying anomalies and predicting attacks with high accuracy.</p>
+                    <span class="feature-link" onclick="event.stopPropagation(); showFeatureDetail('ai-detection');">Explore →</span>
+                </div>
+                <div class="feature-item" onclick="showFeatureDetail('real-time-response')">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-Time Automated Response</h3>
+                    <p>Instant threat neutralization with AI-driven automated countermeasures and SOAR capabilities.</p>
+                    <span class="feature-link" onclick="event.stopPropagation(); showFeatureDetail('real-time-response');">Explore →</span>
+                </div>
+                <div class="feature-item" onclick="showFeatureDetail('predictive-analytics')">
+                    <div class="feature-icon">📈</div>
+                    <h3>Predictive Security Analytics</h3>
+                    <p>Anticipate attacks before they happen with advanced AI modeling and risk forecasting.</p>
+                    <span class="feature-link" onclick="event.stopPropagation(); showFeatureDetail('predictive-analytics');">Explore →</span>
+                </div>
+                <div class="feature-item" onclick="showFeatureDetail('ai-soar')">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>AI-Driven SOAR</h3>
+                    <p>Streamline security operations with AI-powered Security Orchestration, Automation, and Response, improving efficiency and incident handling.</p>
+                    <span class="feature-link" onclick="event.stopPropagation(); showFeatureDetail('ai-soar');">Explore →</span>
+                </div>
             </div>
         </div>
     </section>
@@ -2920,8 +2969,31 @@
                 <h2 class="section-title">Cloud & Infrastructure</h2>
                 <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">Cloud Security, CSPM, Zero Trust Architecture</p>
             </div>
-            <div style="text-align:center; color: var(--gray);">
-                <p>Further details and content for this section will be populated soon.</p>
+            <div class="services-grid">
+                <div class="service-card" onclick="showServiceDetail('cloud-security')">
+                    <div class="service-icon">☁️</div>
+                    <h3 class="service-title">Advanced Cloud Security</h3>
+                    <p class="service-description">Comprehensive protection for your AWS, Azure, and GCP environments, including real-time monitoring, automated threat response, and compliance management.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('cloud-security');">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showFeatureDetail('zero-trust')"> <!-- Links to a feature detail -->
+                    <div class="service-icon">🔐</div>
+                    <h3 class="service-title">Zero Trust Network Access (ZTNA)</h3>
+                    <p class="service-description">Implement a 'never trust, always verify' model for users, devices, and applications accessing your cloud and on-premise infrastructure.</p>
+                    <a href="#feature-detail" class="service-link" onclick="event.preventDefault(); showFeatureDetail('zero-trust');">Explore Feature →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('infra-hardening')">
+                    <div class="service-icon">🛠️</div>
+                    <h3 class="service-title">Infrastructure Hardening & Secure Configuration</h3>
+                    <p class="service-description">Strengthen your servers, networks, and cloud resources against attacks by implementing secure configurations and industry best practices.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('infra-hardening');">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('cloud-data-security')">
+                    <div class="service-icon">🔑</div>
+                    <h3 class="service-title">Cloud Data Security & Encryption</h3>
+                    <p class="service-description">Protect sensitive data in your cloud storage and databases with robust encryption, key management, and data loss prevention (DLP) strategies.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('cloud-data-security');">Learn More →</a>
+                </div>
             </div>
         </div>
     </section>
@@ -2933,8 +3005,31 @@
                 <h2 class="section-title">Identity & Access</h2>
                 <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">IAM, ITDR, PAM, MFA Solutions</p>
             </div>
-            <div style="text-align:center; color: var(--gray);">
-                <p>Further details and content for this section will be populated soon.</p>
+            <div class="services-grid">
+                <div class="service-card" onclick="showServiceDetail('iam')">
+                    <div class="service-icon">🆔</div>
+                    <h3 class="service-title">Modern IAM Solutions</h3>
+                    <p class="service-description">Implement robust IAM strategies to ensure the right individuals access the right resources at the right times, for the right reasons.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('iam');">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('mfa')">
+                    <div class="service-icon">📱</div>
+                    <h3 class="service-title">Strong Multi-Factor Authentication</h3>
+                    <p class="service-description">Enhance security by requiring multiple verification methods, protecting against unauthorized access even if passwords are compromised.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('mfa');">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('pam')">
+                    <div class="service-icon">🗝️</div>
+                    <h3 class="service-title">Privileged Access Management (PAM)</h3>
+                    <p class="service-description">Secure, manage, and monitor privileged accounts and access to critical systems, reducing the risk of insider threats and privilege misuse.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('pam');">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('itdr')">
+                    <div class="service-icon">🚨</div>
+                    <h3 class="service-title">Identity Threat Detection & Response (ITDR)</h3>
+                    <p class="service-description">Proactively detect and respond to threats targeting identities, such as credential theft, account takeover, and unusual access patterns.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('itdr');">Learn More →</a>
+                </div>
             </div>
         </div>
     </section>
@@ -2946,8 +3041,31 @@
                 <h2 class="section-title">Compliance & Governance</h2>
                 <p class="section-subtitle" style="font-size: 1.2rem; color: var(--gray); margin-top: 1rem;">GRC, Compliance Automation, Risk Management</p>
             </div>
-            <div style="text-align:center; color: var(--gray);">
-                <p>Further details and content for this section will be populated soon.</p>
+            <div class="services-grid">
+                <div class="service-card" onclick="showServiceDetail('grc-services')">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Governance, Risk & Compliance (GRC)</h3>
+                    <p class="service-description">Establish robust GRC frameworks, manage risks effectively, and ensure ongoing compliance with industry regulations and standards.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('grc-services');">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('security-auditing')">
+                    <div class="service-icon">🔍</div>
+                    <h3 class="service-title">Independent Security Auditing</h3>
+                    <p class="service-description">Thorough security audits and assessments to ensure your systems meet industry standards (ISO 27001, SOC 2, etc.) and best practices.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('security-auditing');">Learn More →</a>
+                </div>
+                <div class="service-card" onclick="showFeatureDetail('certifications')"> <!-- Links to a feature detail -->
+                    <div class="service-icon">🏆</div>
+                    <h3 class="service-title">Industry Certifications & Standards</h3>
+                    <p class="service-description">Achieve and maintain key industry certifications (ISO 27001, SOC 2, NIST) with our expert guidance and compliant security practices.</p>
+                    <a href="#feature-detail" class="service-link" onclick="event.preventDefault(); showFeatureDetail('certifications');">Explore Feature →</a>
+                </div>
+                <div class="service-card" onclick="showServiceDetail('data-privacy')">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Data Privacy & Protection (GDPR, CCPA)</h3>
+                    <p class="service-description">Navigate complex data privacy regulations like GDPR and CCPA with solutions for data mapping, consent management, and breach notification.</p>
+                    <a href="#service-detail" class="service-link" onclick="event.preventDefault(); showServiceDetail('data-privacy');">Learn More →</a>
+                </div>
             </div>
         </div>
     </section>
@@ -2960,31 +3078,7 @@
         </div>
     </div>
 
-    <div id="authModal" class="auth-modal"> <!-- Removed style="display: none;" -->
-        <div class="auth-form">
-            <button class="close-modal" onclick="auth.closeAuthModal()">&times;</button>
-            <div id="loginForm" style="display: block;">
-                <h2>Secure Login</h2>
-                <form onsubmit="auth.handleLogin(event)">
-                    <div class="form-group"><label for="loginEmail">Email</label><input type="email" id="loginEmail" name="email" required></div>
-                    <div class="form-group"><label for="loginPassword">Password</label><input type="password" id="loginPassword" name="password" required></div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
-                </form>
-                <div class="auth-switch">Don't have an account? <a href="#" onclick="event.preventDefault(); auth.switchToRegister();">Sign up</a></div>
-            </div>
-            <div id="registerForm" style="display: none;">
-                <h2>Create Account</h2>
-                <form onsubmit="auth.handleRegister(event)">
-                    <div class="form-group"><label for="registerName">Full Name</label><input type="text" id="registerName" name="name" required></div>
-                    <div class="form-group"><label for="registerEmail">Email</label><input type="email" id="registerEmail" name="email" required></div>
-                    <div class="form-group"><label for="registerPassword">Password</label><input type="password" id="registerPassword" name="password" required></div>
-                    <div class="form-group"><label for="registerCompany">Company</label><input type="text" id="registerCompany" name="company"></div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
-                </form>
-                <div class="auth-switch">Already have an account? <a href="#" onclick="event.preventDefault(); auth.switchToLogin();">Login</a></div>
-            </div>
-        </div>
-    </div>
+    <!-- Auth Modal is moved into Nav below -->
     <!-- Notification container placeholder removed as toasts are appended to body by JS -->
 
 
