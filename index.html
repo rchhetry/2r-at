@@ -139,7 +139,7 @@
             position: relative;
             transition: color 0.3s ease;
             padding: 0.5rem 0.6rem; /* Adjusted for new menu */
-            font-size: 0.85rem; /* Adjusted for new menu */
+            font-size: 0.8rem; /* Adjusted for new menu */
             border-radius: 4px;
         }
 
@@ -383,7 +383,7 @@
         }
 
         .glitch {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(2.5rem, 7vw, 5rem);
             font-weight: bold;
             text-transform: uppercase;
             position: relative;
@@ -457,7 +457,7 @@
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: var(--gray);
             margin: 2rem 0;
             opacity: 0;
@@ -3295,14 +3295,31 @@ const articleContent = {
 // --- Core Authentication System (from login_js_content, enhanced) ---
 class AuthSystem {
     constructor() {
+        const storedUsers = localStorage.getItem('users');
+        this.users = storedUsers ? JSON.parse(storedUsers) : [];
+
+        this.initializeDemoUsers(); // Add demo users if not present
+
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.users = JSON.parse(localStorage.getItem('users')) || [];
 
         this.protectedContentMap = {
             'home-dashboard': 'dashboard-container',
             'ctf-challenges': 'ctf-challenges-grid'
         };
         // Call initializeUI via DOMContentLoaded to ensure elements are present
+    }
+
+    initializeDemoUsers() {
+        const demoUsers = [
+            { id: 'demo-admin', name: 'Admin User', email: 'admin@2r-at.com', password: 'admin123', company: '2R-AT', role: 'admin', userRole: 'CISO', plan: 'enterprise', joinDate: '2024-01-15', points: 8750, stats: { ctfPoints: 8750, challengesCompleted: 12 }, achievements: ['CTF Master'] },
+            { id: 'demo-user', name: 'Test User', email: 'user@example.com', password: 'user123', company: 'Tech Corp', role: 'user', userRole: 'Developer', plan: 'professional', joinDate: '2024-06-20', points: 2150, stats: { ctfPoints: 2150, challengesCompleted: 5 }, achievements: ['First Challenge'] }
+        ];
+        demoUsers.forEach(demoUser => {
+           if (!this.users.find(u => u.email === demoUser.email)) {
+               this.users.push(demoUser);
+           }
+        });
+        localStorage.setItem('users', JSON.stringify(this.users));
     }
 
     initializeUI() {
