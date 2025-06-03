@@ -2869,6 +2869,7 @@
     </footer>
 
     <script>
+    try { // Added general error catching
         // --- Start of Merged JavaScript ---
 
 // Data objects from comprehensive_js_content
@@ -3470,14 +3471,24 @@ function showCtfHintOptions(challengeId) {
 
 // --- UI Interaction functions for Detail Views (from comprehensive_js_content) ---
 function showTrainingDetail(trainingId) {
+    console.log('Attempting to execute showTrainingDetail with ID:', trainingId);
     const detail = trainingDetails[trainingId];
-    if (!detail) return;
-    const contentElement = document.getElementById('training-detail-content'); // Assuming these IDs exist in HTML
+    console.log('Training data for ' + trainingId + ':', detail);
+    if (!detail) {
+        console.error('ERROR: No data for training ID:' + trainingId);
+        return;
+    }
+
+    const contentElement = document.getElementById('training-detail-content');
     const detailSection = document.getElementById('training-detail');
     const mainSection = document.getElementById('training');
-    if(!contentElement || !detailSection || !mainSection) { console.error("Training detail elements missing"); return; }
+    console.log('Target elements for training: contentElement:', contentElement, 'detailSection:', detailSection, 'mainSection:', mainSection);
+    if (!contentElement || !detailSection || !mainSection) {
+        console.error('ERROR: One or more target elements not found for training details.');
+        return;
+    }
 
-    contentElement.innerHTML = `
+    const generatedHtml = `
         <button onclick="closeTrainingDetail()" class="close-detail btn btn-secondary" style="margin-bottom:2rem;">← Back to Trainings</button>
         <div class="service-detail-header"> <div class="service-detail-icon">${detail.icon}</div> <h2 class="service-detail-title">${detail.title}</h2> <p style="font-size: 1.3rem; color: var(--gray);">${detail.subtitle}</p> </div>
         <div style="max-width: 800px; margin: 0 auto; text-align: center; margin-bottom: 3rem;"> <p style="font-size: 1.1rem; line-height: 1.8;">${detail.description}</p> </div>
@@ -3485,25 +3496,274 @@ function showTrainingDetail(trainingId) {
         <div class="service-detail-grid"> <div class="detail-card"> <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Key Features</h3> <ul class="detail-features"> ${detail.features.map(f => `<li>${f}</li>`).join('')} </ul> </div> <div class="detail-card"> <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Benefits</h3> ${detail.benefits.map(b => `<div style="margin-bottom: 1.5rem;"><h4 style="color: var(--light); margin-bottom: 0.5rem;">${b.title}</h4><p style="color: var(--gray);">${b.desc}</p></div>`).join('')} </div> </div>
         <div style="margin-top: 3rem;"> <h3 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">Curriculum</h3> <div class="case-timeline"> ${detail.curriculum.map((m, i) => `<div class="timeline-item"><div class="timeline-icon">${i+1}</div><div class="timeline-content"><h4 style="color: var(--light); margin-bottom: 0.5rem;">${m.module} - ${m.duration}</h4><p style="color: var(--gray);">${m.desc}</p></div></div>`).join('')} </div> </div>
         <div class="service-pricing"> <h3 style="font-size: 2rem; margin-bottom: 1rem;">Investment</h3> <div class="price-tag">${detail.pricing}</div> <p style="color: var(--gray); margin-bottom: 1rem;">Certification: ${detail.certificationOffered}</p> <p style="color: var(--gray); margin-bottom: 2rem;">Group discounts available.</p> <button class="btn btn-primary" onclick="scrollToContactAndCloseDetails()">Enroll Now</button> <button class="btn btn-secondary" style="margin-left: 1rem;" onclick="downloadBrochure('${trainingId}')">Download Brochure</button> </div>`;
-    mainSection.style.display = 'none'; detailSection.style.display = 'block';
+    console.log('Generated HTML for training modal:', generatedHtml.substring(0, 200) + '...');
+    contentElement.innerHTML = generatedHtml;
+    console.log('#training-detail-content innerHTML updated.');
+
+    mainSection.style.display = 'none';
+    console.log('#training (main) style.display set to none. Current value:', mainSection.style.display);
+    detailSection.style.display = 'block';
+    console.log('#training-detail style.display set to block. Current value:', detailSection.style.display);
+    console.log('Computed style for #training-detail display after changes:', window.getComputedStyle(detailSection).display);
+
     detailSection.scrollIntoView({ behavior: 'smooth' });
 }
+
 function closeTrainingDetail() {
+    console.log('Attempting to execute closeTrainingDetail');
     const detailSection = document.getElementById('training-detail');
     const mainSection = document.getElementById('training');
-    if(detailSection) detailSection.style.display = 'none';
-    if(mainSection) { mainSection.style.display = 'block'; mainSection.scrollIntoView({ behavior: 'smooth' }); }
-}
-function downloadBrochure(trainingId) { const t = trainingDetails[trainingId]; if(t) auth.showNotificationMessage(`Brochure for "${t.title}" will be sent.`, 'success'); }
+    console.log('Target elements for closing training: detailSection:', detailSection, 'mainSection:', mainSection);
 
-function showServiceDetail(serviceId) { const detail = serviceDetails[serviceId]; if (!detail) return; console.log("Show service:", serviceId); auth.showNotificationMessage("Service Detail view for: " + (detail.title || serviceId) + " (Full view coming soon!)", "success"); }
-function closeServiceDetail() { console.log("Close service detail"); /* Logic to hide detail and show main services */ }
-function showCaseDetail(caseId) { const detail = caseStudyDetails[caseId]; if (!detail) return; console.log("Show case study:", caseId); auth.showNotificationMessage("Case Study Detail view for: " + (detail.title || caseId) + " (Full view coming soon!)", "success"); }
-function closeCaseDetail() { console.log("Close case study detail"); /* Logic to hide detail */ }
-function showFeatureDetail(featureId) { const detail = featureDetails[featureId]; if (!detail) return; console.log("Show feature:", featureId); auth.showNotificationMessage("Feature Detail view for: " + (detail.title || featureId) + " (Full view coming soon!)", "success"); }
-function closeFeatureDetail() { console.log("Close feature detail"); /* Logic to hide detail */ }
-function showArticle(articleId) { const detail = articleContent[articleId]; if (!detail) return; console.log("Show article:", articleId); auth.showNotificationMessage("Article view for: " + (detail.title || articleId) + " (Full view coming soon!)", "success"); }
-function closeArticle() { console.log("Close article"); /* Logic to hide modal */ }
+    if(detailSection) {
+        detailSection.style.display = 'none';
+        console.log('#training-detail style.display set to none. Current value:', detailSection.style.display);
+    }
+    if(mainSection) {
+        mainSection.style.display = 'block';
+        console.log('#training (main) style.display set to block. Current value:', mainSection.style.display);
+        console.log('Computed style for #training (main) display after changes:', window.getComputedStyle(mainSection).display);
+        mainSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function downloadBrochure(trainingId) {
+    console.log('Attempting to download brochure for training ID:', trainingId);
+    const t = trainingDetails[trainingId];
+    if(t) auth.showNotificationMessage(`Brochure for "${t.title}" will be sent. (Simulated)`, 'success');
+    else console.error('ERROR: No training data for ID to download brochure:', trainingId);
+}
+
+function showServiceDetail(serviceId) {
+    console.log('Attempting to execute showServiceDetail with ID:', serviceId);
+    const detail = serviceDetails[serviceId];
+    console.log('Service data for ' + serviceId + ':', detail);
+    if (!detail) {
+        console.error('ERROR: No data for service ID:' + serviceId);
+        return;
+    }
+
+    const contentElement = document.getElementById('service-detail-content');
+    const detailSection = document.getElementById('service-detail');
+    const mainSection = document.getElementById('professional-services');
+    console.log('Target elements for service: contentElement:', contentElement, 'detailSection:', detailSection, 'mainSection:', mainSection);
+    if (!contentElement || !detailSection || !mainSection) {
+        console.error('ERROR: One or more target elements not found for service details.');
+        return;
+    }
+
+    const generatedHtml = `
+        <button onclick="closeServiceDetail()" class="close-detail btn btn-secondary" style="margin-bottom:2rem;">← Back to Services</button>
+        <div class="service-detail-header"> <div class="service-detail-icon">${detail.icon}</div> <h2 class="service-detail-title">${detail.title}</h2> <p style="font-size: 1.3rem; color: var(--gray);">${detail.subtitle}</p> </div>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; margin-bottom: 3rem;"> <p style="font-size: 1.1rem; line-height: 1.8;">${detail.description}</p> </div>
+        <div class="service-detail-grid"> <div class="detail-card"> <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Key Features</h3> <ul class="detail-features"> ${detail.keyFeatures.map(f => `<li>${f}</li>`).join('')} </ul> </div> <div class="detail-card"> <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Pricing</h3> <p class="price-tag" style="font-size:1.5rem;">${detail.pricing}</p> ${detail.relatedCaseStudy ? `<p style="margin-top:1rem;"><a href="#" onclick="event.preventDefault(); showCaseDetail('${detail.relatedCaseStudy}'); closeServiceDetail();" class="btn btn-secondary btn-small">View Related Case Study</a></p>` : ''} </div> </div>`;
+    console.log('Generated HTML for service modal:', generatedHtml.substring(0, 200) + '...');
+    contentElement.innerHTML = generatedHtml; // Restored
+    console.log('#service-detail-content innerHTML updated.');
+
+    mainSection.style.display = 'none'; // Restored
+    console.log('#professional-services style.display set to none. Current value:', mainSection.style.display);
+
+    // Forceful styling removed, using direct style manipulation
+    if (detailSection) {
+        console.log('Attempting to make #service-detail visible. Current display:', window.getComputedStyle(detailSection).display);
+        detailSection.style.display = 'block';
+        // No longer using setProperty with !important for regular operation
+        // detailSection.style.visibility = 'visible';
+        // detailSection.style.opacity = '1';
+        // detailSection.style.zIndex = '10005';
+        console.log('#service-detail style.display set to block. Current value:', detailSection.style.display);
+        console.log('Computed display after style.display=block:', window.getComputedStyle(detailSection).display);
+        // console.log('Computed visibility after style.display=block:', window.getComputedStyle(detailSection).visibility);
+        // console.log('Computed opacity after style.display=block:', window.getComputedStyle(detailSection).opacity);
+        // console.log('Computed z-index after style.display=block:', window.getComputedStyle(detailSection).zIndex);
+    } else {
+        console.error('ERROR: #service-detail element NOT FOUND when trying to set display to block.');
+    }
+
+    if (detailSection) detailSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeServiceDetail() {
+    console.log('Attempting to execute closeServiceDetail');
+    const detailSection = document.getElementById('service-detail');
+    const mainSection = document.getElementById('professional-services');
+    console.log('Target elements for closing service: detailSection:', detailSection, 'mainSection:', mainSection);
+
+    if(detailSection) {
+        detailSection.style.display = 'none';
+        console.log('#service-detail style.display set to none. Current value:', detailSection.style.display);
+    }
+    if(mainSection) {
+        mainSection.style.display = 'block';
+        console.log('#professional-services style.display set to block. Current value:', mainSection.style.display);
+        console.log('Computed style for #professional-services display after changes:', window.getComputedStyle(mainSection).display);
+        mainSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function showCaseDetail(caseId) {
+    console.log('Attempting to execute showCaseDetail with ID:', caseId);
+    const detail = caseStudyDetails[caseId];
+    console.log('Case Study data for ' + caseId + ':', detail);
+    if (!detail) {
+        console.error('ERROR: No data for case study ID:' + caseId);
+        return;
+    }
+
+    const contentElement = document.getElementById('case-detail-content');
+    const detailSection = document.getElementById('case-detail');
+    const mainSection = document.getElementById('case-studies');
+    console.log('Target elements for case study: contentElement:', contentElement, 'detailSection:', detailSection, 'mainSection:', mainSection);
+    if (!contentElement || !detailSection || !mainSection) {
+        console.error('ERROR: One or more target elements not found for case study details.');
+        return;
+    }
+
+    const generatedHtml = `
+        <button onclick="closeCaseDetail()" class="close-detail btn btn-secondary" style="margin-bottom:2rem;">← Back to Success Stories</button>
+        <div class="case-detail-hero"> <div class="case-detail-icon" style="background-image: url(${detail.image || ''}); background-size:cover; background-position:center; width:120px; height:120px; border-radius:15px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:3rem;">${!detail.image ? detail.icon : ''}</div> <h2 class="case-detail-title">${detail.title}</h2></div>
+        <div class="case-metrics"> ${detail.results.map(r => `<div class="case-metric"><span class="case-metric-value">${r.value}</span><span style="color:var(--gray);">${r.label}</span></div>`).join('')} </div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top:3rem;">
+            <div class="detail-card"> <h3 style="color:var(--primary); margin-bottom:1rem;">The Problem</h3> <p>${detail.problem}</p> </div>
+            <div class="detail-card"> <h3 style="color:var(--primary); margin-bottom:1rem;">Our Solution</h3> <p>${detail.solution}</p> </div>
+        </div>
+        ${detail.testimonial ? `<div class="case-testimonial"> <p class="testimonial-quote">${detail.testimonial}</p> <p class="testimonial-author">- Client Representative</p> </div>` : ''}
+        <div style="text-align:center; margin-top:3rem;"><button class="btn btn-primary" onclick="scrollToContactAndCloseDetails()">Discuss Your Case</button> <button class="btn btn-secondary" style="margin-left:1rem;" onclick="downloadCaseStudy('${caseId}')">Download Full Study</button></div>`;
+    console.log('Generated HTML for case study modal:', generatedHtml.substring(0, 200) + '...');
+    contentElement.innerHTML = generatedHtml;
+    console.log('#case-detail-content innerHTML updated.');
+
+    mainSection.style.display = 'none';
+    console.log('#case-studies style.display set to none. Current value:', mainSection.style.display);
+    detailSection.style.display = 'block';
+    console.log('#case-detail style.display set to block. Current value:', detailSection.style.display);
+    console.log('Computed style for #case-detail display after changes:', window.getComputedStyle(detailSection).display);
+
+    detailSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeCaseDetail() {
+    console.log('Attempting to execute closeCaseDetail');
+    const detailSection = document.getElementById('case-detail');
+    const mainSection = document.getElementById('case-studies');
+    console.log('Target elements for closing case study: detailSection:', detailSection, 'mainSection:', mainSection);
+
+    if(detailSection) {
+        detailSection.style.display = 'none';
+        console.log('#case-detail style.display set to none. Current value:', detailSection.style.display);
+    }
+    if(mainSection) {
+        mainSection.style.display = 'block';
+        console.log('#case-studies style.display set to block. Current value:', mainSection.style.display);
+        console.log('Computed style for #case-studies display after changes:', window.getComputedStyle(mainSection).display);
+        mainSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+function downloadCaseStudy(caseId) {
+    console.log('Attempting to download case study for ID:', caseId);
+    const cs = caseStudyDetails[caseId];
+    if(cs) auth.showNotificationMessage(`Case study "${cs.title}" will be sent. (Simulated)`, 'success');
+    else console.error('ERROR: No case study data for ID to download:', caseId);
+}
+
+function showFeatureDetail(featureId) {
+    console.log('Attempting to execute showFeatureDetail with ID:', featureId);
+    const detail = featureDetails[featureId];
+    console.log('Feature data for ' + featureId + ':', detail);
+    if (!detail) {
+        console.error('ERROR: No data for feature ID:' + featureId);
+        return;
+    }
+
+    const contentElement = document.getElementById('feature-detail-content');
+    const detailSection = document.getElementById('feature-detail');
+    const mainSection = document.getElementById('features');
+    console.log('Target elements for feature: contentElement:', contentElement, 'detailSection:', detailSection, 'mainSection:', mainSection);
+     if (!contentElement || !detailSection || !mainSection) {
+        console.error('ERROR: One or more target elements not found for feature details.');
+        return;
+    }
+
+    const generatedHtml = `
+        <button onclick="closeFeatureDetail()" class="close-detail btn btn-secondary" style="margin-bottom:2rem;">← Back to Features</button>
+        <div class="feature-detail-header"> <div class="feature-detail-icon">${detail.icon}</div> <h2 class="feature-detail-title">${detail.title}</h2> <p style="font-size:1.3rem; color:var(--gray);">${detail.subtitle}</p></div>
+        <div style="max-width:800px; margin:0 auto 3rem auto; text-align:center;"> <p style="font-size:1.1rem; line-height:1.8;">${detail.description}</p></div>
+        <div class="feature-stats"> ${detail.stats.map(s => `<div class="feature-stat"><span class="feature-stat-number">${s.value}</span><span style="color:var(--gray);">${s.label}</span></div>`).join('')}</div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top:3rem;">
+            <div class="detail-card"> <h3 style="color:var(--primary); margin-bottom:1rem;">Key Points</h3> <ul class="detail-features">${detail.keyPoints.map(p => `<li>${p}</li>`).join('')}</ul></div>
+            <div class="detail-card"> <h3 style="color:var(--primary); margin-bottom:1rem;">Technology Stack</h3> <div class="tech-grid">${detail.techStack.map(t => `<div class="tech-item">${t}</div>`).join('')}</div></div>
+        </div>
+        <div style="text-align:center; margin-top:3rem;"><button class="btn btn-primary" onclick="scrollToContactAndCloseDetails()">Request a Demo</button></div>`;
+    console.log('Generated HTML for feature modal:', generatedHtml.substring(0, 200) + '...');
+    contentElement.innerHTML = generatedHtml;
+    console.log('#feature-detail-content innerHTML updated.');
+
+    mainSection.style.display = 'none';
+    console.log('#features style.display set to none. Current value:', mainSection.style.display);
+    detailSection.style.display = 'block';
+    console.log('#feature-detail style.display set to block. Current value:', detailSection.style.display);
+    console.log('Computed style for #feature-detail display after changes:', window.getComputedStyle(detailSection).display);
+
+    detailSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeFeatureDetail() {
+    console.log('Attempting to execute closeFeatureDetail');
+    const detailSection = document.getElementById('feature-detail');
+    const mainSection = document.getElementById('features');
+    console.log('Target elements for closing feature: detailSection:', detailSection, 'mainSection:', mainSection);
+
+    if(detailSection) {
+        detailSection.style.display = 'none';
+        console.log('#feature-detail style.display set to none. Current value:', detailSection.style.display);
+    }
+    if(mainSection) {
+        mainSection.style.display = 'block';
+        console.log('#features style.display set to block. Current value:', mainSection.style.display);
+        console.log('Computed style for #features display after changes:', window.getComputedStyle(mainSection).display);
+        mainSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function showArticle(articleId) {
+    console.log('Attempting to execute showArticle with ID:', articleId);
+    const detail = articleContent[articleId];
+    console.log('Article data for ' + articleId + ':', detail);
+    if (!detail) {
+        console.error('ERROR: No data for article ID:' + articleId);
+        return;
+    }
+
+    const modalContentElement = document.getElementById('article-modal-content');
+    const modalElement = document.getElementById('article-modal');
+    console.log('Target elements for article: modalContentElement:', modalContentElement, 'modalElement:', modalElement);
+    if (!modalContentElement || !modalElement) {
+        console.error('ERROR: One or more target elements not found for article modal.');
+        return;
+    }
+
+    const generatedHtml = `
+        <div class="article-header"> <h2 class="article-title">${detail.title}</h2> <div class="article-meta"> <span>By ${detail.author}</span> <span>${detail.date}</span> <span>Category: ${detail.category}</span> </div> </div>
+        <div class="article-body"> ${detail.content} </div>`;
+    console.log('Generated HTML for article modal:', generatedHtml.substring(0, 200) + '...');
+    modalContentElement.innerHTML = generatedHtml;
+    console.log('#article-modal-content innerHTML updated.');
+
+    modalElement.style.display = 'flex'; // Changed to flex for centering article-content
+    console.log('#article-modal style.display set to flex. Current value:', modalElement.style.display);
+    console.log('Computed style for #article-modal display after changes:', window.getComputedStyle(modalElement).display);
+}
+
+function closeArticle() {
+    console.log('Attempting to execute closeArticle');
+    const modalElement = document.getElementById('article-modal');
+    console.log('Target element for closing article: modalElement:', modalElement);
+    if (modalElement) {
+        modalElement.style.display = 'none';
+        console.log('#article-modal style.display set to none. Current value:', modalElement.style.display);
+    }
+}
 
 
 function scrollToContactAndCloseDetails() {
@@ -3545,56 +3805,60 @@ window.addEventListener('load', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    auth.initializeUI(); // Initialize AuthSystem UI elements, event listeners, and overlays
+    try { // Added DOMContentLoaded error catching
+        auth.initializeUI(); // Initialize AuthSystem UI elements, event listeners, and overlays
 
-    ['service-detail', 'training-detail', 'feature-detail', 'case-detail'].forEach(id => {
-        const section = document.getElementById(id);
-        if (section) section.style.display = 'none';
-    });
-    const articleModal = document.getElementById('article-modal');
-    if(articleModal) articleModal.style.display = 'none';
+        ['service-detail', 'training-detail', 'feature-detail', 'case-detail'].forEach(id => {
+            const section = document.getElementById(id);
+            if (section) section.style.display = 'none';
+        });
+        const articleModal = document.getElementById('article-modal');
+        if(articleModal) articleModal.style.display = 'none';
 
-    // Other initializations from login.js if they are not covered by auth.initializeUI()
-    if (document.getElementById('particles')) setInterval(createParticle, 300);
+        // Other initializations from login.js if they are not covered by auth.initializeUI()
+        if (document.getElementById('particles')) setInterval(createParticle, 300);
 
-    const statsSec = document.querySelector('.stats');
-    if (statsSec) {
-        new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => { if (entry.isIntersecting) { animateStats(); observer.unobserve(entry.target); } });
-        }, { threshold: 0.5 }).observe(statsSec);
-    }
+        const statsSec = document.querySelector('.stats');
+        if (statsSec) {
+            new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { animateStats(); observer.unobserve(entry.target); } });
+            }, { threshold: 0.5 }).observe(statsSec);
+        }
 
-    const dashSec = document.querySelector('.dashboard-section');
-    if (dashSec) {
-        new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => { if (entry.isIntersecting) { animateDashboard(); if(document.getElementById('threat-container')) setInterval(createThreatPoint, 1500); observer.unobserve(entry.target); } });
-        }, { threshold: 0.5 }).observe(dashSec);
-    }
+        const dashSec = document.querySelector('.dashboard-section');
+        if (dashSec) {
+            new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { animateDashboard(); if(document.getElementById('threat-container')) setInterval(createThreatPoint, 1500); observer.unobserve(entry.target); } });
+            }, { threshold: 0.5 }).observe(dashSec);
+        }
 
-    const termContentTyping = document.querySelector('.terminal-content .typing');
-    if (termContentTyping) {
-        new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.width='0'; entry.target.style.animation='none';
-                    void entry.target.offsetWidth; entry.target.style.animation='';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 }).observe(termContentTyping);
-    }
+        const termContentTyping = document.querySelector('.terminal-content .typing');
+        if (termContentTyping) {
+            new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.width='0'; entry.target.style.animation='none';
+                        void entry.target.offsetWidth; entry.target.style.animation='';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 }).observe(termContentTyping);
+        }
 
-    const animElements = document.querySelectorAll('.service-card, .training-card, .feature-item, .case-card');
-    if (animElements.length > 0) {
-        const elObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; }, index * 100);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        animElements.forEach(el => { el.style.cssText = 'opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease'; elObserver.observe(el); });
+        const animElements = document.querySelectorAll('.service-card, .training-card, .feature-item, .case-card');
+        if (animElements.length > 0) {
+            const elObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; }, index * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animElements.forEach(el => { el.style.cssText = 'opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease'; elObserver.observe(el); });
+        }
+    } catch (e) {
+        console.error('DOMContentLoaded error:', e);
     }
 });
 
@@ -3738,8 +4002,11 @@ if (authModalElement) {
         }
     });
 }
-
+} catch (e) {
+    console.error('Global script execution error:', e);
+}
 // Expose functions to global scope for HTML onclicks
+window.auth = auth; // Expose the auth instance
 window.showLogin = () => auth.showLogin();
 window.showRegister = () => auth.showRegister();
 window.closeAuthModal = () => auth.closeAuthModal();
@@ -3765,12 +4032,13 @@ window.showServiceDetail = showServiceDetail;
 window.closeServiceDetail = closeServiceDetail;
 window.showCaseDetail = showCaseDetail;
 window.closeCaseDetail = closeCaseDetail;
+window.downloadCaseStudy = downloadCaseStudy; // Added
 window.showFeatureDetail = showFeatureDetail;
 window.closeFeatureDetail = closeFeatureDetail;
 window.showArticle = showArticle;
 window.closeArticle = closeArticle;
 window.scrollToContactAndCloseDetails = scrollToContactAndCloseDetails;
-// Function for scanner, if not already in merged_script.js
+
 window.startScan = function() {
     if(!auth.checkAuth('Security Scan')) return;
     const input = document.getElementById('scan-input');
@@ -3810,7 +4078,6 @@ window.startScan = function() {
         }
     }, 200);
 };
-// Function for downloading resources (placeholder)
 window.downloadResource = function(resourceType) {
     if(!auth.checkAuth('Download Resource')) return;
     auth.showNotificationMessage(`Preparing download for ${resourceType}... (Demo only)`, 'success');
@@ -3823,4 +4090,7 @@ window.downloadEvidence = function(evidenceType) { // Alias for CTF
 
 // --- End of Merged JavaScript ---
     </script>
->>>>>>> REPLACE
+</body>
+</html>
+
+[end of index.html]
