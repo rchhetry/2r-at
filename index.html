@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2R-AT | Elite Cybersecurity Solutions</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='sg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231a237e'/%3E%3Cstop offset='100%25' style='stop-color:%230d47a1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 10 L70 20 L70 50 Q70 65 50 75 Q30 65 30 50 L30 20 Z' fill='url(%23sg)' stroke='%2300e676' stroke-width='2'/%3E%3Ccircle cx='50' cy='35' r='3' fill='%2300e676'/%3E%3Cline x1='50' y1='35' x2='40' y2='35' stroke='%2300e676' stroke-width='1.5'/%3E%3Cline x1='50' y1='35' x2='60' y2='35' stroke='%2300e676' stroke-width='1.5'/%3E%3Crect x='45' y='42' width='10' height='8' fill='none' stroke='%2300e676' stroke-width='1.5' rx='1'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-circle"></div>
+    </div>
+
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="cyber-grid"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <svg class="logo-icon" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background Shield -->
+                    <defs>
+                        <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a237e;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0d47a1;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#00e676;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00bfa5;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Shield Shape -->
+                    <path d="M200 30 L250 50 L250 100 Q250 130 200 150 Q150 130 150 100 L150 50 Z"
+                          fill="url(#shieldGradient)" stroke="#00e676" stroke-width="2" opacity="0.9"/>
+
+                    <!-- Circuit Pattern Inside Shield -->
+                    <circle cx="200" cy="70" r="5" fill="#00e676" opacity="0.8"/>
+                    <line x1="200" y1="70" x2="180" y2="70" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+                    <line x1="200" y1="70" x2="220" y2="70" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+                    <line x1="200" y1="70" x2="200" y2="90" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+                    <line x1="200" y1="70" x2="200" y2="50" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+
+                    <!-- Lock Icon in Shield -->
+                    <rect x="190" y="80" width="20" height="15" fill="none" stroke="#00e676" stroke-width="2" rx="2"/>
+                    <path d="M195 80 L195 75 Q200 70 205 75 L205 80" fill="none" stroke="#00e676" stroke-width="2"/>
+
+                    <!-- Company Name -->
+                    <text x="200" y="110" font-family="Arial, sans-serif" font-size="36" font-weight="bold"
+                          text-anchor="middle" fill="url(#textGradient)">2R-AT</text>
+                </svg>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#managed-security-services">Managed Security Services</a></li>
+                <li><a href="#ai-powered-solutions">AI-Powered Solutions</a></li>
+                <li><a href="#security-assessment">Security Assessment</a></li>
+                <li><a href="#cloud-infrastructure">Cloud & Infrastructure</a></li>
+                <li><a href="#identity-access">Identity & Access</a></li>
+                <li><a href="#compliance-governance">Compliance & Governance</a></li>
+                <li><a href="#training">Training & Education</a></li>
+                <li><a href="#plans">Plans</a></li>
+                <li><a href="#success-stories">Success Stories</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <!-- Authentication Buttons -->
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn btn-secondary btn-small" onclick="showAuthModal('login')">Login</button>
+                <button class="btn btn-primary btn-small" onclick="showAuthModal('register')">Get Started</button>
+            </div>
+
+            <!-- User Menu (hidden by default) -->
+            <div class="user-menu" id="user-menu" style="display: none;">
+                <div class="user-avatar" onclick="toggleUserDropdown()" id="user-avatar">
+                    <!-- User initials will be inserted here -->
+                </div>
+                <div class="user-dropdown" id="user-dropdown">
+                    <div class="user-info">
+                        <h4 id="user-display-name">Loading...</h4>
+                        <p id="user-email">Loading...</p>
+                        <p id="user-role">Loading...</p>
+                    </div>
+                    <a href="javascript:void(0)" onclick="showProfile()">👤 Profile</a>
+                    <a href="javascript:void(0)" onclick="showAchievements()">🏆 Achievements</a>
+                    <a href="javascript:void(0)" onclick="showSettings()">⚙️ Settings</a>
+                    <a href="javascript:void(0)" onclick="logout()">🚪 Logout</a>
+                </div>
+            </div>
+
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Authentication Modal -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-content">
+            <span class="auth-close" onclick="closeAuthModal()">&times;</span>
+
+            <div class="auth-header">
+                <h2 class="auth-title" id="auth-title">Welcome to 2R-AT</h2>
+                <p class="auth-subtitle" id="auth-subtitle">Secure your digital future</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')" id="login-tab">Login</button>
+                <button class="auth-tab" onclick="switchAuthTab('register')" id="register-tab">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form active" id="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Secure Login</button>
+                <div class="auth-switch">
+                    Don't have an account? <a href="javascript:void(0)" onclick="switchAuthTab('register')">Register here</a>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form class="auth-form" id="register-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email Address</label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-company">Company (Optional)</label>
+                    <input type="text" id="register-company" name="company">
+                </div>
+                <div class="form-group">
+                    <label for="register-role">Role</label>
+                    <select id="register-role" name="role" required>
+                        <option value="">Select your role</option>
+                        <option value="security-analyst">Security Analyst</option>
+                        <option value="developer">Developer</option>
+                        <option value="ciso">CISO</option>
+                        <option value="pentester">Penetration Tester</option>
+                        <option value="student">Student</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" name="password" required minlength="8">
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Confirm Password</label>
+                    <input type="password" id="register-confirm" name="confirm" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Secure Account</button>
+                <div class="auth-switch">
+                    Already have an account? <a href="javascript:void(0)" onclick="switchAuthTab('login')">Login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div id="notification" class="notification">
+        <div id="notification-message"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1 class="glitch" data-text="2R-AT SECURITY">2R-AT SECURITY</h1>
+            <p class="hero-subtitle">Next-Generation Cybersecurity Solutions for the Digital Age</p>
+            <div class="cta-container">
+                <a href="#contact" class="btn btn-primary">Start Securing Now</a>
+                <a href="#managed-security-services" class="btn btn-secondary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Login for Testing -->
+    <section style="padding: 50px 0; background: rgba(0, 212, 255, 0.05); text-align: center;" id="quick-login">
+        <div class="container">
+            <h3 style="color: var(--primary); margin-bottom: 2rem;">🔧 Quick Login for Testing</h3>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="quickLogin('admin@2r-at.com', 'admin123')">
+                    👑 Login as Admin
+                </button>
+                <button class="btn btn-secondary" onclick="quickLogin('user@example.com', 'user123')">
+                    👤 Login as User
+                </button>
+                <button class="btn btn-secondary" onclick="showAuthModal('register')" style="background: var(--warning); border-color: var(--warning);">
+                    ➕ Create New Account
+                </button>
+            </div>
+            <p style="color: var(--gray); margin-top: 1rem; font-size: 0.9rem;">
+                Use these demo accounts to test the authentication system and CTF challenges
+            </p>
+        </div>
+    </section>
+
+    <!-- Managed Security Services Section -->
+    <section class="professional-services" id="managed-security-services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Managed Security Services</h2>
+                <p class="section-subtitle">24/7 MDR, SOC, vCISO, Incident Response and more to protect your assets.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">24/7 SOC & Managed Detection and Response (MDR)</h3>
+                    <p class="service-description">Our Security Operations Center provides round-the-clock monitoring, threat detection, and rapid incident response to protect your assets.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Comprehensive GRC Services</h3>
+                    <p class="service-description">Complete governance, risk, and compliance solutions ensuring your organization meets all regulatory requirements.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏹</div>
+                    <h3 class="service-title">Advanced Threat Hunting</h3>
+                    <p class="service-description">Proactive threat detection and response services to identify advanced persistent threats and zero-day exploits in your environment.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3 class="service-title">Continuous Security Auditing</h3>
+                    <p class="service-description">Thorough security audits and assessments to ensure your systems meet industry standards and best practices, offered as a managed service.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3 class="service-title">Digital Forensics & Incident Response</h3>
+                    <p class="service-description">Expert digital forensics investigations, malware analysis, threat attribution, and comprehensive incident response services. Court-admissible evidence collection and expert testimony support.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI-Powered Solutions Section -->
+    <section class="professional-services" id="ai-powered-solutions">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">AI-Powered Solutions</h2>
+                <p class="section-subtitle">AI Threat Detection, Automated Response, SOAR</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3 class="service-title">AI-Powered Threat Detection</h3>
+                    <p class="service-description">Machine learning algorithms that evolve with emerging threats, identifying anomalies and predicting attacks with high accuracy.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3 class="service-title">Real-Time Automated Response</h3>
+                    <p class="service-description">Instant threat neutralization with AI-driven automated countermeasures and SOAR capabilities.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3 class="service-title">Predictive Security Analytics</h3>
+                    <p class="service-description">Anticipate attacks before they happen with advanced AI modeling and risk forecasting.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3 class="service-title">AI-Driven SOAR</h3>
+                    <p class="service-description">Streamline security operations with AI-powered Security Orchestration, Automation, and Response, improving efficiency and incident handling.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cloud & Infrastructure Security Section -->
+    <section class="professional-services" id="cloud-infrastructure">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cloud & Infrastructure Security</h2>
+                <p class="section-subtitle">Cloud Security, CSPM, Zero Trust Architecture, Infrastructure Hardening, Cloud Data Security</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">☁️</div>
+                    <h3 class="service-title">Advanced Cloud Security</h3>
+                    <p class="service-description">Advanced cloud infrastructure protection with real-time monitoring, automated threat response, and compliance management for AWS, Azure, and GCP environments. Comprehensive protection for your AWS, Azure, and GCP environments, including SASE and Zero Trust principles.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Zero Trust Network Access (ZTNA)</h3>
+                    <p class="service-description">Implement a 'never trust, always verify' model for users, devices, and applications accessing your cloud and on-premise infrastructure, enhancing security and reducing attack surfaces.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Cloud Security Posture Management (CSPM)</h3>
+                    <p class="service-description">Continuously monitor and manage your cloud security posture, identify misconfigurations, and ensure compliance with industry standards and best practices across your multi-cloud environments.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3 class="service-title">Infrastructure Hardening & Secure Configuration</h3>
+                    <p class="service-description">Strengthen your servers, networks, and cloud resources against attacks by implementing secure configurations, vulnerability management, and industry best practices.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3 class="service-title">Cloud Data Security & Encryption</h3>
+                    <p class="service-description">Protect sensitive data in your cloud storage and databases with robust encryption, key management, access controls, and data loss prevention (DLP) strategies.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Identity & Access Management Section -->
+    <section class="professional-services" id="identity-access">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Identity & Access Management</h2>
+                <p class="section-subtitle">IAM, ITDR, PAM, MFA Solutions - Secure and manage digital identities effectively.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">👤</div>
+                    <h3 class="service-title">Modern IAM Solutions</h3>
+                    <p class="service-description">Implement robust IAM strategies to ensure the right individuals access the right resources at the right times, for the right reasons. Includes SSO, identity governance, and lifecycle management.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3 class="service-title">Strong Multi-Factor Authentication (MFA)</h3>
+                    <p class="service-description">Enhance security by requiring multiple verification methods (e.g., biometrics, hardware tokens, push notifications), protecting against unauthorized access even if passwords are compromised.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🗝️</div>
+                    <h3 class="service-title">Privileged Access Management (PAM)</h3>
+                    <p class="service-description">Secure, manage, and monitor privileged accounts and access to critical systems, reducing the risk of insider threats, credential theft, and privilege misuse.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚨</div>
+                    <h3 class="service-title">Identity Threat Detection & Response (ITDR)</h3>
+                    <p class="service-description">Proactively detect and respond to threats targeting identities, such as credential theft, account takeover, unusual access patterns, and insider risks using advanced analytics and behavioral monitoring.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compliance & Governance Section -->
+    <section class="professional-services" id="compliance-governance">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Compliance & Governance</h2>
+                <p class="section-subtitle">GRC, Compliance Automation, Risk Management, Auditing, Certifications, and Data Privacy.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Governance, Risk & Compliance (GRC)</h3>
+                    <p class="service-description">Establish robust GRC frameworks, manage risks effectively, automate compliance processes, and ensure ongoing adherence to industry regulations (e.g., ISO 27001, NIST, SOC 2) and standards.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3 class="service-title">Independent Security Auditing</h3>
+                    <p class="service-description">Thorough security audits and assessments by certified professionals to validate your controls, identify gaps, and ensure your systems meet industry standards and best practices.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏆</div>
+                    <h3 class="service-title">Industry Certifications & Standards</h3>
+                    <p class="service-description">Achieve and maintain key industry certifications (e.g., ISO 27001, SOC 2, PCI-DSS, HIPAA) with our expert guidance, readiness assessments, and compliant security practices.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Data Privacy & Protection (GDPR, CCPA)</h3>
+                    <p class="service-description">Navigate complex data privacy regulations like GDPR, CCPA, and others with solutions for data mapping, consent management, impact assessments, and breach notification protocols.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3 class="service-title">Compliance Automation</h3>
+                    <p class="service-description">Streamline compliance efforts using automated tools for evidence collection, control monitoring, risk assessment, and reporting, reducing manual overhead and ensuring continuous compliance.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3 class="service-title">Cybersecurity Risk Management</h3>
+                    <p class="service-description">Identify, assess, prioritize, and treat cybersecurity risks across your organization using established frameworks, enabling informed decision-making and resource allocation.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Section -->
+    <section class="training-section" id="training">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cybersecurity Training & Certification Programs</h2>
+                <p class="section-subtitle">Empower your team with cutting-edge security knowledge and industry-recognized certifications</p>
+            </div>
+            <div class="training-grid">
+                <div class="training-card">
+                    <div class="training-icon">🧠</div>
+                    <h3 class="training-title">Security Awareness Training</h3>
+                    <p class="training-description">Comprehensive security awareness program designed to transform your employees into the first line of defense against cyber threats. Includes phishing simulations and incident response training.</p>
+                    <ul class="training-features">
+                        <li>Interactive phishing simulations with real-world scenarios</li>
+                        <li>Role-based training modules (C-suite, IT, HR, Finance)</li>
+                        <li>Quarterly threat landscape updates</li>
+                        <li>Progress tracking and compliance reporting</li>
+                        <li>Mobile security and BYOD awareness</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">4-8 weeks</span>
+                        <span class="training-level">All Levels</span>
+                    </div>
+                    <a href="#contact" class="training-link">Enroll Now →</a>
+                </div>
+
+                <div class="training-card">
+                    <div class="training-icon">🛡️</div>
+                    <h3 class="training-title">Risk Management Certification</h3>
+                    <p class="training-description">Master the art of identifying, assessing, and mitigating cybersecurity risks across your organization with industry-leading frameworks like NIST and ISO 27001. Covers risk assessment, business impact analysis, incident response planning, and regulatory compliance.</p>
+                    <ul class="training-features">
+                        <li>NIST and ISO 27001 frameworks</li>
+                        <li>Risk assessment methodologies</li>
+                        <li>Business impact analysis</li>
+                        <li>Incident response planning</li>
+                        <li>Regulatory compliance strategies</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">12 weeks</span>
+                        <span class="training-level">Intermediate to Advanced</span>
+                    </div>
+                    <a href="#contact" class="training-link">Register →</a>
+                </div>
+
+                <div class="training-card">
+                    <div class="training-icon">🎭</div>
+                    <h3 class="training-title">Ethical Hacking Bootcamp</h3>
+                    <p class="training-description">Intensive hands-on training program covering advanced penetration testing techniques and vulnerability assessment methodologies. Includes real-world lab environments.</p>
+                    <ul class="training-features">
+                        <li>Network penetration testing</li>
+                        <li>Web application security</li>
+                        <li>Mobile app penetration testing</li>
+                        <li>Social engineering techniques</li>
+                        <li>Real-world lab environments</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">16 weeks</span>
+                        <span class="training-level">Advanced</span>
+                    </div>
+                    <a href="#contact" class="training-link">Apply Now →</a>
+                </div>
+
+                <div class="training-card">
+                    <div class="training-icon">🔬</div>
+                    <h3 class="training-title">Digital Forensics Bootcamp</h3>
+                    <p class="training-description">Comprehensive training in digital evidence collection, analysis, and presentation for cybersecurity incident response and legal proceedings.</p>
+                    <ul class="training-features">
+                        <li>Digital evidence acquisition</li>
+                        <li>Memory and disk analysis</li>
+                        <li>Network forensics techniques</li>
+                        <li>Mobile device investigations</li>
+                        <li>Court testimony preparation</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">20 weeks</span>
+                        <span class="training-level">Advanced</span>
+                    </div>
+                    <a href="#contact" class="training-link">Reserve Spot →</a>
+                </div>
+            </div>
+
+            <!-- Training Stats -->
+            <div class="stats" style="padding: 60px 0; margin-top: 60px;">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">5,000+</span>
+                        <span class="stat-label">Professionals Trained</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Certification Pass Rate</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Corporate Programs Delivered</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.9/5</span>
+                        <span class="stat-label">Student Satisfaction Score</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Lab Access & Support</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">Job Placement Rate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threat Intelligence & Research Section -->
+    <section class="threat-intel-section" style="padding: 100px 0; background: var(--dark);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Threat Intelligence & Research</h2>
+                <p class="section-subtitle">Real-time threat intelligence powered by global security operations</p>
+            </div>
+
+            <!-- Live Threat Map -->
+            <div style="background: rgba(10, 14, 39, 0.8); border-radius: 20px; padding: 3rem; margin-bottom: 4rem;">
+                <h3 style="color: var(--primary); text-align: center; margin-bottom: 2rem;">🌍 Global Threat Intelligence Network</h3>
+                <div style="position: relative; height: 400px; background: rgba(0, 0, 0, 0.5); border-radius: 15px; overflow: hidden;">
+                    <div style="position: absolute; top: 20px; left: 20px; z-index: 10;">
+                        <h4 style="color: var(--light); margin-bottom: 1rem;">Live Threat Activity</h4>
+                        <div style="color: var(--gray); font-size: 0.9rem;">
+                            <div style="margin-bottom: 0.5rem;">🔴 Active Campaigns: <span style="color: var(--danger); font-weight: bold;">47</span></div>
+                            <div style="margin-bottom: 0.5rem;">🟡 Blocked Today: <span style="color: var(--warning); font-weight: bold;">15,847</span></div>
+                            <div>🟢 Protected Assets: <span style="color: var(--success); font-weight: bold;">2.3M+</span></div>
+                        </div>
+                    </div>
+
+                    <div style="position: absolute; top: 20px; right: 20px; z-index: 10;">
+                        <div style="background: rgba(239, 68, 68, 0.2); border: 1px solid var(--danger); border-radius: 10px; padding: 1rem; margin-bottom: 1rem;">
+                            <h5 style="color: var(--danger); margin-bottom: 0.5rem;">🚨 CRITICAL ALERT</h5>
+                            <p style="color: var(--light); font-size: 0.8rem;">New APT campaign targeting financial institutions detected. IOCs published to threat feed.</p>
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.2); border: 1px solid var(--warning); border-radius: 10px; padding: 1rem;">
+                            <h5 style="color: var(--warning); margin-bottom: 0.5rem;">⚠️ EMERGING THREAT</h5>
+                            <p style="color: var(--light); font-size: 0.8rem;">Zero-day exploit in popular VPN software. Patches available.</p>
+                        </div>
+                    </div>
+
+                    <!-- Simulated world map with threat indicators -->
+                    <div style="position: absolute; width: 100%; height: 100%; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 500\"><rect width=\"1000\" height=\"500\" fill=\"%23050714\"/><circle cx=\"200\" cy=\"150\" r=\"3\" fill=\"%23EF4444\" opacity=\"0.8\"/><circle cx=\"400\" cy=\"120\" r=\"2\" fill=\"%23F59E0B\" opacity=\"0.8\"/><circle cx=\"600\" cy=\"180\" r=\"4\" fill=\"%23EF4444\" opacity=\"0.8\"/><circle cx=\"800\" cy=\"160\" r=\"2\" fill=\"%23F59E0B\" opacity=\"0.8\"/><circle cx=\"300\" cy=\"300\" r=\"3\" fill=\"%23EF4444\" opacity=\"0.8\"/><circle cx=\"700\" cy=\"320\" r=\"2\" fill=\"%2310B981\" opacity=\"0.8\"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                </div>
+            </div>
+
+            <!-- Threat Intelligence Features -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+                <div style="background: rgba(10, 14, 39, 0.6); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 15px; padding: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">🔍 Advanced Threat Detection</h4>
+                    <ul style="list-style: none; color: var(--gray);">
+                        <li style="margin-bottom: 0.5rem;">✓ AI-powered behavioral analysis</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Zero-day vulnerability detection</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Insider threat monitoring</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Supply chain risk assessment</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(10, 14, 39, 0.6); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 15px; padding: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">📊 Threat Intelligence Feeds</h4>
+                    <ul style="list-style: none; color: var(--gray);">
+                        <li style="margin-bottom: 0.5rem;">✓ Real-time IOC updates</li>
+                        <li style="margin-bottom: 0.5rem;">✓ STIX/TAXII integration</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Custom threat hunting rules</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Attribution and campaign tracking</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(10, 14, 39, 0.6); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 15px; padding: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">🎯 Proactive Defense</h4>
+                    <ul style="list-style: none; color: var(--gray);">
+                        <li style="margin-bottom: 0.5rem;">✓ Predictive threat modeling</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Automated response playbooks</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Threat landscape forecasting</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Risk quantification metrics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Latest Research & Reports -->
+            <div style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1)); border-radius: 20px; padding: 3rem;">
+                <h3 style="color: var(--primary); text-align: center; margin-bottom: 3rem;">📋 Latest Security Research & Reports</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div style="background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--light); margin-bottom: 1rem;">2025 Cyber Threat Landscape Report</h4>
+                        <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">Comprehensive analysis of emerging threats including AI-powered attacks, supply chain compromises, and ransomware evolution.</p>
+                        <button class="btn btn-secondary btn-small" onclick="downloadReport('threat-landscape-2025')">Download Report</button>
+                    </div>
+
+                    <div style="background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--light); margin-bottom: 1rem;">APT Groups Activity Analysis</h4>
+                        <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">Deep dive into nation-state threat actor TTPs, infrastructure, and targeting patterns observed in Q4 2024.</p>
+                        <button class="btn btn-secondary btn-small" onclick="downloadReport('apt-analysis-q4')">Download Report</button>
+                    </div>
+
+                    <div style="background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--light); margin-bottom: 1rem;">Cloud Security Benchmark 2025</h4>
+                        <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">Industry benchmarks for cloud security posture, configuration standards, and compliance frameworks.</p>
+                        <button class="btn btn-secondary btn-small" onclick="downloadReport('cloud-benchmark-2025')">Download Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="training-section" id="plans">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Security Plans</h2>
+                <p class="section-subtitle">Choose the protection level that fits your needs</p>
+            </div>
+            <div class="training-grid">
+                <div class="training-card plan-card">
+                    <h3 class="training-title plan-title">Essential</h3>
+                    <div class="plan-price" style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1.5rem; text-align: center;">$2,999 per month</div>
+                    <ul class="training-features plan-features">
+                        <li>✓ Basic Vulnerability Scanning</li>
+                        <li>✓ Monthly Security Reports</li>
+                        <li>✓ Email Support</li>
+                        <li>✓ Up to 10 Assets</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display: block; text-align: center; margin-top: 2rem;">Get Started</a>
+                </div>
+                <div class="training-card plan-card">
+                    <h3 class="training-title plan-title">Professional</h3>
+                    <div class="plan-price" style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1.5rem; text-align: center;">$7,999 per month</div>
+                    <ul class="training-features plan-features">
+                        <li>✓ Advanced Threat Detection</li>
+                        <li>✓ 24/7 Monitoring</li>
+                        <li>✓ Incident Response Team</li>
+                        <li>✓ Up to 100 Assets</li>
+                        <li>✓ Compliance Management</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display: block; text-align: center; margin-top: 2rem;">Get Started</a>
+                </div>
+                <div class="training-card plan-card">
+                    <h3 class="training-title plan-title">Enterprise</h3>
+                    <div class="plan-price" style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1.5rem; text-align: center;">Custom tailored to your needs</div>
+                    <ul class="training-features plan-features">
+                        <li>✓ Full Security Suite</li>
+                        <li>✓ Dedicated Security Team</li>
+                        <li>✓ Custom Integrations</li>
+                        <li>✓ Unlimited Assets</li>
+                        <li>✓ SLA Guarantee</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display: block; text-align: center; margin-top: 2rem;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="professional-services" id="success-stories">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Success Stories</h2>
+                <p class="section-subtitle">Real results from real clients</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card story-card">
+                    <div class="service-icon story-icon">🏦</div>
+                    <h3 class="service-title story-title">Global Financial Institution</h3>
+                    <p class="service-description story-description">Implemented zero-trust architecture across 50+ branches, preventing $10M in potential fraud.</p>
+                    <div class="story-stats" style="margin-top: 1rem; margin-bottom: 1rem; text-align: center;">
+                        <span style="display: block; font-weight: bold; color: var(--primary);">99.9% Threat Prevention</span>
+                        <span style="display: block; font-weight: bold; color: var(--primary); margin-top: 0.5rem;">50ms Response Time</span>
+                    </div>
+                    <a href="#contact" class="service-link story-link">Read Full Story →</a>
+                </div>
+                <div class="service-card story-card">
+                    <div class="service-icon story-icon">🏥</div>
+                    <h3 class="service-title story-title">Healthcare Network</h3>
+                    <p class="service-description story-description">Secured patient data for 2M+ records while maintaining HIPAA compliance and improving access speed.</p>
+                    <div class="story-stats" style="margin-top: 1rem; margin-bottom: 1rem; text-align: center;">
+                        <span style="display: block; font-weight: bold; color: var(--primary);">100% HIPAA Compliant</span>
+                        <span style="display: block; font-weight: bold; color: var(--primary); margin-top: 0.5rem;">2M+ Records Secured</span>
+                    </div>
+                    <a href="#contact" class="service-link story-link">Read Full Story →</a>
+                </div>
+                <div class="service-card story-card">
+                    <div class="service-icon story-icon">🚀</div>
+                    <h3 class="service-title story-title">Hypergrowth Tech Startup</h3>
+                    <p class="service-description story-description">Built secure-by-design infrastructure enabling 10x growth while maintaining enterprise-grade security.</p>
+                    <div class="story-stats" style="margin-top: 1rem; margin-bottom: 1rem; text-align: center;">
+                        <span style="display: block; font-weight: bold; color: var(--primary);">10x Growth Enabled</span>
+                        <span style="display: block; font-weight: bold; color: var(--primary); margin-top: 0.5rem;">0 Security Incidents</span>
+                    </div>
+                    <a href="#contact" class="service-link story-link">Read Full Story →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose 2R-AT Section -->
+    <section class="professional-services" id="why-choose-2rat">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose 2R-AT</h2>
+                <p class="section-subtitle">Advanced capabilities that set us apart</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3 class="service-title">AI-Powered Detection</h3>
+                    <p class="service-description">Machine learning algorithms that evolve with emerging threats.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3 class="service-title">Real-Time Response</h3>
+                    <p class="service-description">Instant threat neutralization with automated countermeasures.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔐</div>
+                    <h3 class="service-title">Zero Trust Architecture</h3>
+                    <p class="service-description">Never trust, always verify - comprehensive security at every layer.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3 class="service-title">Global Threat Intelligence</h3>
+                    <p class="service-description">Access to worldwide threat databases and security networks.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3 class="service-title">Predictive Analytics</h3>
+                    <p class="service-description">Anticipate attacks before they happen with advanced modeling.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏆</div>
+                    <h3 class="service-title">Industry Certified</h3>
+                    <p class="service-description">ISO 27001, SOC 2, and NIST compliant security practices.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Security Check Section -->
+    <section class="contact" id="quick-security-check" style="background: var(--dark); text-align: center;">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Quick Security Check</h2>
+        </div>
+        <p class="hero-subtitle" style="margin-bottom: 2rem;">$ 2R-AT --scan --target your-infrastructure<br>[+] Initializing security scan...<br>[+] Analyzing 1,247 endpoints...<br>[+] Vulnerabilities detected: 0<br>[+] Security status: PROTECTED ✓</p>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+          <input type="text" placeholder="your-infrastructure (e.g., example.com)" class="flag-input" style="max-width: 400px;">
+          <button class="btn btn-primary">Start Scan</button>
+        </div>
+        <div class="metrics-grid" style="max-width: 800px; margin: 0 auto;">
+           <div class="metric-card"><div class="metric-value">99.9%</div><div class="metric-label">Threat Detection Rate</div></div>
+           <div class="metric-card"><div class="metric-value">24/7</div><div class="metric-label">Security Monitoring</div></div>
+           <div class="metric-card"><div class="metric-value">500+</div><div class="metric-label">Protected Systems</div></div>
+           <div class="metric-card"><div class="metric-value">&lt;1min</div><div class="metric-label">Response Time</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Security Dashboard Demo -->
+    <section class="dashboard-section" id="dashboard">
+        <div class="container">
+            <h2 class="section-title">Security Dashboard</h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">
+                Real-time threat monitoring and analytics
+            </p>
+
+            <div class="dashboard-container" id="dashboard-container">
+                <!-- Protected content overlay will be inserted here if not authenticated -->
+
+                <div class="dashboard-header">
+                    <h3>Global Threat Monitor</h3>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span>System Active</span>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="threats-blocked">1,247</div>
+                        <div class="metric-label">Threats Blocked Today</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="active-monitors">243</div>
+                        <div class="metric-label">Active Monitors</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="data-analyzed">15.7 TB</div>
+                        <div class="metric-label">Data Analyzed</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="uptime">99.99%</div>
+                        <div class="metric-label">System Uptime</div>
+                    </div>
+                </div>
+
+                <!-- User Stats (only visible when authenticated) -->
+                <div id="user-dashboard-stats" style="display: none;">
+                    <h4 style="color: var(--primary); margin: 2rem 0 1rem 0;">Your Security Stats</h4>
+                    <div class="user-stats">
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-threats-blocked">0</span>
+                            <span class="stat-label">Threats You've Blocked</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-ctf-points">0</span>
+                            <span class="stat-label">CTF Points Earned</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-challenges-completed">0</span>
+                            <span class="stat-label">Challenges Completed</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-rank">Unranked</span>
+                            <span class="stat-label">Global Rank</span>
+                        </div>
+                    </div>
+
+                    <div class="achievement-badges" id="user-achievements">
+                        <!-- Achievements will be dynamically inserted -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTF Challenges Section -->
+    <section class="ctf-section" id="ctf-challenges">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Capture The Flag Challenges</h2>
+                <p class="section-subtitle">Test your cybersecurity skills with real-world scenarios</p>
+            </div>
+
+            <!-- CTF Leaderboard -->
+            <div class="ctf-leaderboard">
+                <h3 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">🏆 Current Leaderboard</h3>
+                <div class="leaderboard-grid">
+                    <div class="leaderboard-item gold">
+                        <span class="rank">🥇</span>
+                        <span class="name">CyberNinja_2025</span>
+                        <span class="score">3,850 pts</span>
+                    </div>
+                    <div class="leaderboard-item silver">
+                        <span class="rank">🥈</span>
+                        <span class="name">SecMaster_Pro</span>
+                        <span class="score">3,720 pts</span>
+                    </div>
+                    <div class="leaderboard-item bronze">
+                        <span class="rank">🥉</span>
+                        <span class="name">HackTheBox_Elite</span>
+                        <span class="score">3,650 pts</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="rank">4</span>
+                        <span class="name">PentestGuru</span>
+                        <span class="score">3,420 pts</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="rank">5</span>
+                        <span class="name">ForensicsExpert</span>
+                        <span class="score">3,280 pts</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prize Pool -->
+            <div class="prize-pool">
+                <h3 style="text-align: center; color: var(--secondary); margin-bottom: 2rem;">💰 Monthly Prize Pool: $25,000</h3>
+                <div class="prizes-grid">
+                    <div class="prize-item">
+                        <div class="prize-icon">🏆</div>
+                        <h4>1st Place</h4>
+                        <p class="prize-amount">$10,000</p>
+                        <p class="prize-desc">+ Job Interview Guarantee + CISSP Certification Voucher</p>
+                    </div>
+                    <div class="prize-item">
+                        <div class="prize-icon">🥈</div>
+                        <h4>2nd Place</h4>
+                        <p class="prize-amount">$5,000</p>
+                        <p class="prize-desc">+ Advanced Training Course + CEH Certification Voucher</p>
+                    </div>
+                    <div class="prize-item">
+                        <div class="prize-icon">🥉</div>
+                        <h4>3rd Place</h4>
+                        <p class="prize-amount">$3,000</p>
+                        <p class="prize-desc">+ Penetration Testing Toolkit + GCIH Certification Voucher</p>
+                    </div>
+                    <div class="prize-item">
+                        <div class="prize-icon">🎯</div>
+                        <h4>Top 10</h4>
+                        <p class="prize-amount">$500 each</p>
+                        <p class="prize-desc">+ Training Course Access + Swag Package</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTF Challenges -->
+            <div class="ctf-challenges-grid" id="ctf-challenges-grid">
+                <!-- Protected content overlay will be inserted here if not authenticated -->
+
+                <!-- Challenge 1: Web Application Security -->
+                <div class="ctf-card">
+                    <div class="ctf-header">
+                        <div class="ctf-difficulty critical">CRITICAL</div>
+                        <div class="ctf-points">1000 pts</div>
+                    </div>
+                    <div class="ctf-icon">🌐</div>
+                    <h3 class="ctf-title">Corporate Data Breach Investigation</h3>
+                    <p class="ctf-description">A Fortune 500 company's web application has been compromised. Analyze the application to find how attackers gained access to sensitive customer data.</p>
+
+                    <div class="ctf-scenario">
+                        <h4>🎯 Scenario:</h4>
+                        <p>TechCorp Inc. discovered unauthorized access to their customer database. The attack happened through their web portal. Your mission: identify the vulnerability and extract the hidden flag.</p>
+                    </div>
+
+                    <div class="ctf-details">
+                        <h4>🔍 Investigation Points:</h4>
+                        <ul>
+                            <li>Analyze the login mechanism for SQL injection vulnerabilities</li>
+                            <li>Check for Cross-Site Scripting (XSS) in user input fields</li>
+                            <li>Investigate session management and authentication bypass</li>
+                            <li>Look for insecure direct object references</li>
+                            <li>Examine file upload functionality for malicious content</li>
+                        </ul>
+                    </div>
+
+                    <div class="ctf-hints">
+                        <h4>💡 Hints Available:</h4>
+                        <button class="hint-btn" onclick="showHint('web-app', 1)">Hint 1 (-50 pts)</button>
+                        <button class="hint-btn" onclick="showHint('web-app', 2)">Hint 2 (-100 pts)</button>
+                        <button class="hint-btn" onclick="showHint('web-app', 3)">Hint 3 (-150 pts)</button>
+                    </div>
+
+                    <div class="ctf-submission">
+                        <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-web-app" class="flag-input">
+                        <button class="submit-flag-btn" onclick="submitFlag('web-app')">Submit Flag</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 2: Network Forensics -->
+                <div class="ctf-card">
+                    <div class="ctf-header">
+                        <div class="ctf-difficulty high">HIGH</div>
+                        <div class="ctf-points">800 pts</div>
+                    </div>
+                    <div class="ctf-icon">📡</div>
+                    <h3 class="ctf-title">APT Network Infiltration Analysis</h3>
+                    <p class="ctf-description">An Advanced Persistent Threat (APT) group has infiltrated a government network. Analyze the captured network traffic to uncover their methods and objectives.</p>
+
+                    <div class="ctf-scenario">
+                        <h4>🎯 Scenario:</h4>
+                        <p>Security analysts detected suspicious network activity in a classified government network. You have a packet capture file containing 48 hours of network traffic.</p>
+                    </div>
+
+                    <div class="ctf-details">
+                        <h4>🔍 Analysis Required:</h4>
+                        <ul>
+                            <li>Identify suspicious DNS queries and domain generation algorithms</li>
+                            <li>Analyze encrypted C2 communications patterns</li>
+                            <li>Discover data exfiltration methods and timing</li>
+                            <li>Find evidence of lateral movement within the network</li>
+                        </ul>
+                    </div>
+
+                    <div class="ctf-hints">
+                        <h4>💡 Hints Available:</h4>
+                        <button class="hint-btn" onclick="showHint('network-forensics', 1)">Hint 1 (-40 pts)</button>
+                        <button class="hint-btn" onclick="showHint('network-forensics', 2)">Hint 2 (-80 pts)</button>
+                        <button class="hint-btn" onclick="showHint('network-forensics', 3)">Hint 3 (-120 pts)</button>
+                    </div>
+
+                    <div class="ctf-submission">
+                        <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-network" class="flag-input">
+                        <button class="submit-flag-btn" onclick="submitFlag('network-forensics')">Submit Flag</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 3: Cryptography -->
+                <div class="ctf-card">
+                    <div class="ctf-header">
+                        <div class="ctf-difficulty medium">MEDIUM</div>
+                        <div class="ctf-points">600 pts</div>
+                    </div>
+                    <div class="ctf-icon">🔐</div>
+                    <h3 class="ctf-title">State-Sponsored Crypto Espionage</h3>
+                    <p class="ctf-description">Intelligence agencies intercepted encrypted communications between state-sponsored hackers. Break the encryption to reveal their next target and operation timeline.</p>
+
+                    <div class="ctf-encrypted-message">
+                        <h4>📜 Intercepted Message:</h4>
+                        <div class="encrypted-text">
+                            V2UgYXJlIGdvaW5nIHRvIGF0dGFjayB0aGUgcG93ZXIgZ3JpZCBvZiBOZXcgWW9yayBDaXR5IG9uIDIwMjUtMDItMTUgYXQgMDM6MDA6MDBVVEM=<br>
+                            Gur pbqr jbeq vf: FVYIRE_FGBEZ_2025
+                        </div>
+                    </div>
+
+                    <div class="ctf-hints">
+                        <h4>💡 Hints Available:</h4>
+                        <button class="hint-btn" onclick="showHint('cryptography', 1)">Hint 1 (-30 pts)</button>
+                        <button class="hint-btn" onclick="showHint('cryptography', 2)">Hint 2 (-60 pts)</button>
+                        <button class="hint-btn" onclick="showHint('cryptography', 3)">Hint 3 (-90 pts)</button>
+                    </div>
+
+                    <div class="ctf-submission">
+                        <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-crypto" class="flag-input">
+                        <button class="submit-flag-btn" onclick="submitFlag('cryptography')">Submit Flag</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 4: Digital Forensics -->
+                <div class="ctf-card">
+                    <div class="ctf-header">
+                        <div class="ctf-difficulty critical">CRITICAL</div>
+                        <div class="ctf-points">1200 pts</div>
+                    </div>
+                    <div class="ctf-icon">🔬</div>
+                    <h3 class="ctf-title">Insider Threat Investigation</h3>
+                    <p class="ctf-description">A trusted employee with high-level access has been stealing intellectual property. Conduct a digital forensics investigation to build a case for prosecution.</p>
+
+                    <div class="ctf-evidence">
+                        <h4>🗂️ Digital Evidence:</h4>
+                        <div class="evidence-files">
+                            <div class="evidence-item">
+                                <span class="file-icon">💻</span>
+                                <span class="file-name">laptop_image.dd</span>
+                                <span class="file-size">120 GB</span>
+                                <button class="download-btn" onclick="downloadEvidence('laptop')">Download</button>
+                            </div>
+                            <div class="evidence-item">
+                                <span class="file-icon">📱</span>
+                                <span class="file-name">mobile_extract.tar</span>
+                                <span class="file-size">45 GB</span>
+                                <button class="download-btn" onclick="downloadEvidence('mobile')">Download</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ctf-hints">
+                        <h4>💡 Hints Available:</h4>
+                        <button class="hint-btn" onclick="showHint('digital-forensics', 1)">Hint 1 (-60 pts)</button>
+                        <button class="hint-btn" onclick="showHint('digital-forensics', 2)">Hint 2 (-120 pts)</button>
+                        <button class="hint-btn" onclick="showHint('digital-forensics', 3)">Hint 3 (-180 pts)</button>
+                    </div>
+
+                    <div class="ctf-submission">
+                        <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-forensics" class="flag-input">
+                        <button class="submit-flag-btn" onclick="submitFlag('digital-forensics')">Submit Flag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTF Submission Results -->
+            <div class="ctf-results-section">
+                <h3 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">🎉 Recent Successful Submissions</h3>
+                <div class="recent-submissions" id="recent-submissions">
+                    <div class="submission-item">
+                        <span class="submitter">🥷 CyberNinja_2025</span>
+                        <span class="challenge">Corporate Data Breach</span>
+                        <span class="points">+1000 pts</span>
+                        <span class="time">2 hours ago</span>
+                    </div>
+                    <div class="submission-item">
+                        <span class="submitter">🔒 SecMaster_Pro</span>
+                        <span class="challenge">State-Sponsored Crypto</span>
+                        <span class="points">+570 pts</span>
+                        <span class="time">4 hours ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Your Results Section -->
+            <div class="your-results-section" id="your-results" style="display: none;">
+                <h3 style="color: var(--success); text-align: center; margin-bottom: 2rem;">🎊 Congratulations!</h3>
+                <div class="result-card" id="result-content">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Elite Team Section -->
+    <section class="training-section" id="our-team">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Elite Team</h2>
+                <p class="section-subtitle">World-class security experts at your service</p>
+            </div>
+            <div class="training-grid">
+                <div class="training-card team-member-card">
+                    <div class="training-icon">👤</div>
+                    <h3 class="training-title">Alex Chen</h3>
+                    <p style="text-align:center; color: var(--primary); margin-top:-0.5rem; margin-bottom:0.5rem;">Chief Security Officer</p>
+                    <p class="training-description" style="text-align:center;">CISSP, OSCP, AWS Security</p>
+                </div>
+                <div class="training-card team-member-card">
+                    <div class="training-icon">👤</div>
+                    <h3 class="training-title">Sarah Johnson</h3>
+                    <p style="text-align:center; color: var(--primary); margin-top:-0.5rem; margin-bottom:0.5rem;">Lead Penetration Tester</p>
+                    <p class="training-description" style="text-align:center;">GPEN, GWAPT, GMOB</p>
+                </div>
+                <div class="training-card team-member-card">
+                    <div class="training-icon">👤</div>
+                    <h3 class="training-title">Marcus Rivera</h3>
+                    <p style="text-align:center; color: var(--primary); margin-top:-0.5rem; margin-bottom:0.5rem;">Cloud Security Architect</p>
+                    <p class="training-description" style="text-align:center;">Azure Security, GCP Security, CKS</p>
+                </div>
+                <div class="training-card team-member-card">
+                    <div class="training-icon">👤</div>
+                    <h3 class="training-title">Dr. Emma Wilson</h3>
+                    <p style="text-align:center; color: var(--primary); margin-top:-0.5rem; margin-bottom:0.5rem;">Threat Intelligence Lead</p>
+                    <p class="training-description" style="text-align:center;">GCTI, GREM, PhD Cybersecurity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Resources Section -->
+    <section class="professional-services" id="security-resources">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Security Resources</h2>
+                <p class="section-subtitle">Stay ahead of threats with our latest insights</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card resource-card">
+                    <div class="service-icon">🔐</div>
+                    <p style="color: var(--primary); font-weight: bold;">Cloud Security</p>
+                    <h3 class="service-title" style="margin-top:0.5rem;">Zero Trust Architecture in 2025</h3>
+                    <p class="service-description">Implementing zero trust principles for robust cloud environments and beyond.</p>
+                    <p style="color:var(--gray); font-size:0.9rem; margin-top:1rem;">5 min read Jan 15, 2025</p>
+                    <a href="#contact" class="service-link">Read More →</a>
+                </div>
+                <div class="service-card resource-card">
+                    <div class="service-icon">🚨</div>
+                    <p style="color: var(--primary); font-weight: bold;">Threat Intelligence</p>
+                    <h3 class="service-title" style="margin-top:0.5rem;">Emerging Ransomware Tactics</h3>
+                    <p class="service-description">Analysis of the latest ransomware trends and effective mitigation strategies.</p>
+                    <p style="color:var(--gray); font-size:0.9rem; margin-top:1rem;">8 min read Jan 10, 2025</p>
+                    <a href="#contact" class="service-link">Read More →</a>
+                </div>
+                <div class="service-card resource-card">
+                    <div class="service-icon">📊</div>
+                    <p style="color: var(--primary); font-weight: bold;">Compliance</p>
+                    <h3 class="service-title" style="margin-top:0.5rem;">GDPR & AI: What You Need to Know</h3>
+                    <p class="service-description">Navigating data protection regulations in the age of artificial intelligence.</p>
+                    <p style="color:var(--gray); font-size:0.9rem; margin-top:1rem;">6 min read Jan 5, 2025</p>
+                    <a href="#contact" class="service-link">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Secure Your Future</h2>
+                <p class="section-subtitle">Get in touch with our security experts</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Ready to Fortify Your Defenses?</h3>
+                    <p>Our team of elite security professionals is standing by to assess your needs and design a custom security solution.</p>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            security@2r-at.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <strong>24/7 Hotline</strong><br>
+                            +1 (800) 2R-SECURE
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🚨</div>
+                        <div>
+                            <strong>Emergency Response</strong><br>
+                            Immediate incident response team
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm" onsubmit="handleContactForm(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Security Needs</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Request Security Assessment</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#contact">Privacy Policy</a>
+                <a href="#contact">Terms of Service</a>
+                <a href="#contact">Security Disclosure</a>
+                <a href="#contact">Certifications</a>
+            </div>
+            <p style="color: var(--gray);">© 2025 2R-AT Cybersecurity. All systems protected.</p>
+            <p style="color: var(--gray); font-size: 0.8rem; margin-top: 1rem;">SOC 2 Type II | ISO 27001 | NIST Compliant</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
