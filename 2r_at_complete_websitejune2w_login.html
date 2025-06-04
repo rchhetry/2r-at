@@ -1160,6 +1160,7 @@
                 repeating-linear-gradient(90deg, rgba(0, 212, 255, 0.05) 0px, transparent 1px, transparent 20px, rgba(0, 212, 255, 0.05) 21px);
         }
 
+        /*
         .threat-point {
             position: absolute;
             width: 10px;
@@ -1183,6 +1184,7 @@
                 opacity: 0;
             }
         }
+        */
 
         /* Features Section */
         .features {
@@ -1439,6 +1441,7 @@
             pointer-events: none;
         }
 
+        /*
         .particle {
             position: absolute;
             width: 4px;
@@ -1457,6 +1460,7 @@
                 transform: translateY(-100px) translateX(100px);
             }
         }
+        */
 
         /* Loading Animation */
         .loader {
@@ -2394,16 +2398,20 @@
             
             // Simulate login process
             setTimeout(() => {
-                currentUser = {
-                    name: email.split('@')[0],
-                    email: email,
-                    points: Math.floor(Math.random() * 1000) + 100,
-                    avatar: email.charAt(0).toUpperCase()
-                };
-                
-                updateUserInterface();
-                closeAuthModal();
-                showWelcomeMessage();
+                try {
+                    currentUser = {
+                        name: email.split('@')[0],
+                        email: email,
+                        points: Math.floor(Math.random() * 1000) + 100,
+                        avatar: email.charAt(0).toUpperCase()
+                    };
+
+                    updateUserInterface();
+                    closeAuthModal();
+                    showWelcomeMessage();
+                } catch (e) {
+                    console.error("Error during login post-processing:", e);
+                }
             }, 1000);
         }
 
@@ -2782,14 +2790,24 @@
         // Remove loader after page load
         window.addEventListener('load', () => {
             setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loader').style.display = 'none';
-                }, 500);
+                const loaderElement = document.getElementById('loader');
+                if (loaderElement) {
+                    loaderElement.style.opacity = '0';
+                    setTimeout(() => {
+                        // Re-fetch or assume it still exists if opacity was set
+                        const currentLoaderElement = document.getElementById('loader');
+                        if (currentLoaderElement) {
+                           currentLoaderElement.style.display = 'none';
+                        }
+                    }, 500);
+                } else {
+                    console.error("Loader element with ID 'loader' not found when trying to set opacity.");
+                }
             }, 1000);
         });
 
         // Particle Effect
+        /*
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -2805,6 +2823,7 @@
 
         // Create particles periodically
         setInterval(createParticle, 300);
+        */
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2914,6 +2933,7 @@
         }
 
         // Animated Dashboard Metrics
+        /*
         function animateDashboard() {
             // Animate threats blocked
             let threats = 0;
@@ -2939,8 +2959,10 @@
                 if (element) element.textContent = data.toFixed(1) + ' TB';
             }, 1500);
         }
+        */
 
         // Create threat points
+        /*
         function createThreatPoint() {
             const container = document.getElementById('threat-container');
             if (!container) return;
@@ -2962,6 +2984,7 @@
 
         // Start threat map animation
         setInterval(createThreatPoint, 1500);
+        */
 
         // Start dashboard animations when in view
         const dashboardSection = document.querySelector('.dashboard-section');
@@ -2969,7 +2992,7 @@
             const dashboardObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        animateDashboard();
+                        // animateDashboard(); // Commented out
                         dashboardObserver.unobserve(entry.target);
                     }
                 });
