@@ -1727,3 +1727,67 @@
                 margin: 0;
             }
         }
+
+/* Service Detail Page Specific Styles */
+.service-detail-page {
+    padding: 80px 0; /* Similar to other major sections */
+    background: var(--dark); /* Consistent background */
+    color: var(--light);
+}
+
+.service-detail-page .container {
+    max-width: 1000px; /* Slightly narrower for readability of text-heavy content */
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.service-detail-page .section-header { /* Already styled globally, but can be tweaked if needed */
+    margin-bottom: 3rem;
+}
+
+.service-detail-page .section-title { /* Already styled globally */
+    font-size: 2.5rem; /* Slightly smaller for sub-page title if desired */
+}
+
+.service-detail-page h3 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.service-detail-page h3:first-of-type {
+    margin-top: 0; /* No top margin for the very first h3 (e.g., Overview) */
+}
+
+.service-detail-page p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--gray);
+    margin-bottom: 1rem;
+}
+
+.service-detail-page ul,
+.service-detail-page ol {
+    list-style-position: outside;
+    padding-left: 20px; /* Standard indentation */
+    margin-bottom: 1.5rem;
+    color: var(--gray);
+}
+
+.service-detail-page ul li,
+.service-detail-page ol li {
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
+}
+
+.service-detail-page ul li strong,
+.service-detail-page ol li strong {
+    color: var(--light); /* Make strong text stand out a bit more */
+}
+
+.service-detail-page .btn-secondary { /* Style for the 'Back to Services' button */
+    margin-top: 2rem;
+}
