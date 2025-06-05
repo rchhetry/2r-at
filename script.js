@@ -167,10 +167,6 @@
                 document.getElementById('auth-buttons').style.display = 'none';
                 document.getElementById('user-menu').style.display = 'block';
 
-                // Hide quick login section
-                const quickLogin = document.getElementById('quick-login');
-                if (quickLogin) quickLogin.style.display = 'none';
-
                 // Update user avatar and info
                 const avatar = document.getElementById('user-avatar');
                 const initials = this.currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase();
@@ -194,10 +190,6 @@
                 // Show auth buttons, hide user menu
                 document.getElementById('auth-buttons').style.display = 'flex';
                 document.getElementById('user-menu').style.display = 'none';
-
-                // Show quick login section
-                const quickLogin = document.getElementById('quick-login');
-                if (quickLogin) quickLogin.style.display = 'block';
 
                 // Add protected overlays
                 this.addProtectedOverlays();
@@ -355,17 +347,6 @@
 
         let userPoints = 0;
         let usedHints = {};
-
-        // Quick Login Function for Testing
-        async function quickLogin(email, password) {
-            try {
-                console.log('Quick login attempt:', email);
-                await auth.login(email, password);
-            } catch (error) {
-                console.error('Quick login failed:', error);
-                showNotification(error.message, 'error');
-            }
-        }
 
         // Authentication Modal Functions
         function showAuthModal(mode = 'login') {
