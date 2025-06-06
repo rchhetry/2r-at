@@ -710,6 +710,20 @@ Keep completing challenges to unlock more achievements!`);
             alert(`🏆 Your completion certificate for "${challengeTitle}" is being generated and will be emailed to you within 1 hour. This certificate is recognized by industry professionals and can be added to your LinkedIn profile!`);
         }
 
+        function downloadReport(reportName) {
+            console.log(`Download initiated for report: ${reportName}.pdf`);
+            console.log(`User authenticated: ${auth.isAuthenticated()}`);
+            showNotification(`Simulating download of: ${reportName}.pdf`, 'success');
+            // Actual download logic would go here in a real application
+            // For example, creating an anchor element and triggering a click:
+            // const link = document.createElement('a');
+            // link.href = `/reports/${reportName}.pdf`; // Path to the report
+            // link.download = `${reportName}.pdf`;
+            // document.body.appendChild(link);
+            // link.click();
+            // document.body.removeChild(link);
+        }
+
         function downloadEvidence(evidenceType) {
             const resources = {
                 'laptop': 'laptop_forensic_image.dd - Full disk image of the suspect\'s work laptop (120GB). Use FTK Imager or Autopsy for analysis.',
