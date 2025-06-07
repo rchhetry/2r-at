@@ -66,6 +66,7 @@
                 <li><a href="#compliance-governance">Compliance & Governance</a></li>
                 <li><a href="#training">Training & Education</a></li>
                 <li><a href="#plans">Plans</a></li>
+                <li><a href="#ctf-challenges">CTF</a></li>
                 <li><a href="#success-stories">Success Stories</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -1106,6 +1107,79 @@
                     <div class="ctf-submission">
                         <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-forensics" class="flag-input">
                         <button class="submit-flag-btn" onclick="submitFlag('digital-forensics')">Submit Flag</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 5: Web Security - Admin Portal Bypass -->
+                <div class="ctf-card">
+                    <div class="ctf-header">
+                        <div class="ctf-difficulty high">HIGH</div>
+                        <div class="ctf-points">750 pts</div>
+                    </div>
+                    <div class="ctf-icon">🔑</div>
+                    <h3 class="ctf-title">Admin Portal Bypass</h3>
+                    <p class="ctf-description">An old admin portal for a legacy system is rumored to have weak security. Gain access and retrieve the flag.</p>
+
+                    <div class="ctf-scenario">
+                        <h4>🎯 Scenario:</h4>
+                        <p>The portal at 'legacy-admin.2r-at.com' (simulated) is your target. Standard login prompt. No source code provided directly.</p>
+                    </div>
+
+                    <div class="ctf-details">
+                        <h4>🔍 Investigation Points:</h4>
+                        <ul>
+                            <li>Attempt default or common credentials.</li>
+                            <li>Inspect browser developer tools for any client-side scripts involved in authentication.</li>
+                            <li>Test for basic SQL injection vulnerabilities.</li>
+                            <li>Look for any exposed API endpoints or forgotten password mechanisms that might be vulnerable.</li>
+                        </ul>
+                    </div>
+
+                    <div class="ctf-hints">
+                        <h4>💡 Hints Available:</h4>
+                        <button class="hint-btn" onclick="showHint('web-login-bypass', 1)">Hint 1 (-30 pts)</button>
+                        <button class="hint-btn" onclick="showHint('web-login-bypass', 2)">Hint 2 (-70 pts)</button>
+                        <button class="hint-btn" onclick="showHint('web-login-bypass', 3)">Hint 3 (-100 pts)</button>
+                    </div>
+
+                    <div class="ctf-submission">
+                        <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-web-login-bypass" class="flag-input">
+                        <button class="submit-flag-btn" onclick="submitFlag('web-login-bypass')">Submit Flag</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 6: Cryptography - Ancient Message Decryption -->
+                <div class="ctf-card">
+                    <div class="ctf-header">
+                        <div class="ctf-difficulty medium">MEDIUM</div>
+                        <div class="ctf-points">550 pts</div>
+                    </div>
+                    <div class="ctf-icon">📜</div>
+                    <h3 class="ctf-title">Ancient Message Decryption</h3>
+                    <p class="ctf-description">An encrypted message was found, believed to be using an ancient and simple cipher. Decrypt it to find the flag.</p>
+
+                    <div class="ctf-encrypted-message">
+                        <h4>📜 Intercepted Message:</h4>
+                        <div class="encrypted-text">
+                            YV CFKG: 2F-NG{pafeh_p43f4a_fu1sg_x3l15} (Note: This is example ciphertext, actual solution is 2R-AT{crypt0_c43s4r_sh1ft_k3y15}. The JS has the correct flag. The challenge for the user is to figure out the cipher and key from the hints and apply it to a *different* ciphertext they might be given or assume this is the one to decrypt based on hints.)
+                        </div>
+                    </div>
+                     <div class="ctf-scenario">
+                        <h4>🎯 Scenario:</h4>
+                        <p>The provided ciphertext is your only clue. The flag is embedded within the decrypted message, following the standard 2R-AT{...} format.</p>
+                    </div>
+
+
+                    <div class="ctf-hints">
+                        <h4>💡 Hints Available:</h4>
+                        <button class="hint-btn" onclick="showHint('crypto-ancient-cipher', 1)">Hint 1 (-20 pts)</button>
+                        <button class="hint-btn" onclick="showHint('crypto-ancient-cipher', 2)">Hint 2 (-50 pts)</button>
+                        <button class="hint-btn" onclick="showHint('crypto-ancient-cipher', 3)">Hint 3 (-80 pts)</button>
+                    </div>
+
+                    <div class="ctf-submission">
+                        <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-crypto-ancient-cipher" class="flag-input">
+                        <button class="submit-flag-btn" onclick="submitFlag('crypto-ancient-cipher')">Submit Flag</button>
                     </div>
                 </div>
             </div>

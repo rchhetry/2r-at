@@ -335,14 +335,34 @@
                     { text: "Look for large 7zip files in the user's temp directory and recycle bin", cost: 120 },
                     { text: "The suspect's name is in the laptop's user profile, combine with exfiltration method", cost: 180 }
                 ]
+            },
+            'web-login-bypass': {
+                title: 'Admin Portal Bypass',
+                correctFlag: '2R-AT{w3b_byp4ss_fl4g_h3r3}',
+                points: 750,
+                hints: [
+                    { text: "Check for weak credentials or default passwords.", cost: 30 },
+                    { text: "Inspect client-side JavaScript for any authentication logic that can be manipulated.", cost: 70 },
+                    { text: "Try common SQL injection payloads in the username and password fields.", cost: 100 }
+                ]
+            },
+            'crypto-ancient-cipher': {
+                title: 'Ancient Message Decryption',
+                correctFlag: '2R-AT{crypt0_c43s4r_sh1ft_k3y15}',
+                points: 550,
+                hints: [
+                    { text: "The ciphertext seems to be a simple substitution cipher. Maybe Caesar?", cost: 20 },
+                    { text: "Frequency analysis might reveal common letters.", cost: 50 },
+                    { text: "The key is a single digit number representing the shift.", cost: 80 }
+                ]
             }
         };
 
         const ctfPrizes = {
-            1000: { rank: "🏆 EXPERT LEVEL", bonus: "You've earned a $500 Amazon gift card + priority consideration for our red team!", bg: "linear-gradient(135deg, #FFD700, #FFA500)" },
-            800: { rank: "🥈 ADVANCED LEVEL", bonus: "You've earned a $300 Amazon gift card + access to our advanced training!", bg: "linear-gradient(135deg, #C0C0C0, #A0A0A0)" },
-            600: { rank: "🥉 INTERMEDIATE LEVEL", bonus: "You've earned a $200 Amazon gift card + free certification voucher!", bg: "linear-gradient(135deg, #CD7F32, #B8860B)" },
-            400: { rank: "🎯 BEGINNER LEVEL", bonus: "You've earned a $100 Amazon gift card + training course access!", bg: "linear-gradient(135deg, #32CD32, #228B22)" }
+            1000: { rank: "🏆 EXPERT LEVEL", bonus: "You've earned an Internship Opportunity at 2R-AT + a $200 Gift Voucher + Movie Tickets for two!", bg: "linear-gradient(135deg, #FFD700, #FFA500)" },
+            800: { rank: "🥈 ADVANCED LEVEL", bonus: "You've earned a $150 Gift Voucher + a 1-Year Pre-paid Mobile Topoff + access to our advanced training!", bg: "linear-gradient(135deg, #C0C0C0, #A0A0A0)" },
+            600: { rank: "🥉 INTERMEDIATE LEVEL", bonus: "You've earned a $100 Gift Voucher + Movie Tickets for one + free certification voucher!", bg: "linear-gradient(135deg, #CD7F32, #B8860B)" },
+            400: { rank: "🎯 BEGINNER LEVEL", bonus: "You've earned a $50 Pre-paid Mobile Topoff + training course access!", bg: "linear-gradient(135deg, #32CD32, #228B22)" }
         };
 
         let userPoints = 0;
