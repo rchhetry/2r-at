@@ -1,0 +1,2238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2R-AT | Elite Cybersecurity Solutions</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='sg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231a237e'/%3E%3Cstop offset='100%25' style='stop-color:%230d47a1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 10 L70 20 L70 50 Q70 65 50 75 Q30 65 30 50 L30 20 Z' fill='url(%23sg)' stroke='%2300e676' stroke-width='2'/%3E%3Ccircle cx='50' cy='35' r='3' fill='%2300e676'/%3E%3Cline x1='50' y1='35' x2='40' y2='35' stroke='%2300e676' stroke-width='1.5'/%3E%3Cline x1='50' y1='35' x2='60' y2='35' stroke='%2300e676' stroke-width='1.5'/%3E%3Crect x='45' y='42' width='10' height='8' fill='none' stroke='%2300e676' stroke-width='1.5' rx='1'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-circle"></div>
+    </div>
+
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="cyber-grid"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <svg class="logo-icon" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background Shield -->
+                    <defs>
+                        <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a237e;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0d47a1;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#00e676;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00bfa5;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Shield Shape -->
+                    <path d="M200 30 L250 50 L250 100 Q250 130 200 150 Q150 130 150 100 L150 50 Z"
+                          fill="url(#shieldGradient)" stroke="#00e676" stroke-width="2" opacity="0.9"/>
+
+                    <!-- Circuit Pattern Inside Shield -->
+                    <circle cx="200" cy="70" r="5" fill="#00e676" opacity="0.8"/>
+                    <line x1="200" y1="70" x2="180" y2="70" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+                    <line x1="200" y1="70" x2="220" y2="70" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+                    <line x1="200" y1="70" x2="200" y2="90" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+                    <line x1="200" y1="70" x2="200" y2="50" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+
+                    <!-- Lock Icon in Shield -->
+                    <rect x="190" y="80" width="20" height="15" fill="none" stroke="#00e676" stroke-width="2" rx="2"/>
+                    <path d="M195 80 L195 75 Q200 70 205 75 L205 80" fill="none" stroke="#00e676" stroke-width="2"/>
+
+                    <!-- Company Name -->
+                    <text x="200" y="110" font-family="Arial, sans-serif" font-size="36" font-weight="bold"
+                          text-anchor="middle" fill="url(#textGradient)">2R-AT</text>
+                </svg>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#managed-security-services">Managed Security Services</a></li>
+                <li><a href="#ai-powered-solutions">AI-Powered Solutions</a></li>
+                <li><a href="#security-assessment">Security Assessment</a></li>
+                <li><a href="#cloud-infrastructure">Cloud & Infrastructure</a></li>
+                <li><a href="#identity-access">Identity & Access</a></li>
+                <li><a href="#compliance-governance">Compliance & Governance</a></li>
+                <li><a href="#training">Training & Education</a></li>
+                <li><a href="#plans">Plans</a></li>
+                <li><a href="#success-stories">Success Stories</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <!-- Authentication Buttons -->
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn btn-secondary btn-small" onclick="showAuthModal('login')">Login</button>
+                <button class="btn btn-primary btn-small" onclick="showAuthModal('register')">Get Started</button>
+            </div>
+
+            <!-- User Menu (hidden by default) -->
+            <div class="user-menu" id="user-menu" style="display: none;">
+                <div class="user-avatar" onclick="toggleUserDropdown()" id="user-avatar">
+                    <!-- User initials will be inserted here -->
+                </div>
+                <div class="user-dropdown" id="user-dropdown">
+                    <div class="user-info">
+                        <h4 id="user-display-name">Loading...</h4>
+                        <p id="user-email">Loading...</p>
+                        <p id="user-role">Loading...</p>
+                    </div>
+                    <a href="javascript:void(0)" onclick="showProfile()">👤 Profile</a>
+                    <a href="javascript:void(0)" onclick="showAchievements()">🏆 Achievements</a>
+                    <a href="javascript:void(0)" onclick="showSettings()">⚙️ Settings</a>
+                    <a href="javascript:void(0)" onclick="logout()">🚪 Logout</a>
+                </div>
+            </div>
+
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Authentication Modal -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-content">
+            <span class="auth-close" onclick="closeAuthModal()">&times;</span>
+
+            <div class="auth-header">
+                <h2 class="auth-title" id="auth-title">Welcome to 2R-AT</h2>
+                <p class="auth-subtitle" id="auth-subtitle">Secure your digital future</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')" id="login-tab">Login</button>
+                <button class="auth-tab" onclick="switchAuthTab('register')" id="register-tab">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form active" id="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Secure Login</button>
+                <div class="auth-switch">
+                    Don't have an account? <a href="javascript:void(0)" onclick="switchAuthTab('register')">Register here</a>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form class="auth-form" id="register-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email Address</label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-company">Company (Optional)</label>
+                    <input type="text" id="register-company" name="company">
+                </div>
+                <div class="form-group">
+                    <label for="register-role">Role</label>
+                    <select id="register-role" name="role" required>
+                        <option value="">Select your role</option>
+                        <option value="security-analyst">Security Analyst</option>
+                        <option value="developer">Developer</option>
+                        <option value="ciso">CISO</option>
+                        <option value="pentester">Penetration Tester</option>
+                        <option value="student">Student</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" name="password" required minlength="8">
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Confirm Password</label>
+                    <input type="password" id="register-confirm" name="confirm" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Secure Account</button>
+                <div class="auth-switch">
+                    Already have an account? <a href="javascript:void(0)" onclick="switchAuthTab('login')">Login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div id="notification" class="notification">
+        <div id="notification-message"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1 class="glitch" data-text="2R-AT SECURITY">2R-AT SECURITY</h1>
+            <p class="hero-subtitle">Next-Generation Cybersecurity Solutions for the Digital Age</p>
+            <div class="cta-container">
+                <a href="#contact" class="btn btn-primary">Start Securing Now</a>
+                <a href="#managed-security-services" class="btn btn-secondary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Managed Security Services Section -->
+    <section class="professional-services" id="managed-security-services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Managed Security Services</h2>
+                <p class="section-subtitle">24/7 MDR, SOC, vCISO, Incident Response and more to protect your assets.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">24/7 SOC & Managed Detection and Response (MDR)</h3>
+                    <p class="service-description">Our Security Operations Center provides round-the-clock monitoring, threat detection, and rapid incident response to protect your assets.</p>
+                    <a class="service-link" href="#mdr-details">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Comprehensive GRC Services</h3>
+                    <p class="service-description">Complete governance, risk, and compliance solutions ensuring your organization meets all regulatory requirements.</p>
+                    <a class="service-link" href="#grc-details">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏹</div>
+                    <h3 class="service-title">Advanced Threat Hunting</h3>
+                    <p class="service-description">Proactive threat detection and response services to identify advanced persistent threats and zero-day exploits in your environment.</p>
+                    <a class="service-link" href="#threat-hunting-details">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3 class="service-title">Continuous Security Auditing</h3>
+                    <p class="service-description">Thorough security audits and assessments to ensure your systems meet industry standards and best practices, offered as a managed service.</p>
+                    <a class="service-link" href="#auditing-details">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3 class="service-title">Digital Forensics & Incident Response</h3>
+                    <p class="service-description">Expert digital forensics investigations, malware analysis, threat attribution, and comprehensive incident response services. Court-admissible evidence collection and expert testimony support.</p>
+                    <a class="service-link" href="#dfir-details">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI-Powered Solutions Section -->
+    <section class="professional-services" id="ai-powered-solutions">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">AI-Powered Solutions</h2>
+                <p class="section-subtitle">AI Threat Detection, Automated Response, SOAR</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3 class="service-title">AI-Powered Threat Detection</h3>
+                    <p class="service-description">Machine learning algorithms that evolve with emerging threats, identifying anomalies and predicting attacks with high accuracy.</p>
+                    <a class="service-link" href="#ai-threat-detection-details">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3 class="service-title">Real-Time Automated Response</h3>
+                    <p class="service-description">Instant threat neutralization with AI-driven automated countermeasures and SOAR capabilities.</p>
+                    <a href="#automated-response-details" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3 class="service-title">Predictive Security Analytics</h3>
+                    <p class="service-description">Anticipate attacks before they happen with advanced AI modeling and risk forecasting.</p>
+                    <a class="service-link" href="#predictive-analytics-details">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3 class="service-title">AI-Driven SOAR</h3>
+                    <p class="service-description">Streamline security operations with AI-powered Security Orchestration, Automation, and Response, improving efficiency and incident handling.</p>
+                    <a class="service-link" href="#ai-soar-details">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Assessment Section -->
+    <section class="professional-services" id="security-assessment">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Security Assessment</h2>
+                <p class="section-subtitle">Comprehensive assessments to identify vulnerabilities and strengthen your security posture. XDR, Risk Assessment, and more.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📡</div>
+                    <h3 class="service-title">Extended Detection and Response (XDR)</h3>
+                    <p class="service-description">Holistic, cross-domain security solution for unified threat detection, investigation, and response across endpoints, networks, cloud, and more.</p>
+                    <a class="service-link" href="#xdr-details">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3 class="service-title">Risk Assessment</h3>
+                    <p class="service-description">Identify, analyze, and evaluate cybersecurity risks to your information assets and business operations, enabling informed security decisions.</p>
+                    <a class="service-link" href="#risk-assessment-details">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Comprehensive Security Assessment</h3>
+                    <p class="service-description">Holistic evaluation of your organization's security posture, identifying vulnerabilities, threats, and risks across people, processes, and technology.</p>
+                    <a class="service-link" href="#comprehensive-assessment-details">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3 class="service-title">Vulnerability Assessment</h3>
+                    <p class="service-description">Systematic identification and quantification of security vulnerabilities in your systems, applications, and network infrastructure.</p>
+                    <a class="service-link" href="#vulnerability-assessment-details">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cloud & Infrastructure Security Section -->
+    <section class="professional-services" id="cloud-infrastructure">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cloud & Infrastructure Security</h2>
+                <p class="section-subtitle">Cloud Security, CSPM, Zero Trust Architecture, Infrastructure Hardening, Cloud Data Security</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">☁️</div>
+                    <h3 class="service-title">Advanced Cloud Security</h3>
+                    <p class="service-description">Advanced cloud infrastructure protection with real-time monitoring, automated threat response, and compliance management for AWS, Azure, and GCP environments. Comprehensive protection for your AWS, Azure, and GCP environments, including SASE and Zero Trust principles.</p>
+                    <a href="#advanced-cloud-security-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Zero Trust Network Access (ZTNA)</h3>
+                    <p class="service-description">Implement a 'never trust, always verify' model for users, devices, and applications accessing your cloud and on-premise infrastructure, enhancing security and reducing attack surfaces.</p>
+                    <a href="#ztna-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Cloud Security Posture Management (CSPM)</h3>
+                    <p class="service-description">Continuously monitor and manage your cloud security posture, identify misconfigurations, and ensure compliance with industry standards and best practices across your multi-cloud environments.</p>
+                    <a href="#cspm-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3 class="service-title">Infrastructure Hardening & Secure Configuration</h3>
+                    <p class="service-description">Strengthen your servers, networks, and cloud resources against attacks by implementing secure configurations, vulnerability management, and industry best practices.</p>
+                    <a href="#infra-hardening-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3 class="service-title">Cloud Data Security & Encryption</h3>
+                    <p class="service-description">Protect sensitive data in your cloud storage and databases with robust encryption, key management, access controls, and data loss prevention (DLP) strategies.</p>
+                    <a href="#cloud-data-security-details" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Identity & Access Management Section -->
+    <section class="professional-services" id="identity-access">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Identity & Access Management</h2>
+                <p class="section-subtitle">IAM, ITDR, PAM, MFA Solutions - Secure and manage digital identities effectively.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">👤</div>
+                    <h3 class="service-title">Modern IAM Solutions</h3>
+                    <p class="service-description">Implement robust IAM strategies to ensure the right individuals access the right resources at the right times, for the right reasons. Includes SSO, identity governance, and lifecycle management.</p>
+                    <a href="#iam-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3 class="service-title">Strong Multi-Factor Authentication (MFA)</h3>
+                    <p class="service-description">Enhance security by requiring multiple verification methods (e.g., biometrics, hardware tokens, push notifications), protecting against unauthorized access even if passwords are compromised.</p>
+                    <a href="#mfa-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🗝️</div>
+                    <h3 class="service-title">Privileged Access Management (PAM)</h3>
+                    <p class="service-description">Secure, manage, and monitor privileged accounts and access to critical systems, reducing the risk of insider threats, credential theft, and privilege misuse.</p>
+                    <a href="#pam-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚨</div>
+                    <h3 class="service-title">Identity Threat Detection & Response (ITDR)</h3>
+                    <p class="service-description">Proactively detect and respond to threats targeting identities, such as credential theft, account takeover, unusual access patterns, and insider risks using advanced analytics and behavioral monitoring.</p>
+                    <a href="#itdr-details" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compliance & Governance Section -->
+    <section class="professional-services" id="compliance-governance">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Compliance & Governance</h2>
+                <p class="section-subtitle">GRC, Compliance Automation, Risk Management, Auditing, Certifications, and Data Privacy.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Governance, Risk & Compliance (GRC)</h3>
+                    <p class="service-description">Establish robust GRC frameworks, manage risks effectively, automate compliance processes, and ensure ongoing adherence to industry regulations (e.g., ISO 27001, NIST, SOC 2) and standards.</p>
+                    <a href="#grc-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3 class="service-title">Independent Security Auditing</h3>
+                    <p class="service-description">Thorough security audits and assessments by certified professionals to validate your controls, identify gaps, and ensure your systems meet industry standards and best practices.</p>
+                    <a href="#auditing-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏆</div>
+                    <h3 class="service-title">Industry Certifications & Standards</h3>
+                    <p class="service-description">Achieve and maintain key industry certifications (e.g., ISO 27001, SOC 2, PCI-DSS, HIPAA) with our expert guidance, readiness assessments, and compliant security practices.</p>
+                    <a href="#certifications-standards-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Data Privacy & Protection (GDPR, CCPA)</h3>
+                    <p class="service-description">Navigate complex data privacy regulations like GDPR, CCPA, and others with solutions for data mapping, consent management, impact assessments, and breach notification protocols.</p>
+                    <a href="#data-privacy-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3 class="service-title">Compliance Automation</h3>
+                    <p class="service-description">Streamline compliance efforts using automated tools for evidence collection, control monitoring, risk assessment, and reporting, reducing manual overhead and ensuring continuous compliance.</p>
+                    <a href="#compliance-automation-details" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3 class="service-title">Cybersecurity Risk Management</h3>
+                    <p class="service-description">Identify, assess, prioritize, and treat cybersecurity risks across your organization using established frameworks, enabling informed decision-making and resource allocation.</p>
+                    <a href="#cyber-risk-management-details" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Section -->
+    <section class="training-section" id="training">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cybersecurity Training & Certification Programs</h2>
+                <p class="section-subtitle">Empower your team with cutting-edge security knowledge and industry-recognized certifications</p>
+            </div>
+            <div class="training-grid">
+                <div class="training-card">
+                    <div class="training-icon">🧠</div>
+                    <h3 class="training-title">Security Awareness Training</h3>
+                    <p class="training-description">Comprehensive security awareness program designed to transform your employees into the first line of defense against cyber threats. Includes phishing simulations and incident response training.</p>
+                    <ul class="training-features">
+                        <li>Interactive phishing simulations with real-world scenarios</li>
+                        <li>Role-based training modules (C-suite, IT, HR, Finance)</li>
+                        <li>Quarterly threat landscape updates</li>
+                        <li>Progress tracking and compliance reporting</li>
+                        <li>Mobile security and BYOD awareness</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">4-8 weeks</span>
+                        <span class="training-level">All Levels</span>
+                    </div>
+                    <a href="#contact" class="training-link">Enroll Now →</a>
+                </div>
+
+                <div class="training-card">
+                    <div class="training-icon">🛡️</div>
+                    <h3 class="training-title">Risk Management Certification</h3>
+                    <p class="training-description">Master the art of identifying, assessing, and mitigating cybersecurity risks across your organization with industry-leading frameworks like NIST and ISO 27001. Covers risk assessment, business impact analysis, incident response planning, and regulatory compliance.</p>
+                    <ul class="training-features">
+                        <li>NIST and ISO 27001 frameworks</li>
+                        <li>Risk assessment methodologies</li>
+                        <li>Business impact analysis</li>
+                        <li>Incident response planning</li>
+                        <li>Regulatory compliance strategies</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">12 weeks</span>
+                        <span class="training-level">Intermediate to Advanced</span>
+                    </div>
+                    <a href="#contact" class="training-link">Register →</a>
+                </div>
+
+                <div class="training-card">
+                    <div class="training-icon">🎭</div>
+                    <h3 class="training-title">Ethical Hacking Bootcamp</h3>
+                    <p class="training-description">Intensive hands-on training program covering advanced penetration testing techniques and vulnerability assessment methodologies. Includes real-world lab environments.</p>
+                    <ul class="training-features">
+                        <li>Network penetration testing</li>
+                        <li>Web application security</li>
+                        <li>Mobile app penetration testing</li>
+                        <li>Social engineering techniques</li>
+                        <li>Real-world lab environments</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">16 weeks</span>
+                        <span class="training-level">Advanced</span>
+                    </div>
+                    <a href="#contact" class="training-link">Apply Now →</a>
+                </div>
+
+                <div class="training-card">
+                    <div class="training-icon">🔬</div>
+                    <h3 class="training-title">Digital Forensics Bootcamp</h3>
+                    <p class="training-description">Comprehensive training in digital evidence collection, analysis, and presentation for cybersecurity incident response and legal proceedings.</p>
+                    <ul class="training-features">
+                        <li>Digital evidence acquisition</li>
+                        <li>Memory and disk analysis</li>
+                        <li>Network forensics techniques</li>
+                        <li>Mobile device investigations</li>
+                        <li>Court testimony preparation</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">20 weeks</span>
+                        <span class="training-level">Advanced</span>
+                    </div>
+                    <a href="#contact" class="training-link">Reserve Spot →</a>
+                </div>
+
+                <div class="training-card">
+                    <div class="training-icon">🚩</div>
+                    <h3 class="training-title">Capture The Flag (CTF) Challenges</h3>
+                    <p class="training-description">Test and sharpen your offensive and defensive cybersecurity skills in real-world scenarios. Our CTF platform offers a variety of challenges for all skill levels, from beginner to expert. Compete, learn, and climb the leaderboard!</p>
+                    <ul class="training-features">
+                        <li>Diverse challenge categories (Web, Forensics, Crypto, etc.)</li>
+                        <li>Real-world vulnerability scenarios</li>
+                        <li>Live leaderboard and scoring</li>
+                        <li>Suitable for individual and team participation</li>
+                        <li>Continuous new challenges and updates</li>
+                    </ul>
+                    <div class="training-meta">
+                        <span class="training-duration">Ongoing</span>
+                        <span class="training-level">All Levels</span>
+                    </div>
+                    <a href="#ctf-challenges" class="training-link">Explore Challenges →</a>
+                </div>
+            </div>
+
+            <!-- Training Stats -->
+            <div class="stats" style="padding: 60px 0; margin-top: 60px;">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">5,000+</span>
+                        <span class="stat-label">Professionals Trained</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Certification Pass Rate</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Corporate Programs Delivered</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.9/5</span>
+                        <span class="stat-label">Student Satisfaction Score</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Lab Access & Support</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">Job Placement Rate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threat Intelligence & Research Section -->
+    <section class="threat-intel-section" style="padding: 100px 0; background: var(--dark);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Threat Intelligence & Research</h2>
+                <p class="section-subtitle">Real-time threat intelligence powered by global security operations</p>
+            </div>
+
+            <!-- Live Threat Map -->
+            <div style="background: rgba(10, 14, 39, 0.8); border-radius: 20px; padding: 3rem; margin-bottom: 4rem;">
+                <h3 style="color: var(--primary); text-align: center; margin-bottom: 2rem;">🌍 Global Threat Intelligence Network</h3>
+                <div style="position: relative; height: 400px; background: rgba(0, 0, 0, 0.5); border-radius: 15px; overflow: hidden;">
+                    <div style="position: absolute; top: 20px; left: 20px; z-index: 10;">
+                        <h4 style="color: var(--light); margin-bottom: 1rem;">Live Threat Activity</h4>
+                        <div style="color: var(--gray); font-size: 0.9rem;">
+                            <div style="margin-bottom: 0.5rem;">🔴 Active Campaigns: <span style="color: var(--danger); font-weight: bold;">47</span></div>
+                            <div style="margin-bottom: 0.5rem;">🟡 Blocked Today: <span style="color: var(--warning); font-weight: bold;">15,847</span></div>
+                            <div>🟢 Protected Assets: <span style="color: var(--success); font-weight: bold;">2.3M+</span></div>
+                        </div>
+                    </div>
+
+                    <div style="position: absolute; top: 20px; right: 20px; z-index: 10;">
+                        <div style="background: rgba(239, 68, 68, 0.2); border: 1px solid var(--danger); border-radius: 10px; padding: 1rem; margin-bottom: 1rem;">
+                            <h5 style="color: var(--danger); margin-bottom: 0.5rem;">🚨 CRITICAL ALERT</h5>
+                            <p style="color: var(--light); font-size: 0.8rem;">New APT campaign targeting financial institutions detected. IOCs published to threat feed.</p>
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.2); border: 1px solid var(--warning); border-radius: 10px; padding: 1rem;">
+                            <h5 style="color: var(--warning); margin-bottom: 0.5rem;">⚠️ EMERGING THREAT</h5>
+                            <p style="color: var(--light); font-size: 0.8rem;">Zero-day exploit in popular VPN software. Patches available.</p>
+                        </div>
+                    </div>
+
+                    <!-- Simulated world map with threat indicators -->
+                    <div style="position: absolute; width: 100%; height: 100%; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 500\"><rect width=\"1000\" height=\"500\" fill=\"%23050714\"/><circle cx=\"200\" cy=\"150\" r=\"3\" fill=\"%23EF4444\" opacity=\"0.8\"/><circle cx=\"400\" cy=\"120\" r=\"2\" fill=\"%23F59E0B\" opacity=\"0.8\"/><circle cx=\"600\" cy=\"180\" r=\"4\" fill=\"%23EF4444\" opacity=\"0.8\"/><circle cx=\"800\" cy=\"160\" r=\"2\" fill=\"%23F59E0B\" opacity=\"0.8\"/><circle cx=\"300\" cy=\"300\" r=\"3\" fill=\"%23EF4444\" opacity=\"0.8\"/><circle cx=\"700\" cy=\"320\" r=\"2\" fill=\"%2310B981\" opacity=\"0.8\"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                </div>
+            </div>
+
+            <!-- Threat Intelligence Features -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+                <div style="background: rgba(10, 14, 39, 0.6); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 15px; padding: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">🔍 Advanced Threat Detection</h4>
+                    <ul style="list-style: none; color: var(--gray);">
+                        <li style="margin-bottom: 0.5rem;">✓ AI-powered behavioral analysis</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Zero-day vulnerability detection</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Insider threat monitoring</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Supply chain risk assessment</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(10, 14, 39, 0.6); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 15px; padding: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">📊 Threat Intelligence Feeds</h4>
+                    <ul style="list-style: none; color: var(--gray);">
+                        <li style="margin-bottom: 0.5rem;">✓ Real-time IOC updates</li>
+                        <li style="margin-bottom: 0.5rem;">✓ STIX/TAXII integration</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Custom threat hunting rules</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Attribution and campaign tracking</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(10, 14, 39, 0.6); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 15px; padding: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">🎯 Proactive Defense</h4>
+                    <ul style="list-style: none; color: var(--gray);">
+                        <li style="margin-bottom: 0.5rem;">✓ Predictive threat modeling</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Automated response playbooks</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Threat landscape forecasting</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Risk quantification metrics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Latest Research & Reports -->
+            <div style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1)); border-radius: 20px; padding: 3rem;">
+                <h3 style="color: var(--primary); text-align: center; margin-bottom: 3rem;">📋 Latest Security Research & Reports</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div style="background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--light); margin-bottom: 1rem;">2025 Cyber Threat Landscape Report</h4>
+                        <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">Comprehensive analysis of emerging threats including AI-powered attacks, supply chain compromises, and ransomware evolution.</p>
+                        <button class="btn btn-secondary btn-small" onclick="downloadReport('threat-landscape-2025')">Download Report</button>
+                    </div>
+
+                    <div style="background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--light); margin-bottom: 1rem;">APT Groups Activity Analysis</h4>
+                        <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">Deep dive into nation-state threat actor TTPs, infrastructure, and targeting patterns observed in Q4 2024.</p>
+                        <button class="btn btn-secondary btn-small" onclick="downloadReport('apt-analysis-q4')">Download Report</button>
+                    </div>
+
+                    <div style="background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--light); margin-bottom: 1rem;">Cloud Security Benchmark 2025</h4>
+                        <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">Industry benchmarks for cloud security posture, configuration standards, and compliance frameworks.</p>
+                        <button class="btn btn-secondary btn-small" onclick="downloadReport('cloud-benchmark-2025')">Download Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="training-section" id="plans">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Security Plans</h2>
+                <p class="section-subtitle">Choose the protection level that fits your needs</p>
+            </div>
+            <div class="training-grid">
+                <div class="training-card plan-card">
+                    <h3 class="training-title plan-title">Essential</h3>
+                    <div class="plan-price" style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1.5rem; text-align: center;">$2,999 per month</div>
+                    <ul class="training-features plan-features">
+                        <li>✓ Basic Vulnerability Scanning</li>
+                        <li>✓ Monthly Security Reports</li>
+                        <li>✓ Email Support</li>
+                        <li>✓ Up to 10 Assets</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display: block; text-align: center; margin-top: 2rem;">Get Started</a>
+                </div>
+                <div class="training-card plan-card">
+                    <h3 class="training-title plan-title">Professional</h3>
+                    <div class="plan-price" style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1.5rem; text-align: center;">$7,999 per month</div>
+                    <ul class="training-features plan-features">
+                        <li>✓ Advanced Threat Detection</li>
+                        <li>✓ 24/7 Monitoring</li>
+                        <li>✓ Incident Response Team</li>
+                        <li>✓ Up to 100 Assets</li>
+                        <li>✓ Compliance Management</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display: block; text-align: center; margin-top: 2rem;">Get Started</a>
+                </div>
+                <div class="training-card plan-card">
+                    <h3 class="training-title plan-title">Enterprise</h3>
+                    <div class="plan-price" style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1.5rem; text-align: center;">Custom tailored to your needs</div>
+                    <ul class="training-features plan-features">
+                        <li>✓ Full Security Suite</li>
+                        <li>✓ Dedicated Security Team</li>
+                        <li>✓ Custom Integrations</li>
+                        <li>✓ Unlimited Assets</li>
+                        <li>✓ SLA Guarantee</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display: block; text-align: center; margin-top: 2rem;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="professional-services" id="success-stories">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Success Stories</h2>
+                <p class="section-subtitle">Real results from real clients</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card story-card">
+                    <div class="service-icon story-icon">🏦</div>
+                    <h3 class="service-title story-title">Global Financial Institution</h3>
+                    <p class="service-description story-description">Implemented zero-trust architecture across 50+ branches, preventing $10M in potential fraud.</p>
+                    <div class="story-stats" style="margin-top: 1rem; margin-bottom: 1rem; text-align: center;">
+                        <span style="display: block; font-weight: bold; color: var(--primary);">99.9% Threat Prevention</span>
+                        <span style="display: block; font-weight: bold; color: var(--primary); margin-top: 0.5rem;">50ms Response Time</span>
+                    </div>
+                    <a href="#contact" class="service-link story-link">Read Full Story →</a>
+                </div>
+                <div class="service-card story-card">
+                    <div class="service-icon story-icon">🏥</div>
+                    <h3 class="service-title story-title">Healthcare Network</h3>
+                    <p class="service-description story-description">Secured patient data for 2M+ records while maintaining HIPAA compliance and improving access speed.</p>
+                    <div class="story-stats" style="margin-top: 1rem; margin-bottom: 1rem; text-align: center;">
+                        <span style="display: block; font-weight: bold; color: var(--primary);">100% HIPAA Compliant</span>
+                        <span style="display: block; font-weight: bold; color: var(--primary); margin-top: 0.5rem;">2M+ Records Secured</span>
+                    </div>
+                    <a href="#contact" class="service-link story-link">Read Full Story →</a>
+                </div>
+                <div class="service-card story-card">
+                    <div class="service-icon story-icon">🚀</div>
+                    <h3 class="service-title story-title">Hypergrowth Tech Startup</h3>
+                    <p class="service-description story-description">Built secure-by-design infrastructure enabling 10x growth while maintaining enterprise-grade security.</p>
+                    <div class="story-stats" style="margin-top: 1rem; margin-bottom: 1rem; text-align: center;">
+                        <span style="display: block; font-weight: bold; color: var(--primary);">10x Growth Enabled</span>
+                        <span style="display: block; font-weight: bold; color: var(--primary); margin-top: 0.5rem;">0 Security Incidents</span>
+                    </div>
+                    <a href="#success-story-energy-details" class="service-link story-link">Read Full Story →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose 2R-AT Section -->
+    <section class="professional-services" id="why-choose-2rat">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose 2R-AT</h2>
+                <p class="section-subtitle">Advanced capabilities that set us apart</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3 class="service-title">AI-Powered Detection</h3>
+                    <p class="service-description">Machine learning algorithms that evolve with emerging threats.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3 class="service-title">Real-Time Response</h3>
+                    <p class="service-description">Instant threat neutralization with automated countermeasures.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔐</div>
+                    <h3 class="service-title">Zero Trust Architecture</h3>
+                    <p class="service-description">Never trust, always verify - comprehensive security at every layer.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3 class="service-title">Global Threat Intelligence</h3>
+                    <p class="service-description">Access to worldwide threat databases and security networks.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3 class="service-title">Predictive Analytics</h3>
+                    <p class="service-description">Anticipate attacks before they happen with advanced modeling.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏆</div>
+                    <h3 class="service-title">Industry Certified</h3>
+                    <p class="service-description">ISO 27001, SOC 2, and NIST compliant security practices.</p>
+                    <a href="#contact" class="service-link">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Security Check Section -->
+    <section class="contact" id="quick-security-check" style="background: var(--dark); text-align: center;">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Quick Security Check</h2>
+        </div>
+        <p class="hero-subtitle" style="margin-bottom: 2rem;">$ 2R-AT --scan --target your-infrastructure<br>[+] Initializing security scan...<br>[+] Analyzing 1,247 endpoints...<br>[+] Vulnerabilities detected: 0<br>[+] Security status: PROTECTED ✓</p>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+          <input type="text" placeholder="your-infrastructure (e.g., example.com)" class="flag-input" style="max-width: 400px;">
+          <button class="btn btn-primary">Start Scan</button>
+        </div>
+        <div class="metrics-grid" style="max-width: 800px; margin: 0 auto;">
+           <div class="metric-card"><div class="metric-value">99.9%</div><div class="metric-label">Threat Detection Rate</div></div>
+           <div class="metric-card"><div class="metric-value">24/7</div><div class="metric-label">Security Monitoring</div></div>
+           <div class="metric-card"><div class="metric-value">500+</div><div class="metric-label">Protected Systems</div></div>
+           <div class="metric-card"><div class="metric-value">&lt;1min</div><div class="metric-label">Response Time</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Security Dashboard Demo -->
+    <section class="dashboard-section" id="dashboard">
+        <div class="container">
+            <h2 class="section-title">Security Dashboard</h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">
+                Real-time threat monitoring and analytics
+            </p>
+
+            <div class="dashboard-container" id="dashboard-container">
+                <!-- Protected content overlay will be inserted here if not authenticated -->
+
+                <div class="dashboard-header">
+                    <h3>Global Threat Monitor</h3>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span>System Active</span>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="threats-blocked">1,247</div>
+                        <div class="metric-label">Threats Blocked Today</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="active-monitors">243</div>
+                        <div class="metric-label">Active Monitors</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="data-analyzed">15.7 TB</div>
+                        <div class="metric-label">Data Analyzed</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="uptime">99.99%</div>
+                        <div class="metric-label">System Uptime</div>
+                    </div>
+                </div>
+
+                <!-- User Stats (only visible when authenticated) -->
+                <div id="user-dashboard-stats" style="display: none;">
+                    <h4 style="color: var(--primary); margin: 2rem 0 1rem 0;">Your Security Stats</h4>
+                    <div class="user-stats">
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-threats-blocked">0</span>
+                            <span class="stat-label">Threats You've Blocked</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-ctf-points">0</span>
+                            <span class="stat-label">CTF Points Earned</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-challenges-completed">0</span>
+                            <span class="stat-label">Challenges Completed</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-rank">Unranked</span>
+                            <span class="stat-label">Global Rank</span>
+                        </div>
+                    </div>
+
+                    <div class="achievement-badges" id="user-achievements">
+                        <!-- Achievements will be dynamically inserted -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTF Challenges Section -->
+    <section class="ctf-section" id="ctf-challenges">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Capture The Flag Challenges</h2>
+                <p class="section-subtitle">Test your cybersecurity skills with real-world scenarios</p>
+            </div>
+
+            <!-- CTF Leaderboard -->
+            <div class="ctf-leaderboard">
+                <h3 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">🏆 Current Leaderboard</h3>
+                <div class="leaderboard-grid">
+                    <div class="leaderboard-item gold">
+                        <span class="rank">🥇</span>
+                        <span class="name">CyberNinja_2025</span>
+                        <span class="score">3,850 pts</span>
+                    </div>
+                    <div class="leaderboard-item silver">
+                        <span class="rank">🥈</span>
+                        <span class="name">SecMaster_Pro</span>
+                        <span class="score">3,720 pts</span>
+                    </div>
+                    <div class="leaderboard-item bronze">
+                        <span class="rank">🥉</span>
+                        <span class="name">HackTheBox_Elite</span>
+                        <span class="score">3,650 pts</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="rank">4</span>
+                        <span class="name">PentestGuru</span>
+                        <span class="score">3,420 pts</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="rank">5</span>
+                        <span class="name">ForensicsExpert</span>
+                        <span class="score">3,280 pts</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prize Pool -->
+            <div class="prize-pool">
+                <h3 style="text-align: center; color: var(--secondary); margin-bottom: 2rem;">💰 Monthly Prize Pool: $25,000</h3>
+                <div class="prizes-grid">
+                    <div class="prize-item">
+                        <div class="prize-icon">🏆</div>
+                        <h4>1st Place</h4>
+                        <p class="prize-amount">$10,000</p>
+                        <p class="prize-desc">+ Job Interview Guarantee + CISSP Certification Voucher</p>
+                    </div>
+                    <div class="prize-item">
+                        <div class="prize-icon">🥈</div>
+                        <h4>2nd Place</h4>
+                        <p class="prize-amount">$5,000</p>
+                        <p class="prize-desc">+ Advanced Training Course + CEH Certification Voucher</p>
+                    </div>
+                    <div class="prize-item">
+                        <div class="prize-icon">🥉</div>
+                        <h4>3rd Place</h4>
+                        <p class="prize-amount">$3,000</p>
+                        <p class="prize-desc">+ Penetration Testing Toolkit + GCIH Certification Voucher</p>
+                    </div>
+                    <div class="prize-item">
+                        <div class="prize-icon">🎯</div>
+                        <h4>Top 10</h4>
+                        <p class="prize-amount">$500 each</p>
+                        <p class="prize-desc">+ Training Course Access + Swag Package</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTF Challenges -->
+            <div class="ctf-challenges-grid" id="ctf-challenges-grid">
+                <!-- Protected content overlay will be inserted here if not authenticated -->
+
+                <!-- Challenge 1: Web Application Security -->
+                <div class="ctf-card">
+                    <div class="ctf-header">
+                        <div class="ctf-difficulty critical">CRITICAL</div>
+                        <div class="ctf-points">1000 pts</div>
+                    </div>
+                    <div class="ctf-icon">🌐</div>
+                    <h3 class="ctf-title">Corporate Data Breach Investigation</h3>
+                    <p class="ctf-description">A Fortune 500 company's web application has been compromised. Analyze the application to find how attackers gained access to sensitive customer data.</p>
+
+                    <div class="ctf-scenario">
+                        <h4>🎯 Scenario:</h4>
+                        <p>TechCorp Inc. discovered unauthorized access to their customer database. The attack happened through their web portal. Your mission: identify the vulnerability and extract the hidden flag.</p>
+                    </div>
+
+                    <div class="ctf-details">
+                        <h4>🔍 Investigation Points:</h4>
+                        <ul>
+                            <li>Analyze the login mechanism for SQL injection vulnerabilities</li>
+                            <li>Check for Cross-Site Scripting (XSS) in user input fields</li>
+                            <li>Investigate session management and authentication bypass</li>
+                            <li>Look for insecure direct object references</li>
+                            <li>Examine file upload functionality for malicious content</li>
+                        </ul>
+                    </div>
+
+                    <div class="ctf-hints">
+                        <h4>💡 Hints Available:</h4>
+                        <button class="hint-btn" onclick="showHint('web-app', 1)">Hint 1 (-50 pts)</button>
+                        <button class="hint-btn" onclick="showHint('web-app', 2)">Hint 2 (-100 pts)</button>
+                        <button class="hint-btn" onclick="showHint('web-app', 3)">Hint 3 (-150 pts)</button>
+                    </div>
+
+                    <div class="ctf-submission">
+                        <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-web-app" class="flag-input">
+                        <button class="submit-flag-btn" onclick="submitFlag('web-app')">Submit Flag</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 2: Network Forensics -->
+                <div class="ctf-card">
+                    <div class="ctf-header">
+                        <div class="ctf-difficulty high">HIGH</div>
+                        <div class="ctf-points">800 pts</div>
+                    </div>
+                    <div class="ctf-icon">📡</div>
+                    <h3 class="ctf-title">APT Network Infiltration Analysis</h3>
+                    <p class="ctf-description">An Advanced Persistent Threat (APT) group has infiltrated a government network. Analyze the captured network traffic to uncover their methods and objectives.</p>
+
+                    <div class="ctf-scenario">
+                        <h4>🎯 Scenario:</h4>
+                        <p>Security analysts detected suspicious network activity in a classified government network. You have a packet capture file containing 48 hours of network traffic.</p>
+                    </div>
+
+                    <div class="ctf-details">
+                        <h4>🔍 Analysis Required:</h4>
+                        <ul>
+                            <li>Identify suspicious DNS queries and domain generation algorithms</li>
+                            <li>Analyze encrypted C2 communications patterns</li>
+                            <li>Discover data exfiltration methods and timing</li>
+                            <li>Find evidence of lateral movement within the network</li>
+                        </ul>
+                    </div>
+
+                    <div class="ctf-hints">
+                        <h4>💡 Hints Available:</h4>
+                        <button class="hint-btn" onclick="showHint('network-forensics', 1)">Hint 1 (-40 pts)</button>
+                        <button class="hint-btn" onclick="showHint('network-forensics', 2)">Hint 2 (-80 pts)</button>
+                        <button class="hint-btn" onclick="showHint('network-forensics', 3)">Hint 3 (-120 pts)</button>
+                    </div>
+
+                    <div class="ctf-submission">
+                        <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-network" class="flag-input">
+                        <button class="submit-flag-btn" onclick="submitFlag('network-forensics')">Submit Flag</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 3: Cryptography -->
+                <div class="ctf-card">
+                    <div class="ctf-header">
+                        <div class="ctf-difficulty medium">MEDIUM</div>
+                        <div class="ctf-points">600 pts</div>
+                    </div>
+                    <div class="ctf-icon">🔐</div>
+                    <h3 class="ctf-title">State-Sponsored Crypto Espionage</h3>
+                    <p class="ctf-description">Intelligence agencies intercepted encrypted communications between state-sponsored hackers. Break the encryption to reveal their next target and operation timeline.</p>
+
+                    <div class="ctf-encrypted-message">
+                        <h4>📜 Intercepted Message:</h4>
+                        <div class="encrypted-text">
+                            V2UgYXJlIGdvaW5nIHRvIGF0dGFjayB0aGUgcG93ZXIgZ3JpZCBvZiBOZXcgWW9yayBDaXR5IG9uIDIwMjUtMDItMTUgYXQgMDM6MDA6MDBVVEM=<br>
+                            Gur pbqr jbeq vf: FVYIRE_FGBEZ_2025
+                        </div>
+                    </div>
+
+                    <div class="ctf-hints">
+                        <h4>💡 Hints Available:</h4>
+                        <button class="hint-btn" onclick="showHint('cryptography', 1)">Hint 1 (-30 pts)</button>
+                        <button class="hint-btn" onclick="showHint('cryptography', 2)">Hint 2 (-60 pts)</button>
+                        <button class="hint-btn" onclick="showHint('cryptography', 3)">Hint 3 (-90 pts)</button>
+                    </div>
+
+                    <div class="ctf-submission">
+                        <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-crypto" class="flag-input">
+                        <button class="submit-flag-btn" onclick="submitFlag('cryptography')">Submit Flag</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 4: Digital Forensics -->
+                <div class="ctf-card">
+                    <div class="ctf-header">
+                        <div class="ctf-difficulty critical">CRITICAL</div>
+                        <div class="ctf-points">1200 pts</div>
+                    </div>
+                    <div class="ctf-icon">🔬</div>
+                    <h3 class="ctf-title">Insider Threat Investigation</h3>
+                    <p class="ctf-description">A trusted employee with high-level access has been stealing intellectual property. Conduct a digital forensics investigation to build a case for prosecution.</p>
+
+                    <div class="ctf-evidence">
+                        <h4>🗂️ Digital Evidence:</h4>
+                        <div class="evidence-files">
+                            <div class="evidence-item">
+                                <span class="file-icon">💻</span>
+                                <span class="file-name">laptop_image.dd</span>
+                                <span class="file-size">120 GB</span>
+                                <button class="download-btn" onclick="downloadEvidence('laptop')">Download</button>
+                            </div>
+                            <div class="evidence-item">
+                                <span class="file-icon">📱</span>
+                                <span class="file-name">mobile_extract.tar</span>
+                                <span class="file-size">45 GB</span>
+                                <button class="download-btn" onclick="downloadEvidence('mobile')">Download</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ctf-hints">
+                        <h4>💡 Hints Available:</h4>
+                        <button class="hint-btn" onclick="showHint('digital-forensics', 1)">Hint 1 (-60 pts)</button>
+                        <button class="hint-btn" onclick="showHint('digital-forensics', 2)">Hint 2 (-120 pts)</button>
+                        <button class="hint-btn" onclick="showHint('digital-forensics', 3)">Hint 3 (-180 pts)</button>
+                    </div>
+
+                    <div class="ctf-submission">
+                        <input type="text" placeholder="Enter flag: 2R-AT{...}" id="flag-forensics" class="flag-input">
+                        <button class="submit-flag-btn" onclick="submitFlag('digital-forensics')">Submit Flag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTF Submission Results -->
+            <div class="ctf-results-section">
+                <h3 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">🎉 Recent Successful Submissions</h3>
+                <div class="recent-submissions" id="recent-submissions">
+                    <div class="submission-item">
+                        <span class="submitter">🥷 CyberNinja_2025</span>
+                        <span class="challenge">Corporate Data Breach</span>
+                        <span class="points">+1000 pts</span>
+                        <span class="time">2 hours ago</span>
+                    </div>
+                    <div class="submission-item">
+                        <span class="submitter">🔒 SecMaster_Pro</span>
+                        <span class="challenge">State-Sponsored Crypto</span>
+                        <span class="points">+570 pts</span>
+                        <span class="time">4 hours ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Your Results Section -->
+            <div class="your-results-section" id="your-results" style="display: none;">
+                <h3 style="color: var(--success); text-align: center; margin-bottom: 2rem;">🎊 Congratulations!</h3>
+                <div class="result-card" id="result-content">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Elite Team Section -->
+    <section class="training-section" id="our-team">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Elite Team</h2>
+                <p class="section-subtitle">World-class security experts at your service</p>
+            </div>
+            <div class="training-grid">
+                <div class="training-card team-member-card">
+                    <div class="training-icon">👤</div>
+                    <h3 class="training-title">Alex Chen</h3>
+                    <p style="text-align:center; color: var(--primary); margin-top:-0.5rem; margin-bottom:0.5rem;">Chief Security Officer</p>
+                    <p class="training-description" style="text-align:center;">CISSP, OSCP, AWS Security</p>
+                </div>
+                <div class="training-card team-member-card">
+                    <div class="training-icon">👤</div>
+                    <h3 class="training-title">Sarah Johnson</h3>
+                    <p style="text-align:center; color: var(--primary); margin-top:-0.5rem; margin-bottom:0.5rem;">Lead Penetration Tester</p>
+                    <p class="training-description" style="text-align:center;">GPEN, GWAPT, GMOB</p>
+                </div>
+                <div class="training-card team-member-card">
+                    <div class="training-icon">👤</div>
+                    <h3 class="training-title">Marcus Rivera</h3>
+                    <p style="text-align:center; color: var(--primary); margin-top:-0.5rem; margin-bottom:0.5rem;">Cloud Security Architect</p>
+                    <p class="training-description" style="text-align:center;">Azure Security, GCP Security, CKS</p>
+                </div>
+                <div class="training-card team-member-card">
+                    <div class="training-icon">👤</div>
+                    <h3 class="training-title">Dr. Emma Wilson</h3>
+                    <p style="text-align:center; color: var(--primary); margin-top:-0.5rem; margin-bottom:0.5rem;">Threat Intelligence Lead</p>
+                    <p class="training-description" style="text-align:center;">GCTI, GREM, PhD Cybersecurity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Resources Section -->
+    <section class="professional-services" id="security-resources">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Security Resources</h2>
+                <p class="section-subtitle">Stay ahead of threats with our latest insights</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card resource-card">
+                    <div class="service-icon">🔐</div>
+                    <p style="color: var(--primary); font-weight: bold;">Cloud Security</p>
+                    <h3 class="service-title" style="margin-top:0.5rem;">Zero Trust Architecture in 2025</h3>
+                    <p class="service-description">Implementing zero trust principles for robust cloud environments and beyond.</p>
+                    <p style="color:var(--gray); font-size:0.9rem; margin-top:1rem;">5 min read Jan 15, 2025</p>
+                    <a href="#contact" class="service-link">Read More →</a>
+                </div>
+                <div class="service-card resource-card">
+                    <div class="service-icon">🚨</div>
+                    <p style="color: var(--primary); font-weight: bold;">Threat Intelligence</p>
+                    <h3 class="service-title" style="margin-top:0.5rem;">Emerging Ransomware Tactics</h3>
+                    <p class="service-description">Analysis of the latest ransomware trends and effective mitigation strategies.</p>
+                    <p style="color:var(--gray); font-size:0.9rem; margin-top:1rem;">8 min read Jan 10, 2025</p>
+                    <a href="#contact" class="service-link">Read More →</a>
+                </div>
+                <div class="service-card resource-card">
+                    <div class="service-icon">📊</div>
+                    <p style="color: var(--primary); font-weight: bold;">Compliance</p>
+                    <h3 class="service-title" style="margin-top:0.5rem;">GDPR & AI: What You Need to Know</h3>
+                    <p class="service-description">Navigating data protection regulations in the age of artificial intelligence.</p>
+                    <p style="color:var(--gray); font-size:0.9rem; margin-top:1rem;">6 min read Jan 5, 2025</p>
+                    <a href="#contact" class="service-link">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Secure Your Future</h2>
+                <p class="section-subtitle">Get in touch with our security experts</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Ready to Fortify Your Defenses?</h3>
+                    <p>Our team of elite security professionals is standing by to assess your needs and design a custom security solution.</p>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            security@2r-at.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <strong>24/7 Hotline</strong><br>
+                            +1 (800) 2R-SECURE
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🚨</div>
+                        <div>
+                            <strong>Emergency Response</strong><br>
+                            Immediate incident response team
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm" onsubmit="handleContactForm(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Security Needs</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Request Security Assessment</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+   <section class="service-detail-page" id="mdr-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">24/7 SOC & Managed Detection and Response (MDR)</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>Our 24/7 Security Operations Center (SOC) combined with Managed Detection and Response (MDR) services provides an unparalleled shield for your organization. We offer continuous, round-the-clock monitoring of your IT environment, proactively identifying, analyzing, and responding to cybersecurity threats in real-time. Unlike traditional security approaches that react to known threats, our MDR service actively hunts for emerging and unknown threats, ensuring that sophisticated attacks are detected and neutralized before they can cause significant damage. Our expert analysts leverage cutting-edge technology and up-to-the-minute threat intelligence to deliver a comprehensive security solution.</p>
+
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li><strong>Real-Time Log Analysis & Correlation (SIEM):</strong> Ingesting and analyzing logs from across your environment to detect suspicious patterns and correlate events that may indicate an attack.</li>
+         <li><strong>Advanced Endpoint Detection and Response (EDR) Integration:</strong> Continuous monitoring of endpoint activities to detect malicious behavior, with capabilities for rapid investigation and response.</li>
+         <li><strong>Network Traffic Analysis (NTA):</strong> Monitoring network communications for anomalies, C2 traffic, and data exfiltration attempts.</li>
+         <li><strong>Threat Intelligence Platform Integration:</strong> Utilizing global threat feeds and proprietary intelligence to stay ahead of attacker TTPs.</li>
+         <li><strong>Security Orchestration, Automation, and Response (SOAR):</strong> Automating responses to common incidents for faster containment and freeing up analysts for complex threats.</li>
+         <li><strong>Dedicated Security Analysts & Incident Responders:</strong> A team of certified experts providing 24/7 coverage, investigation, and guided response.</li>
+         <li><strong>Regular Reporting & Security Posture Reviews:</strong> Transparent reporting on security events, incidents, and recommendations for posture improvement.</li>
+         <li><strong>Proactive Threat Hunting:</strong> Actively searching for threats that may have bypassed automated defenses.</li>
+       </ul>
+
+       <h3>Our Approach / Methodology</h3>
+       <p>Our MDR methodology is a continuous cycle designed for optimal threat management:</p>
+       <ol>
+         <li><strong>Collect:</strong> Aggregating telemetry from endpoints, networks, cloud workloads, and applications.</li>
+         <li><strong>Detect:</strong> Applying advanced analytics, machine learning, and threat intelligence to identify potential threats.</li>
+         <li><strong>Analyze:</strong> Human-led investigation and validation of alerts to eliminate false positives and understand the threat context.</li>
+         <li><strong>Respond:</strong> Executing pre-defined playbooks or custom responses to contain the threat, including isolating affected systems or blocking malicious IPs.</li>
+         <li><strong>Remediate:</strong> Providing actionable guidance to eradicate the threat and restore affected systems.</li>
+         <li><strong>Improve:</strong> Continuously refining detection rules, response playbooks, and security controls based on lessons learned and evolving threat landscape.</li>
+       </ol>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li><strong>Reduced Attacker Dwell Time:</strong> Rapid detection and response significantly shorten the window attackers have to operate.</li>
+         <li><strong>Faster Incident Containment:</strong> Minimize the scope and impact of security breaches.</li>
+         <li><strong>Minimized Business Disruption & Financial Loss:</strong> Proactive defense prevents costly data breaches and operational downtime.</li>
+         <li><strong>Access to Specialized Expertise:</strong> Leverage our team of seasoned security professionals without the overhead of building an in-house SOC.</li>
+         <li><strong>Improved Compliance Posture:</strong> Meet regulatory requirements for monitoring, detection, and response.</li>
+         <li><strong>Enhanced Visibility:</strong> Gain deeper insights into your security posture and threat landscape.</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#managed-security-services" class="btn btn-secondary">← Back to Managed Security Services</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="grc-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Comprehensive GRC Services</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>Governance, Risk, and Compliance (GRC) are foundational pillars for a robust cybersecurity posture. Our Comprehensive GRC Services help your organization align its IT activities with business objectives, effectively manage cyber risks, and adhere to the myriad of regulatory and industry-specific compliance mandates. We provide a holistic approach, integrating GRC principles into your security strategy to ensure resilience, integrity, and stakeholder trust.</p>
+
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li><strong>Security Policy & Standard Development:</strong> Crafting and refining clear, actionable security policies, standards, and procedures tailored to your business and regulatory landscape.</li>
+         <li><strong>Risk Assessment & Management Frameworks:</strong> Implementing and managing risk frameworks (e.g., NIST RMF, ISO 27005, FAIR) to identify, analyze, evaluate, and treat cybersecurity risks.</li>
+         <li><strong>Compliance Mapping & Gap Analysis:</strong> Assessing your current state against standards like ISO 27001, SOC 2, PCI DSS, HIPAA, GDPR, CCPA, and identifying areas for improvement.</li>
+         <li><strong>Vendor & Third-Party Risk Management:</strong> Establishing programs to assess and manage risks associated with your supply chain and third-party vendors.</li>
+         <li><strong>Security Awareness & Training Program Oversight:</strong> Assisting in the development and management of effective security awareness programs to cultivate a security-conscious culture.</li>
+         <li><strong>Internal Audit & Pre-Certification Support:</strong> Conducting internal audits to prepare your organization for external certification audits, ensuring readiness and identifying potential non-conformities.</li>
+         <li><strong>Regulatory Change Management:</strong> Keeping you informed of evolving regulations and helping adapt your GRC program accordingly.</li>
+       </ul>
+
+       <h3>Our Approach / Methodology</h3>
+       <p>Our GRC service methodology is structured to deliver continuous improvement:</p>
+       <ol>
+         <li><strong>Assess Current State:</strong> Understand your existing GRC framework, business processes, and regulatory obligations.</li>
+         <li><strong>Identify Gaps & Risks:</strong> Conduct thorough risk assessments and gap analyses against relevant standards and best practices.</li>
+         <li><strong>Develop GRC Roadmap:</strong> Create a prioritized roadmap for addressing identified gaps and implementing necessary controls and processes.</li>
+         <li><strong>Implement Controls & Policies:</strong> Assist in the implementation of technical and procedural controls, and the rollout of new or updated policies.</li>
+         <li><strong>Monitor & Review:</strong> Establish mechanisms for ongoing monitoring of control effectiveness, compliance status, and risk levels.</li>
+         <li><strong>Continuous Improvement:</strong> Regularly review and update the GRC program to adapt to new threats, business changes, and regulatory updates.</li>
+       </ol>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li><strong>Improved Security Posture:</strong> Strengthen overall security through structured governance and risk management.</li>
+         <li><strong>Reduced Risk of Fines & Penalties:</strong> Ensure adherence to legal, regulatory, and contractual obligations.</li>
+         <li><strong>Enhanced Stakeholder Trust:</strong> Demonstrate a commitment to security and data protection to customers, partners, and investors.</li>
+         <li><strong>Streamlined Audit Processes:</strong> Be better prepared for internal and external audits, reducing time and cost.</li>
+         <li><strong>Better Strategic Decision-Making:</strong> Align security investments with business risks and objectives.</li>
+         <li><strong>Increased Operational Efficiency:</strong> Standardized processes and clear responsibilities improve efficiency.</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#managed-security-services" class="btn btn-secondary">← Back to Managed Security Services</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="threat-hunting-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Advanced Threat Hunting</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>Advanced Threat Hunting is a proactive cybersecurity discipline focused on actively searching for and isolating threats that have evaded existing security defenses. Unlike traditional security monitoring, which relies on alerts from automated systems, our threat hunters use their expertise, supported by cutting-edge tools and threat intelligence, to manually and iteratively search for Indicators of Compromise (IOCs) and Indicators of Attack (IOAs). This human-driven approach is crucial for uncovering sophisticated, stealthy attacks that might otherwise go undetected for extended periods.</p>
+
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li><strong>Hypothesis-Driven Investigations:</strong> Developing and testing theories about potential attacker presence based on threat intelligence, environmental anomalies, or specific TTPs.</li>
+         <li><strong>MITRE ATT&CK Framework Alignment:</strong> Systematically hunting for adversary tactics, techniques, and procedures (TTPs) as defined in the ATT&CK framework.</li>
+         <li><strong>Big Data Analytics:</strong> Leveraging security data lakes (SIEM, EDR, logs) to perform complex queries and identify subtle patterns indicative of malicious activity.</li>
+         <li><strong>Endpoint Detection and Response (EDR) Analytics:</strong> Deep dives into endpoint telemetry to uncover suspicious processes, file modifications, and network connections.</li>
+         <li><strong>Network Forensics & Traffic Analysis:</strong> Analyzing network flows and packet captures to detect C2 communications, lateral movement, and data exfiltration.</li>
+         <li><strong>Behavioral Analysis:</strong> Identifying deviations from normal user and system behavior that could indicate a compromise.</li>
+         <li><strong>Custom Scripting & Tooling:</strong> Developing custom scripts and utilizing specialized tools to aid in data collection and analysis during hunts.</li>
+       </ul>
+
+       <h3>Our Approach / Methodology</h3>
+       <p>Our threat hunting operations follow a structured, iterative process:</p>
+       <ol>
+         <li><strong>Intelligence Gathering & Hypothesis Formulation:</strong> Based on the latest threat intelligence, recent incidents, or specific organizational risks, our hunters formulate hypotheses about potential threats.</li>
+         <li><strong>Data Collection & Triage:</strong> Relevant data from various security tools and logs is collected and prioritized.</li>
+         <li><strong>Proactive Searching & Analysis:</strong> Hunters actively search through data, looking for evidence supporting their hypotheses or uncovering new, unexpected indicators.</li>
+         <li><strong>Investigation & Validation:</strong> Suspicious findings are thoroughly investigated to confirm if they represent a genuine threat and to understand its scope and nature.</li>
+         <li><strong>Containment & Response Orchestration:</strong> If a threat is confirmed, hunters work closely with the incident response team to contain and neutralize it.</li>
+         <li><strong>Documentation & Knowledge Transfer:</strong> All findings, methodologies, and new IOCs are documented, feeding back into automated detection systems and improving overall security posture.</li>
+       </ol>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li><strong>Early Detection of Sophisticated Attacks:</strong> Uncover APTs and other advanced threats that bypass conventional defenses.</li>
+         <li><strong>Reduced Attacker Dwell Time:</strong> Significantly shorten the time attackers can operate within your network undetected.</li>
+         <li><strong>Discovery of Unknown Vulnerabilities & Misconfigurations:</strong> Hunts often reveal previously unknown security gaps.</li>
+         <li><strong>Improved Understanding of Your Attack Surface:</strong> Gain insights into how attackers might target your specific environment.</li>
+         <li><strong>Enhanced Incident Response Readiness:</strong> Regular hunting exercises improve the skills and preparedness of your security team.</li>
+         <li><strong>Actionable Intelligence:</strong> Findings from hunts provide valuable intelligence to strengthen preventative controls and detection mechanisms.</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#managed-security-services" class="btn btn-secondary">← Back to Managed Security Services</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="auditing-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Continuous Security Auditing</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>Continuous Security Auditing provides an ongoing, dynamic assessment of your organization's security controls, configurations, and adherence to policies. Unlike traditional point-in-time audits, our continuous auditing service offers regular, automated, and manual checks to ensure that your security posture remains robust and compliant over time. This proactive approach helps in early identification of vulnerabilities, misconfigurations, and compliance deviations, allowing for timely remediation before they can be exploited.</p>
+
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li><strong>Automated Configuration & Compliance Scanning:</strong> Regular scans of systems, networks, and applications against predefined security benchmarks (e.g., CIS Benchmarks, DISA STIGs) and compliance requirements.</li>
+         <li><strong>Vulnerability Assessment Integration:</strong> Incorporating findings from continuous vulnerability scanning into the audit process.</li>
+         <li><strong>Log Review & Audit Trail Analysis:</strong> Automated and manual review of security logs to detect policy violations, unauthorized access, and suspicious activities.</li>
+         <li><strong>User Access & Entitlement Reviews:</strong> Periodic verification of user access rights, privileges, and account activity to ensure adherence to the principle of least privilege.</li>
+         <li><strong>Change Management Audit:</strong> Reviewing change control processes and their effectiveness in maintaining security.</li>
+         <li><strong>Firewall & Network Security Rule Audits:</strong> Regular assessment of firewall rulesets and network segmentation for effectiveness and necessity.</li>
+         <li><strong>Cloud Security Posture Auditing:</strong> Specific checks for cloud environments (AWS, Azure, GCP) to ensure secure configurations and compliance.</li>
+         <li><strong>Customizable Audit Scopes & Reporting:</strong> Tailoring audit activities to your specific needs and providing regular, actionable reports on findings and remediation status.</li>
+       </ul>
+
+       <h3>Our Approach / Methodology</h3>
+       <p>Our continuous auditing process is designed for sustained security assurance:</p>
+       <ol>
+         <li><strong>Baseline Establishment:</strong> Define the initial security and compliance baseline based on your policies, standards, and regulatory requirements.</li>
+         <li><strong>Automated Monitoring & Scanning:</strong> Implement tools and scripts for continuous collection of audit evidence and automated checks.</li>
+         <li><strong>Scheduled Manual Reviews:</strong> Conduct regular manual deep-dive reviews of critical systems and processes that require human expertise.</li>
+         <li><strong>Deviation Analysis & Alerting:</strong> Identify and alert on deviations from the established baseline or policy violations.</li>
+         <li><strong>Prioritized Findings & Remediation Guidance:</strong> Provide prioritized audit findings with clear recommendations for remediation.</li>
+         <li><strong>Remediation Tracking & Verification:</strong> Monitor the progress of remediation efforts and verify their effectiveness.</li>
+         <li><strong>Reporting & Continuous Feedback Loop:</strong> Deliver regular audit reports to stakeholders and use findings to update policies, controls, and audit procedures.</li>
+       </ol>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li><strong>Proactive Identification of Weaknesses:</strong> Discover and address security gaps before they become critical vulnerabilities.</li>
+         <li><strong>Maintained & Demonstrable Compliance:</strong> Consistently meet and prove adherence to internal policies and external regulations.</li>
+         <li><strong>Improved Security Hygiene:</strong> Foster a culture of security through regular checks and balances.</li>
+         <li><strong>Informed Risk Management:</strong> Provide ongoing data to support risk assessment and treatment decisions.</li>
+         <li><strong>Reduced Audit Fatigue & Costs:</strong> Streamline preparations for external audits by maintaining a constant state of audit readiness.</li>
+         <li><strong>Increased Operational Resilience:</strong> Ensure critical security controls are functioning as intended.</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#managed-security-services" class="btn btn-secondary">← Back to Managed Security Services</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="dfir-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Digital Forensics & Incident Response (DFIR)</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>In the event of a cybersecurity incident, a swift and effective response is critical to minimize damage, preserve evidence, and restore normal operations. Our Digital Forensics and Incident Response (DFIR) services provide expert support when you need it most. We combine deep investigative expertise with cutting-edge forensic tools to meticulously analyze security breaches, understand the attacker's methods, and provide actionable intelligence to prevent future occurrences. Our team is prepared to handle incidents of all sizes and complexities, from malware outbreaks to sophisticated APT intrusions.</p>
+
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li><strong>Incident Response Planning & Playbook Development:</strong> Helping you prepare for incidents by developing tailored response plans and actionable playbooks.</li>
+         <li><strong>24/7 Emergency Incident Response Hotline & Retainer:</strong> Immediate access to our DFIR experts to rapidly respond to and manage security incidents.</li>
+         <li><strong>Digital Evidence Acquisition & Preservation:</strong> Forensically sound collection of data from endpoints (laptops, servers, mobile devices), networks, and cloud environments.</li>
+         <li><strong>Malware Analysis & Reverse Engineering:</strong> In-depth analysis of malicious software to understand its capabilities, indicators, and impact.</li>
+         <li><strong>Log & Timeline Analysis:</strong> Correlating logs from various sources to reconstruct attacker activity and create detailed incident timelines.</li>
+         <li><strong>Root Cause Analysis (RCA):</strong> Identifying the fundamental vulnerabilities or failures that allowed the incident to occur.</li>
+         <li><strong>Containment, Eradication & Recovery Strategies:</strong> Guiding your team through the process of containing the threat, removing attacker presence, and safely restoring affected systems.</li>
+         <li><strong>Post-Incident Reporting & Lessons Learned Workshops:</strong> Providing comprehensive reports suitable for technical and executive audiences, and facilitating workshops to improve future resilience.</li>
+         <li><strong>Expert Witness & Litigation Support:</strong> Offering expert testimony and support for legal proceedings if required.</li>
+       </ul>
+
+       <h3>Our Approach / Methodology (PICERL Model)</h3>
+       <p>We typically follow the industry-standard PICERL model for incident response:</p>
+       <ol>
+         <li><strong>Preparation:</strong> Ensuring your organization is ready to respond, including plans, tools, and trained personnel.</li>
+         <li><strong>Identification:</strong> Detecting and validating a security incident, understanding its initial scope and impact.</li>
+         <li><strong>Containment:</strong> Taking immediate steps to limit the spread of the incident and prevent further damage.</li>
+         <li><strong>Eradication:</strong> Removing the threat and any associated malicious artifacts from the environment.</li>
+         <li><strong>Recovery:</strong> Safely restoring systems and data to normal operations and verifying system integrity.</li>
+         <li><strong>Lessons Learned:</strong> Analyzing the incident and response to identify areas for improvement in security controls, policies, and procedures.</li>
+       </ol>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li><strong>Minimized Impact of Incidents:</strong> Rapid and expert response reduces financial, operational, and reputational damage.</li>
+         <li><strong>Faster Recovery Times:</strong> Efficiently restore business operations after an attack.</li>
+         <li><strong>Preservation of Critical Evidence:</strong> Ensure evidence is collected and handled in a forensically sound manner for potential legal action.</li>
+         <li><strong>Clear Understanding of Attack Lifecycle:</strong> Gain insights into how the breach occurred and what actions the attacker took.</li>
+         <li><strong>Prevention of Future Incidents:</strong> Implement recommendations to strengthen defenses against similar attacks.</li>
+         <li><strong>Compliance with Breach Notification Requirements:</strong> Assistance in meeting legal and regulatory obligations for incident reporting.</li>
+         <li><strong>Increased Stakeholder Confidence:</strong> Demonstrating a mature capability to handle security incidents.</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#managed-security-services" class="btn btn-secondary">← Back to Managed Security Services</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="ai-threat-detection-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">AI-Powered Threat Detection</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>Our AI-Powered Threat Detection service transcends traditional signature-based methods by employing advanced machine learning and artificial intelligence. It establishes a baseline of normal behavior within your IT environment and then intelligently identifies anomalies, suspicious activities, and sophisticated attack patterns that often bypass conventional security tools. This proactive approach is crucial for detecting zero-day threats, insider activities, and the evolving tactics, techniques, and procedures (TTPs) used by modern adversaries.</p>
+
+       <h3>Key Capabilities & Technologies</h3>
+       <ul>
+         <li><strong>User and Entity Behavior Analytics (UEBA):</strong> Profiling users, endpoints, and servers to detect anomalous behaviors indicative of compromised accounts or insider threats.</li>
+         <li><strong>Advanced Anomaly Detection:</strong> Utilizing algorithms like clustering, autoencoders, and statistical modeling to identify deviations from established normal patterns across network traffic, log data, and endpoint activity.</li>
+         <li><strong>Supervised & Unsupervised Machine Learning:</strong> Training models on vast datasets to recognize known malicious patterns (supervised) and discover entirely new, previously unseen threats (unsupervised).</li>
+         <li><strong>Natural Language Processing (NLP):</strong> Analyzing unstructured text data, such as phishing emails, malicious scripts, or forum posts, to extract threat intelligence and identify malicious intent.</li>
+         <li><strong>Deep Learning Models:</strong> Employing neural networks for complex pattern recognition in large-scale security data, effective against polymorphic malware and sophisticated evasion techniques.</li>
+         <li><strong>Continuous Model Training & Refinement:</strong> Our AI models are constantly updated and retrained with new threat data and feedback, ensuring they adapt to the evolving threat landscape.</li>
+         <li><strong>Threat Intelligence Correlation:</strong> Integrating AI-driven detections with global threat intelligence feeds to provide context and enrich alerts.</li>
+       </ul>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li><strong>Higher Detection Accuracy:</strong> Significantly reduces false positives compared to traditional systems, allowing your security team to focus on genuine threats.</li>
+         <li><strong>Early Detection of Novel & Zero-Day Attacks:</strong> Identifies threats for which no signatures exist by focusing on malicious behaviors and anomalies.</li>
+         <li><strong>Rapid Identification of Compromises:</strong> Quickly pinpoints compromised accounts, endpoints, or servers, reducing attacker dwell time.</li>
+         <li><strong>Adaptation to Evolving Threats:</strong> AI models continuously learn and adapt, providing sustained protection against new and emerging attack vectors.</li>
+         <li><strong>Reduced Alert Fatigue:</strong> Intelligent prioritization and correlation of alerts help security teams manage the noise and focus on critical incidents.</li>
+         <li><strong>Enhanced Visibility into Insider Threats:</strong> Detects malicious or negligent activities by internal users that might otherwise go unnoticed.</li>
+       </ul>
+
+       <h3>Potential Use Cases</h3>
+       <ul>
+         <li>Detecting stealthy malware and fileless attacks that evade signature-based antivirus.</li>
+         <li>Identifying compromised user credentials being used for lateral movement.</li>
+         <li>Uncovering anomalous data access patterns indicative of data exfiltration.</li>
+         <li>Recognizing sophisticated phishing campaigns through NLP analysis of email content and sender behavior.</li>
+         <li>Flagging unusual administrative activities or policy violations.</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#ai-powered-solutions" class="btn btn-secondary">← Back to AI-Powered Solutions</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="automated-response-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Real-Time Automated Response</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>Our Automated Response systems leverage cutting-edge technology to instantly neutralize identified threats, minimizing impact and ensuring business continuity. This service streamlines security operations by automating predefined actions based on detected security events.</p>
+
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Playbook Customization & Development</li>
+         <li>Real-time Threat Correlation & Triggering</li>
+         <li>Automated Containment Actions (e.g., endpoint isolation, IP blocking, user suspension)</li>
+         <li>Integration with SIEM/SOAR Platforms and Threat Intelligence Feeds</li>
+         <li>Post-incident Reporting & Audit Trail Dashboards</li>
+       </ul>
+
+       <h3>Our Approach / Methodology</h3>
+       <p>We collaborate closely with your team to define critical alert thresholds and develop customized response playbooks tailored to your environment. Our system then monitors for these triggers, executing automated actions swiftly while providing full visibility and comprehensive audit trails for every response action taken.</p>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Significantly Reduced Mean Time to Respond (MTTR) to incidents</li>
+         <li>Minimized Human Error in Repetitive Security Tasks</li>
+         <li>Improved SOC Efficiency and Analyst Focus on Complex Threats</li>
+         <li>Consistent and Predictable Incident Handling Across the Board</li>
+         <li>Enhanced Protection Against Rapidly Evolving Automated Attacks</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#ai-powered-solutions" class="btn btn-secondary">← Back to AI-Powered Solutions</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="predictive-analytics-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Predictive Security Analytics</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>Our Predictive Security Analytics service leverages the power of artificial intelligence and machine learning to forecast potential future cyber threats and vulnerabilities. By analyzing vast amounts of historical data, current global threat trends, and your organization's specific telemetry, we identify patterns and indicators that predict future attack vectors and targets. This foresight allows your organization to transition from a reactive to a proactive security posture, anticipating and mitigating risks before they materialize into active threats.</p>
+
+       <h3>Key Capabilities & Technologies</h3>
+       <ul>
+         <li><strong>Predictive Modeling:</strong> Utilizing advanced statistical models, including time-series analysis, regression techniques, and machine learning algorithms, to forecast threat likelihoods.</li>
+         <li><strong>Dynamic Risk Scoring:</strong> Assigning dynamic risk scores to assets, users, and applications based on predicted threat exposure and vulnerability severity.</li>
+         <li><strong>Vulnerability Prioritization:</strong> Identifying which vulnerabilities in your environment are most likely to be exploited by attackers, enabling focused remediation efforts.</li>
+         <li><strong>Attacker Behavior Forecasting:</strong> Modeling and predicting potential attacker TTPs (Tactics, Techniques, and Procedures) based on evolving threat actor profiles and campaigns.</li>
+         <li><strong>Threat Intelligence Integration:</strong> Enriching predictive models with data from global threat intelligence feeds, dark web monitoring, and industry-specific threat landscapes.</li>
+         <li><strong>Scenario Simulation:</strong> Simulating potential attack scenarios based on predictive insights to test defensive capabilities and response plans.</li>
+       </ul>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li><strong>Proactive Risk Reduction:</strong> Address potential threats and vulnerabilities before they can be exploited, significantly reducing the likelihood of a successful attack.</li>
+         <li><strong>Optimized Security Investments:</strong> Allocate security resources more effectively by focusing on areas with the highest predicted risk.</li>
+         <li><strong>Improved Resource Allocation:</strong> Enable security teams to prioritize tasks and prepare for anticipated threats.</li>
+         <li><strong>Staying Ahead of Emerging Threats:</strong> Gain early warnings about new attack methods and campaigns targeting your industry or technology stack.</li>
+         <li><strong>Data-Driven Security Strategy:</strong> Make more informed strategic decisions based on quantitative predictions rather than solely on past incidents.</li>
+         <li><strong>Enhanced Situational Awareness:</strong> Develop a deeper understanding of your organization's future threat landscape.</li>
+       </ul>
+
+       <h3>Potential Use Cases</h3>
+       <ul>
+         <li>Forecasting which types of phishing attacks are likely to increase in the next quarter.</li>
+         <li>Identifying critical assets that are predicted to become high-value targets for specific threat actors.</li>
+         <li>Prioritizing patching for vulnerabilities that have a high probability of future exploitation.</li>
+         <li>Predicting an increase in brute-force attacks against specific services based on global trends.</li>
+         <li>Anticipating resource needs for the security team based on predicted incident volumes.</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#ai-powered-solutions" class="btn btn-secondary">← Back to AI-Powered Solutions</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="ai-soar-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">AI-Driven SOAR (Security Orchestration, Automation, and Response)</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>Our AI-Driven SOAR service enhances traditional Security Orchestration, Automation, and Response platforms by infusing them with advanced artificial intelligence and machine learning capabilities. While SOAR focuses on automating security workflows and playbooks, AI elevates this by enabling smarter alert triage, more adaptive and context-aware response actions, and intelligent decision support for security analysts. This results in a highly efficient, intelligent, and continuously improving security operations framework.</p>
+
+       <h3>Key Capabilities & Technologies</h3>
+       <ul>
+         <li><strong>Intelligent Alert Triage & Prioritization:</strong> AI algorithms analyze incoming alerts from various security tools (SIEM, EDR, IDS/IPS), enrich them with threat intelligence and business context, and prioritize them based on true risk, significantly reducing alert fatigue.</li>
+         <li><strong>Adaptive Playbook Execution:</strong> Machine learning models analyze the effectiveness of existing response playbooks and suggest or automatically implement optimizations over time. AI can also select the most appropriate playbook based on the nuanced context of an incident.</li>
+         <li><strong>Natural Language Processing (NLP) for Incident Understanding:</strong> Utilizing NLP to process incident descriptions, analyst notes, or even threat reports to automatically extract key information and trigger relevant automated workflows.</li>
+         <li><strong>AI-Assisted Incident Investigation:</strong> Providing analysts with AI-generated summaries of incidents, potential root causes, and recommended investigation paths, speeding up the investigation process.</li>
+         <li><strong>Automated Evidence Gathering & Reporting:</strong> AI can automate the collection of relevant logs, forensic data, and artifacts post-incident, and assist in generating standardized incident reports.</li>
+         <li><strong>Dynamic Risk Assessment & Response Adjustment:</strong> AI continuously assesses the risk posture and can dynamically adjust automated responses – for example, becoming more aggressive during high-alert periods or for critical assets.</li>
+         <li><strong>Predictive Orchestration:</strong> Leveraging predictive analytics to anticipate necessary security actions and pre-emptively orchestrate resources or trigger preventative playbooks.</li>
+       </ul>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li><strong>Greatly Increased SOC Efficiency:</strong> Automate more complex tasks and reduce manual effort in alert handling and incident response.</li>
+         <li><strong>Reduced Alert Fatigue & Faster Triage:</strong> Analysts can focus on the most critical and complex threats, as AI filters and prioritizes alerts more effectively.</li>
+         <li><strong>More Effective & Contextual Incident Response:</strong> AI ensures that automated responses are more tailored to the specific threat and environment.</li>
+         <li><strong>Continuous Improvement of Security Operations:</strong> Machine learning allows SOAR processes to learn from past incidents and adapt over time.</li>
+         <li><strong>Improved Consistency:</strong> AI-driven decisions ensure a more consistent approach to incident handling across the security team.</li>
+         <li><strong>Better Resource Utilization:</strong> Maximize the impact of your security team by augmenting their capabilities with AI.</li>
+       </ul>
+
+       <h3>Potential Use Cases</h3>
+       <ul>
+         <li>Automatically enriching a phishing alert with sender reputation, attachment analysis, and links to similar past incidents, then suggesting a playbook to the analyst.</li>
+         <li>AI identifying a multi-stage attack by correlating seemingly unrelated low-priority alerts and escalating it with a comprehensive summary.</li>
+         <li>Dynamically adjusting firewall rules or endpoint security policies based on AI-driven risk assessments of emerging global threats.</li>
+         <li>Automating the initial steps of a malware outbreak response, including endpoint isolation, sandbox analysis, and blocking C2 domains, with AI adapting the playbook based on malware behavior.</li>
+         <li>Generating a draft incident report with all relevant data points compiled by AI for analyst review and submission.</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#ai-powered-solutions" class="btn btn-secondary">← Back to AI-Powered Solutions</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="advanced-cloud-security-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Advanced Cloud Security</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Advanced Cloud Security service offers comprehensive protection for your multi-cloud environments, including AWS, Azure, and GCP. We focus on ensuring robust security configurations, continuous compliance, and proactive threat detection tailored to the unique challenges of cloud platforms.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Unified Cloud Security Management & Visibility</li>
+         <li>Real-time Threat Detection for Cloud Workloads</li>
+         <li>Automated Compliance Monitoring & Reporting</li>
+         <li>Identity and Access Management (IAM) for Cloud Resources</li>
+         <li>Cloud Data Encryption & Key Management Strategies</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>Our methodology involves a thorough security assessment of your existing cloud architecture, followed by the definition of robust security policies and the implementation of appropriate technical controls. We ensure continuous monitoring and regular optimization of your cloud security posture to adapt to evolving threats and business needs.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Enhanced Visibility and Control Over Cloud Assets</li>
+         <li>Strengthened Cloud Security Posture Against Misconfigurations</li>
+         <li>Continuous Compliance Assurance with Industry Standards</li>
+         <li>Proactive Protection Against Cloud-Specific Threats and Vulnerabilities</li>
+         <li>Secure Adoption and Migration to Cloud Platforms</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#cloud-infrastructure" class="btn btn-secondary">← Back to Cloud & Infrastructure Security</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="ztna-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Zero Trust Network Access (ZTNA)</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Zero Trust Network Access (ZTNA) service implements a modern security model based on the principle of "never trust, always verify." It provides secure, granular access to applications and resources, irrespective of user location or the device being used, significantly enhancing your organization's security posture.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Identity-Aware Access Policies and Enforcement</li>
+         <li>Application Micro-segmentation for Granular Control</li>
+         <li>Secure Application Tunnels (not reliant on network access)</li>
+         <li>Device Posture Checks and Health Validation</li>
+         <li>Continuous Authentication and Authorization</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>We begin by discovering and inventorying applications, then define access policies based on the principle of least privilege. Our phased deployment approach ensures minimal disruption, complemented by comprehensive user training and ongoing policy refinement to adapt to your evolving needs.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Significantly Reduced Attack Surface by Eliminating Over-Privileged Access</li>
+         <li>Enhanced Protection Against Lateral Movement of Threats</li>
+         <li>Secure and Seamless Access for Remote and Hybrid Workforces</li>
+         <li>Improved User Experience Compared to Traditional VPN Solutions</li>
+         <li>Stronger Compliance with Data Protection Regulations</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#cloud-infrastructure" class="btn btn-secondary">← Back to Cloud & Infrastructure Security</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="cspm-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Cloud Security Posture Management (CSPM)</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Cloud Security Posture Management (CSPM) service provides continuous monitoring of your cloud environments (AWS, Azure, GCP) to detect and remediate misconfigurations, compliance violations, and emerging security risks. We help you maintain a strong and compliant security posture across your cloud footprint.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Multi-Cloud Visibility and Asset Inventory</li>
+         <li>Automated Configuration Audits Against Security Benchmarks (CIS, NIST, etc.)</li>
+         <li>Continuous Compliance Monitoring and Reporting (SOC 2, ISO 27001, PCI DSS)</li>
+         <li>Threat Detection for Cloud Control Plane Activities</li>
+         <li>Guided Remediation and Optional Auto-Remediation Workflows</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>We integrate with your cloud provider APIs to gain comprehensive visibility, establish baseline security configurations, and then perform continuous scanning and real-time alerting on deviations. Our team assists in prioritizing findings and integrating remediation workflows to ensure timely risk mitigation.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Proactive Identification and Remediation of Cloud Misconfigurations</li>
+         <li>Maintained and Demonstrable Compliance with Industry Standards</li>
+         <li>Reduced Risk of Data Breaches Originating from Cloud Misconfigurations</li>
+         <li>Enhanced Governance and Control Over Cloud Resources</li>
+         <li>Improved Security Operations Efficiency for Cloud Environments</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#cloud-infrastructure" class="btn btn-secondary">← Back to Cloud & Infrastructure Security</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="infra-hardening-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Infrastructure Hardening & Secure Configuration</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Infrastructure Hardening service focuses on strengthening your servers, network devices, and other critical infrastructure components by applying security best practices and secure configurations. This reduces the attack surface and protects against common exploits and vulnerabilities.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Operating System (OS) Hardening (Windows, Linux, macOS)</li>
+         <li>Network Device Security Configuration (Firewalls, Routers, Switches)</li>
+         <li>Development of Secure Baseline Configurations (Golden Images)</li>
+         <li>Integration with Vulnerability Management for Continuous Improvement</li>
+         <li>Regular Configuration Audits and Drift Detection</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>Our process includes asset discovery and prioritization, development of secure baselines aligned with industry standards (e.g., CIS Benchmarks, DISA STIGs), automated configuration deployment where possible, and ongoing monitoring to detect and remediate configuration drift, ensuring sustained security.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Significant Reduction in the Attack Surface of Critical Infrastructure</li>
+         <li>Enhanced Protection Against Common Exploits and Malware</li>
+         <li>Improved System Stability and Reliability</li>
+         <li>Demonstrable Compliance with Security Policies and Standards</li>
+         <li>Foundation for a Stronger Overall Security Posture</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#cloud-infrastructure" class="btn btn-secondary">← Back to Cloud & Infrastructure Security</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="cloud-data-security-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Cloud Data Security & Encryption</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Cloud Data Security & Encryption service focuses on protecting your organization's sensitive data stored in cloud databases, storage services, and applications. We implement robust encryption, access control, and Data Loss Prevention (DLP) strategies to safeguard your information assets.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Cloud Data Discovery, Classification, and Tagging</li>
+         <li>Implementation of Cloud Data Loss Prevention (DLP) Policies</li>
+         <li>Encryption of Data at Rest and In Transit using Cloud-Native or Third-Party Tools</li>
+         <li>Centralized Key Management Solutions and Practices</li>
+         <li>Monitoring of Data Access Patterns and Anomaly Detection</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>We begin by mapping your data flows and identifying sensitive data in the cloud. Based on a thorough risk assessment, we implement appropriate data protection policies and technical controls, followed by continuous monitoring and incident response planning for potential data breaches.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Robust Protection of Sensitive Information Residing in Cloud Environments</li>
+         <li>Enhanced Compliance with Data Privacy Regulations (e.g., GDPR, CCPA, HIPAA)</li>
+         <li>Prevention of Unauthorized Data Access and Exfiltration Attempts</li>
+         <li>Increased Customer and Stakeholder Trust Through Demonstrated Data Protection</li>
+         <li>Secure Use of Cloud Services for Data Storage and Processing</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#cloud-infrastructure" class="btn btn-secondary">← Back to Cloud & Infrastructure Security</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="iam-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Modern IAM Solutions</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Modern Identity and Access Management (IAM) Solutions ensure that the right individuals have the right access to the right resources at the right times, for the right reasons. We help you implement robust IAM strategies, including Single Sign-On (SSO), identity governance, and lifecycle management.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Single Sign-On (SSO) for Seamless Application Access</li>
+         <li>Multi-Factor Authentication (MFA) Integration for Enhanced Security</li>
+         <li>Identity Governance and Administration (IGA) for Policy Enforcement</li>
+         <li>Automated User Provisioning and Deprovisioning (Lifecycle Management)</li>
+         <li>Access Request Workflows and Entitlement Management</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>We begin with an assessment of your current IAM processes and develop a tailored strategy. This is followed by the implementation and integration of chosen IAM solutions, coupled with ongoing policy refinement and user training to ensure effective adoption and governance.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Centralized and Streamlined Access Control Across Your Organization</li>
+         <li>Improved User Productivity with Simplified Login Processes</li>
+         <li>Enhanced Security Through Consistent Application of Strong Authentication</li>
+         <li>Reduced Operational Overhead for User Access Management</li>
+         <li>Streamlined Compliance Reporting and Audit Preparedness</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#identity-access" class="btn btn-secondary">← Back to Identity & Access Management</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="mfa-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Strong Multi-Factor Authentication (MFA)</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Strong Multi-Factor Authentication (MFA) service significantly enhances your security posture by requiring multiple forms of verification before granting access. This protects against unauthorized access even if user passwords are compromised, a critical layer in modern cybersecurity defense.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Support for a Wide Range of Authentication Factors (TOTP, Push Notifications, Biometrics, Hardware Tokens)</li>
+         <li>Adaptive MFA Policies Based on User Risk, Location, and Behavior</li>
+         <li>Seamless Integration with Existing IAM and Single Sign-On (SSO) Solutions</li>
+         <li>Self-Service Enrollment and Factor Management for Users</li>
+         <li>Comprehensive Audit Logs for MFA Events</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>We conduct a thorough analysis of user groups and applications to determine appropriate MFA enforcement policies. Our phased rollout approach minimizes disruption and is supported by clear user communication, training, and ongoing support to ensure smooth adoption across your organization.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Significant Reduction in Account Takeover and Unauthorized Access Incidents</li>
+         <li>Enhanced Protection for Sensitive Data and Critical Systems</li>
+         <li>Compliance with Industry Regulations and Cybersecurity Insurance Mandates</li>
+         <li>Increased User Trust and Confidence in Security Measures</li>
+         <li>Flexible Authentication Options to Balance Security and Usability</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#identity-access" class="btn btn-secondary">← Back to Identity & Access Management</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="pam-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Privileged Access Management (PAM)</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Privileged Access Management (PAM) solutions secure, manage, and monitor privileged accounts and access to your organization's most critical systems and data. This is essential for mitigating risks associated with compromised administrative credentials and insider threats.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Secure Vaulting and Rotation of Privileged Credentials (Passwords, SSH Keys)</li>
+         <li>Privileged Session Recording, Monitoring, and Real-Time Auditing</li>
+         <li>Just-In-Time (JIT) Access Provisioning for Temporary Privileges</li>
+         <li>Least Privilege Enforcement Across Systems and Applications</li>
+         <li>Comprehensive Audit Trails for all Privileged Activities and Access</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>Our approach involves the discovery and classification of all privileged accounts within your environment, followed by a risk assessment and policy development. We then deploy and configure the PAM solution, integrate it with your existing infrastructure, and provide training for administrators and users.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Robust Protection Against Insider Threats and External Attackers Targeting Privileged Credentials</li>
+         <li>Granular Control and Visibility Over Privileged Access and Activities</li>
+         <li>Detailed Audit Logs to Support Compliance and Forensic Investigations</li>
+         <li>Reduced Risk of System-Wide Compromise Through Stolen or Misused Privileges</li>
+         <li>Enforcement of Least Privilege Principles Across the Enterprise</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#identity-access" class="btn btn-secondary">← Back to Identity & Access Management</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="itdr-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Identity Threat Detection & Response (ITDR)</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Identity Threat Detection and Response (ITDR) service proactively detects and responds to threats targeting user identities, such as credential theft, account takeovers, unusual access patterns, and malicious insider activities. We leverage advanced analytics and behavioral monitoring to identify compromised identities early.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>User and Entity Behavior Analytics (UEBA) for Identity-Based Threats</li>
+         <li>Detection of Anomalous Login Patterns and Impossible Travel Scenarios</li>
+         <li>Monitoring for Compromised Credentials on the Dark Web</li>
+         <li>Automated Response Actions (e.g., Session Termination, Forced MFA, Account Lockout)</li>
+         <li>Integration with SIEM/SOAR for Holistic Incident Response</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>We establish a baseline of normal identity behavior and continuously monitor identity-related events across your environment. Alerts are triaged using advanced analytics, and our team investigates suspicious activities, executing predefined response playbooks to contain and remediate identity threats swiftly.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Early Detection of Sophisticated Identity-Based Attacks and Account Compromises</li>
+         <li>Rapid Response to Contain and Mitigate the Impact of Identity Threats</li>
+         <li>Reduced Risk of Data Breaches and Financial Loss Originating from Identity Theft</li>
+         <li>Enhanced Visibility into User Activities and Potential Insider Risks</li>
+         <li>Improved Overall Security Posture by Focusing on a Critical Attack Vector</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#identity-access" class="btn btn-secondary">← Back to Identity & Access Management</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="certifications-standards-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Industry Certifications & Standards</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our services guide organizations through the complex process of achieving and maintaining key industry certifications (e.g., ISO 27001, SOC 2, PCI-DSS, HIPAA) and adhering to relevant security standards. We provide expert guidance, readiness assessments, and support for implementing compliant security practices.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Certification Readiness Assessments and Gap Analysis</li>
+         <li>Development and Refinement of Security Policies and Procedures</li>
+         <li>Remediation Support and Control Implementation Guidance</li>
+         <li>Internal Audit Services to Prepare for External Certification</li>
+         <li>Ongoing Advisory for Maintaining Compliance Post-Certification</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>We begin by defining the scope of your certification needs, followed by a thorough gap analysis against the chosen standard. Our experts then assist in developing a prioritized roadmap, implementing necessary controls, and conducting pre-audit validation to ensure your organization is prepared for successful certification.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Enhanced Credibility and Trust with Customers and Partners</li>
+         <li>Improved Overall Security Posture Through Standardized Best Practices</li>
+         <li>Market Differentiation and Competitive Advantage</li>
+         <li>Fulfillment of Contractual and Regulatory Requirements</li>
+         <li>Streamlined Operations and Reduced Risk of Non-Compliance Penalties</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#compliance-governance" class="btn btn-secondary">← Back to Compliance & Governance</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="data-privacy-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Data Privacy & Protection (GDPR, CCPA)</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Data Privacy & Protection services help organizations navigate the complexities of regulations like GDPR, CCPA, HIPAA, and others. We provide solutions for data mapping, consent management, Data Protection Impact Assessments (DPIAs), and establishing robust breach notification protocols to ensure compliance.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Data Mapping and Inventory of Personal Data Assets</li>
+         <li>Development and Implementation of Data Protection Impact Assessments (DPIAs)</li>
+         <li>Consent Management Solutions and Cookie Compliance</li>
+         <li>Data Subject Request (DSR) Process Design and Automation</li>
+         <li>Breach Notification Planning and Incident Response Support</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>We assist in developing a comprehensive privacy framework, starting with data discovery and classification. This is followed by implementing appropriate policies, procedures, and technical controls, conducting employee training, and establishing ongoing monitoring and auditing processes to maintain data privacy.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Assured Compliance with Global and Regional Data Privacy Regulations</li>
+         <li>Avoidance of Significant Fines and Penalties for Non-Compliance</li>
+         <li>Enhanced Customer Trust and Improved Brand Reputation</li>
+         <li>Robust Data Governance Practices Across the Organization</li>
+         <li>Minimized Risk of Data Breaches Involving Personal Information</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#compliance-governance" class="btn btn-secondary">← Back to Compliance & Governance</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="compliance-automation-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Compliance Automation</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Compliance Automation services streamline your organization's compliance efforts by leveraging automated tools for evidence collection, control monitoring, risk assessment, and reporting. This reduces manual overhead, ensures continuous compliance, and improves audit readiness.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Automated Control Testing and Validation</li>
+         <li>Continuous Compliance Monitoring Dashboards with Real-time Alerts</li>
+         <li>Centralized Evidence Management Repository for Audits</li>
+         <li>Risk Assessment Automation and Workflow Integration</li>
+         <li>Integration with GRC Platforms and Security Tools</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>We identify key controls and processes suitable for automation, select and integrate appropriate tools into your environment, and develop customized workflows. Our approach includes configuring dashboards for continuous visibility and providing ongoing optimization of automated compliance processes.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Significant Reduction in Manual Effort and Time Spent on Compliance Tasks</li>
+         <li>Continuous Visibility into Your Compliance Status Across Multiple Standards</li>
+         <li>Improved Audit Readiness and More Efficient Audit Cycles</li>
+         <li>Lower Overall Cost of Compliance and Resource Optimization</li>
+         <li>More Consistent and Reliable Application of Security Controls</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#compliance-governance" class="btn btn-secondary">← Back to Compliance & Governance</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="cyber-risk-management-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Cybersecurity Risk Management</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>Our Cybersecurity Risk Management services help your organization identify, assess, prioritize, and effectively treat cybersecurity risks. We utilize established frameworks to provide a clear understanding of your risk landscape, enabling informed decision-making and strategic resource allocation for security.</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>Comprehensive Risk Identification Workshops and Asset Profiling</li>
+         <li>Threat Modeling and Vulnerability Analysis Integration</li>
+         <li>Quantitative and Qualitative Risk Analysis Techniques</li>
+         <li>Development and Maintenance of a Centralized Risk Register</li>
+         <li>Risk Treatment Planning (Mitigation, Transfer, Avoidance, Acceptance Strategies)</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>Our methodology begins with establishing the context of your organization's risk environment. We then conduct thorough risk assessments (identification, analysis, evaluation), guide risk treatment decisions, and help establish processes for ongoing risk monitoring and periodic review to ensure continued effectiveness.</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>Informed Strategic Decision-Making for Security Investments</li>
+         <li>Proactive Reduction of Overall Cybersecurity Risk Exposure</li>
+         <li>Alignment of Cybersecurity Initiatives with Business Objectives</li>
+         <li>Improved Organizational Resilience Against Cyber Threats</li>
+         <li>Enhanced Communication of Risk Posture to Stakeholders</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;"><a href="#compliance-governance" class="btn btn-secondary">← Back to Compliance & Governance</a></div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="xdr-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Extended Detection and Response (XDR)</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>Extended Detection and Response (XDR) is a holistic, cross-domain security solution that provides unified threat detection, investigation, and response capabilities. Unlike traditional siloed security tools like EDR (Endpoint Detection and Response) or NDR (Network Detection and Response), XDR integrates telemetry from multiple security layers – including endpoints, networks, cloud workloads, email, and identity systems. This comprehensive visibility enables faster, more accurate threat detection and more efficient response orchestration across your entire environment.</p>
+
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li><strong>Cross-Layer Telemetry Correlation:</strong> Ingests and correlates security data from endpoints (EDR), networks (NDR), cloud (CSPM, CWPP), email security gateways, and identity and access management (IAM) systems.</li>
+         <li><strong>AI-Powered Analytics & Threat Detection:</strong> Utilizes advanced analytics and machine learning to detect complex attack patterns and anomalous behaviors that might be missed by individual security tools.</li>
+         <li><strong>Unified Incident View:</strong> Provides a centralized console for viewing and investigating threats across multiple security domains, streamlining the investigation process.</li>
+         <li><strong>Automated & Orchestrated Response:</strong> Enables coordinated response actions across different security layers (e.g., isolate an endpoint, block a network connection, disable a user account) from a single platform.</li>
+         <li><strong>Threat Hunting Capabilities:</strong> Facilitates proactive threat hunting by providing rich, correlated data sets for security analysts.</li>
+         <li><strong>Integration with SIEM & SOAR:</strong> Often integrates with or enhances existing SIEM (Security Information and Event Management) and SOAR (Security Orchestration, Automation, and Response) platforms.</li>
+         <li><strong>Cloud-Native Architecture:</strong> Typically delivered as a cloud-native platform for scalability and ease of deployment.</li>
+         <li><strong>Vendor-Specific or Open XDR:</strong> Solutions can be vendor-specific (tightly integrated suite from one vendor) or open/hybrid (integrating tools from multiple vendors).</li>
+       </ul>
+
+       <h3>Our Approach / Methodology</h3>
+       <p>Implementing and managing an XDR solution involves several key steps:</p>
+       <ol>
+         <li><strong>Assessment & Strategy:</strong> Understanding your existing security toolset, identifying gaps, and defining an XDR strategy aligned with your security goals.</li>
+         <li><strong>Platform Selection & Deployment:</strong> Choosing the right XDR platform (vendor-specific or open) and deploying sensors and integrations across relevant security layers.</li>
+         <li><strong>Telemetry Integration & Configuration:</strong> Ensuring proper data ingestion and correlation from all connected security sources. Configuring detection rules and alert thresholds.</li>
+         <li><strong>Detection & Investigation Workflow Development:</strong> Defining workflows for how XDR alerts are triaged, investigated, and escalated.</li>
+         <li><strong>Response Playbook Customization:</strong> Developing or customizing automated response playbooks that leverage XDR's cross-domain capabilities.</li>
+         <li><strong>Analyst Training & Enablement:</strong> Training security analysts on how to effectively use the XDR platform for threat detection, investigation, and response.</li>
+         <li><strong>Continuous Monitoring & Optimization:</strong> Regularly reviewing XDR performance, fine-tuning detection rules, and optimizing response playbooks based on evolving threats and organizational needs.</li>
+       </ol>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li><strong>Improved Threat Detection Accuracy:</strong> Reduces false positives and negatives by correlating data from multiple sources.</li>
+         <li><strong>Faster Mean Time to Detect (MTTD) & Respond (MTTR):</strong> Streamlined investigation and automated cross-domain responses accelerate incident handling.</li>
+         <li><strong>Enhanced Visibility:</strong> Provides a comprehensive view of threats across the entire attack surface.</li>
+         <li><strong>Increased SOC Productivity:</strong> Simplifies security operations by unifying threat management in a single platform.</li>
+         <li><strong>Reduced Alert Fatigue:</strong> Consolidates and prioritizes alerts, allowing analysts to focus on the most critical threats.</li>
+         <li><strong>Better Context for Investigations:</strong> Correlated data provides richer context, enabling analysts to understand the full scope of an attack more quickly.</li>
+         <li><strong>More Effective Response:</strong> Enables coordinated response actions across multiple security layers, leading to more effective threat containment.</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#security-assessment" class="btn btn-secondary">&larr; Back to Security Assessment</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="risk-assessment-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Risk Assessment</h2>
+       </div>
+
+       <h3>Overview</h3>
+       <p>A Cybersecurity Risk Assessment is the process of identifying, analyzing, and evaluating risks to your organization's information assets and business operations. It helps you understand the potential threats your organization faces, the likelihood of those threats occurring, and the potential impact if they do. Our risk assessment services provide a clear picture of your cyber risk landscape, enabling informed decision-making for your security strategy, investments, and overall risk management program.</p>
+
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li><strong>Asset Identification & Valuation:</strong> Identifying critical information assets (data, systems, hardware, intellectual property) and determining their value to the organization.</li>
+         <li><strong>Threat Identification & Modeling:</strong> Identifying potential threat sources (e.g., cybercriminals, insider threats, nation-states, malware) and modeling their tactics, techniques, and procedures (TTPs).</li>
+         <li><strong>Vulnerability Analysis Integration:</strong> Incorporating findings from vulnerability assessments to understand exploitable weaknesses.</li>
+         <li><strong>Likelihood & Impact Analysis:</strong> Assessing the probability of threats exploiting vulnerabilities and the potential business, financial, operational, and reputational impact.</li>
+         <li><strong>Control Assessment:</strong> Evaluating the effectiveness of existing security controls in mitigating identified risks.</li>
+         <li><strong>Risk Register Development:</strong> Creating a comprehensive list of identified risks, their analysis, and current treatment status.</li>
+         <li><strong>Quantitative & Qualitative Analysis:</strong> Employing both numerical (quantitative) and descriptive (qualitative) methods to assess risk levels.</li>
+         <li><strong>Compliance-Focused Assessments:</strong> Tailoring assessments to meet specific regulatory requirements (e.g., HIPAA, GDPR, PCI DSS).</li>
+         <li><strong>Scenario-Based Risk Analysis:</strong> Evaluating risks based on plausible attack scenarios relevant to your industry and organization.</li>
+       </ul>
+
+       <h3>Our Approach / Methodology</h3>
+       <p>Our Risk Assessment methodology is aligned with industry best practices (e.g., NIST SP 800-30, ISO 27005) and typically includes:</p>
+       <ol>
+         <li><strong>Context Establishment:</strong> Understanding your organization's mission, objectives, risk tolerance, and compliance obligations.</li>
+         <li><strong>Risk Identification:</strong> Systematically identifying assets, threats, existing controls, and vulnerabilities.</li>
+         <li><strong>Risk Analysis:</strong> Determining the likelihood and impact of identified risk scenarios. This involves analyzing threat-vulnerability pairs.</li>
+         <li><strong>Risk Evaluation:</strong> Comparing the analyzed risk levels against your organization's risk acceptance criteria to prioritize risks.</li>
+         <li><strong>Risk Treatment Recommendations:</strong> Proposing appropriate risk treatment options (e.g., mitigate, transfer, avoid, accept) and specific controls or actions.</li>
+         <li><strong>Reporting & Communication:</strong> Delivering a comprehensive report detailing the risk assessment findings, methodologies, and actionable recommendations to stakeholders.</li>
+         <li><strong>Continuous Monitoring & Review:</strong> Advising on establishing processes for ongoing risk monitoring and periodic reassessment.</li>
+       </ol>
+
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li><strong>Informed Decision-Making:</strong> Make strategic security decisions based on a clear understanding of your cyber risks.</li>
+         <li><strong>Prioritized Security Investments:</strong> Allocate resources effectively to address the most significant risks.</li>
+         <li><strong>Improved Security Posture:</strong> Strengthen defenses by focusing on mitigating high-priority risks.</li>
+         <li><strong>Regulatory Compliance:</strong> Meet the risk assessment requirements of various industry standards and regulations.</li>
+         <li><strong>Reduced Financial Losses:</strong> Proactively manage risks to minimize the financial impact of potential security incidents.</li>
+         <li><strong>Enhanced Business Resilience:</strong> Understand and prepare for potential disruptions caused by cyber threats.</li>
+         <li><strong>Increased Stakeholder Confidence:</strong> Demonstrate due diligence in managing cybersecurity risks to customers, partners, and regulators.</li>
+       </ul>
+
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#security-assessment" class="btn btn-secondary">← Back to Security Assessment</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="comprehensive-assessment-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Comprehensive Security Assessment</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>[Placeholder content for Overview of Comprehensive Security Assessment. This involves a thorough review of an organization's overall security landscape, including policies, procedures, technical controls, physical security, and employee awareness to provide a complete picture of cyber readiness.]</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>[Placeholder: Policy and Procedure Review]</li>
+         <li>[Placeholder: Technical Architecture Assessment]</li>
+         <li>[Placeholder: Physical Security Evaluation]</li>
+         <li>[Placeholder: Social Engineering Tests]</li>
+         <li>[Placeholder: Gap Analysis against Standards (e.g., NIST, ISO 27001)]</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>[Placeholder content for Methodology of Comprehensive Security Assessment. Typically involves initial scoping, information gathering, multi-faceted testing, analysis, and detailed reporting with actionable recommendations.]</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>[Placeholder: Holistic understanding of security posture]</li>
+         <li>[Placeholder: Identification of critical weaknesses across domains]</li>
+         <li>[Placeholder: Strategic roadmap for security improvements]</li>
+         <li>[Placeholder: Enhanced regulatory compliance]</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#security-assessment" class="btn btn-secondary">← Back to Security Assessment</a>
+       </div>
+     </div>
+   </section>
+
+   <section class="service-detail-page" id="vulnerability-assessment-details" style="padding: 60px 0; background: var(--darker);">
+     <div class="container">
+       <div class="section-header">
+         <h2 class="section-title">Vulnerability Assessment</h2>
+       </div>
+       <h3>Overview</h3>
+       <p>[Placeholder content for Overview of Vulnerability Assessment. This service focuses on identifying, classifying, and prioritizing vulnerabilities in computer systems, applications, and network infrastructures to provide the organization with the necessary knowledge to understand and address security weaknesses.]</p>
+       <h3>Key Features & Components</h3>
+       <ul>
+         <li>[Placeholder: Network Vulnerability Scanning (Internal & External)]</li>
+         <li>[Placeholder: Web Application Vulnerability Scanning]</li>
+         <li>[Placeholder: System Configuration Audits]</li>
+         <li>[Placeholder: Vulnerability Prioritization (e.g., CVSS)]</li>
+         <li>[Placeholder: Remediation Guidance]</li>
+       </ul>
+       <h3>Our Approach / Methodology</h3>
+       <p>[Placeholder content for Methodology of Vulnerability Assessment. Includes defining scope, information gathering, vulnerability scanning and analysis, validation of findings, and reporting with remediation advice.]</p>
+       <h3>Benefits for Your Organization</h3>
+       <ul>
+         <li>[Placeholder: Proactive identification of exploitable flaws]</li>
+         <li>[Placeholder: Reduced risk of security breaches]</li>
+         <li>[Placeholder: Prioritized remediation efforts]</li>
+         <li>[Placeholder: Compliance with industry mandates]</li>
+       </ul>
+       <div style="text-align: center; margin-top: 3rem;">
+         <a href="#security-assessment" class="btn btn-secondary">← Back to Security Assessment</a>
+       </div>
+     </div>
+   </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#contact">Privacy Policy</a>
+                <a href="#contact">Terms of Service</a>
+                <a href="#contact">Security Disclosure</a>
+                <a href="#contact">Certifications</a>
+            </div>
+            <p style="color: var(--gray);">© 2025 2R-AT Cybersecurity. All systems protected.</p>
+            <p style="color: var(--gray); font-size: 0.8rem; margin-top: 1rem;">SOC 2 Type II | ISO 27001 | NIST Compliant</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
