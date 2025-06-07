@@ -306,36 +306,6 @@
                     { text: "Check the source code for hidden admin credentials in JavaScript comments", cost: 150 }
                 ]
             },
-            'network-forensics': {
-                title: 'APT Network Infiltration Analysis',
-                correctFlag: '2R-AT{C2_53rv3r_192.168.100.42_p0rt_8080_DN5_tunneling}',
-                points: 800,
-                hints: [
-                    { text: "Focus on DNS queries that look like base64 encoded data", cost: 40 },
-                    { text: "The C2 server uses port 8080 and disguises traffic as HTTP requests", cost: 80 },
-                    { text: "Look for packets with unusual user-agent strings containing 'APT-Agent-v2.1'", cost: 120 }
-                ]
-            },
-            'cryptography': {
-                title: 'State-Sponsored Crypto Espionage',
-                correctFlag: '2R-AT{SILVER_STORM_2025_power_grid_attack_feb_15}',
-                points: 600,
-                hints: [
-                    { text: "The first part is Base64 encoded, the second part uses ROT13 cipher", cost: 30 },
-                    { text: "Look for the operation codename in the decrypted message", cost: 60 },
-                    { text: "Combine the decrypted attack details with the operation codename", cost: 90 }
-                ]
-            },
-            'digital-forensics': {
-                title: 'Insider Threat Investigation',
-                correctFlag: '2R-AT{john_smith_usb_exfiltration_2025-01-20_encrypted_7zip}',
-                points: 1200,
-                hints: [
-                    { text: "Check the Windows Event Logs for USB device insertion events", cost: 60 },
-                    { text: "Look for large 7zip files in the user's temp directory and recycle bin", cost: 120 },
-                    { text: "The suspect's name is in the laptop's user profile, combine with exfiltration method", cost: 180 }
-                ]
-            },
             'web-login-bypass': {
                 title: 'Admin Portal Bypass',
                 correctFlag: '2R-AT{w3b_byp4ss_fl4g_h3r3}',
