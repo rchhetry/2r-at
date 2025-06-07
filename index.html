@@ -189,9 +189,30 @@
             <p class="hero-subtitle">Next-Generation Cybersecurity Solutions for the Digital Age</p>
             <div class="cta-container">
                 <a href="#contact" class="btn btn-primary">Start Securing Now</a>
+                <a href="#threat-intel-section" class="btn btn-secondary">Threat Research</a>
                 <a href="#managed-security-services" class="btn btn-secondary">Explore Services</a>
             </div>
         </div>
+    </section>
+
+    <!-- Quick Security Check Section -->
+    <section class="contact" id="quick-security-check" style="background: var(--dark); text-align: center;">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Quick Security Check</h2>
+        </div>
+        <p class="hero-subtitle" style="margin-bottom: 2rem;">$ 2R-AT --scan --target your-infrastructure<br>[+] Initializing security scan...<br>[+] Analyzing 1,247 endpoints...<br>[+] Vulnerabilities detected: 0<br>[+] Security status: PROTECTED ✓</p>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+          <input type="text" placeholder="your-infrastructure (e.g., example.com)" class="flag-input" style="max-width: 400px;">
+          <button class="btn btn-primary">Start Scan</button>
+        </div>
+        <div class="metrics-grid" style="max-width: 800px; margin: 0 auto;">
+           <div class="metric-card"><div class="metric-value">99.9%</div><div class="metric-label">Threat Detection Rate</div></div>
+           <div class="metric-card"><div class="metric-value">24/7</div><div class="metric-label">Security Monitoring</div></div>
+           <div class="metric-card"><div class="metric-value">500+</div><div class="metric-label">Protected Systems</div></div>
+           <div class="metric-card"><div class="metric-value">&lt;1min</div><div class="metric-label">Response Time</div></div>
+        </div>
+      </div>
     </section>
 
     <!-- Managed Security Services Section -->
@@ -659,6 +680,74 @@
                 </div>
             </div>
         </div>
+
+    <!-- Live Security Dashboard Demo -->
+    <section class="dashboard-section" id="dashboard">
+        <div class="container">
+            <h2 class="section-title">Security Dashboard</h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">
+                Real-time threat monitoring and analytics
+            </p>
+
+            <div class="dashboard-container" id="dashboard-container">
+                <!-- Protected content overlay will be inserted here if not authenticated -->
+
+                <div class="dashboard-header">
+                    <h3>Global Threat Monitor</h3>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span>System Active</span>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="threats-blocked">1,247</div>
+                        <div class="metric-label">Threats Blocked Today</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="active-monitors">243</div>
+                        <div class="metric-label">Active Monitors</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="data-analyzed">15.7 TB</div>
+                        <div class="metric-label">Data Analyzed</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="uptime">99.99%</div>
+                        <div class="metric-label">System Uptime</div>
+                    </div>
+                </div>
+
+                <!-- User Stats (only visible when authenticated) -->
+                <div id="user-dashboard-stats" style="display: none;">
+                    <h4 style="color: var(--primary); margin: 2rem 0 1rem 0;">Your Security Stats</h4>
+                    <div class="user-stats">
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-threats-blocked">0</span>
+                            <span class="stat-label">Threats You've Blocked</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-ctf-points">0</span>
+                            <span class="stat-label">CTF Points Earned</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-challenges-completed">0</span>
+                            <span class="stat-label">Challenges Completed</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="user-rank">Unranked</span>
+                            <span class="stat-label">Global Rank</span>
+                        </div>
+                    </div>
+
+                    <div class="achievement-badges" id="user-achievements">
+                        <!-- Achievements will be dynamically inserted -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     </section>
 
     <!-- Plans Section -->
@@ -793,94 +882,6 @@
                     <h3 class="service-title">Industry Certified</h3>
                     <p class="service-description">ISO 27001, SOC 2, and NIST compliant security practices.</p>
                     <a href="#contact" class="service-link">Explore →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quick Security Check Section -->
-    <section class="contact" id="quick-security-check" style="background: var(--dark); text-align: center;">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Quick Security Check</h2>
-        </div>
-        <p class="hero-subtitle" style="margin-bottom: 2rem;">$ 2R-AT --scan --target your-infrastructure<br>[+] Initializing security scan...<br>[+] Analyzing 1,247 endpoints...<br>[+] Vulnerabilities detected: 0<br>[+] Security status: PROTECTED ✓</p>
-        <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 2rem;">
-          <input type="text" placeholder="your-infrastructure (e.g., example.com)" class="flag-input" style="max-width: 400px;">
-          <button class="btn btn-primary">Start Scan</button>
-        </div>
-        <div class="metrics-grid" style="max-width: 800px; margin: 0 auto;">
-           <div class="metric-card"><div class="metric-value">99.9%</div><div class="metric-label">Threat Detection Rate</div></div>
-           <div class="metric-card"><div class="metric-value">24/7</div><div class="metric-label">Security Monitoring</div></div>
-           <div class="metric-card"><div class="metric-value">500+</div><div class="metric-label">Protected Systems</div></div>
-           <div class="metric-card"><div class="metric-value">&lt;1min</div><div class="metric-label">Response Time</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Live Security Dashboard Demo -->
-    <section class="dashboard-section" id="dashboard">
-        <div class="container">
-            <h2 class="section-title">Security Dashboard</h2>
-            <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">
-                Real-time threat monitoring and analytics
-            </p>
-
-            <div class="dashboard-container" id="dashboard-container">
-                <!-- Protected content overlay will be inserted here if not authenticated -->
-
-                <div class="dashboard-header">
-                    <h3>Global Threat Monitor</h3>
-                    <div class="status-indicator">
-                        <span class="status-dot"></span>
-                        <span>System Active</span>
-                    </div>
-                </div>
-
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value" id="threats-blocked">1,247</div>
-                        <div class="metric-label">Threats Blocked Today</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" id="active-monitors">243</div>
-                        <div class="metric-label">Active Monitors</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" id="data-analyzed">15.7 TB</div>
-                        <div class="metric-label">Data Analyzed</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" id="uptime">99.99%</div>
-                        <div class="metric-label">System Uptime</div>
-                    </div>
-                </div>
-
-                <!-- User Stats (only visible when authenticated) -->
-                <div id="user-dashboard-stats" style="display: none;">
-                    <h4 style="color: var(--primary); margin: 2rem 0 1rem 0;">Your Security Stats</h4>
-                    <div class="user-stats">
-                        <div class="stat-card">
-                            <span class="stat-value" id="user-threats-blocked">0</span>
-                            <span class="stat-label">Threats You've Blocked</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-value" id="user-ctf-points">0</span>
-                            <span class="stat-label">CTF Points Earned</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-value" id="user-challenges-completed">0</span>
-                            <span class="stat-label">Challenges Completed</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-value" id="user-rank">Unranked</span>
-                            <span class="stat-label">Global Rank</span>
-                        </div>
-                    </div>
-
-                    <div class="achievement-badges" id="user-achievements">
-                        <!-- Achievements will be dynamically inserted -->
-                    </div>
                 </div>
             </div>
         </div>
