@@ -379,110 +379,125 @@ const detailedScanSteps = [
         const auth = new AuthSystem();
 
         // Quick Scan Functionality - Placed before CTF system for better organization
-        function handleQuickScan() {
-            const targetInput = document.getElementById('quick-scan-target');
-            const scanButton = document.getElementById('quick-scan-button');
-            const outputElement = document.getElementById('quick-scan-output');
-            const resultsElement = document.getElementById('quick-scan-results');
+function handleQuickScan() {
+    const targetInput = document.getElementById('quick-scan-target');
+    const scanButton = document.getElementById('quick-scan-button');
+    const outputElement = document.getElementById('quick-scan-output');
+    const resultsElement = document.getElementById('quick-scan-results');
 
-            if (!targetInput || !scanButton || !outputElement || !resultsElement) {
-                console.error('Quick scan elements not found!');
-                return;
-            }
+    if (!targetInput || !scanButton || !outputElement || !resultsElement) {
+        console.error('Quick scan elements not found!');
+        return;
+    }
 
-            const targetValue = targetInput.value.trim().toLowerCase(); // Convert to lowercase for keyword matching
-            const originalTargetDisplayValue = targetInput.value.trim(); // For display
+    const originalTargetDisplayValue = targetInput.value.trim();
+    if (!originalTargetDisplayValue) {
+        outputElement.innerHTML = 'Please enter a target (e.g., your-website.com) to scan.';
+        resultsElement.innerHTML = '';
+        return;
+    }
 
-            if (!originalTargetDisplayValue) {
-                outputElement.innerHTML = 'Please enter a target (e.g., your-website.com) to scan.';
-                resultsElement.innerHTML = '';
-                return;
-            }
+    scanButton.disabled = true;
+    targetInput.disabled = true;
+    outputElement.innerHTML = `[+] Initiating Nessus scan for ${originalTargetDisplayValue}...<br>[+] Please wait, this may take several minutes depending on the target.`;
+    resultsElement.innerHTML = '<div class="loader-circle" style="margin: 2rem auto;"></div>'; // Basic loader
 
-            scanButton.disabled = true;
-            targetInput.disabled = true;
-            outputElement.innerHTML = '';
-            resultsElement.innerHTML = '';
-
-            // Use detailedScanSteps
-            const currentScanSteps = detailedScanSteps.map((step, index) => {
-                if (index === 0 && typeof step === 'function') {
-                    return step(originalTargetDisplayValue);
-                }
-                return step;
+    fetch('/api/nessus-scan', { // Assuming endpoint is '/api/nessus-scan'
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Add any other headers if required by your backend, like CSRF tokens
+        },
+        body: JSON.stringify({ target: originalTargetDisplayValue })
+    })
+    .then(response => {
+        if (!response.ok) {
+            // Try to get error message from backend if available
+            return response.json().then(errData => {
+                throw new Error(errData.error_message || `Network response was not ok: ${response.statusText}`);
+            }).catch(() => {
+                // Fallback if response is not JSON or no error_message
+                throw new Error(`Network response was not ok: ${response.statusText}`);
             });
-
-            let currentStepIndex = 0;
-            function displayNextStep() {
-                if (currentStepIndex < currentScanSteps.length) {
-                    outputElement.innerHTML += (currentStepIndex > 0 ? '<br>' : '') + currentScanSteps[currentStepIndex];
-                    currentStepIndex++;
-                    outputElement.scrollTop = outputElement.scrollHeight;
-                    setTimeout(displayNextStep, Math.random() * 400 + 150);
-                } else {
-                    let foundVulnerabilities = [];
-                    if (targetValue) {
-                        mockVulnerabilities.forEach(vuln => {
-                            if (foundVulnerabilities.length < 3 && vuln.keywords.some(keyword => targetValue.includes(keyword.toLowerCase()))) {
-                                if (Math.random() < 0.65) {
-                                    foundVulnerabilities.push(vuln);
-                                }
-                            }
-                        });
-                    }
-
-                    if (foundVulnerabilities.length === 0 && targetValue && Math.random() < 0.2) {
-                        const genericVuln = mockVulnerabilities.find(v => v.id === 'CVE-SIM-004'); // Missing Security Headers
-                        if (genericVuln) foundVulnerabilities.push(genericVuln);
-                    }
-
-                    outputElement.innerHTML += `<br>[+] Analysis complete. Simulated vulnerabilities detected: ${foundVulnerabilities.length}`;
-                    outputElement.scrollTop = outputElement.scrollHeight;
-
-                    if (foundVulnerabilities.length > 0) {
-                        let resultsHTML = `<h4 style="color:var(--warning); margin-bottom:1rem; text-align:left;">Simulated Scan Report for ${originalTargetDisplayValue}: ${foundVulnerabilities.length} Potential Issue(s) Found</h4>`;
-                        resultsHTML += '<ul style="list-style-type:none; padding-left:0; text-align:left;">';
-                        foundVulnerabilities.forEach(vuln => {
-                            let severityColor = 'var(--gray)';
-                            if (vuln.severity === 'High') severityColor = 'var(--danger)';
-                            else if (vuln.severity === 'Medium') severityColor = 'var(--warning)';
-                            else if (vuln.severity === 'Low') severityColor = 'var(--success)';
-
-                            resultsHTML += `<li style="margin-bottom: 1.5rem; padding: 1rem; border: 1px solid ${severityColor}; border-left-width: 5px; border-radius: 5px; background: rgba(10,14,39,0.5);">
-                                <strong style="color:${severityColor}; font-size:1.1em;">${vuln.name} (Severity: ${vuln.severity})</strong>
-                                <p style="font-size:0.95em; margin-top:0.35rem; color: var(--light);">${vuln.description}</p>
-                                <p style="font-size:0.9em; color:var(--primary); margin-top:0.6rem;"><em>Suggestion: ${vuln.solution_hint}</em></p>
-                            </li>`;
-                        });
-                        resultsHTML += '</ul>';
-                        resultsHTML += `
-                            <p style="margin-top:1.5rem; text-align:center;">This initial simulated scan provides a high-level overview. For a detailed real-world assessment and mitigation strategies, please get in touch with our experts.</p>
-                            <div style="text-align:center; margin-top:1rem;">
-                                <a href="#contact" class="btn btn-primary">Contact Security Experts</a>
-                            </div>
-                        `;
-                        resultsElement.innerHTML = resultsHTML;
-                    } else {
-                        resultsElement.innerHTML = `
-                            <h4 style="color:var(--success); margin-bottom:1rem; text-align:center;">Simulated Scan Report for ${originalTargetDisplayValue}: No Critical Issues Found</h4>
-                            <p style="color:var(--success); font-weight:bold; text-align:center;">No critical mock vulnerabilities detected for '${originalTargetDisplayValue}' in this simulation.</p>
-                            <p style="text-align:center;">While this simulation didn't find immediate critical issues, a comprehensive real-world security assessment is always recommended for thorough protection. Explore our services or contact us for more details.</p>
-                            <div style="text-align:center; margin-top:1rem;">
-                                <a href="#security-assessment" class="btn btn-secondary" style="margin-right:0.5rem;">Explore Assessments</a>
-                                <a href="#contact" class="btn btn-primary">Contact Us</a>
-                            </div>
-                        `;
-                    }
-                    outputElement.innerHTML += `<br>[+] Security status: ${foundVulnerabilities.length > 0 ? '<span style="color:var(--warning);">ACTION RECOMMENDED</span>' : '<span style="color:var(--success);">SIMULATION CLEAN ✓</span>'}`;
-                    outputElement.scrollTop = outputElement.scrollHeight;
-
-                    scanButton.disabled = false;
-                    targetInput.disabled = false;
-                }
-            }
-            displayNextStep();
         }
+        return response.json();
+    })
+    .then(data => {
+        outputElement.innerHTML = `[+] Nessus scan completed for ${data.target || originalTargetDisplayValue}.`;
+        resultsElement.innerHTML = ''; // Clear loader
 
+        if (data.scan_status === 'completed') {
+            let summaryHTML = '<div style="text-align:left; margin-bottom:1.5rem;"><h4>Scan Summary:</h4>';
+            if (data.summary) {
+                summaryHTML += `<p>Total Vulnerabilities: ${data.summary.total_vulnerabilities || 0}`;
+                if (data.summary.critical_count > 0) summaryHTML += ` | <span style="color:var(--danger);">Critical: ${data.summary.critical_count}</span>`;
+                if (data.summary.high_count > 0) summaryHTML += ` | <span style="color:var(--danger);">High: ${data.summary.high_count}</span>`; // High also often danger
+                if (data.summary.medium_count > 0) summaryHTML += ` | <span style="color:var(--warning);">Medium: ${data.summary.medium_count}</span>`;
+                if (data.summary.low_count > 0) summaryHTML += ` | <span style="color:var(--success);">Low: ${data.summary.low_count}</span>`;
+                if (data.summary.info_count > 0) summaryHTML += ` | Info: ${data.summary.info_count}`;
+                summaryHTML += '</p>';
+            } else {
+                summaryHTML += '<p>No summary data available.</p>';
+            }
+            summaryHTML += '</div>';
+            resultsElement.innerHTML += summaryHTML;
+
+            if (data.vulnerabilities && data.vulnerabilities.length > 0) {
+                let vulnerabilitiesHTML = '<h4 style="text-align:left; margin-bottom:1rem;">Vulnerabilities Found:</h4>';
+                vulnerabilitiesHTML += '<ul style="list-style-type:none; padding-left:0; text-align:left;">';
+                data.vulnerabilities.forEach(vuln => {
+                    let severityColor = 'var(--gray)';
+                    let severityText = vuln.severity || 'Info'; // Default to Info if not specified
+                    switch (severityText.toLowerCase()) {
+                        case 'critical': severityColor = 'var(--danger)'; break;
+                        case 'high': severityColor = 'var(--danger)'; break; // Often same color as critical
+                        case 'medium': severityColor = 'var(--warning)'; break;
+                        case 'low': severityColor = 'var(--success)'; break;
+                    }
+
+                    vulnerabilitiesHTML += `<li style="margin-bottom: 1.5rem; padding: 1rem; border: 1px solid ${severityColor}; border-left-width: 5px; border-radius: 5px; background: rgba(10,14,39,0.5);">
+                        <strong style="color:${severityColor}; font-size:1.1em;">${vuln.name || 'N/A'} (Severity: ${severityText})</strong>
+                        ${vuln.plugin_id ? `<p style="font-size:0.8em; color:var(--gray);">Plugin ID: ${vuln.plugin_id}</p>` : ''}
+                        <p style="font-size:0.95em; margin-top:0.35rem; color: var(--light);">${vuln.description || 'No description provided.'}</p>
+                        <p style="font-size:0.9em; color:var(--primary); margin-top:0.6rem;"><em>Solution: ${vuln.solution || 'No solution provided.'}</em></p>
+                    </li>`;
+                });
+                vulnerabilitiesHTML += '</ul>';
+                resultsElement.innerHTML += vulnerabilitiesHTML;
+                resultsElement.innerHTML += \`
+                    <div style="text-align:center; margin-top:1.5rem;">
+                        <p>For help with these findings, please contact our experts.</p>
+                        <a href="#contact" class="btn btn-primary" style="margin-top:1rem;">Contact Security Experts</a>
+                    </div>
+                \`;
+            } else {
+                resultsElement.innerHTML += \`
+                    <p style="color:var(--success); font-weight:bold; text-align:center;">No vulnerabilities reported by Nessus for '${data.target || originalTargetDisplayValue}'.</p>
+                    <div style="text-align:center; margin-top:1rem;">
+                         <p>While this scan found no issues, regular comprehensive assessments are recommended.</p>
+                        <a href="#security-assessment" class="btn btn-secondary" style="margin-right:0.5rem;">Explore Assessments</a>
+                        <a href="#contact" class="btn btn-primary">Contact Us</a>
+                    </div>
+                \`;
+            }
+        } else if (data.scan_status === 'error') {
+            outputElement.innerHTML += \`<br><span style="color:var(--danger);">Error during scan:</span>\`;
+            resultsElement.innerHTML = \`<p style="color:var(--danger);">${data.error_message || 'An unknown error occurred.'}</p>\`;
+        } else { // e.g. in_progress or other statuses
+            outputElement.innerHTML += \`<br><span style="color:var(--primary);">Scan status: ${data.scan_status}</span>\`;
+            resultsElement.innerHTML = \`<p>Please check back later or implement polling for live updates.</p>\`;
+        }
+    })
+    .catch(error => {
+        console.error('Error during Nessus scan fetch:', error);
+        outputElement.innerHTML += \`<br><span style="color:var(--danger);">Failed to initiate or complete scan.</span>\`;
+        resultsElement.innerHTML = \`<p style="color:var(--danger);">Error: ${error.message}</p>\`;
+    })
+    .finally(() => {
+        scanButton.disabled = false;
+        targetInput.disabled = false;
+    });
+}
         // CTF Challenge System
         const ctfChallenges = {
             'web-app': {
