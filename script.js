@@ -1,3 +1,87 @@
+const mockVulnerabilities = [
+    {
+        id: 'CVE-SIM-001',
+        name: 'Simulated SQL Injection Vulnerability',
+        description: 'A simulated vulnerability allowing potential unauthorized database access due to improperly sanitized user inputs on login forms or search parameters.',
+        severity: 'High',
+        keywords: ['sql', 'database', 'login', 'injection', 'sqli', 'auth'],
+        solution_hint: 'Implement parameterized queries or prepared statements. Sanitize all user inputs rigorously. Use a Web Application Firewall (WAF).'
+    },
+    {
+        id: 'CVE-SIM-002',
+        name: 'Simulated Cross-Site Scripting (XSS)',
+        description: 'A simulated vulnerability where malicious scripts could be injected into web pages viewed by other users, potentially leading to session hijacking or data theft.',
+        severity: 'Medium',
+        keywords: ['xss', 'scripting', 'cross-site', 'html', 'injection', 'cookie'],
+        solution_hint: 'Implement strong Content Security Policy (CSP). Encode output data correctly (e.g., HTML entity encoding). Validate and sanitize user inputs.'
+    },
+    {
+        id: 'CVE-SIM-003',
+        name: 'Outdated Web Server Software Detected',
+        description: 'The target appears to be running an outdated version of a web server software (e.g., Apache, Nginx), which may have known vulnerabilities.',
+        severity: 'Medium',
+        keywords: ['server', 'apache', 'nginx', 'iis', 'version', 'cve', 'exploit', 'patch'],
+        solution_hint: 'Regularly update server software to the latest stable versions. Apply security patches promptly. Subscribe to vendor security advisories.'
+    },
+    {
+        id: 'CVE-SIM-004',
+        name: 'Missing Security Headers',
+        description: 'Important HTTP security headers (e.g., Strict-Transport-Security, Content-Security-Policy, X-Frame-Options) are not implemented or misconfigured.',
+        severity: 'Low',
+        keywords: ['header', 'hsts', 'csp', 'x-frame-options', 'security policy', 'http'],
+        solution_hint: 'Configure your web server to send appropriate security headers. Use tools like securityheaders.com to check your configuration.'
+    },
+    {
+        id: 'CVE-SIM-005',
+        name: 'Weak SSL/TLS Configuration',
+        description: 'The SSL/TLS configuration uses weak ciphers, outdated protocols (e.g., SSLv3, TLS 1.0/1.1), or has certificate issues.',
+        severity: 'Medium',
+        keywords: ['ssl', 'tls', 'cipher', 'protocol', 'certificate', 'encryption', 'https'],
+        solution_hint: 'Configure your server to support only strong cipher suites and modern TLS versions (TLS 1.2, TLS 1.3). Ensure your SSL certificate is valid and properly installed.'
+    },
+    {
+        id: 'CVE-SIM-006',
+        name: 'Exposed Admin Interface',
+        description: 'An administrative interface or login panel seems to be publicly accessible, increasing the risk of brute-force attacks or unauthorized access attempts.',
+        severity: 'High',
+        keywords: ['admin', 'login', 'panel', 'wp-admin', 'administrator', 'auth', 'brute force'],
+        solution_hint: 'Restrict access to admin interfaces by IP address. Implement strong MFA. Use non-default paths for admin panels. Monitor login attempts.'
+    },
+    {
+        id: 'CVE-SIM-007',
+        name: 'Directory Traversal Vulnerability',
+        description: 'A simulated vulnerability that could allow an attacker to access restricted directories and files on the server by manipulating file path inputs.',
+        severity: 'High',
+        keywords: ['traversal', 'path', 'directory', 'file', '../', 'inclusion'],
+        solution_hint: 'Sanitize all user-supplied file paths. Implement proper access controls. Use whitelisting for allowed paths.'
+    },
+    {
+        id: 'CVE-SIM-008',
+        name: 'Information Leakage via Server Headers',
+        description: 'Server software versions or other sensitive information are exposed in HTTP response headers, potentially aiding attackers.',
+        severity: 'Low',
+        keywords: ['server', 'version', 'banner', 'leakage', 'information disclosure'],
+        solution_hint: 'Configure your web server to minimize or remove version information from HTTP headers (e.g., Server, X-Powered-By).'
+    }
+];
+
+const detailedScanSteps = [
+    (target) => `$ 2R-AT --scan --target ${target} --profile quick --intensity low`,
+    '[+] Initializing advanced heuristic analysis engine...',
+    '[+] Connecting to global threat intelligence network...',
+    '[+] Calibrating anomaly detection parameters...',
+    '[+] Scanning common ports (80, 443, 8080)...',
+    '[+] Analyzing HTTP headers for security misconfigurations...',
+    '[+] Checking for known vulnerable software versions (simulated)...',
+    '[+] Simulating basic SQL injection and XSS probes...',
+    '[+] Assessing SSL/TLS certificate chain and configuration...',
+    '[+] Looking for exposed administrative interfaces...',
+    '[+] Verifying DNS records and MX server health...',
+    '[+] Cross-referencing findings with mock vulnerability database...',
+    '[+] Generating preliminary risk assessment matrix...',
+    '[+] Compiling simulated findings and recommendations...'
+];
+
 // Authentication System
         class AuthSystem {
             constructor() {
@@ -294,6 +378,111 @@
         // Initialize authentication system
         const auth = new AuthSystem();
 
+        // Quick Scan Functionality - Placed before CTF system for better organization
+        function handleQuickScan() {
+            const targetInput = document.getElementById('quick-scan-target');
+            const scanButton = document.getElementById('quick-scan-button');
+            const outputElement = document.getElementById('quick-scan-output');
+            const resultsElement = document.getElementById('quick-scan-results');
+
+            if (!targetInput || !scanButton || !outputElement || !resultsElement) {
+                console.error('Quick scan elements not found!');
+                return;
+            }
+
+            const targetValue = targetInput.value.trim().toLowerCase(); // Convert to lowercase for keyword matching
+            const originalTargetDisplayValue = targetInput.value.trim(); // For display
+
+            if (!originalTargetDisplayValue) {
+                outputElement.innerHTML = 'Please enter a target (e.g., your-website.com) to scan.';
+                resultsElement.innerHTML = '';
+                return;
+            }
+
+            scanButton.disabled = true;
+            targetInput.disabled = true;
+            outputElement.innerHTML = '';
+            resultsElement.innerHTML = '';
+
+            // Use detailedScanSteps
+            const currentScanSteps = detailedScanSteps.map((step, index) => {
+                if (index === 0 && typeof step === 'function') {
+                    return step(originalTargetDisplayValue);
+                }
+                return step;
+            });
+
+            let currentStepIndex = 0;
+            function displayNextStep() {
+                if (currentStepIndex < currentScanSteps.length) {
+                    outputElement.innerHTML += (currentStepIndex > 0 ? '<br>' : '') + currentScanSteps[currentStepIndex];
+                    currentStepIndex++;
+                    outputElement.scrollTop = outputElement.scrollHeight;
+                    setTimeout(displayNextStep, Math.random() * 400 + 150);
+                } else {
+                    let foundVulnerabilities = [];
+                    if (targetValue) {
+                        mockVulnerabilities.forEach(vuln => {
+                            if (foundVulnerabilities.length < 3 && vuln.keywords.some(keyword => targetValue.includes(keyword.toLowerCase()))) {
+                                if (Math.random() < 0.65) {
+                                    foundVulnerabilities.push(vuln);
+                                }
+                            }
+                        });
+                    }
+
+                    if (foundVulnerabilities.length === 0 && targetValue && Math.random() < 0.2) {
+                        const genericVuln = mockVulnerabilities.find(v => v.id === 'CVE-SIM-004'); // Missing Security Headers
+                        if (genericVuln) foundVulnerabilities.push(genericVuln);
+                    }
+
+                    outputElement.innerHTML += `<br>[+] Analysis complete. Simulated vulnerabilities detected: ${foundVulnerabilities.length}`;
+                    outputElement.scrollTop = outputElement.scrollHeight;
+
+                    if (foundVulnerabilities.length > 0) {
+                        let resultsHTML = `<h4 style="color:var(--warning); margin-bottom:1rem; text-align:left;">Simulated Scan Report for ${originalTargetDisplayValue}: ${foundVulnerabilities.length} Potential Issue(s) Found</h4>`;
+                        resultsHTML += '<ul style="list-style-type:none; padding-left:0; text-align:left;">';
+                        foundVulnerabilities.forEach(vuln => {
+                            let severityColor = 'var(--gray)';
+                            if (vuln.severity === 'High') severityColor = 'var(--danger)';
+                            else if (vuln.severity === 'Medium') severityColor = 'var(--warning)';
+                            else if (vuln.severity === 'Low') severityColor = 'var(--success)';
+
+                            resultsHTML += `<li style="margin-bottom: 1.5rem; padding: 1rem; border: 1px solid ${severityColor}; border-left-width: 5px; border-radius: 5px; background: rgba(10,14,39,0.5);">
+                                <strong style="color:${severityColor}; font-size:1.1em;">${vuln.name} (Severity: ${vuln.severity})</strong>
+                                <p style="font-size:0.95em; margin-top:0.35rem; color: var(--light);">${vuln.description}</p>
+                                <p style="font-size:0.9em; color:var(--primary); margin-top:0.6rem;"><em>Suggestion: ${vuln.solution_hint}</em></p>
+                            </li>`;
+                        });
+                        resultsHTML += '</ul>';
+                        resultsHTML += `
+                            <p style="margin-top:1.5rem; text-align:center;">This initial simulated scan provides a high-level overview. For a detailed real-world assessment and mitigation strategies, please get in touch with our experts.</p>
+                            <div style="text-align:center; margin-top:1rem;">
+                                <a href="#contact" class="btn btn-primary">Contact Security Experts</a>
+                            </div>
+                        `;
+                        resultsElement.innerHTML = resultsHTML;
+                    } else {
+                        resultsElement.innerHTML = `
+                            <h4 style="color:var(--success); margin-bottom:1rem; text-align:center;">Simulated Scan Report for ${originalTargetDisplayValue}: No Critical Issues Found</h4>
+                            <p style="color:var(--success); font-weight:bold; text-align:center;">No critical mock vulnerabilities detected for '${originalTargetDisplayValue}' in this simulation.</p>
+                            <p style="text-align:center;">While this simulation didn't find immediate critical issues, a comprehensive real-world security assessment is always recommended for thorough protection. Explore our services or contact us for more details.</p>
+                            <div style="text-align:center; margin-top:1rem;">
+                                <a href="#security-assessment" class="btn btn-secondary" style="margin-right:0.5rem;">Explore Assessments</a>
+                                <a href="#contact" class="btn btn-primary">Contact Us</a>
+                            </div>
+                        `;
+                    }
+                    outputElement.innerHTML += `<br>[+] Security status: ${foundVulnerabilities.length > 0 ? '<span style="color:var(--warning);">ACTION RECOMMENDED</span>' : '<span style="color:var(--success);">SIMULATION CLEAN ✓</span>'}`;
+                    outputElement.scrollTop = outputElement.scrollHeight;
+
+                    scanButton.disabled = false;
+                    targetInput.disabled = false;
+                }
+            }
+            displayNextStep();
+        }
+
         // CTF Challenge System
         const ctfChallenges = {
             'web-app': {
@@ -306,33 +495,43 @@
                     { text: "Check the source code for hidden admin credentials in JavaScript comments", cost: 150 }
                 ]
             },
-            'web-login-bypass': {
-                title: 'Admin Portal Bypass',
-                correctFlag: '2R-AT{w3b_byp4ss_fl4g_h3r3}',
-                points: 750,
+            'network-forensics': {
+                title: 'APT Network Infiltration Analysis',
+                correctFlag: '2R-AT{C2_53rv3r_192.168.100.42_p0rt_8080_DN5_tunneling}',
+                points: 800,
                 hints: [
-                    { text: "Check for weak credentials or default passwords.", cost: 30 },
-                    { text: "Inspect client-side JavaScript for any authentication logic that can be manipulated.", cost: 70 },
-                    { text: "Try common SQL injection payloads in the username and password fields.", cost: 100 }
+                    { text: "Focus on DNS queries that look like base64 encoded data", cost: 40 },
+                    { text: "The C2 server uses port 8080 and disguises traffic as HTTP requests", cost: 80 },
+                    { text: "Look for packets with unusual user-agent strings containing 'APT-Agent-v2.1'", cost: 120 }
                 ]
             },
-            'crypto-ancient-cipher': {
-                title: 'Ancient Message Decryption',
-                correctFlag: '2R-AT{crypt0_c43s4r_sh1ft_k3y15}',
-                points: 550,
+            'cryptography': {
+                title: 'State-Sponsored Crypto Espionage',
+                correctFlag: '2R-AT{SILVER_STORM_2025_power_grid_attack_feb_15}',
+                points: 600,
                 hints: [
-                    { text: "The ciphertext seems to be a simple substitution cipher. Maybe Caesar?", cost: 20 },
-                    { text: "Frequency analysis might reveal common letters.", cost: 50 },
-                    { text: "The key is a single digit number representing the shift.", cost: 80 }
+                    { text: "The first part is Base64 encoded, the second part uses ROT13 cipher", cost: 30 },
+                    { text: "Look for the operation codename in the decrypted message", cost: 60 },
+                    { text: "Combine the decrypted attack details with the operation codename", cost: 90 }
+                ]
+            },
+            'digital-forensics': {
+                title: 'Insider Threat Investigation',
+                correctFlag: '2R-AT{john_smith_usb_exfiltration_2025-01-20_encrypted_7zip}',
+                points: 1200,
+                hints: [
+                    { text: "Check the Windows Event Logs for USB device insertion events", cost: 60 },
+                    { text: "Look for large 7zip files in the user's temp directory and recycle bin", cost: 120 },
+                    { text: "The suspect's name is in the laptop's user profile, combine with exfiltration method", cost: 180 }
                 ]
             }
         };
 
         const ctfPrizes = {
-            1000: { rank: "🏆 EXPERT LEVEL", bonus: "You've earned an Internship Opportunity at 2R-AT + a $200 Gift Voucher + Movie Tickets for two!", bg: "linear-gradient(135deg, #FFD700, #FFA500)" },
-            800: { rank: "🥈 ADVANCED LEVEL", bonus: "You've earned a $150 Gift Voucher + a 1-Year Pre-paid Mobile Topoff + access to our advanced training!", bg: "linear-gradient(135deg, #C0C0C0, #A0A0A0)" },
-            600: { rank: "🥉 INTERMEDIATE LEVEL", bonus: "You've earned a $100 Gift Voucher + Movie Tickets for one + free certification voucher!", bg: "linear-gradient(135deg, #CD7F32, #B8860B)" },
-            400: { rank: "🎯 BEGINNER LEVEL", bonus: "You've earned a $50 Pre-paid Mobile Topoff + training course access!", bg: "linear-gradient(135deg, #32CD32, #228B22)" }
+            1000: { rank: "🏆 EXPERT LEVEL", bonus: "You've earned a $500 Amazon gift card + priority consideration for our red team!", bg: "linear-gradient(135deg, #FFD700, #FFA500)" },
+            800: { rank: "🥈 ADVANCED LEVEL", bonus: "You've earned a $300 Amazon gift card + access to our advanced training!", bg: "linear-gradient(135deg, #C0C0C0, #A0A0A0)" },
+            600: { rank: "🥉 INTERMEDIATE LEVEL", bonus: "You've earned a $200 Amazon gift card + free certification voucher!", bg: "linear-gradient(135deg, #CD7F32, #B8860B)" },
+            400: { rank: "🎯 BEGINNER LEVEL", bonus: "You've earned a $100 Amazon gift card + training course access!", bg: "linear-gradient(135deg, #32CD32, #228B22)" }
         };
 
         let userPoints = 0;
@@ -723,74 +922,6 @@ Keep completing challenges to unlock more achievements!`);
             alert(`📁 Downloading: ${resources[evidenceType]}\n\n⚠️ Note: This is a simulated download for demonstration purposes. In a real CTF, these would be actual forensic files for analysis.`);
         }
 
-// Dynamic Quick Scan Functionality
-function handleQuickScan() {
-    const targetInput = document.getElementById('quick-scan-target');
-    const scanButton = document.getElementById('quick-scan-button');
-    const outputElement = document.getElementById('quick-scan-output');
-    const resultsElement = document.getElementById('quick-scan-results');
-
-    if (!targetInput || !scanButton || !outputElement || !resultsElement) {
-        console.error('Quick scan elements not found!');
-        return;
-    }
-
-    const targetValue = targetInput.value.trim();
-    if (!targetValue) {
-        outputElement.innerHTML = 'Please enter a target (e.g., your-website.com) to scan.';
-        resultsElement.innerHTML = ''; // Clear previous results
-        return;
-    }
-
-    scanButton.disabled = true;
-    targetInput.disabled = true;
-    outputElement.innerHTML = ''; // Clear previous output
-    resultsElement.innerHTML = ''; // Clear previous results
-
-    const steps = [
-        `$ 2R-AT --scan --target ${targetValue}`,
-        "[+] Initializing security scan...",
-        "[+] Checking DNS records and open ports...",
-        "[+] Analyzing web application firewalls...",
-        `[+] Scanning ${Math.floor(Math.random() * 500) + 50} common vulnerabilities...`,
-        "[+] Cross-referencing with threat intelligence feeds..."
-    ];
-
-    let currentStep = 0;
-    function displayNextStep() {
-        if (currentStep < steps.length) {
-            outputElement.innerHTML += (currentStep > 0 ? '<br>' : '') + steps[currentStep];
-            currentStep++;
-            setTimeout(displayNextStep, Math.random() * 500 + 200); // Shorter delay for steps
-        } else {
-            // Simulate scan completion
-            const vulnerabilitiesFound = Math.random() < 0.4 ? Math.floor(Math.random() * 5) + 1 : 0; // 40% chance of finding vulnerabilities
-
-            outputElement.innerHTML += `<br>[+] Analysis complete. Vulnerabilities detected: ${vulnerabilitiesFound}`;
-            outputElement.innerHTML += `<br>[+] Security status: ${vulnerabilitiesFound > 0 ? '<span style="color:var(--warning);">ACTION REQUIRED</span>' : '<span style="color:var(--success);">PROTECTED ✓</span>'}`;
-
-            if (vulnerabilitiesFound > 0) {
-                resultsElement.innerHTML = `
-                    <p style="color:var(--warning); font-weight:bold;">${vulnerabilitiesFound} potential issue(s) found during this quick scan.</p>
-                    <p>This initial scan provides a high-level overview. For a detailed report, comprehensive analysis, and mitigation strategies, please get in touch with our experts.</p>
-                    <a href="#contact" class="btn btn-primary" style="margin-top:1rem;">Contact Security Experts</a>
-                `;
-            } else {
-                resultsElement.innerHTML = `
-                    <p style="color:var(--success); font-weight:bold;">No critical vulnerabilities detected in this quick scan.</p>
-                    <p>While this scan didn't find immediate critical issues, a comprehensive security assessment is recommended for thorough protection. Explore our services or contact us for more details.</p>
-                    <a href="#security-assessment" class="btn btn-secondary" style="margin-top:0.5rem; margin-right:0.5rem;">Explore Assessments</a>
-                    <a href="#contact" class="btn btn-primary" style="margin-top:0.5rem;">Contact Us</a>
-                `;
-            }
-
-            scanButton.disabled = false;
-            targetInput.disabled = false;
-        }
-    }
-    displayNextStep(); // Start displaying steps
-}
-
         // Enhanced Contact Form Handler
         function handleContactForm(event) {
             event.preventDefault();
@@ -820,51 +951,49 @@ function handleQuickScan() {
             }, 2000);
         }
 
-        // Add event listener after DOM is loaded
+        // Initialize UI based on authentication status
         document.addEventListener('DOMContentLoaded', () => {
-            const scanButton = document.getElementById('quick-scan-button');
-            if (scanButton) {
-                scanButton.addEventListener('click', handleQuickScan);
-            }
-
-            // Initialize UI based on authentication status
             if (auth.isAuthenticated()) {
                 auth.updateUIForAuthenticatedUser();
             } else {
                 auth.updateUIForUnauthenticatedUser();
             }
 
-            // Close modal when clicking outside
-            window.addEventListener('click', (event) => {
-                const authModal = document.getElementById('auth-modal');
-                if (event.target === authModal) {
-                    closeAuthModal();
-                }
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', (event) => {
-                const userMenu = document.getElementById('user-menu');
-                const dropdown = document.getElementById('user-dropdown');
-
-                if (userMenu && !userMenu.contains(event.target)) { // Ensure userMenu exists
-                    dropdown.classList.remove('active');
-                }
-            });
-
-            // Remove loader after page load (consolidated from window.onload)
-            const loader = document.getElementById('loader');
-            if (loader) {
-                 // Using 'load' event on window inside DOMContentLoaded might be tricky.
-                 // It's generally better to trigger loader removal after initial setup.
-                 // For simplicity here, we'll assume direct execution or a more robust page load check.
-                setTimeout(() => {
-                    loader.style.opacity = '0';
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                    }, 500);
-                }, 1000);
+            // Add event listener for the quick scan button
+            const quickScanButton = document.getElementById('quick-scan-button');
+            if (quickScanButton) {
+                quickScanButton.addEventListener('click', handleQuickScan);
+            } else {
+                console.error('Quick scan button not found on DOMContentLoaded');
             }
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (event) => {
+            const authModal = document.getElementById('auth-modal');
+            if (event.target === authModal) {
+                closeAuthModal();
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            const userMenu = document.getElementById('user-menu');
+            const dropdown = document.getElementById('user-dropdown');
+
+            if (!userMenu.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Remove loader after page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1000);
         });
 
         // Particle Effect
