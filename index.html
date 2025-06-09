@@ -189,7 +189,7 @@
             <p class="hero-subtitle">Next-Generation Cybersecurity Solutions for the Digital Age</p>
             <div class="cta-container">
                 <a href="#contact" class="btn btn-primary">Start Securing Now</a>
-                <a href="#threat-intel-section" class="btn btn-secondary">Threat Research</a>
+                <a href="#quick-security-check" class="btn btn-secondary">Quick Scan</a>
                 <a href="#managed-security-services" class="btn btn-secondary">Explore Services</a>
             </div>
         </div>
@@ -201,10 +201,11 @@
         <div class="section-header">
           <h2 class="section-title">Quick Security Check</h2>
         </div>
-        <p class="hero-subtitle" style="margin-bottom: 2rem;">$ 2R-AT --scan --target your-infrastructure<br>[+] Initializing security scan...<br>[+] Analyzing 1,247 endpoints...<br>[+] Vulnerabilities detected: 0<br>[+] Security status: PROTECTED ✓</p>
+        <p class="hero-subtitle" style="margin-bottom: 2rem;" id="quick-scan-output">$ 2R-AT --scan --target your-infrastructure<br>[+] Initializing security scan...<br>[+] Analyzing 1,247 endpoints...<br>[+] Vulnerabilities detected: 0<br>[+] Security status: PROTECTED ✓</p>
+        <div id="quick-scan-results" style="margin-top: 1rem; min-height: 50px;"></div>
         <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 2rem;">
-          <input type="text" placeholder="your-infrastructure (e.g., example.com)" class="flag-input" style="max-width: 400px;">
-          <button class="btn btn-primary">Start Scan</button>
+          <input type="text" placeholder="your-infrastructure (e.g., example.com)" class="flag-input" style="max-width: 400px;" id="quick-scan-target">
+          <button class="btn btn-primary" id="quick-scan-button">Start Scan</button>
         </div>
         <div class="metrics-grid" style="max-width: 800px; margin: 0 auto;">
            <div class="metric-card"><div class="metric-value">99.9%</div><div class="metric-label">Threat Detection Rate</div></div>

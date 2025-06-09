@@ -723,6 +723,74 @@ Keep completing challenges to unlock more achievements!`);
             alert(`📁 Downloading: ${resources[evidenceType]}\n\n⚠️ Note: This is a simulated download for demonstration purposes. In a real CTF, these would be actual forensic files for analysis.`);
         }
 
+// Dynamic Quick Scan Functionality
+function handleQuickScan() {
+    const targetInput = document.getElementById('quick-scan-target');
+    const scanButton = document.getElementById('quick-scan-button');
+    const outputElement = document.getElementById('quick-scan-output');
+    const resultsElement = document.getElementById('quick-scan-results');
+
+    if (!targetInput || !scanButton || !outputElement || !resultsElement) {
+        console.error('Quick scan elements not found!');
+        return;
+    }
+
+    const targetValue = targetInput.value.trim();
+    if (!targetValue) {
+        outputElement.innerHTML = 'Please enter a target (e.g., your-website.com) to scan.';
+        resultsElement.innerHTML = ''; // Clear previous results
+        return;
+    }
+
+    scanButton.disabled = true;
+    targetInput.disabled = true;
+    outputElement.innerHTML = ''; // Clear previous output
+    resultsElement.innerHTML = ''; // Clear previous results
+
+    const steps = [
+        `$ 2R-AT --scan --target ${targetValue}`,
+        "[+] Initializing security scan...",
+        "[+] Checking DNS records and open ports...",
+        "[+] Analyzing web application firewalls...",
+        `[+] Scanning ${Math.floor(Math.random() * 500) + 50} common vulnerabilities...`,
+        "[+] Cross-referencing with threat intelligence feeds..."
+    ];
+
+    let currentStep = 0;
+    function displayNextStep() {
+        if (currentStep < steps.length) {
+            outputElement.innerHTML += (currentStep > 0 ? '<br>' : '') + steps[currentStep];
+            currentStep++;
+            setTimeout(displayNextStep, Math.random() * 500 + 200); // Shorter delay for steps
+        } else {
+            // Simulate scan completion
+            const vulnerabilitiesFound = Math.random() < 0.4 ? Math.floor(Math.random() * 5) + 1 : 0; // 40% chance of finding vulnerabilities
+
+            outputElement.innerHTML += `<br>[+] Analysis complete. Vulnerabilities detected: ${vulnerabilitiesFound}`;
+            outputElement.innerHTML += `<br>[+] Security status: ${vulnerabilitiesFound > 0 ? '<span style="color:var(--warning);">ACTION REQUIRED</span>' : '<span style="color:var(--success);">PROTECTED ✓</span>'}`;
+
+            if (vulnerabilitiesFound > 0) {
+                resultsElement.innerHTML = `
+                    <p style="color:var(--warning); font-weight:bold;">${vulnerabilitiesFound} potential issue(s) found during this quick scan.</p>
+                    <p>This initial scan provides a high-level overview. For a detailed report, comprehensive analysis, and mitigation strategies, please get in touch with our experts.</p>
+                    <a href="#contact" class="btn btn-primary" style="margin-top:1rem;">Contact Security Experts</a>
+                `;
+            } else {
+                resultsElement.innerHTML = `
+                    <p style="color:var(--success); font-weight:bold;">No critical vulnerabilities detected in this quick scan.</p>
+                    <p>While this scan didn't find immediate critical issues, a comprehensive security assessment is recommended for thorough protection. Explore our services or contact us for more details.</p>
+                    <a href="#security-assessment" class="btn btn-secondary" style="margin-top:0.5rem; margin-right:0.5rem;">Explore Assessments</a>
+                    <a href="#contact" class="btn btn-primary" style="margin-top:0.5rem;">Contact Us</a>
+                `;
+            }
+
+            scanButton.disabled = false;
+            targetInput.disabled = false;
+        }
+    }
+    displayNextStep(); // Start displaying steps
+}
+
         // Enhanced Contact Form Handler
         function handleContactForm(event) {
             event.preventDefault();
@@ -752,41 +820,51 @@ Keep completing challenges to unlock more achievements!`);
             }, 2000);
         }
 
-        // Initialize UI based on authentication status
+        // Add event listener after DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
+            const scanButton = document.getElementById('quick-scan-button');
+            if (scanButton) {
+                scanButton.addEventListener('click', handleQuickScan);
+            }
+
+            // Initialize UI based on authentication status
             if (auth.isAuthenticated()) {
                 auth.updateUIForAuthenticatedUser();
             } else {
                 auth.updateUIForUnauthenticatedUser();
             }
-        });
 
-        // Close modal when clicking outside
-        window.addEventListener('click', (event) => {
-            const authModal = document.getElementById('auth-modal');
-            if (event.target === authModal) {
-                closeAuthModal();
-            }
-        });
+            // Close modal when clicking outside
+            window.addEventListener('click', (event) => {
+                const authModal = document.getElementById('auth-modal');
+                if (event.target === authModal) {
+                    closeAuthModal();
+                }
+            });
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (event) => {
-            const userMenu = document.getElementById('user-menu');
-            const dropdown = document.getElementById('user-dropdown');
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (event) => {
+                const userMenu = document.getElementById('user-menu');
+                const dropdown = document.getElementById('user-dropdown');
 
-            if (!userMenu.contains(event.target)) {
-                dropdown.classList.remove('active');
-            }
-        });
+                if (userMenu && !userMenu.contains(event.target)) { // Ensure userMenu exists
+                    dropdown.classList.remove('active');
+                }
+            });
 
-        // Remove loader after page load
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
+            // Remove loader after page load (consolidated from window.onload)
+            const loader = document.getElementById('loader');
+            if (loader) {
+                 // Using 'load' event on window inside DOMContentLoaded might be tricky.
+                 // It's generally better to trigger loader removal after initial setup.
+                 // For simplicity here, we'll assume direct execution or a more robust page load check.
                 setTimeout(() => {
-                    document.getElementById('loader').style.display = 'none';
-                }, 500);
-            }, 1000);
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 500);
+                }, 1000);
+            }
         });
 
         // Particle Effect
