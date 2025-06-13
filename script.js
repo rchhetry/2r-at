@@ -1,89 +1,5 @@
-const mockVulnerabilities = [
-    {
-        id: 'CVE-SIM-001',
-        name: 'Simulated SQL Injection Vulnerability',
-        description: 'A simulated vulnerability allowing potential unauthorized database access due to improperly sanitized user inputs on login forms or search parameters.',
-        severity: 'High',
-        keywords: ['sql', 'database', 'login', 'injection', 'sqli', 'auth'],
-        solution_hint: 'Implement parameterized queries or prepared statements. Sanitize all user inputs rigorously. Use a Web Application Firewall (WAF).'
-    },
-    {
-        id: 'CVE-SIM-002',
-        name: 'Simulated Cross-Site Scripting (XSS)',
-        description: 'A simulated vulnerability where malicious scripts could be injected into web pages viewed by other users, potentially leading to session hijacking or data theft.',
-        severity: 'Medium',
-        keywords: ['xss', 'scripting', 'cross-site', 'html', 'injection', 'cookie'],
-        solution_hint: 'Implement strong Content Security Policy (CSP). Encode output data correctly (e.g., HTML entity encoding). Validate and sanitize user inputs.'
-    },
-    {
-        id: 'CVE-SIM-003',
-        name: 'Outdated Web Server Software Detected',
-        description: 'The target appears to be running an outdated version of a web server software (e.g., Apache, Nginx), which may have known vulnerabilities.',
-        severity: 'Medium',
-        keywords: ['server', 'apache', 'nginx', 'iis', 'version', 'cve', 'exploit', 'patch'],
-        solution_hint: 'Regularly update server software to the latest stable versions. Apply security patches promptly. Subscribe to vendor security advisories.'
-    },
-    {
-        id: 'CVE-SIM-004',
-        name: 'Missing Security Headers',
-        description: 'Important HTTP security headers (e.g., Strict-Transport-Security, Content-Security-Policy, X-Frame-Options) are not implemented or misconfigured.',
-        severity: 'Low',
-        keywords: ['header', 'hsts', 'csp', 'x-frame-options', 'security policy', 'http'],
-        solution_hint: 'Configure your web server to send appropriate security headers. Use tools like securityheaders.com to check your configuration.'
-    },
-    {
-        id: 'CVE-SIM-005',
-        name: 'Weak SSL/TLS Configuration',
-        description: 'The SSL/TLS configuration uses weak ciphers, outdated protocols (e.g., SSLv3, TLS 1.0/1.1), or has certificate issues.',
-        severity: 'Medium',
-        keywords: ['ssl', 'tls', 'cipher', 'protocol', 'certificate', 'encryption', 'https'],
-        solution_hint: 'Configure your server to support only strong cipher suites and modern TLS versions (TLS 1.2, TLS 1.3). Ensure your SSL certificate is valid and properly installed.'
-    },
-    {
-        id: 'CVE-SIM-006',
-        name: 'Exposed Admin Interface',
-        description: 'An administrative interface or login panel seems to be publicly accessible, increasing the risk of brute-force attacks or unauthorized access attempts.',
-        severity: 'High',
-        keywords: ['admin', 'login', 'panel', 'wp-admin', 'administrator', 'auth', 'brute force'],
-        solution_hint: 'Restrict access to admin interfaces by IP address. Implement strong MFA. Use non-default paths for admin panels. Monitor login attempts.'
-    },
-    {
-        id: 'CVE-SIM-007',
-        name: 'Directory Traversal Vulnerability',
-        description: 'A simulated vulnerability that could allow an attacker to access restricted directories and files on the server by manipulating file path inputs.',
-        severity: 'High',
-        keywords: ['traversal', 'path', 'directory', 'file', '../', 'inclusion'],
-        solution_hint: 'Sanitize all user-supplied file paths. Implement proper access controls. Use whitelisting for allowed paths.'
-    },
-    {
-        id: 'CVE-SIM-008',
-        name: 'Information Leakage via Server Headers',
-        description: 'Server software versions or other sensitive information are exposed in HTTP response headers, potentially aiding attackers.',
-        severity: 'Low',
-        keywords: ['server', 'version', 'banner', 'leakage', 'information disclosure'],
-        solution_hint: 'Configure your web server to minimize or remove version information from HTTP headers (e.g., Server, X-Powered-By).'
-    }
-];
-
-const detailedScanSteps = [
-    (target) => `$ 2R-AT --scan --target ${target} --profile quick --intensity low`,
-    '[+] Initializing advanced heuristic analysis engine...',
-    '[+] Connecting to global threat intelligence network...',
-    '[+] Calibrating anomaly detection parameters...',
-    '[+] Scanning common ports (80, 443, 8080)...',
-    '[+] Analyzing HTTP headers for security misconfigurations...',
-    '[+] Checking for known vulnerable software versions (simulated)...',
-    '[+] Simulating basic SQL injection and XSS probes...',
-    '[+] Assessing SSL/TLS certificate chain and configuration...',
-    '[+] Looking for exposed administrative interfaces...',
-    '[+] Verifying DNS records and MX server health...',
-    '[+] Cross-referencing findings with mock vulnerability database...',
-    '[+] Generating preliminary risk assessment matrix...',
-    '[+] Compiling simulated findings and recommendations...'
-];
-
 // Backend configuration
-const BACKEND_URL = 'https://2r-at.com/api';
+// const BACKEND_URL = 'https://2r-at.com/api'; // Base URL for backend if needed, Nuclei API is at /api/nuclei/scan
 
 // Authentication System
 class AuthSystem {
@@ -381,112 +297,8 @@ class AuthSystem {
 // Initialize authentication system
 const auth = new AuthSystem();
 
-// Nessus Scan Integration
-class NessusScanManager {
-    constructor() {
-        this.currentScanId = null;
-        this.pollInterval = null;
-        this.maxPollTime = 30 * 60 * 1000; // 30 minutes max polling
-        this.pollStartTime = null;
-    }
-
-    async startScan(hostname, scanName = null) {
-        try {
-            const response = await fetch(`${BACKEND_URL}/scan/start`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    hostname: hostname,
-                    scan_name: scanName || `Quick Scan - ${hostname}`,
-                    email_notification: auth.isAuthenticated() ? auth.getCurrentUser().email : null
-                })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || `HTTP ${response.status}: ${response.statusText}`);
-            }
-
-            const data = await response.json();
-            this.currentScanId = data.scan_id;
-            this.pollStartTime = Date.now();
-            
-            return data;
-        } catch (error) {
-            console.error('Error starting scan:', error);
-            throw error;
-        }
-    }
-
-    async getScanStatus(scanId) {
-        try {
-            const response = await fetch(`${BACKEND_URL}/scan/${scanId}/status`);
-            
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || `HTTP ${response.status}: ${response.statusText}`);
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('Error getting scan status:', error);
-            throw error;
-        }
-    }
-
-    startPolling(scanId, onUpdate, onComplete, onError) {
-        this.stopPolling(); // Clear any existing polling
-
-        const poll = async () => {
-            try {
-                // Check if we've exceeded max poll time
-                if (Date.now() - this.pollStartTime > this.maxPollTime) {
-                    this.stopPolling();
-                    onError(new Error('Scan polling timeout. Please check the scan status manually.'));
-                    return;
-                }
-
-                const status = await this.getScanStatus(scanId);
-                onUpdate(status);
-
-                if (status.status === 'completed') {
-                    this.stopPolling();
-                    onComplete(status);
-                } else if (status.status === 'failed' || status.status === 'cancelled') {
-                    this.stopPolling();
-                    onError(new Error(`Scan ${status.status}: ${status.error || 'Unknown error'}`));
-                }
-                // Continue polling for 'running' or 'queued' status
-            } catch (error) {
-                this.stopPolling();
-                onError(error);
-            }
-        };
-
-        // Poll immediately, then every 10 seconds
-        poll();
-        this.pollInterval = setInterval(poll, 10000);
-    }
-
-    stopPolling() {
-        if (this.pollInterval) {
-            clearInterval(this.pollInterval);
-            this.pollInterval = null;
-        }
-    }
-
-    async getReportUrl(scanId) {
-        return `${BACKEND_URL}/scan/${scanId}/report`;
-    }
-}
-
-// Initialize Nessus scan manager
-const nessusScanManager = new NessusScanManager();
-
-// Updated Quick Scan Functionality
-function handleQuickScan() {
+// Nuclei Quick Scan Functionality (Replaces Nessus)
+async function handleQuickScan() {
     const targetInput = document.getElementById('quick-scan-target');
     const scanButton = document.getElementById('quick-scan-button');
     const outputElement = document.getElementById('quick-scan-output');
@@ -494,6 +306,12 @@ function handleQuickScan() {
 
     if (!targetInput || !scanButton || !outputElement || !resultsElement) {
         console.error('Quick scan elements not found!');
+        return;
+    }
+
+    if (!auth.isAuthenticated()) {
+        showNotification('Please log in to perform a scan.', 'warning');
+        showAuthModal('login');
         return;
     }
 
@@ -518,157 +336,202 @@ function handleQuickScan() {
     scanButton.textContent = 'Scanning...';
 
     // Show initial status
-    outputElement.innerHTML = `[+] Initiating Nessus vulnerability scan for <strong>${hostname}</strong>...<br>[+] Connecting to Nessus server at 10.1.97.10...<br>[+] Please wait, this may take several minutes...`;
+    outputElement.innerHTML = `[+] Initiating Nuclei scan for <strong>${hostname}</strong>...<br>[+] This may take a few moments...`;
     resultsElement.innerHTML = '<div class="loader-circle" style="margin: 2rem auto;"></div>';
 
-    // Start the scan
-    nessusScanManager.startScan(hostname)
-        .then(scanData => {
-            outputElement.innerHTML += `<br>[+] Scan initiated successfully (ID: ${scanData.scan_id})<br>[+] Monitoring scan progress...`;
-
-            // Start polling for status updates
-            nessusScanManager.startPolling(
-                scanData.scan_id,
-                // onUpdate callback
-                (status) => {
-                    const statusMessages = {
-                        'queued': '[+] Scan queued for execution...',
-                        'running': '[+] Scan in progress, analyzing target systems...',
-                    };
-                    
-                    if (statusMessages[status.status]) {
-                        const lines = outputElement.innerHTML.split('<br>');
-                        const lastLine = lines[lines.length - 1];
-                        if (!lastLine.includes('Scan in progress') && status.status === 'running') {
-                            outputElement.innerHTML += '<br>' + statusMessages[status.status];
-                        }
-                    }
-                },
-                // onComplete callback
-                (finalStatus) => {
-                    handleScanComplete(finalStatus, hostname);
-                },
-                // onError callback
-                (error) => {
-                    handleScanError(error, hostname);
-                }
-            );
-        })
-        .catch(error => {
-            handleScanError(error, hostname);
-        })
-        .finally(() => {
-            // Re-enable controls
-            scanButton.disabled = false;
-            targetInput.disabled = false;
-            scanButton.textContent = 'Start Scan';
+    try {
+        const response = await fetch('/api/nuclei/scan', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // If your auth system uses tokens, add Authorization header here
+                // 'Authorization': `Bearer ${auth.getToken()}`
+            },
+            body: JSON.stringify({ hostname: hostname })
         });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ error: `HTTP ${response.status} ${response.statusText}`, details: 'No further details from server.' }));
+            throw errorData; // Throw an object that handleNucleiScanError can use
+        }
+
+        const results = await response.json();
+        displayNucleiResults(results, hostname);
+
+        // Update user stats and achievements
+        if (auth.isAuthenticated()) {
+            const numVulnerabilities = Array.isArray(results) ? results.length : 0;
+            auth.updateUserStats('threatsBlocked', numVulnerabilities); // Assuming 'threatsBlocked' is the relevant stat
+            if (numVulnerabilities > 0) {
+                 auth.addAchievement('nuclei-vulnerability-found', 'Vulnerability Hunter (Nuclei)', '🎯');
+            }
+            auth.addAchievement('first-nuclei-scan', 'Nuclei Scanner', '🛡️');
+        }
+
+    } catch (error) {
+        console.error('Nuclei Scan Error:', error);
+        // Ensure error is an object with a message property
+        const errorPayload = {
+            message: error.error || error.message || 'An unknown error occurred during the scan.',
+            details: error.details || ''
+        };
+        handleNucleiScanError(errorPayload, hostname);
+    } finally {
+        // Re-enable controls
+        scanButton.disabled = false;
+        targetInput.disabled = false;
+        scanButton.textContent = 'Start Scan';
+    }
 }
 
-function handleScanComplete(scanResult, hostname) {
+function displayNucleiResults(results, hostname) {
     const outputElement = document.getElementById('quick-scan-output');
     const resultsElement = document.getElementById('quick-scan-results');
 
-    outputElement.innerHTML = `[+] ✅ Nessus vulnerability scan completed for <strong>${hostname}</strong><br>[+] Scan Duration: ${calculateScanDuration(scanResult.created_at, scanResult.completed_at)}<br>[+] Processing results...`;
-    resultsElement.innerHTML = '';
+    outputElement.innerHTML = `[+] ✅ Nuclei scan completed for <strong>${hostname}</strong>.<br>[+] Processing results...`;
+    resultsElement.innerHTML = ''; // Clear previous results or loader
+
+    if (!Array.isArray(results) || results.length === 0) {
+        resultsElement.innerHTML = `
+            <div style="text-align: center; padding: 2rem; background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 8px;">
+                <h4 style="color: var(--success); margin-bottom: 1rem;">🛡️ Scan Complete!</h4>
+                <p style="color: var(--light);">No findings reported by Nuclei for <strong>${hostname}</strong>.</p>
+                <p style="color: var(--gray); font-size: 0.9rem;">This scan checks for known vulnerabilities based on Nuclei templates. For a more comprehensive assessment, consider our advanced services.</p>
+            </div>`;
+        return;
+    }
+
+    // Severity sort order
+    const severityOrder = {
+        "critical": 1,
+        "high": 2,
+        "medium": 3,
+        "low": 4,
+        "info": 5,
+        "unknown": 6
+    };
+
+    results.sort((a, b) => {
+        const severityA = (a.info && a.info.severity) ? a.info.severity.toLowerCase() : 'unknown';
+        const severityB = (b.info && b.info.severity) ? b.info.severity.toLowerCase() : 'unknown';
+        return (severityOrder[severityA] || 99) - (severityOrder[severityB] || 99);
+    });
 
     // Build summary
+    const severityCounts = results.reduce((acc, vuln) => {
+        const severity = (vuln.info && vuln.info.severity) ? vuln.info.severity.toLowerCase() : 'unknown';
+        acc[severity] = (acc[severity] || 0) + 1;
+        return acc;
+    }, {});
+
     let summaryHTML = '<div style="text-align:left; margin-bottom:2rem;"><h4 style="color: var(--primary);">📊 Scan Summary</h4>';
-    
-    if (scanResult.summary) {
-        const summary = scanResult.summary;
-        summaryHTML += `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">`;
-        summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary);"><strong>Total Hosts:</strong><br>${summary.total_hosts || 1}</div>`;
-        if (scanResult.vulnerabilities) {
-            const vulns = scanResult.vulnerabilities;
-            const total = Object.values(vulns).reduce((a, b) => a + b, 0);
-            summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid ${total > 0 ? 'var(--danger)' : 'var(--success)'};"><strong>Total Vulnerabilities:</strong><br>${total}</div>`;
-            if (vulns.critical > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--danger);"><strong>Critical:</strong><br>${vulns.critical}</div>`;
-            if (vulns.high > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--danger);"><strong>High:</strong><br>${vulns.high}</div>`;
-            if (vulns.medium > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--warning);"><strong>Medium:</strong><br>${vulns.medium}</div>`;
-            if (vulns.low > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--success);"><strong>Low:</strong><br>${vulns.low}</div>`;
+    summaryHTML += `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 1rem 0;">`;
+    summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary);"><strong>Target:</strong><br>${hostname}</div>`;
+    summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid ${results.length > 0 ? 'var(--danger)' : 'var(--success)'};"><strong>Total Findings:</strong><br>${results.length}</div>`;
+
+    for (const sev of ['critical', 'high', 'medium', 'low', 'info', 'unknown']) {
+        if (severityCounts[sev]) {
+            let borderColor = 'var(--gray)';
+            if (sev === 'critical' || sev === 'high') borderColor = 'var(--danger)';
+            else if (sev === 'medium') borderColor = 'var(--warning)';
+            else if (sev === 'low') borderColor = 'var(--success)';
+            summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid ${borderColor};"><strong>${sev.charAt(0).toUpperCase() + sev.slice(1)}:</strong><br>${severityCounts[sev]}</div>`;
         }
-        summaryHTML += '</div>';
     }
-    summaryHTML += '</div>';
+    summaryHTML += '</div></div>';
     resultsElement.innerHTML += summaryHTML;
 
-    // Show detailed vulnerabilities if available
-    if (scanResult.vulnerabilities_list && scanResult.vulnerabilities_list.length > 0) {
-        let vulnerabilitiesHTML = '<h4 style="text-align:left; margin-bottom:1rem; color: var(--primary);">🔍 Detailed Findings</h4>';
-        vulnerabilitiesHTML += '<div style="max-height: 500px; overflow-y: auto; border: 1px solid rgba(0,212,255,0.2); border-radius: 8px; padding: 1rem;">';
-        
-        scanResult.vulnerabilities_list.forEach(vuln => {
-            const severityColors = {
-                'Critical': 'var(--danger)',
-                'High': 'var(--danger)', 
-                'Medium': 'var(--warning)',
-                'Low': 'var(--success)',
-                'Info': 'var(--gray)'
-            };
-            
-            const severityColor = severityColors[vuln.severity] || 'var(--gray)';
-            
-            vulnerabilitiesHTML += `
-                <div style="margin-bottom: 1.5rem; padding: 1.5rem; border: 1px solid ${severityColor}; border-left-width: 5px; border-radius: 8px; background: rgba(10,14,39,0.4);">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                        <h5 style="color: ${severityColor}; margin: 0; flex: 1;">${vuln.name || 'Unknown Vulnerability'}</h5>
-                        <span style="background: ${severityColor}; color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">${vuln.severity}</span>
-                    </div>
-                    ${vuln.plugin_id && vuln.plugin_id !== 'N/A' ? `<p style="font-size: 0.8rem; color: var(--gray); margin: 0.5rem 0;">Plugin ID: ${vuln.plugin_id}</p>` : ''}
-                    <p style="color: var(--light); margin: 1rem 0; line-height: 1.5;">${vuln.description || 'No description provided.'}</p>
-                    <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 5px; border-left: 3px solid var(--primary);">
-                        <strong style="color: var(--primary);">💡 Solution:</strong>
-                        <p style="color: var(--gray); margin: 0.5rem 0 0 0; font-style: italic;">${vuln.solution || 'No solution provided.'}</p>
-                    </div>
+    // Detailed findings
+    let vulnerabilitiesHTML = '<h4 style="text-align:left; margin-bottom:1rem; color: var(--primary);">🔍 Detailed Findings</h4>';
+    vulnerabilitiesHTML += '<div style="max-height: 600px; overflow-y: auto; border: 1px solid rgba(0,212,255,0.2); border-radius: 8px; padding: 1rem;">';
+
+    results.forEach(vuln => {
+        const info = vuln.info || {};
+        const severity = info.severity ? info.severity.toLowerCase() : 'unknown';
+        const severityColors = {
+            'critical': 'var(--danger)',
+            'high': 'var(--danger)',
+            'medium': 'var(--warning)',
+            'low': 'var(--info)', // Using info for low as success might be too green
+            'info': 'var(--gray)',
+            'unknown': 'var(--gray-dark)'
+        };
+        const severityColor = severityColors[severity] || 'var(--gray)';
+
+        vulnerabilitiesHTML += `
+            <div style="margin-bottom: 1.5rem; padding: 1.5rem; border: 1px solid ${severityColor}; border-left-width: 5px; border-radius: 8px; background: rgba(10,14,39,0.4);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                    <h5 style="color: ${severityColor}; margin: 0 0 0.5rem 0; flex: 1; font-size: 1.1rem;">${info.name || 'Untitled Finding'}</h5>
+                    <span style="background: ${severityColor}; color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">${severity.toUpperCase()}</span>
                 </div>
-            `;
-        });
-        
-        vulnerabilitiesHTML += '</div>';
-        resultsElement.innerHTML += vulnerabilitiesHTML;
-    } else {
-        resultsElement.innerHTML += `
-            <div style="text-align: center; padding: 2rem; background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 8px;">
-                <h4 style="color: var(--success); margin-bottom: 1rem;">🛡️ Great News!</h4>
-                <p style="color: var(--light);">No vulnerabilities were detected during this scan of <strong>${hostname}</strong>.</p>
-                <p style="color: var(--gray); font-size: 0.9rem;">This is a preliminary scan. For comprehensive security assessment, consider our advanced penetration testing services.</p>
+                <p style="font-size: 0.85rem; color: var(--gray); margin: 0.2rem 0 0.5rem 0;"><strong>Template ID:</strong> ${vuln['template-id'] || 'N/A'}</p>
+                <p style="font-size: 0.85rem; color: var(--gray); margin: 0.2rem 0 1rem 0;"><strong>Host:</strong> ${vuln.host || hostname} ${vuln['matched-at'] ? ` <br><strong>Matched:</strong> <code style="color: var(--info);">${vuln['matched-at']}</code>` : ''}</p>
+
+                ${info.description ? `<p style="color: var(--light); margin: 0.75rem 0; line-height: 1.5;">${info.description}</p>` : ''}
+
+                ${info.remediation ? `
+                    <div style="background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 5px; border-left: 3px solid var(--primary); margin-top:1rem;">
+                        <strong style="color: var(--primary);">💡 Recommendation:</strong>
+                        <p style="color: var(--gray); margin: 0.5rem 0 0 0; font-style: italic; font-size:0.9rem;">${info.remediation}</p>
+                    </div>
+                ` : ''}
+
+                ${(info.tags && info.tags.length > 0) ? `
+                    <div style="margin-top: 1rem;">
+                        <strong style="font-size:0.85rem; color:var(--gray-light);">Tags:</strong>
+                        ${info.tags.map(tag => `<span class="tag-badge">${tag}</span>`).join(' ')}
+                    </div>
+                ` : ''}
+
+                ${vuln['curl-command'] ? `
+                    <details style="margin-top: 1rem;">
+                        <summary style="cursor: pointer; color: var(--primary-hover); font-size: 0.9rem;">Show Curl Command</summary>
+                        <pre style="background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 4px; color: var(--light); font-size: 0.8rem; overflow-x:auto;"><code>${vuln['curl-command']}</code></pre>
+                    </details>
+                `: ''}
+                 ${(vuln['extracted-results'] && vuln['extracted-results'].length > 0) ? `
+                    <details style="margin-top: 1rem;">
+                        <summary style="cursor: pointer; color: var(--primary-hover); font-size: 0.9rem;">Show Extracted Results</summary>
+                        <pre style="background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 4px; color: var(--light); font-size: 0.8rem; overflow-x:auto;"><code>${vuln['extracted-results'].join('\n')}</code></pre>
+                    </details>
+                `: ''}
             </div>
         `;
-    }
+    });
+    vulnerabilitiesHTML += '</div>';
+    resultsElement.innerHTML += vulnerabilitiesHTML;
 
-    // Add action buttons
-    let actionsHTML = '<div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">';
-    
-    if (scanResult.report_url) {
-        actionsHTML += `<a href="${BACKEND_URL}${scanResult.report_url}" target="_blank" class="btn btn-primary" style="margin-right: 1rem;">📄 Download Full Report</a>`;
-    }
-    
-    actionsHTML += `
-        <a href="#security-assessment" class="btn btn-secondary" style="margin-right: 1rem;">🔍 Advanced Assessments</a>
-        <a href="#contact" class="btn btn-primary">🤝 Contact Security Experts</a>
-    `;
-    actionsHTML += '</div>';
-    
+    // Action buttons
+    let actionsHTML = `
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <button class="btn btn-secondary" onclick="retryQuickScan()" style="margin-right: 1rem;">🔄 Scan Another Target</button>
+            <a href="#security-assessment" class="btn btn-primary" style="margin-right: 1rem;">⚙️ Advanced Assessments</a>
+            <a href="#contact" class="btn btn-primary">🤝 Contact Security Experts</a>
+        </div>`;
     resultsElement.innerHTML += actionsHTML;
-
-    // Update user stats if authenticated
-    if (auth.isAuthenticated()) {
-        auth.updateUserStats('threatsBlocked', scanResult.vulnerabilities_list ? scanResult.vulnerabilities_list.length : 0);
-        auth.addAchievement('first-scan', 'First Vulnerability Scan', '🔍');
-    }
 }
 
-function handleScanError(error, hostname) {
+
+function handleNucleiScanError(error, hostname) {
     const outputElement = document.getElementById('quick-scan-output');
     const resultsElement = document.getElementById('quick-scan-results');
 
-    outputElement.innerHTML = `[+] ❌ Scan failed for <strong>${hostname}</strong><br>[!] ${error.message}`;
+    const errorMessage = error.message || error.error || 'An unknown error occurred.';
+    const errorDetails = error.details || (typeof error === 'string' ? error : '');
+
+    outputElement.innerHTML = `[+] ❌ Nuclei Scan failed for <strong>${hostname}</strong><br>[!] ${errorMessage}`;
+
+    let detailsHTML = '';
+    if (errorDetails && typeof errorDetails === 'string' && errorDetails.trim() !== '' && errorDetails !== errorMessage) {
+        detailsHTML = `<p style="color: var(--warning); font-family: monospace; background: rgba(0,0,0,0.3); padding: 0.5rem 1rem; border-radius: 5px; font-size:0.85rem; margin-top:0.5rem; max-height:100px; overflow-y:auto;">${errorDetails}</p>`;
+    }
+
     resultsElement.innerHTML = `
         <div style="text-align: center; padding: 2rem; background: rgba(239,68,68,0.1); border: 1px solid var(--danger); border-radius: 8px;">
             <h4 style="color: var(--danger); margin-bottom: 1rem;">⚠️ Scan Error</h4>
-            <p style="color: var(--light); margin-bottom: 1rem;">The vulnerability scan could not be completed for the following reason:</p>
-            <p style="color: var(--danger); font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 5px;">${error.message}</p>
+            <p style="color: var(--light); margin-bottom: 0.5rem;">The Nuclei scan could not be completed for <strong>${hostname}</strong>.</p>
+            <p style="color: var(--danger); font-weight:bold;">${errorMessage}</p>
+            ${detailsHTML}
             <div style="margin-top: 2rem;">
                 <button class="btn btn-secondary" onclick="retryQuickScan()" style="margin-right: 1rem;">🔄 Retry Scan</button>
                 <a href="#contact" class="btn btn-primary">📞 Contact Support</a>
@@ -682,28 +545,15 @@ function retryQuickScan() {
     const resultsElement = document.getElementById('quick-scan-results');
     const outputElement = document.getElementById('quick-scan-output');
     
-    resultsElement.innerHTML = '';
-    outputElement.innerHTML = 'Ready to retry scan...';
+    // Clear previous results and output for a cleaner retry
+    if(resultsElement) resultsElement.innerHTML = '';
+    if(outputElement) outputElement.innerHTML = 'Ready to retry scan...';
+    if(targetInput) targetInput.value = ''; // Optionally clear the input or leave it
     
-    // Small delay then retry
-    setTimeout(handleQuickScan, 500);
-}
-
-function calculateScanDuration(startTime, endTime) {
-    if (!startTime || !endTime) return 'Unknown';
-    
-    const start = new Date(startTime);
-    const end = new Date(endTime);
-    const durationMs = end - start;
-    
-    const minutes = Math.floor(durationMs / 60000);
-    const seconds = Math.floor((durationMs % 60000) / 1000);
-    
-    if (minutes > 0) {
-        return `${minutes}m ${seconds}s`;
-    } else {
-        return `${seconds}s`;
-    }
+    // Small delay then retry, allows UI to update before potential alert/prompt from handleQuickScan
+    // No, handleQuickScan itself should be called. If target is empty, it will prompt.
+    // setTimeout(handleQuickScan, 100); // Removing timeout, direct call is better.
+    handleQuickScan(); // Call directly. If input is needed, it will show message.
 }
 
 // CTF Challenge System

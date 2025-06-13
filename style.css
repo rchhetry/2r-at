@@ -1791,3 +1791,16 @@
 .service-detail-page .btn-secondary { /* Style for the 'Back to Services' button */
     margin-top: 2rem;
 }
+
+/* Styles for Nuclei Scan Result Tags */
+.tag-badge {
+    background-color: rgba(100, 116, 139, 0.2); /* Neutral gray background */
+    border: 1px solid rgba(100, 116, 139, 0.5); /* Slightly darker gray border */
+    color: var(--gray); /* Uses existing gray color variable */
+    padding: 0.2em 0.6em; /* Small padding */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 0.75rem; /* Small font size */
+    display: inline-block; /* To sit nicely with other text */
+    margin: 0.15rem; /* Small margin around tags */
+    white-space: nowrap; /* Prevent tags from breaking lines */
+}
