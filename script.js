@@ -381,7 +381,7 @@ class AuthSystem {
 // Initialize authentication system
 const auth = new AuthSystem();
 
-// Nessus Scan Integration
+/* // Nessus Scan Integration (Commented out as per requirements)
 class NessusScanManager {
     constructor() {
         this.currentScanId = null;
@@ -481,9 +481,44 @@ class NessusScanManager {
         return `${BACKEND_URL}/scan/${scanId}/report`;
     }
 }
-
+*/
 // Initialize Nessus scan manager
-const nessusScanManager = new NessusScanManager();
+// const nessusScanManager = new NessusScanManager(); // Commented out as per requirements
+
+// --- Nuclei Scan Integration ---
+const NUCLEI_API_URL = '/api'; // Assuming backend is served from the same origin
+
+async function startNucleiScan(target, scanName) {
+    const response = await fetch(`${NUCLEI_API_URL}/scans`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            target: target,
+            scan_name: scanName || `Quick Scan - ${target}`
+        }),
+    });
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ detail: `HTTP ${response.status}: ${response.statusText}` }));
+        throw new Error(errorData.detail || `Failed to start Nuclei scan.`);
+    }
+    return response.json();
+}
+
+async function getNucleiScanStatus(scanId) {
+    const response = await fetch(`${NUCLEI_API_URL}/scans/${scanId}`);
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ detail: `HTTP ${response.status}: ${response.statusText}` }));
+        throw new Error(errorData.detail || `Failed to get Nuclei scan status.`);
+    }
+    return response.json();
+}
+
+function getNucleiScanReportLink(scanId) {
+    return `${NUCLEI_API_URL}/scans/${scanId}/report`;
+}
+// --- End Nuclei Scan Integration ---
 
 // Updated Quick Scan Functionality
 function handleQuickScan() {
@@ -493,7 +528,7 @@ function handleQuickScan() {
     const resultsElement = document.getElementById('quick-scan-results');
 
     if (!targetInput || !scanButton || !outputElement || !resultsElement) {
-        console.error('Quick scan elements not found!');
+        console.error('Quick scan UI elements not found!');
         return;
     }
 
@@ -504,7 +539,6 @@ function handleQuickScan() {
         return;
     }
 
-    // Validate hostname format (basic validation)
     const hostnameRegex = /^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)*[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$|^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
     if (!hostnameRegex.test(hostname)) {
         outputElement.innerHTML = '<span style="color: var(--danger);">Please enter a valid hostname or IP address.</span>';
@@ -512,163 +546,172 @@ function handleQuickScan() {
         return;
     }
 
-    // Disable controls
     scanButton.disabled = true;
     targetInput.disabled = true;
     scanButton.textContent = 'Scanning...';
-
-    // Show initial status
-    outputElement.innerHTML = `[+] Initiating Nessus vulnerability scan for <strong>${hostname}</strong>...<br>[+] Connecting to Nessus server at 10.1.97.10...<br>[+] Please wait, this may take several minutes...`;
+    outputElement.innerHTML = `[+] Initiating Nuclei vulnerability scan for <strong>${hostname}</strong>...`;
     resultsElement.innerHTML = '<div class="loader-circle" style="margin: 2rem auto;"></div>';
 
-    // Start the scan
-    nessusScanManager.startScan(hostname)
-        .then(scanData => {
-            outputElement.innerHTML += `<br>[+] Scan initiated successfully (ID: ${scanData.scan_id})<br>[+] Monitoring scan progress...`;
+    let currentScanId = null;
+    let pollInterval = null;
 
-            // Start polling for status updates
-            nessusScanManager.startPolling(
-                scanData.scan_id,
-                // onUpdate callback
-                (status) => {
-                    const statusMessages = {
-                        'queued': '[+] Scan queued for execution...',
-                        'running': '[+] Scan in progress, analyzing target systems...',
-                    };
-                    
-                    if (statusMessages[status.status]) {
-                        const lines = outputElement.innerHTML.split('<br>');
-                        const lastLine = lines[lines.length - 1];
-                        if (!lastLine.includes('Scan in progress') && status.status === 'running') {
-                            outputElement.innerHTML += '<br>' + statusMessages[status.status];
-                        }
+    const cleanupPolling = () => {
+        if (pollInterval) {
+            clearInterval(pollInterval);
+            pollInterval = null;
+        }
+        scanButton.disabled = false;
+        targetInput.disabled = false;
+        scanButton.textContent = 'Start Scan';
+    };
+
+    startNucleiScan(hostname)
+        .then(scanData => {
+            currentScanId = scanData.scan_id;
+            outputElement.innerHTML += `<br>[+] Scan initiated successfully (ID: ${currentScanId}). Waiting for results...`;
+            outputElement.innerHTML += `<br>[+] Scan Queued`;
+
+            pollInterval = setInterval(async () => {
+                if (!currentScanId) return;
+                try {
+                    const statusData = await getNucleiScanStatus(currentScanId);
+                    const status = statusData.status;
+                    const lines = outputElement.innerHTML.split('<br>');
+                    const lastLine = lines[lines.length -1];
+
+                    if (status === 'running' && !lastLine.includes('Scan Running')) {
+                        outputElement.innerHTML += '<br>[+] Scan Running...';
+                    } else if (status === 'processing' && !lastLine.includes('Processing Results')) {
+                        outputElement.innerHTML += '<br>[+] Processing Results...';
                     }
-                },
-                // onComplete callback
-                (finalStatus) => {
-                    handleScanComplete(finalStatus, hostname);
-                },
-                // onError callback
-                (error) => {
-                    handleScanError(error, hostname);
+
+
+                    if (status === 'completed') {
+                        cleanupPolling();
+                        handleNucleiScanComplete(statusData, hostname);
+                    } else if (status === 'failed') {
+                        cleanupPolling();
+                        handleNucleiScanError(statusData.error || 'Unknown error during scan.', hostname, statusData);
+                    }
+                } catch (error) {
+                    cleanupPolling();
+                    handleNucleiScanError(error.message, hostname);
                 }
-            );
+            }, 5000); // Poll every 5 seconds
         })
         .catch(error => {
-            handleScanError(error, hostname);
-        })
-        .finally(() => {
-            // Re-enable controls
-            scanButton.disabled = false;
-            targetInput.disabled = false;
-            scanButton.textContent = 'Start Scan';
+            cleanupPolling();
+            handleNucleiScanError(error.message, hostname);
         });
 }
 
-function handleScanComplete(scanResult, hostname) {
+function handleNucleiScanComplete(scanResult, hostname) {
     const outputElement = document.getElementById('quick-scan-output');
     const resultsElement = document.getElementById('quick-scan-results');
 
-    outputElement.innerHTML = `[+] ✅ Nessus vulnerability scan completed for <strong>${hostname}</strong><br>[+] Scan Duration: ${calculateScanDuration(scanResult.created_at, scanResult.completed_at)}<br>[+] Processing results...`;
+    const scanData = scanResult.result_data ? JSON.parse(scanResult.result_data) : { summary: {}, vulnerabilities: [] };
+
+    outputElement.innerHTML = `[+] ✅ Nuclei vulnerability scan completed for <strong>${hostname}</strong>.`;
+    if(scanResult.created_at && scanResult.completed_at) {
+        outputElement.innerHTML += `<br>[+] Scan Duration: ${calculateScanDuration(scanResult.created_at, scanResult.completed_at)}`;
+    }
+    outputElement.innerHTML += `<br>[+] Processing results...`;
     resultsElement.innerHTML = '';
 
-    // Build summary
     let summaryHTML = '<div style="text-align:left; margin-bottom:2rem;"><h4 style="color: var(--primary);">📊 Scan Summary</h4>';
+    summaryHTML += `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">`;
+    summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary);"><strong>Target:</strong><br>${hostname}</div>`;
     
-    if (scanResult.summary) {
-        const summary = scanResult.summary;
-        summaryHTML += `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">`;
-        summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary);"><strong>Total Hosts:</strong><br>${summary.total_hosts || 1}</div>`;
-        if (scanResult.vulnerabilities) {
-            const vulns = scanResult.vulnerabilities;
-            const total = Object.values(vulns).reduce((a, b) => a + b, 0);
-            summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid ${total > 0 ? 'var(--danger)' : 'var(--success)'};"><strong>Total Vulnerabilities:</strong><br>${total}</div>`;
-            if (vulns.critical > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--danger);"><strong>Critical:</strong><br>${vulns.critical}</div>`;
-            if (vulns.high > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--danger);"><strong>High:</strong><br>${vulns.high}</div>`;
-            if (vulns.medium > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--warning);"><strong>Medium:</strong><br>${vulns.medium}</div>`;
-            if (vulns.low > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--success);"><strong>Low:</strong><br>${vulns.low}</div>`;
-        }
-        summaryHTML += '</div>';
+    if (scanData.summary) {
+        const totalFindings = scanData.summary.total || 0;
+        summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid ${totalFindings > 0 ? 'var(--danger)' : 'var(--success)'};"><strong>Total Findings:</strong><br>${totalFindings}</div>`;
+        if (scanData.summary.critical > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--danger);"><strong>Critical:</strong><br>${scanData.summary.critical}</div>`;
+        if (scanData.summary.high > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--danger);"><strong>High:</strong><br>${scanData.summary.high}</div>`;
+        if (scanData.summary.medium > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--warning);"><strong>Medium:</strong><br>${scanData.summary.medium}</div>`;
+        if (scanData.summary.low > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--info);"><strong>Low:</strong><br>${scanData.summary.low}</div>`;
+         if (scanData.summary.info > 0) summaryHTML += `<div style="background: rgba(10,14,39,0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--gray);"><strong>Info:</strong><br>${scanData.summary.info}</div>`;
     }
-    summaryHTML += '</div>';
+    summaryHTML += '</div></div>';
     resultsElement.innerHTML += summaryHTML;
 
-    // Show detailed vulnerabilities if available
-    if (scanResult.vulnerabilities_list && scanResult.vulnerabilities_list.length > 0) {
+    if (scanData.vulnerabilities && scanData.vulnerabilities.length > 0) {
         let vulnerabilitiesHTML = '<h4 style="text-align:left; margin-bottom:1rem; color: var(--primary);">🔍 Detailed Findings</h4>';
         vulnerabilitiesHTML += '<div style="max-height: 500px; overflow-y: auto; border: 1px solid rgba(0,212,255,0.2); border-radius: 8px; padding: 1rem;">';
         
-        scanResult.vulnerabilities_list.forEach(vuln => {
+        scanData.vulnerabilities.forEach(vuln => {
             const severityColors = {
-                'Critical': 'var(--danger)',
-                'High': 'var(--danger)', 
-                'Medium': 'var(--warning)',
-                'Low': 'var(--success)',
-                'Info': 'var(--gray)'
+                'critical': 'var(--danger)',
+                'high': 'var(--danger)',
+                'medium': 'var(--warning)',
+                'low': 'var(--info)',
+                'info': 'var(--gray)',
+                'unknown': 'var(--gray)'
             };
-            
-            const severityColor = severityColors[vuln.severity] || 'var(--gray)';
+            const severityColor = severityColors[vuln.severity.toLowerCase()] || 'var(--gray)';
             
             vulnerabilitiesHTML += `
                 <div style="margin-bottom: 1.5rem; padding: 1.5rem; border: 1px solid ${severityColor}; border-left-width: 5px; border-radius: 8px; background: rgba(10,14,39,0.4);">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                        <h5 style="color: ${severityColor}; margin: 0; flex: 1;">${vuln.name || 'Unknown Vulnerability'}</h5>
-                        <span style="background: ${severityColor}; color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">${vuln.severity}</span>
+                        <h5 style="color: ${severityColor}; margin: 0; flex: 1;">${vuln.name || vuln['template-id'] || 'Unknown Vulnerability'}</h5>
+                        <span style="background: ${severityColor}; color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">${vuln.severity.toUpperCase()}</span>
                     </div>
-                    ${vuln.plugin_id && vuln.plugin_id !== 'N/A' ? `<p style="font-size: 0.8rem; color: var(--gray); margin: 0.5rem 0;">Plugin ID: ${vuln.plugin_id}</p>` : ''}
-                    <p style="color: var(--light); margin: 1rem 0; line-height: 1.5;">${vuln.description || 'No description provided.'}</p>
-                    <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 5px; border-left: 3px solid var(--primary);">
-                        <strong style="color: var(--primary);">💡 Solution:</strong>
-                        <p style="color: var(--gray); margin: 0.5rem 0 0 0; font-style: italic;">${vuln.solution || 'No solution provided.'}</p>
-                    </div>
+                    <p style="font-size: 0.8rem; color: var(--gray); margin: 0.5rem 0;">Template ID: ${vuln['template-id']}</p>
+                    <p style="color: var(--light); margin: 1rem 0; line-height: 1.5;"><strong>Description:</strong> ${vuln.description || 'No description provided.'}</p>
+                    <p style="color: var(--light); margin: 1rem 0; line-height: 1.5;"><strong>Matched At:</strong> ${vuln['matched-at'] || 'N/A'}</p>
+                    ${vuln.curl_command ? `<pre style="background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 5px; color: var(--gray); font-size: 0.8em; overflow-x:auto;">${vuln.curl_command}</pre>` : ''}
+                    ${vuln.tags && vuln.tags.length > 0 ? `<p style="font-size: 0.8rem; color: var(--gray); margin-top: 0.5rem;">Tags: ${vuln.tags.join(', ')}</p>` : ''}
                 </div>
             `;
         });
-        
         vulnerabilitiesHTML += '</div>';
         resultsElement.innerHTML += vulnerabilitiesHTML;
     } else {
-        resultsElement.innerHTML += `
+         resultsElement.innerHTML += `
             <div style="text-align: center; padding: 2rem; background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 8px;">
-                <h4 style="color: var(--success); margin-bottom: 1rem;">🛡️ Great News!</h4>
-                <p style="color: var(--light);">No vulnerabilities were detected during this scan of <strong>${hostname}</strong>.</p>
-                <p style="color: var(--gray); font-size: 0.9rem;">This is a preliminary scan. For comprehensive security assessment, consider our advanced penetration testing services.</p>
+                <h4 style="color: var(--success); margin-bottom: 1rem;">🛡️ Scan Complete!</h4>
+                <p style="color: var(--light);">Nuclei scan finished for <strong>${hostname}</strong>. No vulnerabilities were explicitly detailed in the summary, or the scan focused on information gathering.</p>
+                <p style="color: var(--gray); font-size: 0.9rem;">Review the HTML report for comprehensive details if available.</p>
             </div>
         `;
     }
 
-    // Add action buttons
     let actionsHTML = '<div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">';
-    
-    if (scanResult.report_url) {
-        actionsHTML += `<a href="${BACKEND_URL}${scanResult.report_url}" target="_blank" class="btn btn-primary" style="margin-right: 1rem;">📄 Download Full Report</a>`;
-    }
-    
+    const reportLink = getNucleiScanReportLink(scanResult.scan_id);
+    actionsHTML += `<a href="${reportLink}" target="_blank" class="btn btn-primary" style="margin-right: 1rem;">📄 View Full HTML Report</a>`;
     actionsHTML += `
         <a href="#security-assessment" class="btn btn-secondary" style="margin-right: 1rem;">🔍 Advanced Assessments</a>
         <a href="#contact" class="btn btn-primary">🤝 Contact Security Experts</a>
     `;
     actionsHTML += '</div>';
-    
     resultsElement.innerHTML += actionsHTML;
 
-    // Update user stats if authenticated
     if (auth.isAuthenticated()) {
-        auth.updateUserStats('threatsBlocked', scanResult.vulnerabilities_list ? scanResult.vulnerabilities_list.length : 0);
-        auth.addAchievement('first-scan', 'First Vulnerability Scan', '🔍');
+        auth.updateUserStats('threatsBlocked', (scanData.vulnerabilities || []).length);
+        auth.addAchievement('nuclei-scan', 'First Nuclei Scan', '🔬');
     }
 }
 
-function handleScanError(error, hostname) {
+
+function handleNucleiScanError(errorMessage, hostname, scanData = null) {
     const outputElement = document.getElementById('quick-scan-output');
     const resultsElement = document.getElementById('quick-scan-results');
 
-    outputElement.innerHTML = `[+] ❌ Scan failed for <strong>${hostname}</strong><br>[!] ${error.message}`;
+    let displayError = errorMessage;
+    if (scanData && scanData.result_data) {
+        try {
+            const result = JSON.parse(scanData.result_data);
+            if (result && result.error) { // Assuming backend might put specific error info in result_data
+                displayError = result.error;
+            }
+        } catch(e) { /* ignore parsing error, use original errorMessage */ }
+    }
+
+    outputElement.innerHTML = `[+] ❌ Nuclei Scan failed for <strong>${hostname}</strong><br>[!] ${displayError}`;
     resultsElement.innerHTML = `
         <div style="text-align: center; padding: 2rem; background: rgba(239,68,68,0.1); border: 1px solid var(--danger); border-radius: 8px;">
             <h4 style="color: var(--danger); margin-bottom: 1rem;">⚠️ Scan Error</h4>
-            <p style="color: var(--light); margin-bottom: 1rem;">The vulnerability scan could not be completed for the following reason:</p>
-            <p style="color: var(--danger); font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 5px;">${error.message}</p>
+            <p style="color: var(--light); margin-bottom: 1rem;">The Nuclei scan could not be completed:</p>
+            <p style="color: var(--danger); font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 5px;">${displayError}</p>
             <div style="margin-top: 2rem;">
                 <button class="btn btn-secondary" onclick="retryQuickScan()" style="margin-right: 1rem;">🔄 Retry Scan</button>
                 <a href="#contact" class="btn btn-primary">📞 Contact Support</a>
@@ -678,16 +721,19 @@ function handleScanError(error, hostname) {
 }
 
 function retryQuickScan() {
+    // This function is now generic for retrying the current quick scan implementation
     const targetInput = document.getElementById('quick-scan-target');
     const resultsElement = document.getElementById('quick-scan-results');
     const outputElement = document.getElementById('quick-scan-output');
     
     resultsElement.innerHTML = '';
     outputElement.innerHTML = 'Ready to retry scan...';
+    targetInput.disabled = false; // Re-enable input for retry
     
-    // Small delay then retry
+    // Small delay then retry by calling the main handler
     setTimeout(handleQuickScan, 500);
 }
+
 
 function calculateScanDuration(startTime, endTime) {
     if (!startTime || !endTime) return 'Unknown';
