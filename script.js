@@ -1195,11 +1195,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Add event listener for the quick scan button
+    // const quickScanButtonOld = document.getElementById('quick-scan-button');
+    // if (quickScanButtonOld) {
+    //     quickScanButtonOld.addEventListener('click', handleQuickScan);
+    // } else {
+    //     console.error('Quick scan button not found on DOMContentLoaded');
+    // }
+
+    // Event listener for the Quick Scan button in the hero section
+    const quickScanButtonHero = document.querySelector('.hero .btn-secondary[href="#quick-security-check"]');
+    if (quickScanButtonHero) {
+        quickScanButtonHero.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            // Smooth scroll to the Quick Security Check section
+            const quickSecurityCheckSection = document.getElementById('quick-security-check');
+            if (quickSecurityCheckSection) {
+                quickSecurityCheckSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+
+    // Event listener for the Start Scan button in the Quick Security Check section
     const quickScanButton = document.getElementById('quick-scan-button');
     if (quickScanButton) {
-        quickScanButton.addEventListener('click', handleQuickScan);
-    } else {
-        console.error('Quick scan button not found on DOMContentLoaded');
+        quickScanButton.addEventListener('click', function() {
+            window.open('app.html', '_blank');
+        });
     }
 });
 
