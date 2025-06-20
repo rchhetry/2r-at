@@ -1,246 +1,141 @@
-const mockVulnerabilities = [
-    {
-        id: 'CVE-SIM-001',
-        name: 'Simulated SQL Injection Vulnerability',
-        description: 'A simulated vulnerability allowing potential unauthorized database access due to improperly sanitized user inputs on login forms or search parameters.',
-        severity: 'High',
-        keywords: ['sql', 'database', 'login', 'injection', 'sqli', 'auth'],
-        solution_hint: 'Implement parameterized queries or prepared statements. Sanitize all user inputs rigorously. Use a Web Application Firewall (WAF).'
-    },
-    {
-        id: 'CVE-SIM-002',
-        name: 'Simulated Cross-Site Scripting (XSS)',
-        description: 'A simulated vulnerability where malicious scripts could be injected into web pages viewed by other users, potentially leading to session hijacking or data theft.',
-        severity: 'Medium',
-        keywords: ['xss', 'scripting', 'cross-site', 'html', 'injection', 'cookie'],
-        solution_hint: 'Implement strong Content Security Policy (CSP). Encode output data correctly (e.g., HTML entity encoding). Validate and sanitize user inputs.'
-    },
-    {
-        id: 'CVE-SIM-003',
-        name: 'Outdated Web Server Software Detected',
-        description: 'The target appears to be running an outdated version of a web server software (e.g., Apache, Nginx), which may have known vulnerabilities.',
-        severity: 'Medium',
-        keywords: ['server', 'apache', 'nginx', 'iis', 'version', 'cve', 'exploit', 'patch'],
-        solution_hint: 'Regularly update server software to the latest stable versions. Apply security patches promptly. Subscribe to vendor security advisories.'
-    },
-    {
-        id: 'CVE-SIM-004',
-        name: 'Missing Security Headers',
-        description: 'Important HTTP security headers (e.g., Strict-Transport-Security, Content-Security-Policy, X-Frame-Options) are not implemented or misconfigured.',
-        severity: 'Low',
-        keywords: ['header', 'hsts', 'csp', 'x-frame-options', 'security policy', 'http'],
-        solution_hint: 'Configure your web server to send appropriate security headers. Use tools like securityheaders.com to check your configuration.'
-    },
-    {
-        id: 'CVE-SIM-005',
-        name: 'Weak SSL/TLS Configuration',
-        description: 'The SSL/TLS configuration uses weak ciphers, outdated protocols (e.g., SSLv3, TLS 1.0/1.1), or has certificate issues.',
-        severity: 'Medium',
-        keywords: ['ssl', 'tls', 'cipher', 'protocol', 'certificate', 'encryption', 'https'],
-        solution_hint: 'Configure your server to support only strong cipher suites and modern TLS versions (TLS 1.2, TLS 1.3). Ensure your SSL certificate is valid and properly installed.'
-    },
-    {
-        id: 'CVE-SIM-006',
-        name: 'Exposed Admin Interface',
-        description: 'An administrative interface or login panel seems to be publicly accessible, increasing the risk of brute-force attacks or unauthorized access attempts.',
-        severity: 'High',
-        keywords: ['admin', 'login', 'panel', 'wp-admin', 'administrator', 'auth', 'brute force'],
-        solution_hint: 'Restrict access to admin interfaces by IP address. Implement strong MFA. Use non-default paths for admin panels. Monitor login attempts.'
-    },
-    {
-        id: 'CVE-SIM-007',
-        name: 'Directory Traversal Vulnerability',
-        description: 'A simulated vulnerability that could allow an attacker to access restricted directories and files on the server by manipulating file path inputs.',
-        severity: 'High',
-        keywords: ['traversal', 'path', 'directory', 'file', '../', 'inclusion'],
-        solution_hint: 'Sanitize all user-supplied file paths. Implement proper access controls. Use whitelisting for allowed paths.'
-    },
-    {
-        id: 'CVE-SIM-008',
-        name: 'Information Leakage via Server Headers',
-        description: 'Server software versions or other sensitive information are exposed in HTTP response headers, potentially aiding attackers.',
-        severity: 'Low',
-        keywords: ['server', 'version', 'banner', 'leakage', 'information disclosure'],
-        solution_hint: 'Configure your web server to minimize or remove version information from HTTP headers (e.g., Server, X-Powered-By).'
-    }
-];
-
-const detailedScanSteps = [
-    (target) => `$ 2R-AT --scan --target ${target} --profile quick --intensity low`,
-    '[+] Initializing advanced heuristic analysis engine...',
-    '[+] Connecting to global threat intelligence network...',
-    '[+] Calibrating anomaly detection parameters...',
-    '[+] Scanning common ports (80, 443, 8080)...',
-    '[+] Analyzing HTTP headers for security misconfigurations...',
-    '[+] Checking for known vulnerable software versions (simulated)...',
-    '[+] Simulating basic SQL injection and XSS probes...',
-    '[+] Assessing SSL/TLS certificate chain and configuration...',
-    '[+] Looking for exposed administrative interfaces...',
-    '[+] Verifying DNS records and MX server health...',
-    '[+] Cross-referencing findings with mock vulnerability database...',
-    '[+] Generating preliminary risk assessment matrix...',
-    '[+] Compiling simulated findings and recommendations...'
-];
+// Updated script.js for 2R-AT with real backend integration
 
 // Backend configuration
-const BACKEND_URL = 'https://2r-at.com/api';
+const BACKEND_URL = window.location.origin + '/api';
 
 // Authentication System
 class AuthSystem {
     constructor() {
-        this.users = new Map(); // In-memory user storage
         this.currentUser = null;
         this.sessionTimeout = 30 * 60 * 1000; // 30 minutes
         this.sessionTimer = null;
-
-        // Initialize with some demo users
-        this.initializeDemoUsers();
+        this.token = localStorage.getItem('2r-at-token');
 
         // Check for existing session
         this.checkExistingSession();
     }
 
-    initializeDemoUsers() {
-        // Demo users for testing
-        const demoUsers = [
-            {
-                id: 'demo-admin',
-                name: 'Admin User',
-                email: 'admin@2r-at.com',
-                password: 'admin123',
-                role: 'admin',
-                company: '2R-AT Security',
-                userRole: 'CISO',
-                plan: 'enterprise',
-                joinDate: '2024-01-15',
-                stats: {
-                    threatsBlocked: 1547,
-                    ctfPoints: 8750,
-                    challengesCompleted: 12,
-                    rank: 'Elite Defender'
-                },
-                achievements: [
-                    { id: 'first-login', name: 'Welcome Aboard', icon: '🎉' },
-                    { id: 'ctf-master', name: 'CTF Master', icon: '🏆' },
-                    { id: 'threat-hunter', name: 'Threat Hunter', icon: '🎯' },
-                    { id: 'security-expert', name: 'Security Expert', icon: '🛡️' }
-                ]
-            },
-            {
-                id: 'demo-user',
-                name: 'Test User',
-                email: 'user@example.com',
-                password: 'user123',
-                role: 'user',
-                company: 'Tech Corp',
-                userRole: 'Security Analyst',
-                plan: 'professional',
-                joinDate: '2024-06-20',
-                stats: {
-                    threatsBlocked: 342,
-                    ctfPoints: 2150,
-                    challengesCompleted: 5,
-                    rank: 'Security Specialist'
-                },
-                achievements: [
-                    { id: 'first-login', name: 'Welcome Aboard', icon: '🎉' },
-                    { id: 'first-challenge', name: 'First Challenge', icon: '🎯' }
-                ]
+    async checkExistingSession() {
+        if (this.token) {
+            try {
+                // Validate token by trying to get user profile
+                const response = await this.makeAuthenticatedRequest('/auth/profile');
+                if (response.ok) {
+                    const userData = await response.json();
+                    this.currentUser = userData.user;
+                    this.updateUIForAuthenticatedUser();
+                    this.startSessionTimer();
+                } else {
+                    // Token invalid, clear it
+                    this.clearToken();
+                }
+            } catch (error) {
+                console.error('Session validation failed:', error);
+                this.clearToken();
             }
-        ];
-
-        demoUsers.forEach(user => {
-            this.users.set(user.email, user);
-        });
-
-        // Debug: Log available users
-        console.log('Demo users initialized:', Array.from(this.users.keys()));
+        }
+        
+        if (!this.currentUser) {
+            this.updateUIForUnauthenticatedUser();
+        }
     }
 
-    checkExistingSession() {
-        // In a real app, you'd check for a valid session token
-        // For demo purposes, we'll keep users logged in during the session
-        if (this.currentUser) {
-            this.updateUIForAuthenticatedUser();
-        }
+    async makeAuthenticatedRequest(endpoint, options = {}) {
+        const defaultOptions = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            }
+        };
+
+        const mergedOptions = {
+            ...defaultOptions,
+            ...options,
+            headers: {
+                ...defaultOptions.headers,
+                ...options.headers
+            }
+        };
+
+        return fetch(`${BACKEND_URL}${endpoint}`, mergedOptions);
+    }
+
+    clearToken() {
+        this.token = null;
+        localStorage.removeItem('2r-at-token');
     }
 
     async register(userData) {
-        const { name, email, company, role, userRole, password, confirm } = userData;
+        try {
+            const response = await fetch(`${BACKEND_URL}/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
 
-        // Validation
-        if (password !== confirm) {
-            throw new Error('Passwords do not match');
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Registration failed');
+            }
+
+            // Store token and user data
+            this.token = data.token;
+            localStorage.setItem('2r-at-token', this.token);
+            this.currentUser = data.user;
+
+            this.updateUIForAuthenticatedUser();
+            this.startSessionTimer();
+
+            showNotification('Account created successfully! Welcome to 2R-AT Security.', 'success');
+            closeAuthModal();
+
+            return data.user;
+        } catch (error) {
+            console.error('Registration error:', error);
+            throw error;
         }
-
-        if (password.length < 8) {
-            throw new Error('Password must be at least 8 characters');
-        }
-
-        if (this.users.has(email)) {
-            throw new Error('Email already registered');
-        }
-
-        // Create new user
-        const newUser = {
-            id: 'user-' + Date.now(),
-            name,
-            email,
-            company: company || 'Independent',
-            role: 'user',
-            userRole,
-            password, // In real app, this would be hashed
-            plan: 'basic',
-            joinDate: new Date().toISOString().split('T')[0],
-            stats: {
-                threatsBlocked: 0,
-                ctfPoints: 0,
-                challengesCompleted: 0,
-                rank: 'Novice'
-            },
-            achievements: [
-                { id: 'first-login', name: 'Welcome Aboard', icon: '🎉' }
-            ]
-        };
-
-        this.users.set(email, newUser);
-
-        // Auto-login after registration
-        this.currentUser = newUser;
-        this.updateUIForAuthenticatedUser();
-        this.startSessionTimer();
-
-        showNotification('Account created successfully! Welcome to 2R-AT Security.', 'success');
-        closeAuthModal();
-
-        return newUser;
     }
 
     async login(email, password) {
-        console.log('Login attempt:', email, password);
-        console.log('Available users:', Array.from(this.users.keys()));
+        try {
+            const response = await fetch(`${BACKEND_URL}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-        const user = this.users.get(email);
-        console.log('Found user:', user);
+            const data = await response.json();
 
-        if (!user || user.password !== password) {
-            console.log('Login failed - Invalid credentials');
-            throw new Error('Invalid email or password');
+            if (!response.ok) {
+                throw new Error(data.error || 'Login failed');
+            }
+
+            // Store token and user data
+            this.token = data.token;
+            localStorage.setItem('2r-at-token', this.token);
+            this.currentUser = data.user;
+
+            this.updateUIForAuthenticatedUser();
+            this.startSessionTimer();
+
+            showNotification(`Welcome back, ${this.currentUser.name}!`, 'success');
+            closeAuthModal();
+
+            return this.currentUser;
+        } catch (error) {
+            console.error('Login error:', error);
+            throw error;
         }
-
-        this.currentUser = user;
-        this.updateUIForAuthenticatedUser();
-        this.startSessionTimer();
-
-        showNotification(`Welcome back, ${user.name}!`, 'success');
-        closeAuthModal();
-
-        console.log('Login successful for:', user.name);
-        return user;
     }
 
     logout() {
         this.currentUser = null;
+        this.clearToken();
         this.clearSessionTimer();
         this.updateUIForUnauthenticatedUser();
         showNotification('You have been logged out securely.', 'success');
@@ -264,12 +159,12 @@ class AuthSystem {
 
         document.getElementById('user-display-name').textContent = this.currentUser.name;
         document.getElementById('user-email').textContent = this.currentUser.email;
-        document.getElementById('user-role').textContent = `${this.currentUser.userRole} • ${this.currentUser.plan.charAt(0).toUpperCase() + this.currentUser.plan.slice(1)} Plan`;
+        document.getElementById('user-role').textContent = `${this.currentUser.role} • ${this.currentUser.plan.charAt(0).toUpperCase() + this.currentUser.plan.slice(1)} Plan`;
 
         // Remove protected overlays
         this.removeProtectedOverlays();
 
-        // Update dashboard with user stats
+        // Update dashboard with user stats (mock for now)
         this.updateUserDashboard();
     }
 
@@ -319,15 +214,27 @@ class AuthSystem {
         if (userStats) {
             userStats.style.display = 'block';
 
-            // Update stats
-            document.getElementById('user-threats-blocked').textContent = this.currentUser.stats.threatsBlocked.toLocaleString();
-            document.getElementById('user-ctf-points').textContent = this.currentUser.stats.ctfPoints.toLocaleString();
-            document.getElementById('user-challenges-completed').textContent = this.currentUser.stats.challengesCompleted;
-            document.getElementById('user-rank').textContent = this.currentUser.stats.rank;
+            // Mock stats for now - in a real app, these would come from the backend
+            const mockStats = {
+                threatsBlocked: Math.floor(Math.random() * 1000) + 100,
+                ctfPoints: Math.floor(Math.random() * 5000) + 500,
+                challengesCompleted: Math.floor(Math.random() * 10) + 1,
+                rank: 'Security Specialist'
+            };
 
-            // Update achievements
+            document.getElementById('user-threats-blocked').textContent = mockStats.threatsBlocked.toLocaleString();
+            document.getElementById('user-ctf-points').textContent = mockStats.ctfPoints.toLocaleString();
+            document.getElementById('user-challenges-completed').textContent = mockStats.challengesCompleted;
+            document.getElementById('user-rank').textContent = mockStats.rank;
+
+            // Mock achievements
             const achievementsContainer = document.getElementById('user-achievements');
-            achievementsContainer.innerHTML = this.currentUser.achievements.map(achievement =>
+            const mockAchievements = [
+                { icon: '🎉', name: 'Welcome Aboard' },
+                { icon: '🔍', name: 'First Scan' },
+                { icon: '🛡️', name: 'Security Expert' }
+            ];
+            achievementsContainer.innerHTML = mockAchievements.map(achievement =>
                 `<div class="badge">${achievement.icon} ${achievement.name}</div>`
             ).join('');
         }
@@ -349,40 +256,16 @@ class AuthSystem {
     }
 
     isAuthenticated() {
-        return this.currentUser !== null;
+        return this.currentUser !== null && this.token !== null;
     }
 
     getCurrentUser() {
         return this.currentUser;
     }
-
-    updateUserStats(statType, value) {
-        if (this.currentUser) {
-            this.currentUser.stats[statType] += value;
-            this.updateUserDashboard();
-
-            // Update user in storage
-            this.users.set(this.currentUser.email, this.currentUser);
-        }
-    }
-
-    addAchievement(achievementId, name, icon) {
-        if (this.currentUser) {
-            const existing = this.currentUser.achievements.find(a => a.id === achievementId);
-            if (!existing) {
-                this.currentUser.achievements.push({ id: achievementId, name, icon });
-                this.updateUserDashboard();
-                showNotification(`🎉 Achievement Unlocked: ${name}!`, 'success');
-            }
-        }
-    }
 }
 
-// Initialize authentication system
-const auth = new AuthSystem();
-
-// Nessus Scan Integration
-class NessusScanManager {
+// Nuclei Scan Manager
+class NucleiScanManager {
     constructor() {
         this.currentScanId = null;
         this.pollInterval = null;
@@ -391,22 +274,22 @@ class NessusScanManager {
     }
 
     async startScan(hostname, scanName = null) {
+        if (!auth.isAuthenticated()) {
+            throw new Error('Authentication required');
+        }
+
         try {
-            const response = await fetch(`${BACKEND_URL}/scan/start`, {
+            const response = await auth.makeAuthenticatedRequest('/scan/start', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
                 body: JSON.stringify({
                     hostname: hostname,
-                    scan_name: scanName || `Quick Scan - ${hostname}`,
-                    email_notification: auth.isAuthenticated() ? auth.getCurrentUser().email : null
+                    scan_name: scanName || `Quick Scan - ${hostname}`
                 })
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.detail || `HTTP ${response.status}: ${response.statusText}`);
+                throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
             }
 
             const data = await response.json();
@@ -421,12 +304,16 @@ class NessusScanManager {
     }
 
     async getScanStatus(scanId) {
+        if (!auth.isAuthenticated()) {
+            throw new Error('Authentication required');
+        }
+
         try {
-            const response = await fetch(`${BACKEND_URL}/scan/${scanId}/status`);
+            const response = await auth.makeAuthenticatedRequest(`/scan/${scanId}/status`);
             
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.detail || `HTTP ${response.status}: ${response.statusText}`);
+                throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
             }
 
             return await response.json();
@@ -482,8 +369,9 @@ class NessusScanManager {
     }
 }
 
-// Initialize Nessus scan manager
-const nessusScanManager = new NessusScanManager();
+// Initialize systems
+const auth = new AuthSystem();
+const nessusScanManager = new NucleiScanManager();
 
 // Updated Quick Scan Functionality
 function handleQuickScan() {
@@ -497,17 +385,15 @@ function handleQuickScan() {
         return;
     }
 
-    const hostname = targetInput.value.trim();
-    if (!hostname) {
-        outputElement.innerHTML = '<span style="color: var(--warning);">Please enter a hostname or IP address to scan.</span>';
-        resultsElement.innerHTML = '';
+    // Check authentication
+    if (!auth.isAuthenticated()) {
+        showAuthModal('login');
         return;
     }
 
-    // Validate hostname format (basic validation)
-    const hostnameRegex = /^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)*[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$|^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-    if (!hostnameRegex.test(hostname)) {
-        outputElement.innerHTML = '<span style="color: var(--danger);">Please enter a valid hostname or IP address.</span>';
+    const hostname = targetInput.value.trim();
+    if (!hostname) {
+        outputElement.innerHTML = '<span style="color: var(--warning);">Please enter a hostname or IP address to scan.</span>';
         resultsElement.innerHTML = '';
         return;
     }
@@ -518,7 +404,7 @@ function handleQuickScan() {
     scanButton.textContent = 'Scanning...';
 
     // Show initial status
-    outputElement.innerHTML = `[+] Initiating Nessus vulnerability scan for <strong>${hostname}</strong>...<br>[+] Connecting to Nessus server at 10.1.97.10...<br>[+] Please wait, this may take several minutes...`;
+    outputElement.innerHTML = `[+] Initiating Nuclei vulnerability scan for <strong>${hostname}</strong>...<br>[+] Connecting to security scanner...<br>[+] Please wait, this may take several minutes...`;
     resultsElement.innerHTML = '<div class="loader-circle" style="margin: 2rem auto;"></div>';
 
     // Start the scan
@@ -569,7 +455,8 @@ function handleScanComplete(scanResult, hostname) {
     const outputElement = document.getElementById('quick-scan-output');
     const resultsElement = document.getElementById('quick-scan-results');
 
-    outputElement.innerHTML = `[+] ✅ Nessus vulnerability scan completed for <strong>${hostname}</strong><br>[+] Scan Duration: ${calculateScanDuration(scanResult.created_at, scanResult.completed_at)}<br>[+] Processing results...`;
+    const duration = calculateScanDuration(scanResult.created_at, scanResult.completed_at);
+    outputElement.innerHTML = `[+] ✅ Nuclei vulnerability scan completed for <strong>${hostname}</strong><br>[+] Scan Duration: ${duration}<br>[+] Processing results...`;
     resultsElement.innerHTML = '';
 
     // Build summary
@@ -615,7 +502,7 @@ function handleScanComplete(scanResult, hostname) {
                         <h5 style="color: ${severityColor}; margin: 0; flex: 1;">${vuln.name || 'Unknown Vulnerability'}</h5>
                         <span style="background: ${severityColor}; color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">${vuln.severity}</span>
                     </div>
-                    ${vuln.plugin_id && vuln.plugin_id !== 'N/A' ? `<p style="font-size: 0.8rem; color: var(--gray); margin: 0.5rem 0;">Plugin ID: ${vuln.plugin_id}</p>` : ''}
+                    ${vuln.plugin_id && vuln.plugin_id !== 'N/A' ? `<p style="font-size: 0.8rem; color: var(--gray); margin: 0.5rem 0;">Template ID: ${vuln.plugin_id}</p>` : ''}
                     <p style="color: var(--light); margin: 1rem 0; line-height: 1.5;">${vuln.description || 'No description provided.'}</p>
                     <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 5px; border-left: 3px solid var(--primary);">
                         <strong style="color: var(--primary);">💡 Solution:</strong>
@@ -641,7 +528,8 @@ function handleScanComplete(scanResult, hostname) {
     let actionsHTML = '<div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">';
     
     if (scanResult.report_url) {
-        actionsHTML += `<a href="${BACKEND_URL}${scanResult.report_url}" target="_blank" class="btn btn-primary" style="margin-right: 1rem;">📄 Download Full Report</a>`;
+        const reportUrl = nessusScanManager.getReportUrl(scanResult.scan_id);
+        actionsHTML += `<a href="${reportUrl}" target="_blank" class="btn btn-primary" style="margin-right: 1rem;">📄 Download Full Report</a>`;
     }
     
     actionsHTML += `
@@ -651,12 +539,6 @@ function handleScanComplete(scanResult, hostname) {
     actionsHTML += '</div>';
     
     resultsElement.innerHTML += actionsHTML;
-
-    // Update user stats if authenticated
-    if (auth.isAuthenticated()) {
-        auth.updateUserStats('threatsBlocked', scanResult.vulnerabilities_list ? scanResult.vulnerabilities_list.length : 0);
-        auth.addAchievement('first-scan', 'First Vulnerability Scan', '🔍');
-    }
 }
 
 function handleScanError(error, hostname) {
@@ -706,81 +588,7 @@ function calculateScanDuration(startTime, endTime) {
     }
 }
 
-// CTF Challenge System
-const ctfChallenges = {
-    'web-app': {
-        title: 'Corporate Data Breach Investigation',
-        correctFlag: '2R-AT{SQL_1nj3ct10n_4nd_XSS_c0mb0_4tt4ck}',
-        points: 1000,
-        hints: [
-            { text: "Look for SQL injection in the login form - try using single quotes", cost: 50 },
-            { text: "The admin panel might have XSS vulnerabilities in the search function", cost: 100 },
-            { text: "Check the source code for hidden admin credentials in JavaScript comments", cost: 150 }
-        ]
-    },
-    'network-forensics': {
-        title: 'APT Network Infiltration Analysis',
-        correctFlag: '2R-AT{C2_53rv3r_192.168.100.42_p0rt_8080_DN5_tunneling}',
-        points: 800,
-        hints: [
-            { text: "Focus on DNS queries that look like base64 encoded data", cost: 40 },
-            { text: "The C2 server uses port 8080 and disguises traffic as HTTP requests", cost: 80 },
-            { text: "Look for packets with unusual user-agent strings containing 'APT-Agent-v2.1'", cost: 120 }
-        ]
-    },
-    'cryptography': {
-        title: 'State-Sponsored Crypto Espionage',
-        correctFlag: '2R-AT{SILVER_STORM_2025_power_grid_attack_feb_15}',
-        points: 600,
-        hints: [
-            { text: "The first part is Base64 encoded, the second part uses ROT13 cipher", cost: 30 },
-            { text: "Look for the operation codename in the decrypted message", cost: 60 },
-            { text: "Combine the decrypted attack details with the operation codename", cost: 90 }
-        ]
-    },
-    'digital-forensics': {
-        title: 'Insider Threat Investigation',
-        correctFlag: '2R-AT{john_smith_usb_exfiltration_2025-01-20_encrypted_7zip}',
-        points: 1200,
-        hints: [
-            { text: "Check the Windows Event Logs for USB device insertion events", cost: 60 },
-            { text: "Look for large 7zip files in the user's temp directory and recycle bin", cost: 120 },
-            { text: "The suspect's name is in the laptop's user profile, combine with exfiltration method", cost: 180 }
-        ]
-    },
-    'web-login-bypass': {
-        title: 'Admin Portal Bypass',
-        correctFlag: '2R-AT{admin_bypass_weak_client_validation_js}',
-        points: 750,
-        hints: [
-            { text: "Look for client-side validation that can be bypassed", cost: 30 },
-            { text: "Check if the authentication logic is implemented in JavaScript", cost: 70 },
-            { text: "Try disabling JavaScript or modifying the validation function", cost: 100 }
-        ]
-    },
-    'crypto-ancient-cipher': {
-        title: 'Ancient Message Decryption',
-        correctFlag: '2R-AT{crypt0_c43s4r_sh1ft_k3y15}',
-        points: 550,
-        hints: [
-            { text: "This is a classical substitution cipher, very old but simple", cost: 20 },
-            { text: "Julius Caesar used this cipher to communicate with his generals", cost: 50 },
-            { text: "Try different shift values, the key might be 15", cost: 80 }
-        ]
-    }
-};
-
-const ctfPrizes = {
-    1000: { rank: "🏆 EXPERT LEVEL", bonus: "You've earned a $500 Amazon gift card + priority consideration for our red team!", bg: "linear-gradient(135deg, #FFD700, #FFA500)" },
-    800: { rank: "🥈 ADVANCED LEVEL", bonus: "You've earned a $300 Amazon gift card + access to our advanced training!", bg: "linear-gradient(135deg, #C0C0C0, #A0A0A0)" },
-    600: { rank: "🥉 INTERMEDIATE LEVEL", bonus: "You've earned a $200 Amazon gift card + free certification voucher!", bg: "linear-gradient(135deg, #CD7F32, #B8860B)" },
-    400: { rank: "🎯 BEGINNER LEVEL", bonus: "You've earned a $100 Amazon gift card + training course access!", bg: "linear-gradient(135deg, #32CD32, #228B22)" }
-};
-
-let userPoints = 0;
-let usedHints = {};
-
-// Authentication Modal Functions
+// Authentication Modal Functions (updated)
 function showAuthModal(mode = 'login') {
     document.getElementById('auth-modal').style.display = 'block';
     document.body.style.overflow = 'hidden';
@@ -811,7 +619,7 @@ function switchAuthTab(mode) {
     }
 }
 
-// Authentication Handlers
+// Authentication Handlers (updated)
 async function handleLogin(event) {
     event.preventDefault();
 
@@ -835,10 +643,20 @@ async function handleRegister(event) {
         email: formData.get('email'),
         company: formData.get('company'),
         role: formData.get('role'),
-        userRole: formData.get('role'),
         password: formData.get('password'),
         confirm: formData.get('confirm')
     };
+
+    // Client-side validation
+    if (userData.password !== userData.confirm) {
+        showNotification('Passwords do not match', 'error');
+        return;
+    }
+
+    if (userData.password.length < 8) {
+        showNotification('Password must be at least 8 characters', 'error');
+        return;
+    }
 
     try {
         await auth.register(userData);
@@ -858,16 +676,6 @@ function toggleUserDropdown() {
     dropdown.classList.toggle('active');
 }
 
-// Protected Content Access Check
-function checkAuth(section) {
-    if (!auth.isAuthenticated()) {
-        showNotification('Please log in to access this section.', 'warning');
-        showAuthModal('login');
-        return false;
-    }
-    return true;
-}
-
 // Profile and Settings Functions
 function showProfile() {
     if (!auth.isAuthenticated()) return;
@@ -877,31 +685,19 @@ function showProfile() {
 
 Name: ${user.name}
 Email: ${user.email}
-Company: ${user.company}
-Role: ${user.userRole}
+Company: ${user.company || 'Not specified'}
+Role: ${user.role}
 Plan: ${user.plan.charAt(0).toUpperCase() + user.plan.slice(1)}
-Member Since: ${user.joinDate}
 
-CTF Points: ${user.stats.ctfPoints}
-Challenges Completed: ${user.stats.challengesCompleted}
-Current Rank: ${user.stats.rank}`);
+Note: Full profile management coming soon!`);
 }
 
 function showAchievements() {
-    if (!auth.isAuthenticated()) return;
-
-    const user = auth.getCurrentUser();
-    const achievementsList = user.achievements.map(a => `${a.icon} ${a.name}`).join('\n');
-
-    alert(`Your Achievements (${user.achievements.length}):
-
-${achievementsList}
-
-Keep completing challenges to unlock more achievements!`);
+    alert('Achievements system coming soon! Complete security challenges to unlock badges and certifications.');
 }
 
 function showSettings() {
-    alert('Settings panel would open here with options for:\n\n• Account preferences\n• Security settings\n• Notification preferences\n• Privacy controls\n• Two-factor authentication');
+    alert('Settings panel coming soon with options for:\n\n• Account preferences\n• Security settings\n• Notification preferences\n• Privacy controls\n• Two-factor authentication');
 }
 
 // Notification System
@@ -918,246 +714,7 @@ function showNotification(message, type = 'success') {
     }, 5000);
 }
 
-// CTF Functions
-function showHint(challengeId, hintNumber) {
-    if (!auth.isAuthenticated()) {
-        showAuthModal('login');
-        return;
-    }
-
-    const challenge = ctfChallenges[challengeId];
-    const hint = challenge.hints[hintNumber - 1];
-
-    if (!usedHints[challengeId]) {
-        usedHints[challengeId] = [];
-    }
-
-    if (usedHints[challengeId].includes(hintNumber)) {
-        alert("You've already used this hint!");
-        return;
-    }
-
-    const useHint = confirm(`This hint will cost you ${hint.cost} points. Continue?\n\nHint: ${hint.text}`);
-    if (useHint) {
-        usedHints[challengeId].push(hintNumber);
-        alert(`Hint revealed! You lost ${hint.cost} points.`);
-    }
-}
-
-function submitFlag(challengeId) {
-    if (!auth.isAuthenticated()) {
-        showAuthModal('login');
-        return;
-    }
-
-    const inputElement = document.getElementById(`flag-${challengeId}`);
-    const submittedFlag = inputElement.value.trim();
-    const challenge = ctfChallenges[challengeId];
-
-    if (!submittedFlag) {
-        alert("Please enter a flag!");
-        return;
-    }
-
-    // Calculate points (deduct hint costs)
-    let finalPoints = challenge.points;
-    if (usedHints[challengeId]) {
-        usedHints[challengeId].forEach(hintNum => {
-            finalPoints -= challenge.hints[hintNum - 1].cost;
-        });
-    }
-
-    if (submittedFlag === challenge.correctFlag) {
-        // Correct flag submitted
-        userPoints += finalPoints;
-        auth.updateUserStats('ctfPoints', finalPoints);
-        auth.updateUserStats('challengesCompleted', 1);
-        showSuccessResponse(challengeId, finalPoints, challenge.title);
-        inputElement.value = '';
-        inputElement.disabled = true;
-
-        // Add to recent submissions
-        addToRecentSubmissions(challenge.title, finalPoints);
-
-        // Show celebration
-        createCelebrationEffect();
-
-        // Add achievement
-        if (finalPoints >= 1000) {
-            auth.addAchievement('expert-solver', 'Expert Challenge Solver', '🎯');
-        }
-    } else {
-        // Wrong flag
-        showFailureResponse(submittedFlag, challengeId);
-    }
-}
-
-function showSuccessResponse(challengeId, points, challengeTitle) {
-    const resultsSection = document.getElementById('your-results');
-    const resultContent = document.getElementById('result-content');
-
-    // Determine prize level
-    let prizeInfo = ctfPrizes[400]; // Default
-    if (points >= 1000) prizeInfo = ctfPrizes[1000];
-    else if (points >= 800) prizeInfo = ctfPrizes[800];
-    else if (points >= 600) prizeInfo = ctfPrizes[600];
-
-    resultContent.innerHTML = `
-        <h4>🎊 FLAG CAPTURED SUCCESSFULLY! 🎊</h4>
-        <div class="result-details">
-            <div class="result-detail">
-                <div class="label">Challenge</div>
-                <div class="value">${challengeTitle}</div>
-            </div>
-            <div class="result-detail">
-                <div class="label">Points Earned</div>
-                <div class="value">+${points}</div>
-            </div>
-            <div class="result-detail">
-                <div class="label">Total Points</div>
-                <div class="value">${auth.getCurrentUser().stats.ctfPoints}</div>
-            </div>
-            <div class="result-detail">
-                <div class="label">Achievement Level</div>
-                <div class="value">${prizeInfo.rank}</div>
-            </div>
-        </div>
-        <div style="background: ${prizeInfo.bg}; color: black; padding: 2rem; border-radius: 15px; margin-top: 2rem; font-weight: bold;">
-            🎁 CONGRATULATIONS! ${prizeInfo.bonus}
-            <br><br>
-            📧 Prize details will be sent to your email within 24 hours.
-            <br>
-            📞 Our recruitment team may contact you for exciting career opportunities!
-        </div>
-        <div style="margin-top: 2rem;">
-            <button class="btn btn-primary" onclick="shareSuccess('${challengeTitle}', ${points})">Share Your Achievement</button>
-            <button class="btn btn-secondary" style="margin-left: 1rem;" onclick="downloadCertificate('${challengeTitle}')">Download Certificate</button>
-        </div>
-    `;
-
-    resultsSection.style.display = 'block';
-    resultsSection.scrollIntoView({ behavior: 'smooth' });
-}
-
-function showFailureResponse(submittedFlag, challengeId) {
-    const responses = [
-        "🚫 Incorrect flag! Keep analyzing the evidence...",
-        "❌ Not quite right. Have you considered all the attack vectors?",
-        "🔍 Close, but not correct. Review your methodology and try again.",
-        "💭 Think like an attacker. What would be the most likely entry point?",
-        "🎯 You're on the right track! Double-check your analysis.",
-        "🧩 Every detail matters in cybersecurity. Look closer!",
-        "⚡ Security is all about persistence. Don't give up!",
-        "🔐 The answer is hidden in the details. Keep investigating!"
-    ];
-
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-
-    // Show encouraging message with hint option
-    const useHint = confirm(`${randomResponse}\n\nWould you like to use a hint? (This will deduct points)`);
-    if (useHint) {
-        showHintOptions(challengeId);
-    }
-}
-
-function showHintOptions(challengeId) {
-    const challenge = ctfChallenges[challengeId];
-    let hintOptions = "Available hints:\n\n";
-
-    challenge.hints.forEach((hint, index) => {
-        const hintNum = index + 1;
-        const alreadyUsed = usedHints[challengeId] && usedHints[challengeId].includes(hintNum);
-        const status = alreadyUsed ? " (Already used)" : ` (-${hint.cost} points)`;
-        hintOptions += `${hintNum}. ${hint.text}${status}\n\n`;
-    });
-
-    const hintChoice = prompt(hintOptions + "Enter hint number (1-3) or 0 to cancel:");
-    if (hintChoice && hintChoice !== "0") {
-        showHint(challengeId, parseInt(hintChoice));
-    }
-}
-
-function addToRecentSubmissions(challengeTitle, points) {
-    const submissionsContainer = document.getElementById('recent-submissions');
-    const newSubmission = document.createElement('div');
-    newSubmission.className = 'submission-item';
-    newSubmission.style.background = 'rgba(16, 185, 129, 0.1)';
-    newSubmission.style.borderColor = 'var(--success)';
-
-    newSubmission.innerHTML = `
-        <span class="submitter">🎉 You</span>
-        <span class="challenge">${challengeTitle}</span>
-        <span class="points">+${points} pts</span>
-        <span class="time">Just now</span>
-    `;
-
-    submissionsContainer.insertBefore(newSubmission, submissionsContainer.firstChild);
-}
-
-function createCelebrationEffect() {
-    // Create confetti effect
-    for (let i = 0; i < 100; i++) {
-        createConfetti();
-    }
-}
-
-function createConfetti() {
-    const confetti = document.createElement('div');
-    confetti.style.position = 'fixed';
-    confetti.style.left = Math.random() * window.innerWidth + 'px';
-    confetti.style.top = '-10px';
-    confetti.style.width = '10px';
-    confetti.style.height = '10px';
-    confetti.style.backgroundColor = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'][Math.floor(Math.random() * 5)];
-    confetti.style.borderRadius = '50%';
-    confetti.style.pointerEvents = 'none';
-    confetti.style.zIndex = '10000';
-    confetti.style.animation = 'confetti-fall 3s linear infinite';
-
-    document.body.appendChild(confetti);
-
-    setTimeout(() => {
-        confetti.remove();
-    }, 3000);
-}
-
-function shareSuccess(challengeTitle, points) {
-    const shareText = `🎉 I just solved "${challengeTitle}" and earned ${points} points in 2R-AT's Cybersecurity CTF Challenge! Think you can beat my score? 🔐 #CybersecurityCTF #2RAT #EthicalHacking`;
-
-    if (navigator.share) {
-        navigator.share({
-            title: '2R-AT CTF Challenge Success!',
-            text: shareText,
-            url: window.location.href
-        });
-    } else {
-        // Fallback to copying to clipboard
-        navigator.clipboard.writeText(shareText).then(() => {
-            alert('Achievement text copied to clipboard! Share it on your social media.');
-        });
-    }
-}
-
-function downloadCertificate(challengeTitle) {
-    alert(`🏆 Your completion certificate for "${challengeTitle}" is being generated and will be emailed to you within 1 hour. This certificate is recognized by industry professionals and can be added to your LinkedIn profile!`);
-}
-
-function downloadReport(reportName) {
-    console.log(`Download initiated for report: ${reportName}.pdf`);
-    console.log(`User authenticated: ${auth.isAuthenticated()}`);
-    showNotification(`Simulating download of: ${reportName}.pdf`, 'success');
-}
-
-function downloadEvidence(evidenceType) {
-    const resources = {
-        'laptop': 'laptop_forensic_image.dd - Full disk image of the suspect\'s work laptop (120GB). Use FTK Imager or Autopsy for analysis.',
-        'mobile': 'mobile_extraction.tar - Complete mobile device extraction including apps, messages, call logs, and deleted data.'
-    };
-
-    alert(`📁 Downloading: ${resources[evidenceType]}\n\n⚠️ Note: This is a simulated download for demonstration purposes. In a real CTF, these would be actual forensic files for analysis.`);
-}
-
-// Enhanced Contact Form Handler
+// Contact Form Handler (updated)
 function handleContactForm(event) {
     event.preventDefault();
 
@@ -1188,12 +745,6 @@ function handleContactForm(event) {
 
 // Initialize UI based on authentication status
 document.addEventListener('DOMContentLoaded', () => {
-    if (auth.isAuthenticated()) {
-        auth.updateUIForAuthenticatedUser();
-    } else {
-        auth.updateUIForUnauthenticatedUser();
-    }
-
     // Add event listener for the quick scan button
     const quickScanButton = document.getElementById('quick-scan-button');
     if (quickScanButton) {
@@ -1216,7 +767,7 @@ document.addEventListener('click', (event) => {
     const userMenu = document.getElementById('user-menu');
     const dropdown = document.getElementById('user-dropdown');
 
-    if (!userMenu.contains(event.target)) {
+    if (userMenu && dropdown && !userMenu.contains(event.target)) {
         dropdown.classList.remove('active');
     }
 });
@@ -1224,21 +775,27 @@ document.addEventListener('click', (event) => {
 // Remove loader after page load
 window.addEventListener('load', () => {
     setTimeout(() => {
-        document.getElementById('loader').style.opacity = '0';
-        setTimeout(() => {
-            document.getElementById('loader').style.display = 'none';
-        }, 500);
+        const loader = document.getElementById('loader');
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        }
     }, 1000);
 });
 
 // Particle Effect
 function createParticle() {
+    const particlesContainer = document.getElementById('particles');
+    if (!particlesContainer) return;
+
     const particle = document.createElement('div');
     particle.className = 'particle';
     particle.style.left = Math.random() * window.innerWidth + 'px';
     particle.style.animationDelay = Math.random() * 15 + 's';
     particle.style.opacity = Math.random() * 0.5 + 0.1;
-    document.getElementById('particles').appendChild(particle);
+    particlesContainer.appendChild(particle);
 
     setTimeout(() => {
         particle.remove();
@@ -1278,12 +835,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Navbar background on scroll
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(5, 7, 20, 0.95)';
-        navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
-    } else {
-        navbar.style.background = 'rgba(5, 7, 20, 0.9)';
-        navbar.style.boxShadow = 'none';
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(5, 7, 20, 0.95)';
+            navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+        } else {
+            navbar.style.background = 'rgba(5, 7, 20, 0.9)';
+            navbar.style.boxShadow = 'none';
+        }
     }
 });
 
@@ -1311,21 +870,9 @@ document.addEventListener('keydown', (event) => {
     // Escape to close modals
     if (event.key === 'Escape') {
         closeAuthModal();
-        document.getElementById('user-dropdown').classList.remove('active');
+        const dropdown = document.getElementById('user-dropdown');
+        if (dropdown) {
+            dropdown.classList.remove('active');
+        }
     }
 });
-
-// Auto-save demo data periodically (simulated)
-setInterval(() => {
-    if (auth.isAuthenticated()) {
-        // In a real app, this would sync with the server
-        console.log('Auto-saving user data...');
-    }
-}, 30000); // Every 30 seconds
-
-// Initial load setup
-setTimeout(() => {
-    if (!auth.isAuthenticated()) {
-        auth.addProtectedOverlays();
-    }
-}, 1500);
