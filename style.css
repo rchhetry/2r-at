@@ -366,6 +366,62 @@ nav {
     cursor: pointer;
 }
 
+/* Enhancements for Our Elite Team Section */
+.team-member-card {
+    display: flex; /* Use flexbox for better layout control */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items like placeholder and title */
+    text-align: left; /* Default text align to left for bios */
+}
+
+.team-member-img-placeholder {
+    width: 100px; /* Size of the placeholder */
+    height: 100px;
+    background-color: rgba(0, 212, 255, 0.1); /* Theme color, subtle */
+    border: 2px solid var(--primary);
+    border-radius: 50%; /* Circular placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem; /* Size of the icon */
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.team-member-card .training-title { /* Name */
+    text-align: center; /* Keep name centered */
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.team-member-role {
+    color: var(--primary);
+    font-weight: 600;
+    text-align: center; /* Role centered below name */
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.team-member-skills {
+    color: var(--gray);
+    font-size: 0.875rem;
+    text-align: center; /* Skills centered */
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.team-member-bio {
+    color: var(--light); /* Main bio text color */
+    font-size: 0.95rem;
+    line-height: 1.7;
+    text-align: left; /* Ensure bio is left-aligned */
+}
+
+.team-member-card .training-description {
+    text-align: left; /* Ensure any fallback to this class is also left-aligned */
+}
+
+
 /* Hero Dashboard Summary */
 .hero-dashboard-summary {
     margin-top: 20px; /* Space above the summary line */
