@@ -8,8 +8,8 @@ const successStories = {
     banking: {
         title: "Global Financial Institution",
         icon: "🏦",
-        subtitle: "Securing $50B+ in Assets Across 15 Countries",
-        challenge: `When GlobalBank International approached 2R-AT Security in early 2024, they were facing a perfect storm of cybersecurity challenges. As one of the world's largest financial institutions with over $50 billion in managed assets across 50+ branches spanning 15 countries, they were experiencing an alarming 300% increase in sophisticated cyber attacks targeting their core banking infrastructure.
+        subtitle: "Securing Billions in Assets Across Multiple Countries for a Major Financial Group",
+        challenge: `When a Major Financial Group approached 2R-AT Security in early 2024, they were facing a perfect storm of cybersecurity challenges. As one of the world's largest financial institutions with billions in managed assets across numerous branches spanning multiple countries, they were experiencing an alarming 300% increase in sophisticated cyber attacks targeting their core banking infrastructure.
 
 The institution was dealing with:
 • Advanced Persistent Threats (APTs) specifically targeting SWIFT payment systems
@@ -74,7 +74,7 @@ The tipping point came when their existing security provider failed to detect a 
 
         testimonial: "2R-AT Security's zero-trust implementation has fundamentally transformed our security posture. In 18 months, we've gone from being reactive to cyber threats to being proactively protected. Their team didn't just implement technology—they partnered with us to build a security culture that permeates every aspect of our operations. The peace of mind this gives our board, our customers, and our regulators is invaluable. We've seen a dramatic reduction in successful attacks while maintaining the performance our customers expect from a world-class financial institution.",
         author: "Maria Rodriguez, Chief Information Security Officer",
-        company: "GlobalBank International",
+        company: "A Major Financial Group",
 
         additionalDetails: {
             timeframe: "12-month implementation, ongoing partnership",
@@ -87,8 +87,8 @@ The tipping point came when their existing security provider failed to detect a 
     healthcare: {
         title: "Healthcare Network",
         icon: "🏥",
-        subtitle: "Protecting 2M+ Patient Records Across Regional Medical Centers",
-        challenge: `MedCare Regional Health System, encompassing 8 major hospitals and 25 outpatient clinics across the region, contacted 2R-AT Security after experiencing a series of cybersecurity incidents that threatened both patient care and regulatory compliance. Managing over 2 million patient records and processing thousands of daily medical transactions, they faced unprecedented challenges:
+        subtitle: "Protecting Millions of Patient Records Across Regional Medical Centers for a Regional Healthcare Provider",
+        challenge: `A Regional Healthcare Provider, encompassing multiple major hospitals and outpatient clinics across their region, contacted 2R-AT Security after experiencing a series of cybersecurity incidents that threatened both patient care and regulatory compliance. Managing millions of patient records and processing thousands of daily medical transactions, they faced unprecedented challenges:
 
 **Critical Security Gaps:**
 • Outdated legacy medical systems with known vulnerabilities
@@ -165,7 +165,7 @@ The final straw came when a sophisticated ransomware attack encrypted critical p
 
         testimonial: "Patient data security has always been our top priority, but we struggled to achieve both robust protection and operational efficiency. 2R-AT's healthcare-focused approach changed everything. They understood that in healthcare, security can't be an obstacle to patient care—it has to enable it. Their solution not only protected our patients' most sensitive information but actually improved our medical staff's ability to access critical data quickly and securely. The peace of mind knowing our patients' data is secure allows us to focus entirely on what we do best: providing exceptional healthcare.",
         author: "Dr. James Chen, Chief Medical Information Officer",
-        company: "MedCare Regional Health System",
+        company: "A Regional Healthcare Provider",
 
         additionalDetails: {
             timeframe: "12-month implementation across all facilities",
@@ -178,8 +178,8 @@ The final straw came when a sophisticated ransomware attack encrypted critical p
     tech: {
         title: "Hypergrowth Tech Startup",
         icon: "🚀",
-        subtitle: "Enabling 10x Growth While Maintaining Enterprise-Grade Security",
-        challenge: `TechNova, a revolutionary AI-powered fintech startup, approached 2R-AT Security during a critical growth phase. Having recently secured $50M in Series B funding, they were experiencing explosive 10x growth while facing the challenge of building enterprise-grade security from the ground up. Their unique challenges included:
+        subtitle: "Enabling Rapid Growth While Maintaining Enterprise-Grade Security for an Innovative Tech Company",
+        challenge: `An Innovative Tech Company, a revolutionary AI-powered fintech startup, approached 2R-AT Security during a critical growth phase. Having recently secured significant Series B funding, they were experiencing explosive growth while facing the challenge of building enterprise-grade security from the ground up. Their unique challenges included:
 
 **Rapid Growth Challenges:**
 • Scaling from 50 to 500+ employees in 12 months
@@ -266,7 +266,7 @@ The urgency escalated when a potential $10M enterprise client made SOC 2 complia
 
         testimonial: "2R-AT Security didn't just implement security for us—they enabled our growth. In the startup world, security is often seen as a brake on innovation and speed. 2R-AT flipped that paradigm entirely. Their secure-by-design approach meant we could scale rapidly while actually strengthening our security posture. When enterprise clients asked about our security capabilities, we went from having to make excuses to being able to showcase our robust, compliant infrastructure as a competitive advantage. They understood that for a hypergrowth startup, security needs to be an accelerator, not an obstacle.",
         author: "Sarah Kim, Co-founder & CTO",
-        company: "TechNova AI",
+        company: "An Innovative Tech Company",
 
         additionalDetails: {
             timeframe: "12-month security transformation during hypergrowth",
@@ -396,7 +396,7 @@ function showSuccessStory(storyId) {
 
             <!-- Call to Action Section -->
             <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1)); border-radius: 20px;">
-                <h3 style="color: var(--primary); margin-bottom: 2rem; font-size: 2rem;">Ready to Transform Your Security Like ${story.title.split(' ')[0]}?</h3>
+                <h3 style="color: var(--primary); margin-bottom: 2rem; font-size: 2rem;">Ready to Transform Your Security?</h3>
                 <p style="color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">Join hundreds of organizations that have transformed their security posture with 2R-AT's enterprise-grade cybersecurity solutions.</p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <a href="#contact" class="btn btn-primary" style="margin: 0.5rem;">Get Your Security Assessment</a>
