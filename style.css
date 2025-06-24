@@ -121,6 +121,7 @@ nav {
     display: flex;
     gap: 2rem;
     list-style: none;
+    margin-left: -20px; /* Move menu slightly to the left */
 }
 
 .nav-links a {
