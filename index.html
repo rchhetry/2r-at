@@ -193,6 +193,12 @@
                 <button class="btn btn-secondary" onclick="window.open('/app.html', '_blank'); if(typeof showNotification === 'function') showNotification('Security scanning platform launched', 'success');">Quick Security Scan</button>
                 <a href="#managed-security-services" class="btn btn-secondary">Explore Services</a>
             </div>
+            <div class="hero-dashboard-summary">
+                <span class="hero-dashboard-label">Global Threat Monitor:</span>
+                <span class="hero-dashboard-status active">System Active</span> |
+                <span class="hero-dashboard-metric">Threats Blocked Today: <span id="hero-threats-blocked">1,247</span></span> |
+                <span class="hero-dashboard-metric">Data Analyzed: <span id="hero-data-analyzed">15.7 TB</span></span>
+            </div>
         </div>
     </section>
 
@@ -639,75 +645,6 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Live Security Dashboard Demo -->
-    <section class="dashboard-section" id="dashboard">
-        <div class="container">
-            <h2 class="section-title">Security Dashboard</h2>
-            <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">
-                Real-time threat monitoring and analytics
-            </p>
-
-            <div class="dashboard-container" id="dashboard-container">
-                <!-- Protected content overlay will be inserted here if not authenticated -->
-
-                <div class="dashboard-header">
-                    <h3>Global Threat Monitor</h3>
-                    <div class="status-indicator">
-                        <span class="status-dot"></span>
-                        <span>System Active</span>
-                    </div>
-                </div>
-
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value" id="threats-blocked">1,247</div>
-                        <div class="metric-label">Threats Blocked Today</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" id="active-monitors">243</div>
-                        <div class="metric-label">Active Monitors</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" id="data-analyzed">15.7 TB</div>
-                        <div class="metric-label">Data Analyzed</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" id="uptime">99.99%</div>
-                        <div class="metric-label">System Uptime</div>
-                    </div>
-                </div>
-
-                <!-- User Stats (only visible when authenticated) -->
-                <div id="user-dashboard-stats" style="display: none;">
-                    <h4 style="color: var(--primary); margin: 2rem 0 1rem 0;">Your Security Stats</h4>
-                    <div class="user-stats">
-                        <div class="stat-card">
-                            <span class="stat-value" id="user-threats-blocked">0</span>
-                            <span class="stat-label">Threats You've Blocked</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-value" id="user-ctf-points">0</span>
-                            <span class="stat-label">CTF Points Earned</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-value" id="user-challenges-completed">0</span>
-                            <span class="stat-label">Challenges Completed</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-value" id="user-rank">Unranked</span>
-                            <span class="stat-label">Global Rank</span>
-                        </div>
-                    </div>
-
-                    <div class="achievement-badges" id="user-achievements">
-                        <!-- Achievements will be dynamically inserted -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     </section>
 
     <!-- Plans Section -->

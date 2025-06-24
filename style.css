@@ -366,6 +366,43 @@ nav {
     cursor: pointer;
 }
 
+/* Hero Dashboard Summary */
+.hero-dashboard-summary {
+    margin-top: 20px; /* Space above the summary line */
+    text-align: center;
+    font-size: 0.875rem; /* Slightly smaller than main text */
+    color: var(--gray); /* Subtle color */
+    padding: 5px 10px;
+    background-color: rgba(12, 20, 70, 0.3); /* Subtle background, similar to nav */
+    border-radius: 4px;
+    display: inline-block; /* To keep it on one line and allow padding/bg */
+    max-width: 90%; /* Ensure it doesn't overflow on smaller hero sections */
+    box-sizing: border-box;
+}
+
+.hero-dashboard-summary .hero-dashboard-label {
+    font-weight: bold;
+    color: var(--light); /* Slightly more emphasis */
+}
+
+.hero-dashboard-summary .hero-dashboard-status {
+    font-weight: bold;
+}
+
+.hero-dashboard-summary .hero-dashboard-status.active {
+    color: var(--success); /* Green for active status */
+}
+
+.hero-dashboard-summary .hero-dashboard-metric {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.hero-dashboard-summary .hero-dashboard-metric span { /* For the dynamic values */
+    color: var(--light);
+    font-weight: bold;
+}
+
 .btn-primary {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: var(--light);
