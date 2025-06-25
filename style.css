@@ -429,6 +429,40 @@ nav {
     text-align: left; /* Ensure any fallback to this class is also left-aligned */
 }
 
+/* News Marquee Styles */
+.news-marquee-container {
+    width: 80%;
+    max-width: 700px;
+    margin: 20px auto 0 auto;
+    background-color: rgba(5, 7, 20, 0.7);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: left;
+}
+
+#news-marquee-content {
+    display: inline-block;
+    white-space: nowrap;
+    color: var(--gray);
+    font-size: 0.875rem;
+    animation: marquee-scroll 30s linear infinite;
+}
+
+#news-marquee-content:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
 
 /* Hero Dashboard Summary */
 .hero-dashboard-summary {

@@ -993,6 +993,95 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// Hero Stats Automation and News Marquee Initialization
+document.addEventListener('DOMContentLoaded', () => {
+    // Hero Stats
+    const threatsBlockedEl = document.getElementById('hero-threats-blocked');
+    const dataAnalyzedEl = document.getElementById('hero-data-analyzed');
+
+    if (threatsBlockedEl && dataAnalyzedEl) { // Only run if elements exist
+        let currentThreats = parseInt(localStorage.getItem('heroThreatsBlocked')) || parseInt(threatsBlockedEl.textContent.replace(/,/g, '')) || 1247;
+        let currentDataAnalyzedGB = parseFloat(localStorage.getItem('heroDataAnalyzedGB')) || (parseFloat(dataAnalyzedEl.textContent.replace(/[^0-9.]/g, '')) * 1024) || (15.7 * 1024);
+
+        function updateStatsDisplay() {
+            threatsBlockedEl.textContent = currentThreats.toLocaleString();
+            dataAnalyzedEl.textContent = (currentDataAnalyzedGB / 1024).toFixed(1) + " TB";
+        }
+
+        updateStatsDisplay(); // Initial display
+
+        setInterval(() => {
+            currentThreats += Math.floor(Math.random() * 5) + 1;
+            localStorage.setItem('heroThreatsBlocked', currentThreats);
+
+            currentDataAnalyzedGB += (Math.random() * 40) + 10;
+            localStorage.setItem('heroDataAnalyzedGB', currentDataAnalyzedGB.toFixed(2));
+
+            updateStatsDisplay();
+        }, 3000);
+    }
+
+    // Initialize news marquee
+    fetchAndDisplayNews();
+});
+
+// News Marquee - Fetch and Display
+async function fetchAndDisplayNews() {
+    const marqueeContentEl = document.getElementById('news-marquee-content');
+    if (!marqueeContentEl) {
+        console.error('News marquee element not found.');
+        return;
+    }
+
+    const rssFeedUrl = 'https://feeds.feedburner.com/TheHackersNews';
+    const corsProxyUrl = 'https://api.allorigins.win/raw?url='; // A common public CORS proxy
+    const fullUrl = corsProxyUrl + encodeURIComponent(rssFeedUrl);
+
+    const staticFallbackNews = [
+        "Stay Updated: Latest Cybersecurity Alerts Here...",
+        "Major Tech Firm Reports Data Breach - Investigation Underway...",
+        "New Phishing Scam Targets Remote Workers - Be Vigilant...",
+        "Critical Vulnerability Discovered in Widely Used Software...",
+        "2R-AT Releases Q3 Threat Landscape Report..."
+    ];
+
+    function displayNews(items) {
+        marqueeContentEl.textContent = items.join("  ***  "); // Separator between items
+    }
+
+    try {
+        const response = await fetch(fullUrl);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch RSS feed: ${response.status} ${response.statusText}`);
+        }
+        const xmlText = await response.text();
+
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+
+        const items = xmlDoc.querySelectorAll("item"); // Common tag for RSS feed items
+        let headlines = [];
+        items.forEach((item, index) => {
+            if (index < 7) { // Get up to 7 headlines
+                const title = item.querySelector("title")?.textContent || "No title";
+                headlines.push(title.trim());
+            }
+        });
+
+        if (headlines.length > 0) {
+            displayNews(headlines);
+        } else {
+            console.warn('No news items found in RSS feed, using fallback.');
+            displayNews(staticFallbackNews);
+        }
+
+    } catch (error) {
+        console.error('Error fetching or parsing RSS feed:', error);
+        displayNews(staticFallbackNews); // Display static news on error
+    }
+}
+
+
 // Close modal when clicking outside
 window.addEventListener('click', (event) => {
     const authModal = document.getElementById('auth-modal');
