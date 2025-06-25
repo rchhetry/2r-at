@@ -2152,3 +2152,69 @@ footer {
     animation: spin 1s ease-in-out infinite;
     margin-left: 1rem;
 }
+
+/* Info Page Container (for privacy, terms, etc.) */
+.info-page-container {
+    max-width: 900px;
+    margin: 120px auto 40px auto; /* Increased top margin for fixed navbar */
+    padding: 40px;
+    background-color: var(--dark); /* Slightly lighter than body for subtle separation */
+    border-radius: 15px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    color: var(--light);
+}
+
+.info-page-container h1 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    padding-bottom: 1rem;
+    text-align: center;
+}
+
+.info-page-container h2 {
+    font-size: 1.8rem;
+    color: var(--secondary);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.info-page-container h3 {
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.info-page-container p,
+.info-page-container li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--gray);
+    margin-bottom: 1rem;
+}
+
+.info-page-container ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.info-page-container strong {
+    color: var(--light);
+    font-weight: 600;
+}
+
+.info-page-container a:not(.btn) { /* Style general links within info pages */
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.info-page-container a:not(.btn):hover {
+    color: var(--secondary);
+}
+
+.info-page-container .btn-secondary {
+    display: inline-block;
+    margin-top: 2rem;
+}
