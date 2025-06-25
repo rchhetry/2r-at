@@ -446,9 +446,9 @@ nav {
 #news-marquee-content {
     display: inline-block;
     white-space: nowrap;
-    color: var(--gray);
+    color: var(--light); /* Changed from var(--gray) for better readability */
     font-size: 0.875rem;
-    animation: marquee-scroll 30s linear infinite;
+    animation: marquee-scroll 90s linear infinite; /* Slowed down from 30s */
 }
 
 #news-marquee-content:hover {
@@ -2259,4 +2259,52 @@ footer {
 .info-page-container .btn-secondary {
     display: inline-block;
     margin-top: 2rem;
+}
+
+/* Partners Section */
+.partners-section {
+    padding: 80px 0;
+    background: var(--dark); /* Slightly different from footer or previous section for distinction */
+    text-align: center;
+}
+
+.partners-section .section-header {
+    margin-bottom: 3rem;
+}
+
+.partners-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem; /* Gap between partner items */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the grid if it's narrower than container */
+}
+
+.partner-item {
+    background-color: rgba(255, 255, 255, 0.05); /* Subtle background */
+    border: 1px solid rgba(0, 212, 255, 0.15); /* Subtle border */
+    border-radius: 10px;
+    padding: 1.5rem 2rem; /* Padding inside each partner item */
+    min-width: 150px; /* Minimum width for each item */
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.partner-item span {
+    color: var(--gray);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.partner-item:hover {
+    background-color: rgba(0, 212, 255, 0.1);
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.15);
+}
+
+.partner-item:hover span {
+    color: var(--primary);
 }
