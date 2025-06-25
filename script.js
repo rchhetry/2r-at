@@ -1046,7 +1046,8 @@ async function fetchAndDisplayNews() {
     ];
 
     function displayNews(items) {
-        marqueeContentEl.textContent = items.join("  ***  "); // Separator between items
+        // Using a more distinct separator with non-breaking spaces for wider visual gap
+        marqueeContentEl.innerHTML = items.map(item => `<span>${item}</span>`).join("&nbsp;&nbsp;&nbsp; • &nbsp;&nbsp;&nbsp;");
     }
 
     try {
