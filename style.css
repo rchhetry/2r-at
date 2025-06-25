@@ -374,18 +374,26 @@ nav {
     text-align: left; /* Default text align to left for bios */
 }
 
-.team-member-img-placeholder {
-    width: 100px; /* Size of the placeholder */
+.team-member-img-placeholder,
+.team-member-img {
+    width: 100px;
     height: 100px;
-    background-color: rgba(0, 212, 255, 0.1); /* Theme color, subtle */
+    background-color: rgba(0, 212, 255, 0.1); /* Fallback for placeholder */
     border: 2px solid var(--primary);
-    border-radius: 50%; /* Circular placeholder */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem; /* Size of the icon */
-    color: var(--primary);
+    border-radius: 50%;
+    display: flex; /* For placeholder icon centering */
+    align-items: center; /* For placeholder icon centering */
+    justify-content: center; /* For placeholder icon centering */
+    font-size: 3rem; /* For placeholder icon */
+    color: var(--primary); /* For placeholder icon */
     margin-bottom: 1rem;
+    object-fit: cover; /* For actual images to cover the area without distortion */
+}
+
+.team-member-img { /* Specific override for actual images */
+    display: block; /* Override flex for images if it causes issues */
+    font-size: 0; /* Hide placeholder icon if text somehow bleeds through */
+    color: transparent; /* Hide placeholder icon color */
 }
 
 .team-member-card .training-title { /* Name */
