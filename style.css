@@ -1691,6 +1691,89 @@ footer {
 }
 
 /* Mobile Responsive */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden; /* Prevent horizontal scrollbar as a general safeguard */
+    }
+
+    .container {
+        padding: 0 1rem; /* Reduce side padding for containers on mobile */
+    }
+
+    .section-title {
+        font-size: 2.2rem; /* Further reduce section title size */
+        line-height: 1.3; /* Allow for better wrapping */
+    }
+
+    .section-subtitle {
+        font-size: 1rem; /* Reduce subtitle size */
+    }
+
+    .hero .glitch {
+        font-size: clamp(2.5rem, 10vw, 4rem); /* Adjust clamp for mobile glitch text */
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem; /* Adjust hero subtitle */
+        margin: 1.5rem 0;
+    }
+
+    .hero-dashboard-summary {
+        font-size: 0.75rem; /* Smaller font for dashboard summary */
+        padding: 5px 8px;
+        max-width: 100%; /* Ensure it fits */
+    }
+
+    .news-marquee-container {
+        width: 95%; /* Make marquee container more responsive */
+        padding: 8px 10px;
+    }
+
+    #news-marquee-content {
+        font-size: 0.75rem; /* Smaller font for marquee text */
+    }
+
+    .partners-grid {
+        gap: 1rem; /* Reduce gap for partner items on mobile */
+    }
+
+    .partner-item {
+        width: calc(50% - 1rem); /* Aim for 2 items per row, accounting for gap */
+        min-width: 120px; /* Allow smaller items */
+        height: 70px; /* Adjust height */
+        padding: 0.5rem; /* Adjust padding */
+    }
+
+    .partner-item img {
+        max-height: 35px; /* Smaller logos on mobile */
+        max-width: 100px;
+    }
+
+    /* Ensure CTA buttons in hero stack nicely and don't cause overflow */
+    .cta-container .btn {
+        width: auto; /* Allow buttons to size to content */
+        min-width: 200px; /* But give them a reasonable minimum width */
+        padding: 0.8rem 1.5rem; /* Adjust padding */
+        font-size: 0.9rem;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem; /* Reduce gap for contact form */
+    }
+
+    .contact-form {
+        padding: 2rem; /* Adjust padding for contact form */
+    }
+
+    .footer-links {
+        flex-direction: column; /* Stack footer links */
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
 .mobile-menu-toggle {
     display: none;
     flex-direction: column;
