@@ -446,9 +446,13 @@ nav {
 #news-marquee-content {
     display: inline-block;
     white-space: nowrap;
-    color: var(--light); /* Changed from var(--gray) for better readability */
+    /* color: var(--light); Fallback color, though might not be visible with transparent */
     font-size: 0.875rem;
-    animation: marquee-scroll 75s linear infinite; /* Sped up from 180s, was 90s before that */
+    animation: marquee-scroll 120s linear infinite; /* Slowed down from 75s */
+    background: linear-gradient(to right, #007bff, #8A2BE2); /* Blue to Purple gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Makes the text itself transparent to show the background gradient */
 }
 
 #news-marquee-content:hover {
