@@ -1063,7 +1063,7 @@ async function fetchAndDisplayNews() {
         const items = xmlDoc.querySelectorAll("item"); // Common tag for RSS feed items
         let headlines = [];
         items.forEach((item, index) => {
-            if (index < 7) { // Get up to 7 headlines
+            if (index < 12) { // Get up to 12 headlines
                 const title = item.querySelector("title")?.textContent || "No title";
                 headlines.push(title.trim());
             }

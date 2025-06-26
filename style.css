@@ -448,7 +448,7 @@ nav {
     white-space: nowrap;
     color: var(--light); /* Changed from var(--gray) for better readability */
     font-size: 0.875rem;
-    animation: marquee-scroll 180s linear infinite; /* Further slowed down from 90s */
+    animation: marquee-scroll 75s linear infinite; /* Sped up from 180s, was 90s before that */
 }
 
 #news-marquee-content:hover {
