@@ -446,13 +446,15 @@ nav {
 #news-marquee-content {
     display: inline-block;
     white-space: nowrap;
-    /* color: var(--light); Fallback color, though might not be visible with transparent */
+    color: var(--primary); /* Changed to primary blue */
     font-size: 0.875rem;
-    animation: marquee-scroll 120s linear infinite; /* Slowed down from 75s */
-    background: linear-gradient(to right, #007bff, #8A2BE2); /* Blue to Purple gradient */
+    animation: marquee-scroll 120s linear infinite; /* Speed remains 120s */
+    /* Removed gradient properties:
+    background: linear-gradient(to right, #007bff, #8A2BE2);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent; /* Makes the text itself transparent to show the background gradient */
+    color: transparent;
+    */
 }
 
 #news-marquee-content:hover {
@@ -2373,15 +2375,16 @@ footer {
     background-color: rgba(255, 255, 255, 0.05); /* Subtle background */
     border: 1px solid rgba(0, 212, 255, 0.15); /* Subtle border */
     border-radius: 10px;
-    padding: 1rem; /* Adjusted padding for logos */
+    padding: 1rem;
     width: 180px; /* Fixed width for consistency */
-    height: 90px; /* Fixed height for consistency */
+    /* height: 90px; Removed fixed height to allow text to determine height */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     transition: all 0.3s ease;
-    overflow: hidden; /* Ensure logos don't break out of the box */
+    overflow: hidden; /* To prevent text overflow if absolutely necessary, though wrapping is preferred */
+    min-height: 70px; /* Ensure a minimum height for visual consistency if names are short */
 }
 
 .partner-item img {
@@ -2394,11 +2397,12 @@ footer {
     transition: filter 0.3s ease;
 }
 
-.partner-item span { /* For text fallbacks */
+.partner-item span { /* For text names */
     color: var(--gray);
-    font-size: 1.1rem;
+    font-size: 0.95rem; /* Slightly reduced for better fit of longer names */
     font-weight: 500;
     transition: color 0.3s ease;
+    line-height: 1.3; /* Allow for multi-line text if needed */
 }
 
 .partner-item:hover {
